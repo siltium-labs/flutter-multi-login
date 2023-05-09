@@ -42,6 +42,5 @@ android {
 
     defaultConfig {
         minSdkVersion 16
-        manifestPlaceholders = [fbAppId: "@string/facebook_app_id", fbClientToken: "@string/facebook_client_token"]
     }
 }
