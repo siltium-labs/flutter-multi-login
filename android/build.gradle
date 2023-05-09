@@ -42,7 +42,5 @@ android {
 
     defaultConfig {
         minSdkVersion 16
-        manifestPlaceholders.fbAppId = "766439921742770"
-        manifestPlaceholders.fbClientToken = "a16c69f046c143dbd0f534defa878b87"
     }
 }
