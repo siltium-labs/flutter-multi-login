@@ -2,10 +2,9 @@
   package="com.example.s_multiloginp"
   xmlns:tools="http://schemas.android.com/tools">
 
-  <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="${fbAppId}" />
-  <meta-data android:name="com.facebook.sdk.ClientToken" android:value="${fbClientToken}" />
-  <activity
-    tools:node="merge">
-  </activity>
+  <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="${fbAppId}"
+    tools:node="merge" />
+  <meta-data android:name="com.facebook.sdk.ClientToken" android:value="${fbClientToken}"
+    tools:node="merge" />
 
 </manifest>
