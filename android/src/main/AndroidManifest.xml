@@ -3,8 +3,8 @@
   xmlns:tools="http://schemas.android.com/tools">
 
   <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="${fbAppId}"
-    tools:node="merge-only-attributes" />
+  />
   <meta-data android:name="com.facebook.sdk.ClientToken" android:value="${fbClientToken}"
-    tools:node="merge-only-attributes" />
+  />
 
 </manifest>
