@@ -18,7 +18,7 @@ import 'package:firebase_core/firebase_core.dart';
 //* Plugin imports
 import 's_multiloginp_platform_interface.dart';
 
-//TODO: PLUGIN CLASSSSS
+//TODO: PLUGIN CLASS
 class SMultiloginp {
   Future<String?> getPlatformVersion() {
     return SMultiloginpPlatform.instance.getPlatformVersion();
