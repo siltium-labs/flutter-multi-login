@@ -1,3 +1,3 @@
-## 0.0.1
+## 0.1.0
 
-* TODO: Describe initial release.
+Initial release: Email, Google y Facebook login with Firebase for Android.
