@@ -1,9 +1,7 @@
-//* Dart imports
-import 'dart:io';
-
 //* Flutter imports
 import 'package:flutter/material.dart';
-import 'package:s_multiloginp/src/components/card_background_component.dart';
+import 'package:s_multiloginp/src/components/login_form_component.dart';
+import 'package:s_multiloginp/src/components/social_media_buttons_component.dart';
 
 //* Project imports
 import 'package:s_multiloginp/src/constants/k_colors.dart';
@@ -12,6 +10,7 @@ import 'package:s_multiloginp/src/enums/component_mode_enum.dart';
 import 'package:s_multiloginp/src/manager/auth_manager.dart';
 import 'package:s_multiloginp/src/utils/loading_popup.dart';
 import 'package:s_multiloginp/src/models/current_user_model.dart';
+import 'package:s_multiloginp/src/components/card_background_component.dart';
 
 //* Firebase imports
 import 'package:firebase_core/firebase_core.dart';
@@ -299,7 +298,7 @@ class SMultiLoginComponentState extends State<SMultiLoginComponent> {
   // Initialize TextEditingControllers and variables
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  bool _obscurePassword = true;
+  // bool _obscurePassword = true;
 
   @override
   Widget build(BuildContext context) {
@@ -307,48 +306,28 @@ class SMultiLoginComponentState extends State<SMultiLoginComponent> {
       case ComponentMode.simpleCardMode:
         return _cardModeContent();
       case ComponentMode.simpleMode:
-        return _simpleModeContent();
+        return _content(); //_simpleModeContent();
       case ComponentMode.complexCardMode:
         return _cardModeContent();
       case ComponentMode.complexMode:
-        return _complexModeContent();
+        return _content(); //_complexModeContent();
       default:
-        return _simpleModeContent();
+        return _content(); // _simpleModeContent();
     }
   }
 
   _cardModeContent() {
-    // return Container(
-    //   decoration: widget.cardDecoration ??
-    //       BoxDecoration(
-    //         color: kwhite,
-    //         borderRadius: BorderRadius.circular(20),
-    //         boxShadow: const [
-    //           BoxShadow(
-    //             color: Color(0x40666666),
-    //             spreadRadius: -3,
-    //             blurRadius: 20,
-    //             offset: Offset(0, 10),
-    //           ),
-    //         ],
-    //       ),
-    //   child: Padding(
-    //     padding: widget.cardInnerPadding ?? const EdgeInsets.all(20),
-    //     child: widget.componentMode == ComponentMode.simpleCardMode
-    //         ? _simpleModeContent()
-    //         : _complexModeContent(),
-    //   ),
-    // );
     return CardBackgroundComponent(
       cardDecoration: widget.cardDecoration,
       cardInnerPadding: widget.cardInnerPadding,
-      child: widget.componentMode == ComponentMode.simpleCardMode
-          ? _simpleModeContent()
-          : _complexModeContent(),
+      // child: widget.componentMode == ComponentMode.simpleCardMode
+      //     ? _simpleModeContent()
+      //     : _complexModeContent(),
+      child: _content(),
     );
   }
 
-  _simpleModeContent() {
+  _content() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -371,120 +350,175 @@ class SMultiLoginComponentState extends State<SMultiLoginComponent> {
           spacing: 10,
           runSpacing: 10,
           children: [
-            ..._getSimpleLoginButtonsList(),
+            SocialMediaButtonsComponent(
+              componentMode: widget.componentMode,
+              googleButtonStyle: widget.googleButtonStyle,
+              googleButtonText: widget.googleButtonText,
+              googleButtonIcon: widget.googleButtonIcon,
+              facebookButtonStyle: widget.facebookButtonStyle,
+              facebookButtonText: widget.facebookButtonText,
+              facebookButtonIcon: widget.facebookButtonIcon,
+              appleButtonStyle: widget.appleButtonStyle,
+              appleButtonText: widget.appleButtonText,
+              appleButtonIcon: widget.appleButtonIcon,
+              onResultGoogleLogin: widget.onResultGoogleLogin,
+              onResultFacebookLogin: widget.onResultFacebookLogin,
+              onResultAppleLogin: widget.onResultAppleLogin,
+              onErrorGoogleLogin: widget.onErrorGoogleLogin,
+              onErrorFacebookLogin: widget.onErrorFacebookLogin,
+              onErrorAppleLogin: widget.onErrorAppleLogin,
+            ),
           ],
         ),
       ],
     );
   }
 
-  _complexModeContent() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        _emailLoginForm(),
-        Visibility(
-          visible: widget.footerText != null,
-          child: Column(
-            children: [
-              Text(
-                widget.footerText ?? "O podés ingresar con:",
-                style: widget.footerTextStyle,
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 20),
-            ],
-          ),
-        ),
-        Wrap(
-          alignment: WrapAlignment.center,
-          spacing: 10,
-          runSpacing: 10,
-          children: [
-            ..._getComplexLoginButtonsList(),
-          ],
-        ),
-      ],
-    );
-  }
+  // _simpleModeContent() {
+  //   return Column(
+  //     crossAxisAlignment: CrossAxisAlignment.center,
+  //     children: [
+  //       _emailLoginForm(),
+  //       Visibility(
+  //         visible: widget.footerText != null,
+  //         child: Column(
+  //           children: [
+  //             Text(
+  //               widget.footerText ?? "O podés ingresar con:",
+  //               style: widget.footerTextStyle,
+  //               textAlign: TextAlign.center,
+  //             ),
+  //             const SizedBox(height: 20),
+  //           ],
+  //         ),
+  //       ),
+  //       Wrap(
+  //         alignment: WrapAlignment.center,
+  //         spacing: 10,
+  //         runSpacing: 10,
+  //         children: [
+  //           ..._getSimpleLoginButtonsList(),
+  //         ],
+  //       ),
+  //     ],
+  //   );
+  // }
+
+  // _complexModeContent() {
+  //   return Column(
+  //     crossAxisAlignment: CrossAxisAlignment.center,
+  //     children: [
+  //       _emailLoginForm(),
+  //       Visibility(
+  //         visible: widget.footerText != null,
+  //         child: Column(
+  //           children: [
+  //             Text(
+  //               widget.footerText ?? "O podés ingresar con:",
+  //               style: widget.footerTextStyle,
+  //               textAlign: TextAlign.center,
+  //             ),
+  //             const SizedBox(height: 20),
+  //           ],
+  //         ),
+  //       ),
+  //       Wrap(
+  //         alignment: WrapAlignment.center,
+  //         spacing: 10,
+  //         runSpacing: 10,
+  //         children: [
+  //           ..._getComplexLoginButtonsList(),
+  //         ],
+  //       ),
+  //     ],
+  //   );
+  // }
 
   _emailLoginForm() {
     return Visibility(
       visible: widget.onResultEmailLogin != null,
       child: Column(
         children: [
-          const SizedBox(height: 20),
-          TextFormField(
-            controller: _emailController,
-            keyboardType: TextInputType.emailAddress,
-            cursorColor: kgrey,
-            textInputAction: TextInputAction.next,
-            decoration: widget.emailInputDecoration ??
-                InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide.none,
-                  ),
-                  fillColor: kbackground,
-                  filled: true,
-                  hintStyle: const TextStyle(
-                    color: kgrey,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 13,
-                    fontStyle: FontStyle.italic,
-                  ),
-                  hintText: 'Correo electrónico...',
-                ),
-            style: widget.emailInputTextStyle ??
-                const TextStyle(
-                  color: kdarkgrey,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 13,
-                ),
-          ),
-          const SizedBox(height: 20),
-          TextFormField(
-            controller: _passwordController,
-            cursorColor: kgrey,
-            textInputAction: TextInputAction.next,
-            obscureText: _obscurePassword,
-            obscuringCharacter: "*",
-            decoration: widget.passwordInputDecoration ??
-                InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide.none,
-                  ),
-                  fillColor: kbackground,
-                  filled: true,
-                  hintStyle: const TextStyle(
-                    color: kgrey,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 13,
-                    fontStyle: FontStyle.italic,
-                  ),
-                  hintText: 'Contraseña...',
-                  suffixIcon: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _obscurePassword = !_obscurePassword;
-                      });
-                    },
-                    child: Icon(
-                      _obscurePassword
-                          ? Icons.visibility
-                          : Icons.visibility_off,
-                      color: kgrey,
-                      size: 30,
-                    ),
-                  ),
-                ),
-            style: widget.passwordInputTextStyle ??
-                const TextStyle(
-                  color: kdarkgrey,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 13,
-                ),
+          // const SizedBox(height: 20),
+          // TextFormField(
+          //   controller: _emailController,
+          //   keyboardType: TextInputType.emailAddress,
+          //   cursorColor: kgrey,
+          //   textInputAction: TextInputAction.next,
+          //   decoration: widget.emailInputDecoration ??
+          //       InputDecoration(
+          //         border: OutlineInputBorder(
+          //           borderRadius: BorderRadius.circular(15),
+          //           borderSide: BorderSide.none,
+          //         ),
+          //         fillColor: kbackground,
+          //         filled: true,
+          //         hintStyle: const TextStyle(
+          //           color: kgrey,
+          //           fontWeight: FontWeight.w400,
+          //           fontSize: 13,
+          //           fontStyle: FontStyle.italic,
+          //         ),
+          //         hintText: 'Correo electrónico...',
+          //       ),
+          //   style: widget.emailInputTextStyle ??
+          //       const TextStyle(
+          //         color: kdarkgrey,
+          //         fontWeight: FontWeight.w400,
+          //         fontSize: 13,
+          //       ),
+          // ),
+          // const SizedBox(height: 20),
+          // TextFormField(
+          //   controller: _passwordController,
+          //   cursorColor: kgrey,
+          //   textInputAction: TextInputAction.next,
+          //   obscureText: _obscurePassword,
+          //   obscuringCharacter: "*",
+          //   decoration: widget.passwordInputDecoration ??
+          //       InputDecoration(
+          //         border: OutlineInputBorder(
+          //           borderRadius: BorderRadius.circular(15),
+          //           borderSide: BorderSide.none,
+          //         ),
+          //         fillColor: kbackground,
+          //         filled: true,
+          //         hintStyle: const TextStyle(
+          //           color: kgrey,
+          //           fontWeight: FontWeight.w400,
+          //           fontSize: 13,
+          //           fontStyle: FontStyle.italic,
+          //         ),
+          //         hintText: 'Contraseña...',
+          //         suffixIcon: GestureDetector(
+          //           onTap: () {
+          //             setState(() {
+          //               _obscurePassword = !_obscurePassword;
+          //             });
+          //           },
+          //           child: Icon(
+          //             _obscurePassword
+          //                 ? Icons.visibility
+          //                 : Icons.visibility_off,
+          //             color: kgrey,
+          //             size: 30,
+          //           ),
+          //         ),
+          //       ),
+          //   style: widget.passwordInputTextStyle ??
+          //       const TextStyle(
+          //         color: kdarkgrey,
+          //         fontWeight: FontWeight.w400,
+          //         fontSize: 13,
+          //       ),
+          // ),
+          LoginFormComponent(
+            emailController: _emailController,
+            emailInputDecoration: widget.emailInputDecoration,
+            emailInputTextStyle: widget.emailInputTextStyle,
+            passwordController: _passwordController,
+            passwordInputDecoration: widget.passwordInputDecoration,
+            passwordInputTextStyle: widget.passwordInputTextStyle,
           ),
           const SizedBox(height: 40),
           _emailLoginButton(),
@@ -514,184 +548,184 @@ class SMultiLoginComponentState extends State<SMultiLoginComponent> {
     );
   }
 
-  _getSimpleLoginButtonsList() {
-    List<Widget> buttonsList = [];
-    if (widget.onResultGoogleLogin != null) {
-      buttonsList.add(_simpleGoogleLoginButton());
-    }
-    if (widget.onResultFacebookLogin != null) {
-      buttonsList.add(_simpleFacebookLoginButton());
-    }
-    if (widget.onResultAppleLogin != null && Platform.isIOS) {
-      buttonsList.add(_simpleAppleLoginButton());
-    }
-    return buttonsList;
-  }
+  // _getSimpleLoginButtonsList() {
+  //   List<Widget> buttonsList = [];
+  //   if (widget.onResultGoogleLogin != null) {
+  //     buttonsList.add(_simpleGoogleLoginButton());
+  //   }
+  //   if (widget.onResultFacebookLogin != null) {
+  //     buttonsList.add(_simpleFacebookLoginButton());
+  //   }
+  //   if (widget.onResultAppleLogin != null && Platform.isIOS) {
+  //     buttonsList.add(_simpleAppleLoginButton());
+  //   }
+  //   return buttonsList;
+  // }
 
-  _simpleGoogleLoginButton() {
-    return ButtonComponent(
-      onPressed: () => _onGoogleLogin(),
-      icon: widget.googleButtonIcon ??
-          Image.asset(
-            "assets/icon_google_default.png",
-            package: 's_multiloginp',
-            height: 30,
-            color: kwhite,
-          ),
-      buttonStyle: widget.googleButtonStyle ??
-          ButtonStyle(
-            backgroundColor: const MaterialStatePropertyAll<Color>(kred),
-            fixedSize: const MaterialStatePropertyAll<Size>(
-              Size(90, 40),
-            ),
-            shape: MaterialStatePropertyAll<OutlinedBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
-              ),
-            ),
-          ),
-    );
-  }
+  // _simpleGoogleLoginButton() {
+  //   return ButtonComponent(
+  //     onPressed: () => _onGoogleLogin(),
+  //     icon: widget.googleButtonIcon ??
+  //         Image.asset(
+  //           "assets/icon_google_default.png",
+  //           package: 's_multiloginp',
+  //           height: 30,
+  //           color: kwhite,
+  //         ),
+  //     buttonStyle: widget.googleButtonStyle ??
+  //         ButtonStyle(
+  //           backgroundColor: const MaterialStatePropertyAll<Color>(kred),
+  //           fixedSize: const MaterialStatePropertyAll<Size>(
+  //             Size(90, 40),
+  //           ),
+  //           shape: MaterialStatePropertyAll<OutlinedBorder>(
+  //             RoundedRectangleBorder(
+  //               borderRadius: BorderRadius.circular(50),
+  //             ),
+  //           ),
+  //         ),
+  //   );
+  // }
 
-  _simpleFacebookLoginButton() {
-    return ButtonComponent(
-      onPressed: () => _onFacebookLogin(),
-      icon: widget.facebookButtonIcon ??
-          const Icon(
-            Icons.facebook,
-            color: kwhite,
-            size: 30,
-          ),
-      buttonStyle: widget.facebookButtonStyle ??
-          ButtonStyle(
-            backgroundColor: const MaterialStatePropertyAll<Color>(kblue),
-            fixedSize: const MaterialStatePropertyAll<Size>(
-              Size(90, 40),
-            ),
-            shape: MaterialStatePropertyAll<OutlinedBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
-              ),
-            ),
-          ),
-    );
-  }
+  // _simpleFacebookLoginButton() {
+  //   return ButtonComponent(
+  //     onPressed: () => _onFacebookLogin(),
+  //     icon: widget.facebookButtonIcon ??
+  //         const Icon(
+  //           Icons.facebook,
+  //           color: kwhite,
+  //           size: 30,
+  //         ),
+  //     buttonStyle: widget.facebookButtonStyle ??
+  //         ButtonStyle(
+  //           backgroundColor: const MaterialStatePropertyAll<Color>(kblue),
+  //           fixedSize: const MaterialStatePropertyAll<Size>(
+  //             Size(90, 40),
+  //           ),
+  //           shape: MaterialStatePropertyAll<OutlinedBorder>(
+  //             RoundedRectangleBorder(
+  //               borderRadius: BorderRadius.circular(50),
+  //             ),
+  //           ),
+  //         ),
+  //   );
+  // }
 
-  _simpleAppleLoginButton() {
-    return ButtonComponent(
-      onPressed: () => _onAppleLogin(),
-      icon: widget.appleButtonIcon ??
-          const Icon(
-            Icons.apple,
-            color: kwhite,
-            size: 30,
-          ),
-      buttonStyle: widget.appleButtonStyle ??
-          ButtonStyle(
-            backgroundColor: const MaterialStatePropertyAll<Color>(kblack),
-            fixedSize: const MaterialStatePropertyAll<Size>(
-              Size(90, 40),
-            ),
-            shape: MaterialStatePropertyAll<OutlinedBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
-              ),
-            ),
-          ),
-    );
-  }
+  // _simpleAppleLoginButton() {
+  //   return ButtonComponent(
+  //     onPressed: () => _onAppleLogin(),
+  //     icon: widget.appleButtonIcon ??
+  //         const Icon(
+  //           Icons.apple,
+  //           color: kwhite,
+  //           size: 30,
+  //         ),
+  //     buttonStyle: widget.appleButtonStyle ??
+  //         ButtonStyle(
+  //           backgroundColor: const MaterialStatePropertyAll<Color>(kblack),
+  //           fixedSize: const MaterialStatePropertyAll<Size>(
+  //             Size(90, 40),
+  //           ),
+  //           shape: MaterialStatePropertyAll<OutlinedBorder>(
+  //             RoundedRectangleBorder(
+  //               borderRadius: BorderRadius.circular(50),
+  //             ),
+  //           ),
+  //         ),
+  //   );
+  // }
 
-  _getComplexLoginButtonsList() {
-    List<Widget> buttonsList = [];
-    if (widget.onResultGoogleLogin != null) {
-      buttonsList.add(_complexGoogleLoginButton());
-    }
-    if (widget.onResultFacebookLogin != null) {
-      buttonsList.add(_complexFacebookLoginButton());
-    }
-    if (widget.onResultAppleLogin != null && Platform.isIOS) {
-      buttonsList.add(_complexAppleLoginButton());
-    }
-    return buttonsList;
-  }
+  // _getComplexLoginButtonsList() {
+  //   List<Widget> buttonsList = [];
+  //   if (widget.onResultGoogleLogin != null) {
+  //     buttonsList.add(_complexGoogleLoginButton());
+  //   }
+  //   if (widget.onResultFacebookLogin != null) {
+  //     buttonsList.add(_complexFacebookLoginButton());
+  //   }
+  //   if (widget.onResultAppleLogin != null && Platform.isIOS) {
+  //     buttonsList.add(_complexAppleLoginButton());
+  //   }
+  //   return buttonsList;
+  // }
 
-  _complexGoogleLoginButton() {
-    return ButtonComponent(
-      onPressed: () => _onGoogleLogin(),
-      text: widget.googleButtonText ?? "Sing In with Google",
-      icon: widget.googleButtonIcon ??
-          Image.asset(
-            "assets/icon_google_default.png",
-            package: 's_multiloginp',
-            height: 30,
-          ),
-      buttonStyle: widget.googleButtonStyle ??
-          ButtonStyle(
-            backgroundColor: const MaterialStatePropertyAll<Color>(kred),
-            minimumSize: const MaterialStatePropertyAll<Size>(
-              Size(double.infinity, 40),
-            ),
-            shape: MaterialStatePropertyAll<OutlinedBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
-              ),
-            ),
-          ),
-    );
-  }
+  // _complexGoogleLoginButton() {
+  //   return ButtonComponent(
+  //     onPressed: () => _onGoogleLogin(),
+  //     text: widget.googleButtonText ?? "Sing In with Google",
+  //     icon: widget.googleButtonIcon ??
+  //         Image.asset(
+  //           "assets/icon_google_default.png",
+  //           package: 's_multiloginp',
+  //           height: 30,
+  //         ),
+  //     buttonStyle: widget.googleButtonStyle ??
+  //         ButtonStyle(
+  //           backgroundColor: const MaterialStatePropertyAll<Color>(kred),
+  //           minimumSize: const MaterialStatePropertyAll<Size>(
+  //             Size(double.infinity, 40),
+  //           ),
+  //           shape: MaterialStatePropertyAll<OutlinedBorder>(
+  //             RoundedRectangleBorder(
+  //               borderRadius: BorderRadius.circular(50),
+  //             ),
+  //           ),
+  //         ),
+  //   );
+  // }
 
-  _complexFacebookLoginButton() {
-    return ButtonComponent(
-      onPressed: () => _onFacebookLogin(),
-      text: widget.facebookButtonText ?? "Sing In with Facebook",
-      icon: widget.facebookButtonIcon ??
-          const Icon(
-            Icons.facebook,
-            color: kwhite,
-            size: 30,
-          ),
-      buttonStyle: widget.facebookButtonStyle ??
-          ButtonStyle(
-            backgroundColor: const MaterialStatePropertyAll<Color>(kblue),
-            minimumSize: const MaterialStatePropertyAll<Size>(
-              Size(double.infinity, 40),
-            ),
-            shape: MaterialStatePropertyAll<OutlinedBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
-              ),
-            ),
-          ),
-    );
-  }
+  // _complexFacebookLoginButton() {
+  //   return ButtonComponent(
+  //     onPressed: () => _onFacebookLogin(),
+  //     text: widget.facebookButtonText ?? "Sing In with Facebook",
+  //     icon: widget.facebookButtonIcon ??
+  //         const Icon(
+  //           Icons.facebook,
+  //           color: kwhite,
+  //           size: 30,
+  //         ),
+  //     buttonStyle: widget.facebookButtonStyle ??
+  //         ButtonStyle(
+  //           backgroundColor: const MaterialStatePropertyAll<Color>(kblue),
+  //           minimumSize: const MaterialStatePropertyAll<Size>(
+  //             Size(double.infinity, 40),
+  //           ),
+  //           shape: MaterialStatePropertyAll<OutlinedBorder>(
+  //             RoundedRectangleBorder(
+  //               borderRadius: BorderRadius.circular(50),
+  //             ),
+  //           ),
+  //         ),
+  //   );
+  // }
 
-  _complexAppleLoginButton() {
-    return ButtonComponent(
-      onPressed: () => _onAppleLogin(),
-      text: widget.appleButtonText ?? "Sing In with Apple",
-      icon: widget.appleButtonIcon ??
-          const Icon(
-            Icons.apple,
-            color: kwhite,
-            size: 30,
-          ),
-      buttonStyle: widget.appleButtonStyle ??
-          ButtonStyle(
-            backgroundColor: const MaterialStatePropertyAll<Color>(kblack),
-            minimumSize: const MaterialStatePropertyAll<Size>(
-              Size(double.infinity, 40),
-            ),
-            shape: MaterialStatePropertyAll<OutlinedBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
-              ),
-            ),
-          ),
-    );
-  }
+  // _complexAppleLoginButton() {
+  //   return ButtonComponent(
+  //     onPressed: () => _onAppleLogin(),
+  //     text: widget.appleButtonText ?? "Sing In with Apple",
+  //     icon: widget.appleButtonIcon ??
+  //         const Icon(
+  //           Icons.apple,
+  //           color: kwhite,
+  //           size: 30,
+  //         ),
+  //     buttonStyle: widget.appleButtonStyle ??
+  //         ButtonStyle(
+  //           backgroundColor: const MaterialStatePropertyAll<Color>(kblack),
+  //           minimumSize: const MaterialStatePropertyAll<Size>(
+  //             Size(double.infinity, 40),
+  //           ),
+  //           shape: MaterialStatePropertyAll<OutlinedBorder>(
+  //             RoundedRectangleBorder(
+  //               borderRadius: BorderRadius.circular(50),
+  //             ),
+  //           ),
+  //         ),
+  //   );
+  // }
 
-  //CONTROLLER----------------------------------------------------
-  //*EMAIL
+  // //CONTROLLER----------------------------------------------------
+  // //*EMAIL
   _onEmailLogin() async {
     await LoadingPopup(
       context: context,
@@ -704,7 +738,7 @@ class SMultiLoginComponentState extends State<SMultiLoginComponent> {
   _onEmailLoading() async {
     await AuthManager().signInEmailAndPassword(
         email: _emailController.text, password: _passwordController.text);
-    return _getUserCredential();
+    return AuthManager().getUserCredential(); //_getUserCredential();
   }
 
   _onEmailResult(CurrentUserModel data) async {
@@ -729,122 +763,122 @@ class SMultiLoginComponentState extends State<SMultiLoginComponent> {
     }
   }
 
-  //!GOOGLE
-  _onGoogleLogin() async {
-    await LoadingPopup(
-      context: context,
-      onLoading: _onGoogleLoading(),
-      onResult: (data) => _onGoogleResult(data),
-      onError: (error) => _onGoogleError(error),
-    ).show();
-  }
+  // //!GOOGLE
+  // _onGoogleLogin() async {
+  //   await LoadingPopup(
+  //     context: context,
+  //     onLoading: _onGoogleLoading(),
+  //     onResult: (data) => _onGoogleResult(data),
+  //     onError: (error) => _onGoogleError(error),
+  //   ).show();
+  // }
 
-  _onGoogleLoading() async {
-    await AuthManager().signInWithGoogle();
-    return _getUserCredential();
-  }
+  // _onGoogleLoading() async {
+  //   await AuthManager().signInWithGoogle();
+  //   return _getUserCredential();
+  // }
 
-  _onGoogleResult(CurrentUserModel data) async {
-    if (data.token != null) {
-      if (widget.onResultGoogleLogin != null) {
-        _emailController.clear();
-        _passwordController.clear();
-        widget.onResultGoogleLogin!(data);
-      } else {
-        debugPrint("Null result GoogleLogin");
-      }
-    } else {
-      debugPrint("Error on GoogleLogin");
-    }
-  }
-
-  _onGoogleError(String error) {
-    if (widget.onErrorGoogleLogin != null) {
-      widget.onErrorGoogleLogin!(error);
-    } else {
-      debugPrint("El error fue: $error");
-    }
-  }
-
-  //?FACEBOOK
-  _onFacebookLogin() async {
-    await LoadingPopup(
-      context: context,
-      onLoading: _onFacebookLoading(),
-      onResult: (data) => _onFacebookResult(data),
-      onError: (error) => _onFacebookError(error),
-    ).show();
-  }
-
-  _onFacebookLoading() async {
-    await AuthManager().signInWithFacebook();
-    return _getUserCredential();
-  }
-
-  _onFacebookResult(CurrentUserModel data) async {
-    if (data.token != null) {
-      if (widget.onResultFacebookLogin != null) {
-        _emailController.clear();
-        _passwordController.clear();
-        widget.onResultFacebookLogin!(data);
-      } else {
-        debugPrint("Null result FacebookLogin");
-      }
-    } else {
-      debugPrint("Error on FacebookLogin");
-    }
-  }
-
-  _onFacebookError(String error) {
-    if (widget.onErrorFacebookLogin != null) {
-      widget.onErrorFacebookLogin!(error);
-    } else {
-      debugPrint("El error fue: $error");
-    }
-  }
-
-  //TODO: APPLE
-  _onAppleLogin() async {
-    await LoadingPopup(
-      context: context,
-      onLoading: _onAppleLoading(),
-      onResult: (data) => _onAppleResult(data),
-      onError: (error) => _onAppleError(error),
-    ).show();
-  }
-
-  _onAppleLoading() async {
-    await AuthManager().signInWithApple();
-    return _getUserCredential();
-  }
-
-  _onAppleResult(CurrentUserModel data) {
-    debugPrint("Apple login");
-  }
-  // _onAppleResult(GetUserCredentialModel data) async {
+  // _onGoogleResult(CurrentUserModel data) async {
   //   if (data.token != null) {
-  //     if (widget.onResultAppleLogin != null) {
-  //       _emailController!.clear();
-  //       _passwordController!.clear();
-  //       widget.onResultAppleLogin!(data);
+  //     if (widget.onResultGoogleLogin != null) {
+  //       _emailController.clear();
+  //       _passwordController.clear();
+  //       widget.onResultGoogleLogin!(data);
   //     } else {
-  //       debugPrint("Null result AppleLogin");
+  //       debugPrint("Null result GoogleLogin");
   //     }
   //   } else {
-  //     debugPrint("Error on AppleLogin");
+  //     debugPrint("Error on GoogleLogin");
   //   }
   // }
 
-  _onAppleError(String error) {
-    if (widget.onErrorAppleLogin != null) {
-      widget.onErrorAppleLogin!(error);
-    } else {
-      debugPrint("El error fue: $error");
-    }
-  }
+  // _onGoogleError(String error) {
+  //   if (widget.onErrorGoogleLogin != null) {
+  //     widget.onErrorGoogleLogin!(error);
+  //   } else {
+  //     debugPrint("El error fue: $error");
+  //   }
+  // }
 
-  //OTROS
-  Future<CurrentUserModel> _getUserCredential() {
-    return AuthManager().getUserCredential();
-  }
+  // //?FACEBOOK
+  // _onFacebookLogin() async {
+  //   await LoadingPopup(
+  //     context: context,
+  //     onLoading: _onFacebookLoading(),
+  //     onResult: (data) => _onFacebookResult(data),
+  //     onError: (error) => _onFacebookError(error),
+  //   ).show();
+  // }
+
+  // _onFacebookLoading() async {
+  //   await AuthManager().signInWithFacebook();
+  //   return _getUserCredential();
+  // }
+
+  // _onFacebookResult(CurrentUserModel data) async {
+  //   if (data.token != null) {
+  //     if (widget.onResultFacebookLogin != null) {
+  //       _emailController.clear();
+  //       _passwordController.clear();
+  //       widget.onResultFacebookLogin!(data);
+  //     } else {
+  //       debugPrint("Null result FacebookLogin");
+  //     }
+  //   } else {
+  //     debugPrint("Error on FacebookLogin");
+  //   }
+  // }
+
+  // _onFacebookError(String error) {
+  //   if (widget.onErrorFacebookLogin != null) {
+  //     widget.onErrorFacebookLogin!(error);
+  //   } else {
+  //     debugPrint("El error fue: $error");
+  //   }
+  // }
+
+  // //TODO: APPLE
+  // _onAppleLogin() async {
+  //   await LoadingPopup(
+  //     context: context,
+  //     onLoading: _onAppleLoading(),
+  //     onResult: (data) => _onAppleResult(data),
+  //     onError: (error) => _onAppleError(error),
+  //   ).show();
+  // }
+
+  // _onAppleLoading() async {
+  //   await AuthManager().signInWithApple();
+  //   return _getUserCredential();
+  // }
+
+  // _onAppleResult(CurrentUserModel data) {
+  //   debugPrint("Apple login");
+  // }
+  // // _onAppleResult(GetUserCredentialModel data) async {
+  // //   if (data.token != null) {
+  // //     if (widget.onResultAppleLogin != null) {
+  // //       _emailController!.clear();
+  // //       _passwordController!.clear();
+  // //       widget.onResultAppleLogin!(data);
+  // //     } else {
+  // //       debugPrint("Null result AppleLogin");
+  // //     }
+  // //   } else {
+  // //     debugPrint("Error on AppleLogin");
+  // //   }
+  // // }
+
+  // _onAppleError(String error) {
+  //   if (widget.onErrorAppleLogin != null) {
+  //     widget.onErrorAppleLogin!(error);
+  //   } else {
+  //     debugPrint("El error fue: $error");
+  //   }
+  // }
+
+  // //OTROS
+  // Future<CurrentUserModel> _getUserCredential() {
+  //   return AuthManager().getUserCredential();
+  // }
 }
