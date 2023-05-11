@@ -49,7 +49,7 @@ EN FIREBASE:
 
 5) Luego, añadir Firebase a tu aplicación: NuevoProyectoFirebase -> Agregar app -> Flutter<br>
 A continuación, seguir los pasos de la documentación oficial que se muestran en pantalla.<br>
-(Nota: Si es la primera vez que usas Firebase con Flutter, sigue todos lo pasos desde el primero. Si ya lo usaste anteriormente, puedes seguir desde el paso 2 (y desde el comando `flutterfire configure`) en adelante).<br>
+Nota: Si es la primera vez que usas Firebase con Flutter, sigue todos lo pasos desde el primero. Si ya lo usaste anteriormente, puedes seguir desde el paso 2 (y desde el comando `flutterfire configure`) en adelante.<br>
 También puedes seguir la guía de la [Documentación oficial para Agregar Firebase en una app de Flutter](https://firebase.google.com/docs/flutter/setup?hl=es-419&platform=android)<br>
 (Una vez terminada esta guía, también es necesario ir a NuevoProyectoFirebase -> Agregar app -> Flutter)
 
@@ -58,7 +58,7 @@ También puedes seguir la guía de la [Documentación oficial para Agregar Fireb
 ## **Habilitar los Inicio de sesión (Android)**
 ### **LOGIN CON CORREO Y CONTRASEÑA:**
 Con los pasos anteriores, se habilita el uso del login con correo y contraseña. Habilitarlo desde Firebase.<br>
-(Nota: Crear también un usuario de prueba).
+Nota: Crear también un usuario de prueba.
 
 ~
 
@@ -82,7 +82,7 @@ Crear una nueva app y seguir la guía de inicio rápido según la plataforma que
 [Desde la consola de Facebook Devs](https://developers.facebook.com/apps/766439921742770/fb-login/quickstart/)<br>
 [Documentacion extra](https://defold.com/extension-facebook/)<br>
 
-(Nota: Hay problemas con los nombres de paquetes en la guia de inicio rápido, hacerlo por aparte probando hasta que pueda agregarse mediante los hash).
+Nota: Hay problemas con los nombres de paquetes en la guia de inicio rápido, hacerlo por aparte probando hasta que pueda agregarse mediante los hash.
 
 Habilitar el inicio de sesión de Facebook desde Firebase. Copiar el App ID y el App Secret dados en Facebook Devs y luego copiar la URI en la Consola de Facebook Devs, en "Inicio de sesión con Facebook -> Configurar -> URI de redireccionamiento de OAuth válidos".
 
