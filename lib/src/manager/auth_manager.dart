@@ -59,7 +59,8 @@ class AuthManager {
       // );
 
       // Once signed in, return the UserCredential (inicio de sesion)
-      OAuthCredential googleOAuthCredential = await GoogleLoginManager().googleLogin();
+      OAuthCredential googleOAuthCredential =
+          await GoogleLoginManager().googleLogin();
       return user = await _auth.signInWithCredential(googleOAuthCredential);
       // return user;
     } on FirebaseAuthException catch (e) {
@@ -81,8 +82,9 @@ class AuthManager {
       //     FacebookAuthProvider.credential(loginResult.accessToken!.token);
 
       // Once signed in, return the UserCredential (inicio de sesion)
-      return user = await _auth
-          .signInWithCredential(FacebookLoginManager().facebookLogin());
+      OAuthCredential facebookOAuthCredential =
+          await FacebookLoginManager().facebookLogin();
+      return user = await _auth.signInWithCredential(facebookOAuthCredential);
       // return user;
     } on FirebaseAuthException catch (e) {
       await onFirebaseAuthException(error: e);
@@ -127,8 +129,9 @@ class AuthManager {
       //   idToken: appleCredential.identityToken,
       //   rawNonce: rawNonce,
       // );
-      return user =
-          await _auth.signInWithCredential(AppleLoginManager().appleLogin());
+      OAuthCredential appleOAuthCredential =
+          await AppleLoginManager().appleLogin();
+      return user = await _auth.signInWithCredential(appleOAuthCredential);
       // return user;
     } on FirebaseAuthException catch (e) {
       await onFirebaseAuthException(error: e);
