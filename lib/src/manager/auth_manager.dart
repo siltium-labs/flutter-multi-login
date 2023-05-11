@@ -59,8 +59,8 @@ class AuthManager {
       // );
 
       // Once signed in, return the UserCredential (inicio de sesion)
-      return user =
-          await _auth.signInWithCredential(GoogleLoginManager().googleLogin());
+      OAuthCredential googleOAuthCredential = await GoogleLoginManager().googleLogin();
+      return user = await _auth.signInWithCredential(googleOAuthCredential);
       // return user;
     } on FirebaseAuthException catch (e) {
       await onFirebaseAuthException(error: e);
