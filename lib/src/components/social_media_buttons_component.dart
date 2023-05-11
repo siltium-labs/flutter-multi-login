@@ -64,9 +64,13 @@ class SocialMediaButtonsComponentState
     extends State<SocialMediaButtonsComponent> {
   @override
   Widget build(BuildContext context) {
-    return widget.componentMode == ComponentMode.simpleCardMode
-        ? getSimpleLoginButtonsList()
-        : getComplexLoginButtonsList();
+    return Column(
+      children: [
+        ...widget.componentMode == ComponentMode.simpleCardMode
+            ? getSimpleLoginButtonsList()
+            : getComplexLoginButtonsList()
+      ],
+    );
   }
 
   getSimpleLoginButtonsList() {
