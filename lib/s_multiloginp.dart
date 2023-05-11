@@ -724,7 +724,7 @@ class SMultiLoginComponentState extends State<SMultiLoginComponent> {
   //   );
   // }
 
-  // //CONTROLLER----------------------------------------------------
+  //CONTROLLER----------------------------------------------------
   // //*EMAIL
   _onEmailLogin() async {
     await LoadingPopup(
