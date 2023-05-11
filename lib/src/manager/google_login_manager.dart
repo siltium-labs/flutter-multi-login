@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class GoogleLoginManager {
-  googleLogin() async {
+  _getGoogleCredential() async {
     // Trigger the authentication flow (abre sdk login google)
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
@@ -12,11 +12,16 @@ class GoogleLoginManager {
         await googleUser?.authentication;
 
     // Create a new credential (guardar credenciales)
-    final googleOAuthCredential = GoogleAuthProvider.credential(
+    AuthCredential googleOAuthCredential = GoogleAuthProvider.credential(
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
     );
+
     return googleOAuthCredential;
+  }
+
+  AuthCredential googleLogin() {
+    return _getGoogleCredential();
   }
 
   googleLogout() async {
