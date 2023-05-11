@@ -1,16 +1,19 @@
 //* Flutter imports
 import 'package:flutter/material.dart';
-import 'package:s_multiloginp/src/components/login_form_component.dart';
-import 'package:s_multiloginp/src/components/social_media_buttons_component.dart';
 
 //* Project imports
 import 'package:s_multiloginp/src/constants/k_colors.dart';
-import 'package:s_multiloginp/src/components/button_component.dart';
 import 'package:s_multiloginp/src/enums/component_mode_enum.dart';
 import 'package:s_multiloginp/src/manager/auth_manager.dart';
 import 'package:s_multiloginp/src/utils/loading_popup.dart';
 import 'package:s_multiloginp/src/models/current_user_model.dart';
+import 'package:s_multiloginp/smultilogin_options_model.dart';
+
+//* Components imports
 import 'package:s_multiloginp/src/components/card_background_component.dart';
+import 'package:s_multiloginp/src/components/login_form_component.dart';
+import 'package:s_multiloginp/src/components/button_component.dart';
+import 'package:s_multiloginp/src/components/social_media_buttons_component.dart';
 
 //* Firebase imports
 import 'package:firebase_core/firebase_core.dart';
@@ -32,7 +35,7 @@ class SMultiLogin {
   }
   SMultiLogin._constructor();
 
-  multiLoginInit(MultiloginOptionsModel options) async {
+  multiLoginInit(SMultiloginOptionsModel options) async {
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp(
       options: FirebaseOptions(
@@ -62,42 +65,6 @@ class SMultiLogin {
   userData() {
     return AuthManager().getUserData();
   }
-}
-
-class MultiloginOptionsModel {
-  String apiKey;
-  String appId;
-  String messagingSenderId;
-  String projectId;
-  String? authDomain;
-  String? databaseURL;
-  String? storageBucket;
-  String? measurementId;
-  // ios specific
-  String? trackingId;
-  String? deepLinkURLScheme;
-  String? androidClientId;
-  String? iosClientId;
-  String? iosBundleId;
-  String? appGroupId;
-
-  MultiloginOptionsModel({
-    required this.apiKey,
-    required this.appId,
-    required this.messagingSenderId,
-    required this.projectId,
-    this.authDomain,
-    this.databaseURL,
-    this.storageBucket,
-    this.measurementId,
-    // ios specific
-    this.trackingId,
-    this.deepLinkURLScheme,
-    this.androidClientId,
-    this.iosClientId,
-    this.iosBundleId,
-    this.appGroupId,
-  });
 }
 
 // ignore: must_be_immutable
