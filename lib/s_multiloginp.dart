@@ -3,7 +3,6 @@ import 'dart:io';
 
 //* Flutter imports
 import 'package:flutter/material.dart';
-import 'package:s_multiloginp/src/components/card_background_component.dart';
 
 //* Project imports
 import 'package:s_multiloginp/src/constants/k_colors.dart';
@@ -318,33 +317,26 @@ class SMultiLoginComponentState extends State<SMultiLoginComponent> {
   }
 
   _cardModeContent() {
-    // return Container(
-    //   decoration: widget.cardDecoration ??
-    //       BoxDecoration(
-    //         color: kwhite,
-    //         borderRadius: BorderRadius.circular(20),
-    //         boxShadow: const [
-    //           BoxShadow(
-    //             color: Color(0x40666666),
-    //             spreadRadius: -3,
-    //             blurRadius: 20,
-    //             offset: Offset(0, 10),
-    //           ),
-    //         ],
-    //       ),
-    //   child: Padding(
-    //     padding: widget.cardInnerPadding ?? const EdgeInsets.all(20),
-    //     child: widget.componentMode == ComponentMode.simpleCardMode
-    //         ? _simpleModeContent()
-    //         : _complexModeContent(),
-    //   ),
-    // );
-    return CardBackgroundComponent(
-      cardDecoration: widget.cardDecoration,
-      cardInnerPadding: widget.cardInnerPadding,
-      child: widget.componentMode == ComponentMode.simpleCardMode
-          ? _simpleModeContent()
-          : _complexModeContent(),
+    return Container(
+      decoration: widget.cardDecoration ??
+          BoxDecoration(
+            color: kwhite,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: const [
+              BoxShadow(
+                color: Color(0x40666666),
+                spreadRadius: -3,
+                blurRadius: 20,
+                offset: Offset(0, 10),
+              ),
+            ],
+          ),
+      child: Padding(
+        padding: widget.cardInnerPadding ?? const EdgeInsets.all(20),
+        child: widget.componentMode == ComponentMode.simpleCardMode
+            ? _simpleModeContent()
+            : _complexModeContent(),
+      ),
     );
   }
 
