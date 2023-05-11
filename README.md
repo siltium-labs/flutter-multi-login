@@ -1,6 +1,6 @@
 
 ------------------------------------------
-# **S-MultiLogin: Siltium Component for Social Media Login**<br> ![](https://img.shields.io/badge/Dart-Flutter-blue) ![](https://img.shields.io/badge/SO-Android-green) ![](https://img.shields.io/badge/Email&Pass-yellow) ![](https://img.shields.io/badge/Google-red) ![](https://img.shields.io/badge/Facebook-blue) ![](https://img.shields.io/badge/pendiente-Apple-black)
+# **S-MultiLogin: Siltium Component for Social Media Login**<br> ![](https://img.shields.io/badge/Dart-Flutter-blue) ![](https://img.shields.io/badge/iOS-Android-green) ![](https://img.shields.io/badge/Email&Pass-yellow) ![](https://img.shields.io/badge/Google-red) ![](https://img.shields.io/badge/Facebook-blue) ![](https://img.shields.io/badge/en%20test-Apple-black)
 
 
 ## **Descripción**
@@ -9,7 +9,9 @@ Plugin para incluir en proyectos que permite utilizar el componente SMultiLogin 
 <br>
 
 ## **Versión**
-0.1.0 - Version inicial: Login con Email & Contraseña, Google y Facebook para android.
+0.1.0 - **Version inicial -** Inicio de sesión con Email & Contraseña, Google y Facebook para Android.
+<br>
+0.2.0 - Inicio de sesión con Email & Contraseña, Google y Facebook para Android & iOS. Inicios de sesión con iOS y Apple en testing.
 <br>
 <br>
 
@@ -84,9 +86,9 @@ Crear una nueva app y seguir la guía de inicio rápido según la plataforma que
 
 Habilitar el inicio de sesión de Facebook desde Firebase. Copiar el App ID y el App Secret dados en Facebook Devs y luego copiar la URI en la Consola de Facebook Devs, en "Inicio de sesión con Facebook -> Configurar -> URI de redireccionamiento de OAuth válidos".
 
-EN FLUTTER<br>
+EN FLUTTER - ANDROID<br>
 Resumen:
-1) En el archivo `project_name\android\app\build.gradle` importar el SDK de Facebook y agregar un par de strings, con el fbAppID y el fbClientToken (Secret App) respectivamente y con esos nombres de variable:
+1) En el archivo `project_name\android\app\build.gradle` importar el SDK de Facebook y agregar un par de strings, con el `fbAppID` y el `fbClientToken` (Secret App) respectivamente y con esos nombres de variable:
 ```
 defaultConfig {
         ...
@@ -99,7 +101,94 @@ dependencies {
     implementation 'com.facebook.android:facebook-android-sdk:latest.release'
 }
 ```
-Nota: Es necesario escapar las comillas para que el archivo build.gradle lo tome como un string.
+Nota: Es necesario escapar las comillas para que el archivo `build.gradle` lo tome como un string.<br>
+~
+
+EN FLUTTER - IOS<br>
+Resumen:
+1) En el archivo `Info.plist` agregar el siguiente codigo dentro de `<dict>...</dict>`, agregando los campos correspondientes. Es decir, el AppID y el Client Token (SecretApp) de tu app de facebook:
+```plist
+<key>CFBundleURLTypes</key>
+<array>
+  <dict>
+  <key>CFBundleURLSchemes</key>
+  <array>
+    <string>TU_FB_APP_ID</string>
+  </array>
+  </dict>
+</array>
+<key>FacebookAppID</key>
+<string>TU_FB_APP_ID</string>
+<key>FacebookClientToken</key>
+<string>TU_FB_CLIENT_TOKEN</string>
+<key>FacebookDisplayName</key>
+<string>TU_APP_NAME</string>
+```
+
+2) Para usar los cuadros de diálogo de Facebook (p. ej., inicio de sesión, contenido compartido, invitaciones a apps, etc.) con los que se puede cambiar de una app a las apps de Facebook, el archivo `Info.plist` de tu solicitud también debe incluir la siguiente información:
+
+```plist
+<key>LSApplicationQueriesSchemes</key>
+<array>
+  <string>fbapi</string>
+  <string>fb-messenger-share-api</string>
+</array>
+```
+
+3) Reemplaza el código que aparece en el método `AppDelegate.swift` con el siguiente código:
+```swift
+// AppDelegate.swift
+import UIKit
+import FacebookCore
+
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate {    
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {          
+        ApplicationDelegate.shared.application(
+            application,
+            didFinishLaunchingWithOptions: launchOptions
+        )
+
+        return true
+    }
+          
+    func application(
+        _ app: UIApplication,
+        open url: URL,
+        options: [UIApplication.OpenURLOptionsKey : Any] = [:]
+    ) -> Bool {
+        ApplicationDelegate.shared.application(
+            app,
+            open: url,
+            sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+            annotation: options[UIApplication.OpenURLOptionsKey.annotation]
+        )
+    }  
+}
+```
+Este código inicializa el SDK cuando se inicia tu app y permite al SDK administrar inicios de sesión y compartir contenido desde la app nativa de Facebook cuando realizas la acción Iniciar sesión o Compartir. De lo contrario, el usuario debe iniciar sesión en Facebook a fin de usar el navegador de la app para iniciar sesión.
+
+4) En iOS 13, la funcionalidad de URL de apertura se movió a `SceneDelegate`. Si usas iOS 13, agrega el siguiente método a `SceneDelegate` para que las operaciones como el inicio de sesión o el uso compartido funcionen según lo previsto:
+```swift
+// SceneDelegate.swift
+import FacebookCore
+  ...
+func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+    guard let url = URLContexts.first?.url else {
+        return
+    }
+
+    ApplicationDelegate.shared.application(
+        UIApplication.shared,
+        open: url,
+        sourceApplication: nil,
+        annotation: [UIApplication.OpenURLOptionsKey.annotation]
+    )
+}
+```
 
 ~
 ### **LOGIN CON APPLE:** Pendiente
