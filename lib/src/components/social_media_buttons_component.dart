@@ -64,7 +64,10 @@ class SocialMediaButtonsComponentState
     extends State<SocialMediaButtonsComponent> {
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Wrap(
+      alignment: WrapAlignment.center,
+      spacing: 10,
+      runSpacing: 10,
       children: [
         ...widget.componentMode == ComponentMode.simpleCardMode
             ? getSimpleLoginButtonsList()
