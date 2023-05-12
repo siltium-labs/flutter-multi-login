@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:s_multiloginp/src/constants/k_colors.dart';
 import 'package:s_multiloginp/src/enums/component_mode_enum.dart';
 import 'package:s_multiloginp/src/manager/auth_manager.dart';
-import 'package:s_multiloginp/src/utils/loading_popup.dart';
+// import 'package:s_multiloginp/src/utils/loading_popup.dart';
 import 'package:s_multiloginp/src/models/current_user_model.dart';
 import 'package:s_multiloginp/s_multilogin_options_model.dart';
 
 //* Components imports
 import 'package:s_multiloginp/src/components/card_background_component.dart';
 import 'package:s_multiloginp/src/components/login_form_component.dart';
-import 'package:s_multiloginp/src/components/button_component.dart';
+// import 'package:s_multiloginp/src/components/button_component.dart';
 import 'package:s_multiloginp/src/components/social_media_buttons_component.dart';
 
 //* Firebase imports
@@ -269,17 +269,25 @@ class SMultiLoginComponentState extends State<SMultiLoginComponent> {
 
   @override
   Widget build(BuildContext context) {
+    // switch (widget.componentMode) {
+    //   case ComponentMode.simpleCardMode:
+    //     return _cardModeContent();
+    //   case ComponentMode.simpleMode:
+    //     return _content(); //_simpleModeContent();
+    //   case ComponentMode.complexCardMode:
+    //     return _cardModeContent();
+    //   case ComponentMode.complexMode:
+    //     return _content(); //_complexModeContent();
+    //   default:
+    //     return _content(); // _simpleModeContent();
+    // }
     switch (widget.componentMode) {
       case ComponentMode.simpleCardMode:
         return _cardModeContent();
-      case ComponentMode.simpleMode:
-        return _content(); //_simpleModeContent();
       case ComponentMode.complexCardMode:
         return _cardModeContent();
-      case ComponentMode.complexMode:
-        return _content(); //_complexModeContent();
       default:
-        return _content(); // _simpleModeContent();
+        return _content();
     }
   }
 
@@ -487,33 +495,33 @@ class SMultiLoginComponentState extends State<SMultiLoginComponent> {
             passwordInputDecoration: widget.passwordInputDecoration,
             passwordInputTextStyle: widget.passwordInputTextStyle,
           ),
-          const SizedBox(height: 40),
-          _emailLoginButton(),
-          const SizedBox(height: 70),
+          // const SizedBox(height: 40),
+          // _emailLoginButton(),
+          // const SizedBox(height: 70),
         ],
       ),
     );
   }
 
-  _emailLoginButton() {
-    return ButtonComponent(
-      onPressed: () => _onEmailLogin(),
-      text: widget.emailButtonText ?? "Iniciar Sesión",
-      icon: widget.emailButtonIcon,
-      buttonStyle: widget.emailButtonStyle ??
-          ButtonStyle(
-            backgroundColor: const MaterialStatePropertyAll<Color>(kblue),
-            minimumSize: const MaterialStatePropertyAll<Size>(
-              Size(double.infinity, 40),
-            ),
-            shape: MaterialStatePropertyAll<OutlinedBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
-              ),
-            ),
-          ),
-    );
-  }
+  // _emailLoginButton() {
+  //   return ButtonComponent(
+  //     onPressed: () => _onEmailLogin(),
+  //     text: widget.emailButtonText ?? "Iniciar Sesión",
+  //     icon: widget.emailButtonIcon,
+  //     buttonStyle: widget.emailButtonStyle ??
+  //         ButtonStyle(
+  //           backgroundColor: const MaterialStatePropertyAll<Color>(kblue),
+  //           minimumSize: const MaterialStatePropertyAll<Size>(
+  //             Size(double.infinity, 40),
+  //           ),
+  //           shape: MaterialStatePropertyAll<OutlinedBorder>(
+  //             RoundedRectangleBorder(
+  //               borderRadius: BorderRadius.circular(50),
+  //             ),
+  //           ),
+  //         ),
+  //   );
+  // }
 
   // _getSimpleLoginButtonsList() {
   //   List<Widget> buttonsList = [];
@@ -691,44 +699,44 @@ class SMultiLoginComponentState extends State<SMultiLoginComponent> {
   //   );
   // }
 
-  //CONTROLLER----------------------------------------------------
-  // //*EMAIL
-  _onEmailLogin() async {
-    await LoadingPopup(
-      context: context,
-      onLoading: _onEmailLoading(),
-      onResult: (data) => _onEmailResult(data),
-      onError: (error) => _onEmailError(error),
-    ).show();
-  }
+  // //CONTROLLER----------------------------------------------------
+  // // //*EMAIL
+  // _onEmailLogin() async {
+  //   await LoadingPopup(
+  //     context: context,
+  //     onLoading: _onEmailLoading(),
+  //     onResult: (data) => _onEmailResult(data),
+  //     onError: (error) => _onEmailError(error),
+  //   ).show();
+  // }
 
-  _onEmailLoading() async {
-    await AuthManager().signInEmailAndPassword(
-        email: _emailController.text, password: _passwordController.text);
-    return AuthManager().getUserCredential(); //_getUserCredential();
-  }
+  // _onEmailLoading() async {
+  //   await AuthManager().signInEmailAndPassword(
+  //       email: _emailController.text, password: _passwordController.text);
+  //   return AuthManager().getUserCredential(); //_getUserCredential();
+  // }
 
-  _onEmailResult(CurrentUserModel data) async {
-    if (data.token != null) {
-      if (widget.onResultEmailLogin != null) {
-        _emailController.clear();
-        _passwordController.clear();
-        widget.onResultEmailLogin!(data);
-      } else {
-        debugPrint("Null result EmailLogin");
-      }
-    } else {
-      debugPrint("Error on EmailLogin");
-    }
-  }
+  // _onEmailResult(CurrentUserModel data) async {
+  //   if (data.token != null) {
+  //     if (widget.onResultEmailLogin != null) {
+  //       _emailController.clear();
+  //       _passwordController.clear();
+  //       widget.onResultEmailLogin!(data);
+  //     } else {
+  //       debugPrint("Null result EmailLogin");
+  //     }
+  //   } else {
+  //     debugPrint("Error on EmailLogin");
+  //   }
+  // }
 
-  _onEmailError(String error) {
-    if (widget.onErrorEmailLogin != null) {
-      widget.onErrorEmailLogin!(error);
-    } else {
-      debugPrint("El error fue: $error");
-    }
-  }
+  // _onEmailError(String error) {
+  //   if (widget.onErrorEmailLogin != null) {
+  //     widget.onErrorEmailLogin!(error);
+  //   } else {
+  //     debugPrint("El error fue: $error");
+  //   }
+  // }
 
   // //!GOOGLE
   // _onGoogleLogin() async {
