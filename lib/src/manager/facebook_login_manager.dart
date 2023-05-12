@@ -13,6 +13,7 @@ class FacebookLoginManager {
     final OAuthCredential facebookOAuthCredential =
         FacebookAuthProvider.credential(loginResult.accessToken!.token);
 
+    // Once signed in, return the UserCredential (inicio de sesion, en AuthManager)
     return facebookOAuthCredential;
   }
 
