@@ -271,8 +271,6 @@ class SocialMediaButtonsComponentState
   _onGoogleResult(CurrentUserModel data) async {
     if (data.token != null) {
       if (widget.onResultGoogleLogin != null) {
-        // _emailController.clear();
-        // _passwordController.clear();
         widget.onResultGoogleLogin!(data);
       } else {
         debugPrint("Null result GoogleLogin");
@@ -308,8 +306,6 @@ class SocialMediaButtonsComponentState
   _onFacebookResult(CurrentUserModel data) async {
     if (data.token != null) {
       if (widget.onResultFacebookLogin != null) {
-        // _emailController.clear();
-        // _passwordController.clear();
         widget.onResultFacebookLogin!(data);
       } else {
         debugPrint("Null result FacebookLogin");
@@ -348,8 +344,6 @@ class SocialMediaButtonsComponentState
   // _onAppleResult(GetUserCredentialModel data) async {
   //   if (data.token != null) {
   //     if (widget.onResultAppleLogin != null) {
-  //       _emailController!.clear();
-  //       _passwordController!.clear();
   //       widget.onResultAppleLogin!(data);
   //     } else {
   //       debugPrint("Null result AppleLogin");
