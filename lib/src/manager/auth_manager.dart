@@ -6,14 +6,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 // import 'package:google_sign_in/google_sign_in.dart';
-import 'package:s_multiloginp/src/manager/apple_login_manager.dart';
-import 'package:s_multiloginp/src/manager/facebook_login_manager.dart';
-import 'package:s_multiloginp/src/manager/google_login_manager.dart';
 // import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 // import 'package:crypto/crypto.dart';
 
 //* Project imports
 import 'package:s_multiloginp/src/models/current_user_model.dart';
+import 'package:s_multiloginp/src/manager/apple_login_manager.dart';
+import 'package:s_multiloginp/src/manager/facebook_login_manager.dart';
+import 'package:s_multiloginp/src/manager/google_login_manager.dart';
 
 class AuthManager {
   static final AuthManager _instance = AuthManager._constructor();

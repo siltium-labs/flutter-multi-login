@@ -8,6 +8,8 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:crypto/crypto.dart';
 
 class AppleLoginManager {
+  /// Generates a cryptographically secure random nonce, to be included in a
+  /// credential request.
   String generateNonce([int length = 32]) {
     const charset =
         '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
@@ -16,6 +18,7 @@ class AppleLoginManager {
         .join();
   }
 
+  /// Returns the sha256 hash of [input] in hex notation.
   String sha256ofString(String input) {
     final bytes = utf8.encode(input);
     final digest = sha256.convert(bytes);
@@ -23,7 +26,10 @@ class AppleLoginManager {
   }
 
   appleLogin() async {
-    // Prevent replay attacks with the credential returned from Apple
+    // To prevent replay attacks with the credential returned from Apple, we
+    // include a nonce in the credential request. When signing in with
+    // Firebase, the nonce in the id token returned by Apple, is expected to
+    // match the sha256 hash of `rawNonce`.
     final rawNonce = generateNonce();
     final nonce = sha256ofString(rawNonce);
 
@@ -42,6 +48,8 @@ class AppleLoginManager {
       rawNonce: rawNonce,
     );
 
+    // Sign in the user with Firebase (en AuthManager). If the nonce we generated earlier does
+    // not match the nonce in `appleCredential.identityToken`, sign in will fail.
     return appleOAuthCredential;
   }
 }

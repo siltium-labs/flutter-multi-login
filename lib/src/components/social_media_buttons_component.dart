@@ -70,13 +70,13 @@ class SocialMediaButtonsComponentState
       runSpacing: 10,
       children: [
         ...(widget.componentMode == ComponentMode.simpleCardMode || widget.componentMode == ComponentMode.simpleMode)
-            ? getSimpleLoginButtonsList()
-            : getComplexLoginButtonsList()
+            ? _getSimpleLoginButtonsList()
+            : _getComplexLoginButtonsList()
       ],
     );
   }
 
-  getSimpleLoginButtonsList() {
+  _getSimpleLoginButtonsList() {
     List<Widget> buttonsList = [];
     if (widget.onResultGoogleLogin != null) {
       buttonsList.add(_simpleGoogleLoginButton());
@@ -163,7 +163,7 @@ class SocialMediaButtonsComponentState
     );
   }
 
-  getComplexLoginButtonsList() {
+  _getComplexLoginButtonsList() {
     List<Widget> buttonsList = [];
     if (widget.onResultGoogleLogin != null) {
       buttonsList.add(_complexGoogleLoginButton());
@@ -265,7 +265,7 @@ class SocialMediaButtonsComponentState
 
   _onGoogleLoading() async {
     await AuthManager().signInWithGoogle();
-    return _getUserCredential();
+    return AuthManager().getUserCredential();
   }
 
   _onGoogleResult(CurrentUserModel data) async {
@@ -300,7 +300,7 @@ class SocialMediaButtonsComponentState
 
   _onFacebookLoading() async {
     await AuthManager().signInWithFacebook();
-    return _getUserCredential();
+    return AuthManager().getUserCredential();
   }
 
   _onFacebookResult(CurrentUserModel data) async {
@@ -323,35 +323,33 @@ class SocialMediaButtonsComponentState
     }
   }
 
-  //TODO: APPLE
+  //TODO: APPLE. DESCOMENTAR ONAPPLERESULT Y DATA PARA PROBAR!!!
   _onAppleLogin() async {
     await LoadingPopup(
       context: context,
       onLoading: _onAppleLoading(),
-      onResult: (data) => _onAppleResult(data),
+      onResult: (data) => _onAppleResult(/*data*/),
       onError: (error) => _onAppleError(error),
     ).show();
   }
 
   _onAppleLoading() async {
     await AuthManager().signInWithApple();
-    return _getUserCredential();
+    return AuthManager().getUserCredential();
   }
 
-  _onAppleResult(CurrentUserModel data) {
+  _onAppleResult(/*GetUserCredentialModel data*/) async {
     debugPrint("Apple login");
+    // if (data.token != null) {
+    //   if (widget.onResultAppleLogin != null) {
+    //     widget.onResultAppleLogin!(data);
+    //   } else {
+    //     debugPrint("Null result AppleLogin");
+    //   }
+    // } else {
+    //   debugPrint("Error on AppleLogin");
+    // }
   }
-  // _onAppleResult(GetUserCredentialModel data) async {
-  //   if (data.token != null) {
-  //     if (widget.onResultAppleLogin != null) {
-  //       widget.onResultAppleLogin!(data);
-  //     } else {
-  //       debugPrint("Null result AppleLogin");
-  //     }
-  //   } else {
-  //     debugPrint("Error on AppleLogin");
-  //   }
-  // }
 
   _onAppleError(String error) {
     if (widget.onErrorAppleLogin != null) {
@@ -359,10 +357,5 @@ class SocialMediaButtonsComponentState
     } else {
       debugPrint("El error fue: $error");
     }
-  }
-
-  //OTROS
-  Future<CurrentUserModel> _getUserCredential() {
-    return AuthManager().getUserCredential();
   }
 }

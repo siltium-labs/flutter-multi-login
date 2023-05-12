@@ -17,6 +17,7 @@ class GoogleLoginManager {
       idToken: googleAuth?.idToken,
     );
 
+    // Once signed in, return the UserCredential (inicio de sesion, en AuthManager)
     return googleOAuthCredential;
   }
 
