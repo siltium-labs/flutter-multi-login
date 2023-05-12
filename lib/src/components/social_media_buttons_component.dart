@@ -69,7 +69,8 @@ class SocialMediaButtonsComponentState
       spacing: 10,
       runSpacing: 10,
       children: [
-        ...(widget.componentMode == ComponentMode.simpleCardMode || widget.componentMode == ComponentMode.simpleMode)
+        ...(widget.componentMode == ComponentMode.simpleCardMode ||
+                widget.componentMode == ComponentMode.simpleMode)
             ? _getSimpleLoginButtonsList()
             : _getComplexLoginButtonsList()
       ],

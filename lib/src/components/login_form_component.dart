@@ -10,8 +10,6 @@ import 'package:s_multiloginp/src/components/button_component.dart';
 
 // ignore: must_be_immutable
 class LoginFormComponent extends StatefulWidget {
-  final TextEditingController emailController;
-  final TextEditingController passwordController;
   // Styles
   final InputDecoration? emailInputDecoration;
   final TextStyle? emailInputTextStyle;
@@ -26,8 +24,6 @@ class LoginFormComponent extends StatefulWidget {
 
   LoginFormComponent({
     Key? key,
-    required this.emailController,
-    required this.passwordController,
     // Styles
     required this.emailInputDecoration,
     required this.emailInputTextStyle,
@@ -46,6 +42,9 @@ class LoginFormComponent extends StatefulWidget {
 }
 
 class LoginFormComponentState extends State<LoginFormComponent> {
+  // Initialize TextEditingControllers and variables
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   bool _obscurePassword = true;
 
   @override
@@ -64,7 +63,7 @@ class LoginFormComponentState extends State<LoginFormComponent> {
 
   _emailInput() {
     return TextFormField(
-      controller: widget.emailController,
+      controller: _emailController,
       keyboardType: TextInputType.emailAddress,
       cursorColor: kgrey,
       textInputAction: TextInputAction.next,
@@ -95,7 +94,7 @@ class LoginFormComponentState extends State<LoginFormComponent> {
 
   _passwordInput() {
     return TextFormField(
-      controller: widget.passwordController,
+      controller: _passwordController,
       cursorColor: kgrey,
       textInputAction: TextInputAction.next,
       obscureText: _obscurePassword,
@@ -169,8 +168,8 @@ class LoginFormComponentState extends State<LoginFormComponent> {
 
   _onEmailLoading() async {
     await AuthManager().signInEmailAndPassword(
-      email: widget.emailController.text,
-      password: widget.passwordController.text,
+      email: _emailController.text,
+      password: _passwordController.text,
     );
     return AuthManager().getUserCredential();
   }
@@ -178,8 +177,8 @@ class LoginFormComponentState extends State<LoginFormComponent> {
   _onEmailResult(CurrentUserModel data) async {
     if (data.token != null) {
       if (widget.onResultEmailLogin != null) {
-        widget.emailController.clear();
-        widget.passwordController.clear();
+        _emailController.clear();
+        _passwordController.clear();
         widget.onResultEmailLogin!(data);
       } else {
         debugPrint("Null result EmailLogin");
