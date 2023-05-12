@@ -201,20 +201,13 @@ func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>)
 import 'package:s_multiloginp/s_multiloginp.dart';
 ```
 
-2) Inicializar el paquete en `main.dart` con `SMultiLogin().multiLoginInit()` pasando los parametros solicitados, que se encuentran en el archivo `firebase_options.dart` generado anteriormente con la intalación/configuración de firebase en el proyecto:
+2) Inicializar el paquete en `main.dart` con `SMultiLogin().multiLoginInit()` pasando como parámetro un FirebaseOptions, que se encuentra en el archivo `firebase_options.dart` generado anteriormente con la intalación/configuración de firebase en el proyecto:
 ```dart
+import 'firebase_options.dart';
+
 void main() async {
   // Add package init (for Android)
-  await SMultiLogin().multiLoginInit(
-    MultiloginOptionsModel(
-      apiKey: 'acb321',
-      appId: '1:123:android:efg456',
-      messagingSenderId: '789',
-      projectId: 'a-bc-d',
-      storageBucket: 'a-bc-d.xyz.com',
-    ),
-  );
-  //
+  await SMultiLogin().multiLoginInit(DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 ```
