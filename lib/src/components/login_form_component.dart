@@ -30,11 +30,11 @@ class LoginFormComponent extends StatefulWidget {
     required this.passwordController,
     required this.passwordInputDecoration,
     required this.passwordInputTextStyle,
-    this.emailButtonStyle,
-    this.emailButtonText,
-    this.emailButtonIcon,
-    this.onResultEmailLogin,
-    this.onErrorEmailLogin,
+    required this.emailButtonStyle,
+    required this.emailButtonText,
+    required this.emailButtonIcon,
+    required this.onResultEmailLogin,
+    required this.onErrorEmailLogin,
   }) : super(key: key);
 
   @override
