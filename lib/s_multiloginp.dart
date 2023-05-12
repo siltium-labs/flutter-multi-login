@@ -7,7 +7,6 @@ import 'package:s_multiloginp/src/enums/component_mode_enum.dart';
 import 'package:s_multiloginp/src/manager/auth_manager.dart';
 // import 'package:s_multiloginp/src/utils/loading_popup.dart';
 import 'package:s_multiloginp/src/models/current_user_model.dart';
-import 'package:s_multiloginp/s_multilogin_options_model.dart';
 
 //* Components imports
 import 'package:s_multiloginp/src/components/card_background_component.dart';
@@ -35,26 +34,10 @@ class SMultiLogin {
   }
   SMultiLogin._constructor();
 
-  multiLoginInit(SMultiloginOptionsModel options) async {
+  multiLoginInit(FirebaseOptions options) async {
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp(
-      options: FirebaseOptions(
-        apiKey: options.apiKey,
-        appId: options.appId,
-        messagingSenderId: options.messagingSenderId,
-        projectId: options.projectId,
-        authDomain: options.authDomain,
-        databaseURL: options.databaseURL,
-        storageBucket: options.storageBucket,
-        measurementId: options.measurementId,
-        // ios specific
-        trackingId: options.trackingId,
-        deepLinkURLScheme: options.deepLinkURLScheme,
-        androidClientId: options.androidClientId,
-        iosClientId: options.iosClientId,
-        iosBundleId: options.iosBundleId,
-        appGroupId: options.appGroupId,
-      ),
+      options: options,
     );
   }
 
