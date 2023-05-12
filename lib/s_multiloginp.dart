@@ -268,13 +268,6 @@ class SMultiLoginComponentState extends State<SMultiLoginComponent> {
   // bool _obscurePassword = true;
 
   @override
-  void initState() {
-    super.initState();
-    _emailController.clear();
-    _passwordController.clear();
-  }
-
-  @override
   Widget build(BuildContext context) {
     switch (widget.componentMode) {
       case ComponentMode.simpleCardMode:

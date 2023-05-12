@@ -5,14 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:s_multiloginp/src/constants/k_colors.dart';
 
 class LoginFormComponent extends StatefulWidget {
+  final TextEditingController emailController;
   final InputDecoration? emailInputDecoration;
   final TextStyle? emailInputTextStyle;
-  final TextEditingController emailController;
+  final TextEditingController passwordController;
   final InputDecoration? passwordInputDecoration;
   final TextStyle? passwordInputTextStyle;
-  final TextEditingController passwordController;
   
-
   const LoginFormComponent({
     Key? key,
     required this.emailController,
