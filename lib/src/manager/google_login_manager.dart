@@ -1,11 +1,20 @@
+//* Dart imports
+import 'dart:io';
+
 //* Package imports
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class GoogleLoginManager {
-  googleLogin() async {
+  googleLogin(String? iOSClientId) async {
+    final GoogleSignInAccount? googleUser;
+
     // Trigger the authentication flow (abre sdk login google)
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    if (Platform.isIOS && iOSClientId != null) {
+      googleUser = await GoogleSignIn(clientId: iOSClientId).signIn();
+    } else {
+      googleUser = await GoogleSignIn().signIn();
+    }
 
     // Obtain the auth details from the request (despues de elegir el usuario)
     final GoogleSignInAuthentication? googleAuth =

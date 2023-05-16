@@ -18,6 +18,7 @@ class AuthManager {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   UserCredential? user;
   CurrentUserModel? userCredential;
+  String? authIOSClientId;
 
   //*EMAIL
   Future<UserCredential?> signInEmailAndPassword(
@@ -38,7 +39,7 @@ class AuthManager {
   Future<UserCredential?> signInWithGoogle() async {
     try {
       OAuthCredential googleOAuthCredential =
-          await GoogleLoginManager().googleLogin();
+          await GoogleLoginManager().googleLogin(authIOSClientId);
       return user = await _auth.signInWithCredential(googleOAuthCredential);
     } on FirebaseAuthException catch (e) {
       await onFirebaseAuthException(error: e);
@@ -99,5 +100,9 @@ class AuthManager {
 
   String getUserData() {
     return user!.user!.email ?? (user!.user!.displayName ?? "No hay datos");
+  }
+
+  setIOSClientId(String iOSClientId){
+    authIOSClientId = iOSClientId;
   }
 }

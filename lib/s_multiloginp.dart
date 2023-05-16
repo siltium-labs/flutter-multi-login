@@ -40,6 +40,10 @@ class SMultiLogin {
     );
   }
 
+  iOSClientIdInit(String iOSClientId){
+    AuthManager().setIOSClientId(iOSClientId);
+  }
+
   logout() async {
     AuthManager().onLogOut();
   }
