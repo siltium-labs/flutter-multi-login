@@ -33,14 +33,11 @@ class SMultiLogin {
   }
   SMultiLogin._constructor();
 
-  multiLoginInit(FirebaseOptions options) async {
+  multiLoginInit(FirebaseOptions options, String? iOSClientId) async {
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp(
       options: options,
     );
-  }
-
-  iOSClientIdInit(String iOSClientId){
     AuthManager().setIOSClientId(iOSClientId);
   }
 

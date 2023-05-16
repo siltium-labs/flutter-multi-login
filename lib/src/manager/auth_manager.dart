@@ -102,7 +102,7 @@ class AuthManager {
     return user!.user!.email ?? (user!.user!.displayName ?? "No hay datos");
   }
 
-  setIOSClientId(String iOSClientId){
+  setIOSClientId(String? iOSClientId){
     authIOSClientId = iOSClientId;
   }
 }
