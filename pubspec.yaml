@@ -1,6 +1,6 @@
 name: s_multiloginp
 description: Siltium social media sing in with Firebase.
-version: 0.2.0
+version: 0.3.0
 homepage:
 
 environment:

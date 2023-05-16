@@ -13,10 +13,13 @@ Plugin para incluir en proyectos que permite utilizar el componente SMultiLogin 
 <br>
 0.2.0 - Inicio de sesión con Email & Contraseña, Google y Facebook para Android & iOS. Inicios de sesión con iOS y Apple en testing.
 <br>
+0.3.0 - Inicios de sesión con Email & Contraseña, Google y Facebook para Android & iOS. Inicio de sesión con Apple en testing.
+<br>
 <br>
 
-## **Instalación (Android)**
+## **Instalación (Android y iOS)**
 EN FLUTTER:
+
 1) Agregar la libreria en `pubspec.yaml`:
 ```yaml
 dependencies:
@@ -26,6 +29,8 @@ dependencies:
       ref: development
 ```
 Nota: Si se realizan cambios en la rama de dicho repositorio, es necesario realizar un `flutter pub get` para ver reflejados dichos cambios en un proyecto externo.
+
+PARA ANDROID:
 
 2) Modificar el compileSdkVersion a 33 en `project_name\android\app\build.gradle`:
 ```gradle
@@ -43,11 +48,22 @@ android {
     }
 }
 ```
+
+PARA IOS:
+
+4) Correr el comando `flutter pub get` y, a continuación, en el archivo `project_name\ios\Podfile` modificar la version de la plataforma ios a 12:
+```ruby
+# Uncomment the next line to define a global platform for your project
+platform :ios, '12.0'
+```
+5) Luego correr el comando `pod install` y, finalmente, podrás correr el comando `flutter run`.
+
+
 EN FIREBASE:
 
-4) En Firebase, Ir a la [Consola Firebase](https://firebase.google.com) y crear un nuevo proyecto.
+5) En Firebase, Ir a la [Consola Firebase](https://firebase.google.com) y crear un nuevo proyecto.
 
-5) Luego, añadir Firebase a tu aplicación: NuevoProyectoFirebase -> Agregar app -> Flutter<br>
+6) Luego, añadir Firebase a tu aplicación: NuevoProyectoFirebase -> Agregar app -> Flutter<br>
 A continuación, seguir los pasos de la documentación oficial que se muestran en pantalla.<br>
 Nota: Si es la primera vez que usas Firebase con Flutter, sigue todos lo pasos desde el primero. Si ya lo usaste anteriormente, puedes seguir desde el paso 2 (y desde el comando `flutterfire configure`) en adelante.<br>
 También puedes seguir la guía de la [Documentación oficial para Agregar Firebase en una app de Flutter](https://firebase.google.com/docs/flutter/setup?hl=es-419&platform=android)<br>

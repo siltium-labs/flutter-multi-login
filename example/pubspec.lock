@@ -323,7 +323,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.2.0"
+    version: "0.3.0"
   sign_in_with_apple:
     dependency: transitive
     description:
