@@ -99,6 +99,8 @@ Nota: Para habilitar los diferentes proveedores, dirigirse a Authentication -> S
 
 ![Agregar nuevo proveedor](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/login_01.png)
 
+~
+
 ### **LOGIN CON CORREO Y CONTRASEÑA:**
 Con los pasos anteriores, se habilita el uso del login con correo y contraseña, tanto para Android como para iOS. Habilitarlo desde Firebase.<br>
 
@@ -188,6 +190,8 @@ Habilitar el inicio de sesión de Facebook desde Firebase. Copiar el App ID y el
 
 ![Agregar uri en facebook](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/facebook_04.png)
 
+~
+
 EN FLUTTER, resumen:
 
 PARA ANDROID:
@@ -242,6 +246,8 @@ Nota: En `CFBundleURLSchemes` en necesario colocar el texto "fb" antes del `FB_A
 
 ~
 ### **LOGIN CON APPLE:** Pendiente de configuración en Apple Dev.
+
+~
 <br>
 
 ## **Uso**
