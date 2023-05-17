@@ -262,7 +262,7 @@ SMultiLoginComponent.simpleCardMode(
 );
 ```
 
-![Imagen del componente con estilo default y login con email, google y facebook](https://raw.githubusercontent.com/YamiTeyssier/s-multilogin-plug/development/assets/readme_images/default_smlcomponent.png)
+![Imagen del componente con estilo default y login con email, google y facebook](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/default_smlcomponent.png)
 
 ```dart
 // Ejemplo de SMultiLoginComponent.complexCardMode(), diseño personalizado e inicio de sesión a través de correo, google y facebook:
