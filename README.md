@@ -61,20 +61,56 @@ platform :ios, '12.0'
 
 EN FIREBASE:
 
-5) En Firebase, Ir a la [Consola Firebase](https://firebase.google.com) y crear un nuevo proyecto.
+5) En Firebase, Ir a la [Consola Firebase](https://firebase.google.com) y crear un nuevo proyecto:
+
+![Crear nuevo proyecto firebase](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/install_01.png)
+
+Colocarle nombre al nuevo proyecto y continuar:
+
+![Nombrar el nuevo proyecto firebase](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/install_02.png)
+
+También puedes habilitar o deshabilitar Google Analytics. Si lo deshabilitas, seguidamente puedes crear el proyecto. Si no, continúa a la configuración del mismo:
+
+![Habilitar/Deshabilitar google analytics](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/install_03.png)
+
+Al habilitar Google Analytics es necesario configurarlo y aceptar las condiciones de uso. Y finalmente, puedes crear el proyecto:
+
+![Finalizar y crear el proyecto](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/install_04.png)
 
 6) Luego, añadir Firebase a tu aplicación: NuevoProyectoFirebase -> Agregar app -> Flutter<br>
-A continuación, seguir los pasos de la documentación oficial que se muestran en pantalla.<br>
-Nota: Si es la primera vez que usas Firebase con Flutter, sigue todos lo pasos desde el primero. Si ya lo usaste anteriormente, puedes seguir desde el paso 2 (y desde el comando `flutterfire configure`) en adelante.<br>
+
+![Crear App de Flutter en Firebase](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/install_05.png)
+
+A continuación, seguir los pasos 1 y 2 de la documentación oficial que se muestran en pantalla.<br>
+Nota: Si es la primera vez que usas Firebase con Flutter, realiza los pasos 1 y 2 completos. Si ya lo usaste anteriormente, puedes realizar solo el paso 2 desde el comando `flutterfire configure`.<br>
+
+![Paso 1](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/install_06.png)
+
+![Paso 2](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/install_07.png)
+
 También puedes seguir la guía de la [Documentación oficial para Agregar Firebase en una app de Flutter](https://firebase.google.com/docs/flutter/setup?hl=es-419&platform=android)<br>
 (Una vez terminada esta guía, también es necesario ir a NuevoProyectoFirebase -> Agregar app -> Flutter)
 
 <br>
 
 ## **Habilitar los Inicio de sesión (Android y iOS)**
+
+Nota: Para habilitar los diferentes proveedores, dirigirse a Authentication -> Sing-in method -> Agregar proveedor nuevo:
+
+![Agregar nuevo proveedor](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/login_01.png)
+
 ### **LOGIN CON CORREO Y CONTRASEÑA:**
 Con los pasos anteriores, se habilita el uso del login con correo y contraseña, tanto para Android como para iOS. Habilitarlo desde Firebase.<br>
-Nota: Crear también un usuario de prueba.
+
+![Agregar email login](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/email_01.png)
+
+![Habilitar email login](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/email_02.png)
+
+Nota: Crear también un usuario de prueba (Authentication -> Users -> Agregar usuario):
+
+![Crear nuevo usuario](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/email_03.png)
+
+![Nuevo usuario](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/email_04.png)
 
 ~
 
@@ -82,6 +118,17 @@ Nota: Crear también un usuario de prueba.
 EN ANDROID:
 
 Con los pasos anteriores, se habilita el uso del login con cuenta de google para Android. Habilitarlo desde Firebase y agregar la huella digital SHA1 de tu computadora, en "Configuración del proyecto" y seleccionando la app.<br>
+
+![Agregar google login](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/google_01.png)
+
+![Habilitar google login](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/google_02.png)
+
+![ir a configuracion del proyecto](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/google_03.png)
+
+![En tu app, huellas digitales](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/google_04.png)
+
+![Agregar tu huella digital](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/google_05.png)
+
 Como obtener la huella digital SHA1: [Google docs sobre SHA1](https://developers.google.com/android/guides/client-auth?hl=es-419).<br>
 - Resumen: En el cmd (consola de comandos) posicionarse dentro del directorio bin del jdk instalado, y ejecutar:
 ```
@@ -92,10 +139,13 @@ password: android
 
 EN IOS:
 
-Con los pasos anteriores, se habilita el uso del login con cuenta de google para iOS, a través de la generación del archivo `GoogleService-Info.plist`. Como tal, dicho archivo esta deprecado y ya no funciona como tal.<br>
+Con los pasos anteriores, se habilita el uso del login con cuenta de google para iOS, a través de la generación del archivo `GoogleService-Info.plist`. Como tal, dicho archivo está deprecado y ya no funciona como tal.<br>
 Por lo tanto, es necesario realizar los siguientes pasos para iOS:
 
 1) Del archivo `GoogleService-Info.plist` obtener el `CLIENT_ID` y el `REVERSED_CLIENT_ID`.
+
+![Obtener CLIENT_ID y REVERSED_CLIENT_ID](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/google_06.png)
+
 2) Copiar el `CLIENT_ID` y colocarlo como parte del método `SMultiLogin().multiLoginInit()`, como se detalla más adelante en el uso de la librería (paso 2 de "Uso").
 3) Luego, en el archivo `Info.plist` agregar el siguiente código dentro de `<dict>...</dict>`, agregando el campo `REVERSED_CLIENT_ID` obtenido del archivo `GoogleService-Info.plist`:
 ```plist
@@ -114,6 +164,8 @@ Por lo tanto, es necesario realizar los siguientes pasos para iOS:
 ```
 4) Eliminar el archivo `GoogleService-Info.plist`.
 
+![Eliminar GoogleService-Info.plist](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/google_07.png)
+
 ~
 
 ### **LOGIN CON FACEBOOK:**
@@ -128,7 +180,15 @@ Nota: Hay problemas con los nombres de paquetes en la guia de inicio rápido, ha
 
 Habilitar el inicio de sesión de Facebook desde Firebase. Copiar el App ID y el App Secret dados en Facebook Devs y luego copiar la URI en la Consola de Facebook Devs, en "Inicio de sesión con Facebook -> Configurar -> URI de redireccionamiento de OAuth válidos".
 
-EN FLUTTER
+![Donde estan el AppID y el App Secret](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/facebook_01.png)
+
+![Agregar facebook login](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/facebook_02.png)
+
+![Habilitar facebook login](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/facebook_03.png)
+
+![Agregar uri en facebook](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/facebook_04.png)
+
+EN FLUTTER, resumen:
 
 PARA ANDROID:
 
@@ -261,8 +321,8 @@ SMultiLoginComponent.simpleCardMode(
   },
 );
 ```
-
-![Imagen del componente con estilo default y login con email, google y facebook](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/default_smlcomponent.png)
+Imagen:<br>
+![Imagen del componente con estilo default y login con email, google y facebook](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/usage_01.png)
 
 ```dart
 // Ejemplo de SMultiLoginComponent.complexCardMode(), diseño personalizado e inicio de sesión a través de correo, google y facebook:
@@ -411,3 +471,6 @@ SMultiLoginComponent.complexCardMode(
   },
 ),
 ```
+
+Imagen:<br>
+![Imagen del componente con estilo personalizado y login con email, google y facebook](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/usage_02.png)
