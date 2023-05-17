@@ -71,15 +71,17 @@ También puedes seguir la guía de la [Documentación oficial para Agregar Fireb
 
 <br>
 
-## **Habilitar los Inicio de sesión (Android)**
+## **Habilitar los Inicio de sesión (Android y iOS)**
 ### **LOGIN CON CORREO Y CONTRASEÑA:**
-Con los pasos anteriores, se habilita el uso del login con correo y contraseña. Habilitarlo desde Firebase.<br>
+Con los pasos anteriores, se habilita el uso del login con correo y contraseña, tanto para Android como para iOS. Habilitarlo desde Firebase.<br>
 Nota: Crear también un usuario de prueba.
 
 ~
 
 ### **LOGIN CON CUENTA DE GOOGLE:**
-Con los pasos anteriores, se habilita el uso del login con cuenta de google. Habilitarlo desde Firebase y agregar la huella digital SHA1 de tu computadora, en "Configuración del proyecto" y seleccionando la app.<br>
+EN ANDROID:
+
+Con los pasos anteriores, se habilita el uso del login con cuenta de google para Android. Habilitarlo desde Firebase y agregar la huella digital SHA1 de tu computadora, en "Configuración del proyecto" y seleccionando la app.<br>
 Como obtener la huella digital SHA1: [Google docs sobre SHA1](https://developers.google.com/android/guides/client-auth?hl=es-419).<br>
 - Resumen: En el cmd (consola de comandos) posicionarse dentro del directorio bin del jdk instalado, y ejecutar:
 ```
@@ -88,12 +90,36 @@ password: android
 ```
 - Copiar el SHA1 en la consola de Firebase.
 
+EN IOS:
+
+Con los pasos anteriores, se habilita el uso del login con cuenta de google para iOS, a través de la generación del archivo `GoogleService-Info.plist`. Como tal, dicho archivo esta deprecado y ya no funciona como tal.<br>
+Por lo tanto, es necesario realizar los siguientes pasos para iOS:
+
+1) Del archivo `GoogleService-Info.plist` obtener el `CLIENT_ID` y el `REVERSED_CLIENT_ID`.
+2) Copiar el `CLIENT_ID` y colocarlo como parte del método `SMultiLogin().multiLoginInit()`, como se detalla más adelante en el uso de la librería (paso 2 de "Uso").
+3) Luego, en el archivo `Info.plist` agregar el siguiente código dentro de `<dict>...</dict>`, agregando el campo `REVERSED_CLIENT_ID` obtenido del archivo `GoogleService-Info.plist`:
+```plist
+<!-- Google config-->
+		<key>CFBundleURLTypes</key>
+		<array>
+			<dict>
+				<key>CFBundleTypeRole</key>
+				<string>Editor</string>
+				<key>CFBundleURLSchemes</key>
+				<array>
+					<string>TU_REVERSED_CLIENT_ID</string>
+				</array>
+			</dict>
+		</array>
+```
+4) Eliminar el archivo `GoogleService-Info.plist`.
+
 ~
 
 ### **LOGIN CON FACEBOOK:**
 Entrar en la [Consola de Facebook Developers](https://developers.facebook.com/) e iniciar sesión (o registrarse).
 
-Crear una nueva app y seguir la guía de inicio rápido según la plataforma que corresponda:<br>
+Crear una nueva app y seguir la guía de inicio rápido según la plataforma que corresponda (Android y iOS):<br>
 [Documentación oficial](https://developers.facebook.com/quickstarts/3399391376980505/?platform=android)<br>
 [Desde la consola de Facebook Devs](https://developers.facebook.com/apps/766439921742770/fb-login/quickstart/)<br>
 [Documentacion extra](https://defold.com/extension-facebook/)<br>
@@ -102,7 +128,10 @@ Nota: Hay problemas con los nombres de paquetes en la guia de inicio rápido, ha
 
 Habilitar el inicio de sesión de Facebook desde Firebase. Copiar el App ID y el App Secret dados en Facebook Devs y luego copiar la URI en la Consola de Facebook Devs, en "Inicio de sesión con Facebook -> Configurar -> URI de redireccionamiento de OAuth válidos".
 
-EN FLUTTER - ANDROID<br>
+EN FLUTTER
+
+PARA ANDROID:
+
 Resumen:
 1) En el archivo `project_name\android\app\build.gradle` importar el SDK de Facebook y agregar un par de strings, con el `fbAppID` y el `fbClientToken` (Secret App) respectivamente y con esos nombres de variable:
 ```
@@ -120,94 +149,39 @@ dependencies {
 Nota: Es necesario escapar las comillas para que el archivo `build.gradle` lo tome como un string.<br>
 ~
 
-EN FLUTTER - IOS<br>
+Para IOS:
+
 Resumen:
-1) En el archivo `Info.plist` agregar el siguiente codigo dentro de `<dict>...</dict>`, agregando los campos correspondientes. Es decir, el AppID y el Client Token (SecretApp) de tu app de facebook:
+1) En el archivo `Info.plist` agregar el siguiente código dentro de `<dict>...</dict>`, agregando los campos correspondientes. Es decir, el AppID y el Client Token (SecretApp) de tu app de facebook:
 ```plist
-<key>CFBundleURLTypes</key>
-<array>
-  <dict>
-  <key>CFBundleURLSchemes</key>
-  <array>
-    <string>TU_FB_APP_ID</string>
-  </array>
-  </dict>
-</array>
-<key>FacebookAppID</key>
-<string>TU_FB_APP_ID</string>
-<key>FacebookClientToken</key>
-<string>TU_FB_CLIENT_TOKEN</string>
-<key>FacebookDisplayName</key>
-<string>TU_APP_NAME</string>
+<!-- Facebook iOS config -->
+		<key>CFBundleURLTypes</key>
+		<array>
+			<dict>
+				<key>CFBundleURLSchemes</key>
+				<array>
+					<string>fbTU_FB_APP_ID</string>
+				</array>
+			</dict>
+		</array>
+		<key>FacebookAppID</key>
+		<string>TU_FB_APP_ID</string>
+		<key>FacebookClientToken</key>
+		<string>TU_FB_CLIENT_TOKEN</string>
+		<key>FacebookDisplayName</key>
+		<string>TU_APP_NAME</string>
+		<key>LSApplicationQueriesSchemes</key>
+		<array>
+			<string>fbapi</string>
+			<string>fb-messenger-share-api</string>
+			<string>fbauth2</string>
+			<string>fbshareextension</string>
+		</array>
 ```
-
-2) Para usar los cuadros de diálogo de Facebook (p. ej., inicio de sesión, contenido compartido, invitaciones a apps, etc.) con los que se puede cambiar de una app a las apps de Facebook, el archivo `Info.plist` de tu solicitud también debe incluir la siguiente información:
-
-```plist
-<key>LSApplicationQueriesSchemes</key>
-<array>
-  <string>fbapi</string>
-  <string>fb-messenger-share-api</string>
-</array>
-```
-
-3) Reemplaza el código que aparece en el método `AppDelegate.swift` con el siguiente código:
-```swift
-// AppDelegate.swift
-import UIKit
-import FacebookCore
-
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {    
-    func application(
-        _ application: UIApplication,
-        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
-    ) -> Bool {          
-        ApplicationDelegate.shared.application(
-            application,
-            didFinishLaunchingWithOptions: launchOptions
-        )
-
-        return true
-    }
-          
-    func application(
-        _ app: UIApplication,
-        open url: URL,
-        options: [UIApplication.OpenURLOptionsKey : Any] = [:]
-    ) -> Bool {
-        ApplicationDelegate.shared.application(
-            app,
-            open: url,
-            sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
-            annotation: options[UIApplication.OpenURLOptionsKey.annotation]
-        )
-    }  
-}
-```
-Este código inicializa el SDK cuando se inicia tu app y permite al SDK administrar inicios de sesión y compartir contenido desde la app nativa de Facebook cuando realizas la acción Iniciar sesión o Compartir. De lo contrario, el usuario debe iniciar sesión en Facebook a fin de usar el navegador de la app para iniciar sesión.
-
-4) En iOS 13, la funcionalidad de URL de apertura se movió a `SceneDelegate`. Si usas iOS 13, agrega el siguiente método a `SceneDelegate` para que las operaciones como el inicio de sesión o el uso compartido funcionen según lo previsto:
-```swift
-// SceneDelegate.swift
-import FacebookCore
-  ...
-func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-    guard let url = URLContexts.first?.url else {
-        return
-    }
-
-    ApplicationDelegate.shared.application(
-        UIApplication.shared,
-        open: url,
-        sourceApplication: nil,
-        annotation: [UIApplication.OpenURLOptionsKey.annotation]
-    )
-}
-```
+Nota: En `CFBundleURLSchemes` en necesario colocar el texto "fb" antes del `FB_APP_ID` para que funcione correctamente.
 
 ~
-### **LOGIN CON APPLE:** Pendiente
+### **LOGIN CON APPLE:** Pendiente de configuración en Apple Dev.
 <br>
 
 ## **Uso**
@@ -223,7 +197,10 @@ import 'firebase_options.dart';
 
 void main() async {
   // Add package init (for Android)
-  await SMultiLogin().multiLoginInit(DefaultFirebaseOptions.currentPlatform);
+  await SMultiLogin().multiLoginInit(
+    DefaultFirebaseOptions.currentPlatform,
+    "CLIENT_ID",
+  );
   runApp(const MyApp());
 }
 ```
