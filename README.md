@@ -23,7 +23,7 @@ EN FLUTTER:
 1) Agregar la libreria en `pubspec.yaml`:
 ```yaml
 dependencies:
-  s_multi_login:
+  s_multiloginp:
     git:
       url: https://github.com/YamiTeyssier/s-multilogin-plug.git
       ref: development
