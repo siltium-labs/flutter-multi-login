@@ -1,5 +1,6 @@
 //* Package imports
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:s_multiloginp/src/manager/twitter_login_manager.dart';
 
 //* Project imports
 import 'package:s_multiloginp/src/models/current_user_model.dart';
@@ -65,6 +66,17 @@ class AuthManager {
       OAuthCredential appleOAuthCredential =
           await AppleLoginManager().appleLogin();
       return user = await _auth.signInWithCredential(appleOAuthCredential);
+    } on FirebaseAuthException catch (e) {
+      await onFirebaseAuthException(error: e);
+      return null;
+    }
+  }
+
+  //? TWITTER
+  Future<UserCredential?> singInWithTwitter() async {
+    try {
+      OAuthCredential twitterOAuthCredential = await TwitterLoginManager().twitterLogin();
+      return user = await _auth.signInWithCredential(twitterOAuthCredential);
     } on FirebaseAuthException catch (e) {
       await onFirebaseAuthException(error: e);
       return null;
