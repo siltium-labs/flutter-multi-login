@@ -185,21 +185,20 @@ Nota: En `CFBundleURLSchemes` en necesario colocar el texto "fb" antes del `FB_A
 <br>
 
 ## **Uso**
-1) Importar el paquete en `main.dart`:
+1) Importar el paquete en `main.dart` y el archivo `firebase_options.dart`, generado anteriormente con la intalación/configuración de Firebase en el proyecto:
 ```dart
-// Package import
+// Package and Firebase options file import
 import 'package:s_multiloginp/s_multiloginp.dart';
+import 'firebase_options.dart';
 ```
 
-2) Inicializar el paquete en `main.dart` con `SMultiLogin().multiLoginInit()` pasando como parámetro un FirebaseOptions, que se encuentra en el archivo `firebase_options.dart` generado anteriormente con la intalación/configuración de firebase en el proyecto:
+2) Inicializar el paquete en `main.dart` con `SMultiLogin().multiLoginInit()` pasando como parámetros un FirebaseOptions, que se encuentra en el archivo `firebase_options.dart`, y el `CLIENT_ID` obtenido del archivo `GoogleService-Info.plist` (paso 1 de Login con Google-iOS):
 ```dart
-import 'firebase_options.dart';
-
 void main() async {
   // Add package init (for Android)
   await SMultiLogin().multiLoginInit(
-    DefaultFirebaseOptions.currentPlatform,
-    "CLIENT_ID",
+    DefaultFirebaseOptions.currentPlatform, // FirebaseOptions de "firebase_options.dart"
+    "TU_CLIENT_ID", // CLIENT_ID de "GoogleService-Info.plist"
   );
   runApp(const MyApp());
 }
