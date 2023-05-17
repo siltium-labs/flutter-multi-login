@@ -4,7 +4,7 @@
 
 
 ## **Descripción**
-Plugin para incluir en proyectos que permite utilizar el componente SMultiLogin para inicio de sesión con firebase a través de correo y contraseña, como así también a través de las redes sociales.
+Plugin para incluir en proyectos mobile de Siltium que permite utilizar el componente SMultiLogin para inicio de sesión con la herramienta Firebase, a través de correo y contraseña como así también a través de las redes sociales (Google, Facebook, etc.).
 <br>
 <br>
 
@@ -28,7 +28,7 @@ dependencies:
       url: https://github.com/YamiTeyssier/s-multilogin-plug.git
       ref: development
 ```
-Nota: Si se realizan cambios en la rama de dicho repositorio, es necesario realizar un `flutter pub get` para ver reflejados dichos cambios en un proyecto externo.
+Nota: Si se realizan cambios en la rama de dicho repositorio, es necesario realizar un `flutter clean` y un `flutter pub get` para ver reflejados dichos cambios en un proyecto externo.
 
 PARA ANDROID:
 
@@ -61,7 +61,7 @@ platform :ios, '12.0'
 
 EN FIREBASE:
 
-5) En Firebase, Ir a la [Consola Firebase](https://firebase.google.com) y crear un nuevo proyecto:
+6) En Firebase, Ir a la [Consola Firebase](https://firebase.google.com) y crear un nuevo proyecto:
 
 ![Crear nuevo proyecto firebase](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/install_01.png)
 
@@ -77,7 +77,7 @@ Al habilitar Google Analytics es necesario configurarlo y aceptar las condicione
 
 ![Finalizar y crear el proyecto](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/install_04.png)
 
-6) Luego, añadir Firebase a tu aplicación: NuevoProyectoFirebase -> Agregar app -> Flutter<br>
+7) Luego, añadir Firebase a tu aplicación: NuevoProyectoFirebase -> Agregar app -> Flutter<br>
 
 ![Crear App de Flutter en Firebase](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/install_05.png)
 
@@ -125,12 +125,6 @@ Con los pasos anteriores, se habilita el uso del login con cuenta de google para
 
 ![Habilitar google login](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/google_02.png)
 
-![ir a configuracion del proyecto](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/google_03.png)
-
-![En tu app, huellas digitales](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/google_04.png)
-
-![Agregar tu huella digital](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/google_05.png)
-
 Como obtener la huella digital SHA1: [Google docs sobre SHA1](https://developers.google.com/android/guides/client-auth?hl=es-419).<br>
 - Resumen: En el cmd (consola de comandos) posicionarse dentro del directorio bin del jdk instalado, y ejecutar:
 ```
@@ -139,17 +133,23 @@ password: android
 ```
 - Copiar el SHA1 en la consola de Firebase.
 
+![ir a configuracion del proyecto](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/google_03.png)
+
+![En tu app, huellas digitales](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/google_04.png)
+
+![Agregar tu huella digital](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/google_05.png)
+
 EN IOS:
 
-Con los pasos anteriores, se habilita el uso del login con cuenta de google para iOS, a través de la generación del archivo `GoogleService-Info.plist`. Como tal, dicho archivo está deprecado y ya no funciona como tal.<br>
+Con los pasos anteriores, se habilita el uso del login con cuenta de google para iOS, a través de la generación del archivo `GoogleService-Info.plist`. Sin embargo, dicho archivo está deprecado y ya no funciona como tal.<br>
 Por lo tanto, es necesario realizar los siguientes pasos para iOS:
 
-1) Del archivo `GoogleService-Info.plist` obtener el `CLIENT_ID` y el `REVERSED_CLIENT_ID`.
+1) Del archivo `GoogleService-Info.plist`, ubicado en `project_name\ios\Runner\`, obtener el `CLIENT_ID` y el `REVERSED_CLIENT_ID`.
 
 ![Obtener CLIENT_ID y REVERSED_CLIENT_ID](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/google_06.png)
 
 2) Copiar el `CLIENT_ID` y colocarlo como parte del método `SMultiLogin().multiLoginInit()`, como se detalla más adelante en el uso de la librería (paso 2 de "Uso").
-3) Luego, en el archivo `Info.plist` agregar el siguiente código dentro de `<dict>...</dict>`, agregando el campo `REVERSED_CLIENT_ID` obtenido del archivo `GoogleService-Info.plist`:
+3) Luego, en el archivo `project_name\ios\Runner\Info.plist` agregar el siguiente código dentro de `<dict>...</dict>`, agregando el campo `REVERSED_CLIENT_ID` obtenido del archivo `GoogleService-Info.plist`:
 ```plist
 <!-- Google config-->
 		<key>CFBundleURLTypes</key>
@@ -196,7 +196,6 @@ EN FLUTTER, resumen:
 
 PARA ANDROID:
 
-Resumen:
 1) En el archivo `project_name\android\app\build.gradle` importar el SDK de Facebook y agregar un par de strings, con el `fbAppID` y el `fbClientToken` (Secret App) respectivamente y con esos nombres de variable:
 ```
 defaultConfig {
@@ -215,8 +214,7 @@ Nota: Es necesario escapar las comillas para que el archivo `build.gradle` lo to
 
 Para IOS:
 
-Resumen:
-1) En el archivo `Info.plist` agregar el siguiente código dentro de `<dict>...</dict>`, agregando los campos correspondientes. Es decir, el AppID y el Client Token (SecretApp) de tu app de facebook:
+1) En el archivo `project_name\ios\Runner\Info.plist` agregar el siguiente código dentro de `<dict>...</dict>`, agregando los campos correspondientes. Es decir, el AppID y el Client Token (SecretApp) de tu app de facebook:
 ```plist
 <!-- Facebook iOS config -->
 		<key>CFBundleURLTypes</key>
@@ -269,8 +267,10 @@ void main() async {
   runApp(const MyApp());
 }
 ```
+Nota: No olvidar agregar el `async` al `main()`.
 
-3) Llamar a `SMultiLoginComponent()`. Nota: Se puede elegir uno de entre 4 "modos" de diseño por defecto, que son:
+3) Llamar a `SMultiLoginComponent()`.<br>
+Nota: Se puede elegir uno de entre 4 "modos" de diseño por defecto, que son:
 ```dart
 // Dos modos, uno minimalista y otro con más detalle respectivamente, encerrados en una Card con un estilo el cual es personalizable:
 SMultiLoginComponent.simpleCardMode();
@@ -327,7 +327,7 @@ SMultiLoginComponent.simpleCardMode(
   },
 );
 ```
-Imagen:<br>
+Imagen ilustrativa:<br>
 ![Imagen del componente con estilo default y login con email, google y facebook](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/usage_01.png)
 
 ```dart
@@ -478,5 +478,5 @@ SMultiLoginComponent.complexCardMode(
 ),
 ```
 
-Imagen:<br>
+Imagen ilustrativa:<br>
 ![Imagen del componente con estilo personalizado y login con email, google y facebook](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/usage_02.png)
