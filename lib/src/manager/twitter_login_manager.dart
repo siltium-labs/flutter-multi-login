@@ -13,7 +13,7 @@ class TwitterLoginManager {
     );
 
     // Trigger the sign-in flow
-    final authResult = await twitterLogin.login();
+    final authResult = await twitterLogin.loginV2();
 
     // Create a credential from the access token
     final twitterOAuthCredential = TwitterAuthProvider.credential(
