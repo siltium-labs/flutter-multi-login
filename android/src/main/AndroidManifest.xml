@@ -4,11 +4,25 @@
 
   <uses-permission android:name="android.permission.INTERNET" tools:node="merge" />
 
+  <!-- Facebook config-->
   <application android:name="android.app.Application" tools:node="merge">
     <meta-data android:name="com.facebook.sdk.ApplicationId"
       android:value="@string/fbAppID" />
     <meta-data android:name="com.facebook.sdk.ClientToken"
       android:value="@string/fbClientToken" />
+
+    <!-- Twitter config -->
+    <activity
+      android:name=".MainActivity">
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <!-- Registered Callback URLs in TwitterApp -->
+        <data android:scheme="https://fir-login-siltium.firebaseapp.com/__/auth/handler" />
+      </intent-filter>
+    </activity>
+
   </application>
 
 </manifest>

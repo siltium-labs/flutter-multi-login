@@ -1,14 +1,16 @@
 //* Package imports
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:s_multiloginp/src/models/twitter_login_model.dart';
 import 'package:twitter_login/twitter_login.dart';
 
 class TwitterLoginManager {
-  twitterLogin() async {
+  twitterLogin(TwitterLoginModel twLoginData) async {
     // Create a TwitterLogin instance
     final twitterLogin = TwitterLogin(
-        apiKey: '<your consumer key>',
-        apiSecretKey: ' <your consumer secret>', //! CONSULTAR ESTO
-        redirectURI: '<your_scheme>://');
+      apiKey: twLoginData.apiKey,
+      apiSecretKey: twLoginData.apiSecretKey, //! CONSULTAR ESTO
+      redirectURI: twLoginData.redirectURI,
+    );
 
     // Trigger the sign-in flow
     final authResult = await twitterLogin.login();

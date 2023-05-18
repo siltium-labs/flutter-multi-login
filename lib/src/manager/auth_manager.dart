@@ -7,6 +7,7 @@ import 'package:s_multiloginp/src/models/current_user_model.dart';
 import 'package:s_multiloginp/src/manager/apple_login_manager.dart';
 import 'package:s_multiloginp/src/manager/facebook_login_manager.dart';
 import 'package:s_multiloginp/src/manager/google_login_manager.dart';
+import 'package:s_multiloginp/src/models/twitter_login_model.dart';
 
 class AuthManager {
   static final AuthManager _instance = AuthManager._constructor();
@@ -19,9 +20,11 @@ class AuthManager {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   UserCredential? user;
   CurrentUserModel? userCredential;
-  String? authIOSClientId;
+  // Variales init social media
+  String? googleIOSClientId;
+  late TwitterLoginModel twitterLoginData;
 
-  //*EMAIL
+  //* EMAIL
   Future<UserCredential?> signInEmailAndPassword(
       {required String email, required String password}) async {
     try {
@@ -36,11 +39,11 @@ class AuthManager {
     }
   }
 
-  //!GOOGLE
+  //! GOOGLE
   Future<UserCredential?> signInWithGoogle() async {
     try {
       OAuthCredential googleOAuthCredential =
-          await GoogleLoginManager().googleLogin(authIOSClientId);
+          await GoogleLoginManager().googleLogin(googleIOSClientId);
       return user = await _auth.signInWithCredential(googleOAuthCredential);
     } on FirebaseAuthException catch (e) {
       await onFirebaseAuthException(error: e);
@@ -48,7 +51,7 @@ class AuthManager {
     }
   }
 
-  //?FACEBOOK
+  //? FACEBOOK
   Future<UserCredential?> signInWithFacebook() async {
     try {
       OAuthCredential facebookOAuthCredential =
@@ -75,7 +78,7 @@ class AuthManager {
   //? TWITTER
   Future<UserCredential?> singInWithTwitter() async {
     try {
-      OAuthCredential twitterOAuthCredential = await TwitterLoginManager().twitterLogin();
+      OAuthCredential twitterOAuthCredential = await TwitterLoginManager().twitterLogin(twitterLoginData);
       return user = await _auth.signInWithCredential(twitterOAuthCredential);
     } on FirebaseAuthException catch (e) {
       await onFirebaseAuthException(error: e);
@@ -114,7 +117,11 @@ class AuthManager {
     return user!.user!.email ?? (user!.user!.displayName ?? "No hay datos");
   }
 
-  setIOSClientId(String? iOSClientId){
-    authIOSClientId = iOSClientId;
+  googleLoginInit(String? iOSClientId){
+    googleIOSClientId = iOSClientId;
+  }
+
+  twitterLoginInit({required TwitterLoginModel newTwLoginData}){
+    twitterLoginData = newTwLoginData;
   }
 }

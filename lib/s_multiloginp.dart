@@ -14,6 +14,7 @@ import 'package:s_multiloginp/src/components/social_media_buttons_component.dart
 
 //* Firebase imports
 import 'package:firebase_core/firebase_core.dart';
+import 'package:s_multiloginp/src/models/twitter_login_model.dart';
 
 //* Plugin imports
 import 's_multiloginp_platform_interface.dart';
@@ -33,12 +34,29 @@ class SMultiLogin {
   }
   SMultiLogin._constructor();
 
-  multiLoginInit(FirebaseOptions options, String? iOSClientId) async {
+  multiLoginInit({required FirebaseOptions options}) async {
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp(
       options: options,
     );
-    AuthManager().setIOSClientId(iOSClientId);
+  }
+
+  googleLoginInit({required String iOSClientId}) {
+    AuthManager().googleLoginInit(iOSClientId);
+  }
+
+  twitterLoginInit({
+    required String apiKey,
+    required String apiSecretKey,
+    required String redirectURI,
+  }) {
+    AuthManager().twitterLoginInit(
+      newTwLoginData: TwitterLoginModel(
+        apiKey: apiKey,
+        apiSecretKey: apiSecretKey,
+        redirectURI: redirectURI,
+      ),
+    );
   }
 
   logout() async {
@@ -74,15 +92,20 @@ class SMultiLoginComponent extends StatefulWidget {
   ButtonStyle? appleButtonStyle;
   String? appleButtonText;
   Widget? appleButtonIcon;
+  ButtonStyle? twitterButtonStyle;
+  String? twitterButtonText;
+  Widget? twitterButtonIcon;
   // Functions
   Function(CurrentUserModel)? onResultEmailLogin;
   Function(CurrentUserModel)? onResultGoogleLogin;
   Function(CurrentUserModel)? onResultFacebookLogin;
   Function(CurrentUserModel)? onResultAppleLogin;
+  Function(CurrentUserModel)? onResultTwitterLogin;
   Function(String)? onErrorEmailLogin;
   Function(String)? onErrorGoogleLogin;
   Function(String)? onErrorFacebookLogin;
   Function(String)? onErrorAppleLogin;
+  Function(String)? onErrorTwitterLogin;
 
   SMultiLoginComponent.simpleCardMode({
     Key? key,
@@ -111,15 +134,20 @@ class SMultiLoginComponent extends StatefulWidget {
     this.appleButtonStyle,
     this.appleButtonText,
     this.appleButtonIcon,
+    this.twitterButtonStyle,
+    this.twitterButtonText,
+    this.twitterButtonIcon,
     // Functions
     this.onResultEmailLogin,
     this.onResultGoogleLogin,
     this.onResultFacebookLogin,
     this.onResultAppleLogin,
+    this.onResultTwitterLogin,
     this.onErrorEmailLogin,
     this.onErrorGoogleLogin,
     this.onErrorFacebookLogin,
     this.onErrorAppleLogin,
+    this.onErrorTwitterLogin,
   }) : super(key: key) {
     componentMode = ComponentMode.simpleCardMode;
   }
@@ -318,12 +346,17 @@ class SMultiLoginComponentState extends State<SMultiLoginComponent> {
               appleButtonStyle: widget.appleButtonStyle,
               appleButtonText: widget.appleButtonText,
               appleButtonIcon: widget.appleButtonIcon,
+              twitterButtonStyle: widget.twitterButtonStyle,
+              twitterButtonText: widget.twitterButtonText,
+              twitterButtonIcon: widget.twitterButtonIcon,
               onResultGoogleLogin: widget.onResultGoogleLogin,
               onResultFacebookLogin: widget.onResultFacebookLogin,
               onResultAppleLogin: widget.onResultAppleLogin,
+              onResultTwitterLogin: widget.onResultTwitterLogin,
               onErrorGoogleLogin: widget.onErrorGoogleLogin,
               onErrorFacebookLogin: widget.onErrorFacebookLogin,
               onErrorAppleLogin: widget.onErrorAppleLogin,
+              onErrorTwitterLogin: widget.onErrorTwitterLogin,
             ),
           ],
         ),

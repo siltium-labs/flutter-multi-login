@@ -18,7 +18,7 @@ dependencies:
   flutter_facebook_auth: ^5.0.9
   sign_in_with_apple: ^4.3.0
   crypto: ^3.0.1
-  twitter_login: ^4.0.1
+  twitter_login: ^4.4.0
 
 dev_dependencies:
   flutter_test:
@@ -38,3 +38,4 @@ flutter:
   assets:
     - assets/
     - assets/icon_google_default.png
+    - assets/icon_twitter_default.png
