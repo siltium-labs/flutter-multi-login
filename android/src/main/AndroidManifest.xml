@@ -12,16 +12,16 @@
       android:value="@string/fbClientToken" />
 
     <!-- Twitter config -->
-    <!-- <activity
+    <activity
       android:name="android.app.Application.MainActivity"
       android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
-        <data android:scheme="https://fir-login-siltium.firebaseapp.com/__/auth/handler" />
+        <data android:scheme="smultiloginexample" />
       </intent-filter>
-    </activity> -->
+    </activity>
 
   </application>
 
