@@ -14,7 +14,8 @@
     <!-- Twitter config -->
     <activity
       android:name="android.app.Application.MainActivity"
-      android:exported="true">
+      android:exported="true"
+      tools:node="merge">
       <intent-filter>
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
