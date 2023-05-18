@@ -12,7 +12,7 @@
       android:value="@string/fbClientToken" />
 
     <!-- Twitter config -->
-      <intent-filter tools:node="merge">
+      <intent-filter tools:node="merge-only-attributes">
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
