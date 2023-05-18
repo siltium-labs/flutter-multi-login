@@ -13,7 +13,7 @@
 
     <!-- Twitter config -->
     <activity
-      android:name=".MainActivity"
+      android:name="com.example.s_login_firebase_example.MainActivity"
       android:exported="true"
       tools:node="merge">
       <intent-filter>
