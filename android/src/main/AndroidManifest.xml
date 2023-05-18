@@ -12,12 +12,16 @@
       android:value="@string/fbClientToken" />
 
     <!-- Twitter config -->
-      <intent-filter tools:node="merge-only-attributes">
+    <activity
+      android:name="com.example.s_login_firebase_example.MainActivity"
+      android:exported="true">
+      <intent-filter tools:node="merge">
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
         <data android:scheme="smultiloginexample" />
       </intent-filter>
+    </activity>
 
   </application>
 
