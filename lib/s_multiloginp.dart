@@ -6,7 +6,7 @@ import 'package:s_multiloginp/src/constants/k_colors.dart';
 import 'package:s_multiloginp/src/enums/component_mode_enum.dart';
 import 'package:s_multiloginp/src/manager/auth_manager.dart';
 import 'package:s_multiloginp/src/models/current_user_model.dart';
-import 'package:s_multiloginp/src/multilogin_init_model.dart';
+import 'package:s_multiloginp/multilogin_init_model.dart';
 
 //* Components imports
 import 'package:s_multiloginp/src/components/card_background_component.dart';
