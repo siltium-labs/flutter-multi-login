@@ -7,7 +7,7 @@ import 'package:s_multiloginp/src/models/current_user_model.dart';
 import 'package:s_multiloginp/src/manager/apple_login_manager.dart';
 import 'package:s_multiloginp/src/manager/facebook_login_manager.dart';
 import 'package:s_multiloginp/src/manager/google_login_manager.dart';
-import 'package:s_multiloginp/src/models/twitter_login_model.dart';
+import 'package:s_multiloginp/twitter_login_model.dart';
 
 class AuthManager {
   static final AuthManager _instance = AuthManager._constructor();

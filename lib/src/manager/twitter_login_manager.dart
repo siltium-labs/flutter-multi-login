@@ -1,6 +1,6 @@
 //* Package imports
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:s_multiloginp/src/models/twitter_login_model.dart';
+import 'package:s_multiloginp/twitter_login_model.dart';
 import 'package:twitter_login/twitter_login.dart';
 
 class TwitterLoginManager {
@@ -8,7 +8,7 @@ class TwitterLoginManager {
     // Create a TwitterLogin instance
     final twitterLogin = TwitterLogin(
       apiKey: twLoginData.apiKey,
-      apiSecretKey: twLoginData.apiSecretKey, //! CONSULTAR ESTO
+      apiSecretKey: twLoginData.apiSecretKey,
       redirectURI: twLoginData.redirectURI,
     );
 

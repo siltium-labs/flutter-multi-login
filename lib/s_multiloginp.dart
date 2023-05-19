@@ -6,6 +6,7 @@ import 'package:s_multiloginp/src/constants/k_colors.dart';
 import 'package:s_multiloginp/src/enums/component_mode_enum.dart';
 import 'package:s_multiloginp/src/manager/auth_manager.dart';
 import 'package:s_multiloginp/src/models/current_user_model.dart';
+import 'package:s_multiloginp/src/multilogin_init_model.dart';
 
 //* Components imports
 import 'package:s_multiloginp/src/components/card_background_component.dart';
@@ -14,7 +15,6 @@ import 'package:s_multiloginp/src/components/social_media_buttons_component.dart
 
 //* Firebase imports
 import 'package:firebase_core/firebase_core.dart';
-import 'package:s_multiloginp/src/models/twitter_login_model.dart';
 
 //* Plugin imports
 import 's_multiloginp_platform_interface.dart';
@@ -34,30 +34,48 @@ class SMultiLogin {
   }
   SMultiLogin._constructor();
 
-  multiLoginInit({required FirebaseOptions options}) async {
+  multiLoginInit({required MultiLoginInitModel initModel}) async {
+    // Init de Firebase (Correo, Android & iOS)
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp(
-      options: options,
+      options: initModel.options,
     );
+    // Init de Google (iOS)
+    if (initModel.googleIOSClientId != null &&
+        initModel.googleIOSClientId!.isNotEmpty) {
+      AuthManager().googleLoginInit(initModel.googleIOSClientId!);
+    }
+    // Init Twitter (Android & iOS)
+    if (initModel.twitterInitData != null) {
+      AuthManager()
+          .twitterLoginInit(newTwLoginData: initModel.twitterInitData!);
+    }
   }
 
-  googleLoginInit({required String iOSClientId}) {
-    AuthManager().googleLoginInit(iOSClientId);
-  }
+  // _firebaseInit({required FirebaseOptions options}) async {
+  //   WidgetsFlutterBinding.ensureInitialized();
+  //   await Firebase.initializeApp(
+  //     options: options,
+  //   );
+  // }
 
-  twitterLoginInit({
-    required String apiKey,
-    required String apiSecretKey,
-    required String redirectURI,
-  }) {
-    AuthManager().twitterLoginInit(
-      newTwLoginData: TwitterLoginModel(
-        apiKey: apiKey,
-        apiSecretKey: apiSecretKey,
-        redirectURI: redirectURI,
-      ),
-    );
-  }
+  // _googleLoginInit({required String iOSClientId}) {
+  //   AuthManager().googleLoginInit(iOSClientId);
+  // }
+
+  // _twitterLoginInit({
+  //   required String apiKey,
+  //   required String apiSecretKey,
+  //   required String redirectURI,
+  // }) {
+  //   AuthManager().twitterLoginInit(
+  //     newTwLoginData: TwitterLoginModel(
+  //       apiKey: apiKey,
+  //       apiSecretKey: apiSecretKey,
+  //       redirectURI: redirectURI,
+  //     ),
+  //   );
+  // }
 
   logout() async {
     AuthManager().onLogOut();
