@@ -52,31 +52,6 @@ class SMultiLogin {
     }
   }
 
-  // _firebaseInit({required FirebaseOptions options}) async {
-  //   WidgetsFlutterBinding.ensureInitialized();
-  //   await Firebase.initializeApp(
-  //     options: options,
-  //   );
-  // }
-
-  // _googleLoginInit({required String iOSClientId}) {
-  //   AuthManager().googleLoginInit(iOSClientId);
-  // }
-
-  // _twitterLoginInit({
-  //   required String apiKey,
-  //   required String apiSecretKey,
-  //   required String redirectURI,
-  // }) {
-  //   AuthManager().twitterLoginInit(
-  //     newTwLoginData: TwitterLoginModel(
-  //       apiKey: apiKey,
-  //       apiSecretKey: apiSecretKey,
-  //       redirectURI: redirectURI,
-  //     ),
-  //   );
-  // }
-
   logout() async {
     AuthManager().onLogOut();
   }

@@ -22,7 +22,7 @@ class AuthManager {
   CurrentUserModel? userCredential;
   // Variales init social media
   String? googleIOSClientId;
-  late TwitterLoginModel twitterLoginData;
+  TwitterLoginModel? twitterLoginData;
 
   //* EMAIL
   Future<UserCredential?> signInEmailAndPassword(
@@ -121,7 +121,7 @@ class AuthManager {
     googleIOSClientId = iOSClientId;
   }
 
-  twitterLoginInit({required TwitterLoginModel newTwLoginData}){
+  twitterLoginInit({TwitterLoginModel? newTwLoginData}){
     twitterLoginData = newTwLoginData;
   }
 }
