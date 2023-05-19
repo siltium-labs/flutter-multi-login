@@ -1,6 +1,9 @@
 //* Flutter imports
 import 'package:flutter/material.dart';
 
+//* Packages imports
+import 'package:firebase_auth/firebase_auth.dart';
+
 //* Project imports
 import 'package:s_multiloginp/src/constants/k_colors.dart';
 import 'package:s_multiloginp/src/manager/auth_manager.dart';
@@ -188,9 +191,9 @@ class LoginFormComponentState extends State<LoginFormComponent> {
     }
   }
 
-  _onEmailError(String error) {
+  _onEmailError(FirebaseAuthException error) {
     if (widget.onErrorEmailLogin != null) {
-      widget.onErrorEmailLogin!(error);
+      widget.onErrorEmailLogin!(error.message ?? "Unknown login error with email & password");
     } else {
       debugPrint("El error fue: $error");
     }

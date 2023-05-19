@@ -4,6 +4,9 @@ import 'dart:io';
 //* Flutter imports
 import 'package:flutter/material.dart';
 
+//* Packages imports
+import 'package:firebase_auth/firebase_auth.dart';
+
 //* Project imports
 import 'package:s_multiloginp/src/constants/k_colors.dart';
 import 'package:s_multiloginp/src/enums/component_mode_enum.dart';
@@ -347,9 +350,9 @@ class SocialMediaButtonsComponentState
     }
   }
 
-  _onGoogleError(String error) {
+  _onGoogleError(FirebaseAuthException error) {
     if (widget.onErrorGoogleLogin != null) {
-      widget.onErrorGoogleLogin!(error);
+      widget.onErrorGoogleLogin!(error.message ?? "Unknown login error with google");
     } else {
       debugPrint("El error fue: $error");
     }
@@ -382,9 +385,9 @@ class SocialMediaButtonsComponentState
     }
   }
 
-  _onFacebookError(String error) {
+  _onFacebookError(FirebaseAuthException error) {
     if (widget.onErrorFacebookLogin != null) {
-      widget.onErrorFacebookLogin!(error);
+      widget.onErrorFacebookLogin!(error.message ?? "Unknown login error with facebook ");
     } else {
       debugPrint("El error fue: $error");
     }
@@ -418,9 +421,9 @@ class SocialMediaButtonsComponentState
     // }
   }
 
-  _onAppleError(String error) {
+  _onAppleError(FirebaseAuthException error) {
     if (widget.onErrorAppleLogin != null) {
-      widget.onErrorAppleLogin!(error);
+      widget.onErrorAppleLogin!(error.message ?? "Unknown login error with apple");
     } else {
       debugPrint("El error fue: $error");
     }
@@ -453,9 +456,9 @@ class SocialMediaButtonsComponentState
     }
   }
 
-  _onTwitterError(String error) {
+  _onTwitterError(FirebaseAuthException error) {
     if (widget.onErrorTwitterLogin != null) {
-      widget.onErrorTwitterLogin!(error);
+      widget.onErrorTwitterLogin!(error.message ?? "Unknown login error with twitter");
     } else {
       debugPrint("El error fue: $error");
     }
