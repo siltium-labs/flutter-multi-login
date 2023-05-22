@@ -92,8 +92,10 @@ class AuthManager {
   //? LINKEDIN
   Future<UserCredential?> singInWithLinkedin() async {
     try {
-      OAuthCredential linkedinOAuthCredential = await LinkedinLoginManager().linkedinLogin(linkedinLoginData);
-      return user = await _auth.signInWithCredential(linkedinOAuthCredential);
+      // OAuthCredential linkedinOAuthCredential = await LinkedinLoginManager().linkedinLogin(linkedinLoginData);
+      // return user = await _auth.signInWithCredential(linkedinOAuthCredential);
+      String token = await LinkedinLoginManager().linkedinLogin(linkedinLoginData);
+      return user = await _auth.signInWithCustomToken(token);
     } on FirebaseAuthException catch (e) {
       await onFirebaseAuthException(error: e);
       return null;
