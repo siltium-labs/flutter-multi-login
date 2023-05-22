@@ -19,6 +19,9 @@ import 'package:firebase_core/firebase_core.dart';
 //* Plugin imports
 import 's_multiloginp_platform_interface.dart';
 
+// Exports:
+export 'package:s_multiloginp/src/models/linkedin_login_model.dart';
+
 // Plugin class (with Method Channel)
 class SMultiloginp {
   Future<String?> getPlatformVersion() {
@@ -49,6 +52,11 @@ class SMultiLogin {
     if (initModel.twitterInitData != null) {
       AuthManager()
           .twitterLoginInit(newTwLoginData: initModel.twitterInitData!);
+    }
+    // Init LinkedIn (Android & iOS)
+    if (initModel.linkedinInitData != null) {
+      AuthManager()
+          .linkedinLoginInit(newLkLoginData: initModel.linkedinInitData!);
     }
   }
 
@@ -88,17 +96,22 @@ class SMultiLoginComponent extends StatefulWidget {
   ButtonStyle? twitterButtonStyle;
   String? twitterButtonText;
   Widget? twitterButtonIcon;
+  ButtonStyle? linkedinButtonStyle;
+  String? linkedinButtonText;
+  Widget? linkedinButtonIcon;
   // Functions
   Function(CurrentUserModel)? onResultEmailLogin;
   Function(CurrentUserModel)? onResultGoogleLogin;
   Function(CurrentUserModel)? onResultFacebookLogin;
   Function(CurrentUserModel)? onResultAppleLogin;
   Function(CurrentUserModel)? onResultTwitterLogin;
+  Function(CurrentUserModel)? onResultLinkedinLogin;
   Function(String)? onErrorEmailLogin;
   Function(String)? onErrorGoogleLogin;
   Function(String)? onErrorFacebookLogin;
   Function(String)? onErrorAppleLogin;
   Function(String)? onErrorTwitterLogin;
+  Function(String)? onErrorLinkedinLogin;
 
   SMultiLoginComponent.simpleCardMode({
     Key? key,
@@ -119,28 +132,28 @@ class SMultiLoginComponent extends StatefulWidget {
     this.emailButtonText,
     this.emailButtonIcon,
     this.googleButtonStyle,
-    this.googleButtonText,
     this.googleButtonIcon,
     this.facebookButtonStyle,
-    this.facebookButtonText,
     this.facebookButtonIcon,
     this.appleButtonStyle,
-    this.appleButtonText,
     this.appleButtonIcon,
     this.twitterButtonStyle,
-    this.twitterButtonText,
     this.twitterButtonIcon,
+    this.linkedinButtonStyle,
+    this.linkedinButtonIcon,
     // Functions
     this.onResultEmailLogin,
     this.onResultGoogleLogin,
     this.onResultFacebookLogin,
     this.onResultAppleLogin,
     this.onResultTwitterLogin,
+    this.onResultLinkedinLogin,
     this.onErrorEmailLogin,
     this.onErrorGoogleLogin,
     this.onErrorFacebookLogin,
     this.onErrorAppleLogin,
     this.onErrorTwitterLogin,
+    this.onErrorLinkedinLogin,
   }) : super(key: key) {
     componentMode = ComponentMode.simpleCardMode;
   }
@@ -162,23 +175,28 @@ class SMultiLoginComponent extends StatefulWidget {
     this.emailButtonText,
     this.emailButtonIcon,
     this.googleButtonStyle,
-    this.googleButtonText,
     this.googleButtonIcon,
     this.facebookButtonStyle,
-    this.facebookButtonText,
     this.facebookButtonIcon,
     this.appleButtonStyle,
-    this.appleButtonText,
     this.appleButtonIcon,
+    this.twitterButtonStyle,
+    this.twitterButtonIcon,
+    this.linkedinButtonStyle,
+    this.linkedinButtonIcon,
     // Functions
     this.onResultEmailLogin,
     this.onResultGoogleLogin,
     this.onResultFacebookLogin,
     this.onResultAppleLogin,
+    this.onResultTwitterLogin,
+    this.onResultLinkedinLogin,
     this.onErrorEmailLogin,
     this.onErrorGoogleLogin,
     this.onErrorFacebookLogin,
     this.onErrorAppleLogin,
+    this.onErrorTwitterLogin,
+    this.onErrorLinkedinLogin,
   }) : super(key: key) {
     componentMode = ComponentMode.simpleMode;
   }
@@ -210,15 +228,25 @@ class SMultiLoginComponent extends StatefulWidget {
     this.appleButtonStyle,
     this.appleButtonText,
     this.appleButtonIcon,
+    this.twitterButtonStyle,
+    this.twitterButtonText,
+    this.twitterButtonIcon,
+    this.linkedinButtonStyle,
+    this.linkedinButtonText,
+    this.linkedinButtonIcon,
     // Functions
     this.onResultEmailLogin,
     this.onResultGoogleLogin,
     this.onResultFacebookLogin,
     this.onResultAppleLogin,
+    this.onResultTwitterLogin,
+    this.onResultLinkedinLogin,
     this.onErrorEmailLogin,
     this.onErrorGoogleLogin,
     this.onErrorFacebookLogin,
     this.onErrorAppleLogin,
+    this.onErrorTwitterLogin,
+    this.onErrorLinkedinLogin,
   }) : super(key: key) {
     componentMode = ComponentMode.complexCardMode;
   }
@@ -248,15 +276,25 @@ class SMultiLoginComponent extends StatefulWidget {
     this.appleButtonStyle,
     this.appleButtonText,
     this.appleButtonIcon,
+    this.twitterButtonStyle,
+    this.twitterButtonText,
+    this.twitterButtonIcon,
+    this.linkedinButtonStyle,
+    this.linkedinButtonText,
+    this.linkedinButtonIcon,
     // Functions
     this.onResultEmailLogin,
     this.onResultGoogleLogin,
     this.onResultFacebookLogin,
     this.onResultAppleLogin,
+    this.onResultTwitterLogin,
+    this.onResultLinkedinLogin,
     this.onErrorEmailLogin,
     this.onErrorGoogleLogin,
     this.onErrorFacebookLogin,
     this.onErrorAppleLogin,
+    this.onErrorTwitterLogin,
+    this.onErrorLinkedinLogin,
   }) : super(key: key) {
     componentMode = ComponentMode.complexMode;
   }
@@ -342,14 +380,19 @@ class SMultiLoginComponentState extends State<SMultiLoginComponent> {
               twitterButtonStyle: widget.twitterButtonStyle,
               twitterButtonText: widget.twitterButtonText,
               twitterButtonIcon: widget.twitterButtonIcon,
+              linkedinButtonStyle: widget.linkedinButtonStyle,
+              linkedinButtonText: widget.linkedinButtonText,
+              linkedinButtonIcon: widget.linkedinButtonIcon,
               onResultGoogleLogin: widget.onResultGoogleLogin,
               onResultFacebookLogin: widget.onResultFacebookLogin,
               onResultAppleLogin: widget.onResultAppleLogin,
               onResultTwitterLogin: widget.onResultTwitterLogin,
+              onResultLinkedinLogin: widget.onResultLinkedinLogin,
               onErrorGoogleLogin: widget.onErrorGoogleLogin,
               onErrorFacebookLogin: widget.onErrorFacebookLogin,
               onErrorAppleLogin: widget.onErrorAppleLogin,
               onErrorTwitterLogin: widget.onErrorTwitterLogin,
+              onErrorLinkedinLogin: widget.onErrorLinkedinLogin,
             ),
           ],
         ),

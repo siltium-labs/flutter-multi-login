@@ -1,13 +1,15 @@
 //* Package imports
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:s_multiloginp/src/manager/twitter_login_manager.dart';
 
 //* Project imports
+import 'package:s_multiloginp/s_multiloginp.dart';
 import 'package:s_multiloginp/src/models/current_user_model.dart';
 import 'package:s_multiloginp/src/manager/apple_login_manager.dart';
 import 'package:s_multiloginp/src/manager/facebook_login_manager.dart';
 import 'package:s_multiloginp/src/manager/google_login_manager.dart';
 import 'package:s_multiloginp/twitter_login_model.dart';
+import 'package:s_multiloginp/src/manager/linkedin_login_manager.dart';
+import 'package:s_multiloginp/src/manager/twitter_login_manager.dart';
 
 class AuthManager {
   static final AuthManager _instance = AuthManager._constructor();
@@ -23,6 +25,7 @@ class AuthManager {
   // Variales init social media
   String? googleIOSClientId;
   TwitterLoginModel? twitterLoginData;
+  LinkedinLoginModel? linkedinLoginData;
 
   //* EMAIL
   Future<UserCredential?> signInEmailAndPassword(
@@ -86,6 +89,17 @@ class AuthManager {
     }
   }
 
+  //? LINKEDIN
+  Future<UserCredential?> singInWithLinkedin() async {
+    try {
+      OAuthCredential linkedinOAuthCredential = await LinkedinLoginManager().linkedinLogin(linkedinLoginData);
+      return user = await _auth.signInWithCredential(linkedinOAuthCredential);
+    } on FirebaseAuthException catch (e) {
+      await onFirebaseAuthException(error: e);
+      return null;
+    }
+  }
+
   // OTROS
   Future<CurrentUserModel> getUserCredential() async {
     return userCredential = CurrentUserModel(
@@ -123,5 +137,9 @@ class AuthManager {
 
   twitterLoginInit({TwitterLoginModel? newTwLoginData}){
     twitterLoginData = newTwLoginData;
+  }
+
+  linkedinLoginInit({LinkedinLoginModel? newLkLoginData}){
+    linkedinLoginData = newLkLoginData;
   }
 }

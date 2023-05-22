@@ -31,15 +31,20 @@ class SocialMediaButtonsComponent extends StatefulWidget {
   ButtonStyle? twitterButtonStyle;
   String? twitterButtonText;
   Widget? twitterButtonIcon;
+  ButtonStyle? linkedinButtonStyle;
+  String? linkedinButtonText;
+  Widget? linkedinButtonIcon;
   // Functions
   Function(CurrentUserModel)? onResultGoogleLogin;
   Function(CurrentUserModel)? onResultFacebookLogin;
   Function(CurrentUserModel)? onResultAppleLogin;
   Function(CurrentUserModel)? onResultTwitterLogin;
+  Function(CurrentUserModel)? onResultLinkedinLogin;
   Function(String)? onErrorGoogleLogin;
   Function(String)? onErrorFacebookLogin;
   Function(String)? onErrorAppleLogin;
   Function(String)? onErrorTwitterLogin;
+  Function(String)? onErrorLinkedinLogin;
 
   SocialMediaButtonsComponent({
     Key? key,
@@ -57,15 +62,20 @@ class SocialMediaButtonsComponent extends StatefulWidget {
     required this.twitterButtonStyle,
     required this.twitterButtonText,
     required this.twitterButtonIcon,
+    required this.linkedinButtonStyle,
+    required this.linkedinButtonText,
+    required this.linkedinButtonIcon,
     // Functions
     required this.onResultGoogleLogin,
     required this.onResultFacebookLogin,
     required this.onResultAppleLogin,
     required this.onResultTwitterLogin,
+    required this.onResultLinkedinLogin,
     required this.onErrorGoogleLogin,
     required this.onErrorFacebookLogin,
     required this.onErrorAppleLogin,
     required this.onErrorTwitterLogin,
+    required this.onErrorLinkedinLogin,
   }) : super(key: key);
 
   @override
@@ -103,6 +113,9 @@ class SocialMediaButtonsComponentState
     }
     if (widget.onResultTwitterLogin != null) {
       buttonsList.add(_simpleTwitterLoginButton());
+    }
+    if (widget.onResultLinkedinLogin != null) {
+      buttonsList.add(_simpleLinkedinLoginButton());
     }
     return buttonsList;
   }
@@ -205,6 +218,31 @@ class SocialMediaButtonsComponentState
     );
   }
 
+  _simpleLinkedinLoginButton() {
+    return ButtonComponent(
+      onPressed: () => _onLinkedinLogin(),
+      icon: widget.linkedinButtonIcon ??
+          Image.asset(
+            "assets/icon_linkedin_default.png",
+            package: 's_multiloginp',
+            height: 30,
+            color: kwhite,
+          ),
+      buttonStyle: widget.linkedinButtonStyle ??
+          ButtonStyle(
+            backgroundColor: const MaterialStatePropertyAll<Color>(kdarkcyan),
+            fixedSize: const MaterialStatePropertyAll<Size>(
+              Size(90, 40),
+            ),
+            shape: MaterialStatePropertyAll<OutlinedBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(50),
+              ),
+            ),
+          ),
+    );
+  }
+
   _getComplexLoginButtonsList() {
     List<Widget> buttonsList = [];
     if (widget.onResultGoogleLogin != null) {
@@ -218,6 +256,9 @@ class SocialMediaButtonsComponentState
     }
     if (widget.onResultTwitterLogin != null) {
       buttonsList.add(_complexTwitterLoginButton());
+    }
+    if (widget.onResultLinkedinLogin != null) {
+      buttonsList.add(_complexLinkedinLoginButton());
     }
     return buttonsList;
   }
@@ -297,7 +338,7 @@ class SocialMediaButtonsComponentState
     );
   }
 
-  _complexTwitterLoginButton(){
+  _complexTwitterLoginButton() {
     return ButtonComponent(
       onPressed: () => _onTwitterLogin(),
       text: widget.twitterButtonText ?? "Sing In with Google",
@@ -310,6 +351,31 @@ class SocialMediaButtonsComponentState
       buttonStyle: widget.twitterButtonStyle ??
           ButtonStyle(
             backgroundColor: const MaterialStatePropertyAll<Color>(kcyan),
+            minimumSize: const MaterialStatePropertyAll<Size>(
+              Size(double.infinity, 40),
+            ),
+            shape: MaterialStatePropertyAll<OutlinedBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(50),
+              ),
+            ),
+          ),
+    );
+  }
+
+  _complexLinkedinLoginButton() {
+    return ButtonComponent(
+      onPressed: () => _onLinkedinLogin(),
+      text: widget.linkedinButtonText ?? "Sing In with LinkedIn",
+      icon: widget.linkedinButtonIcon ??
+          Image.asset(
+            "assets/icon_linkedin_default.png",
+            package: 's_multiloginp',
+            height: 30,
+          ),
+      buttonStyle: widget.linkedinButtonStyle ??
+          ButtonStyle(
+            backgroundColor: const MaterialStatePropertyAll<Color>(kdarkcyan),
             minimumSize: const MaterialStatePropertyAll<Size>(
               Size(double.infinity, 40),
             ),
@@ -352,7 +418,8 @@ class SocialMediaButtonsComponentState
 
   _onGoogleError(FirebaseAuthException error) {
     if (widget.onErrorGoogleLogin != null) {
-      widget.onErrorGoogleLogin!(error.message ?? "Unknown login error with google");
+      widget.onErrorGoogleLogin!(
+          error.message ?? "Unknown login error with google");
     } else {
       debugPrint("El error fue: $error");
     }
@@ -387,7 +454,8 @@ class SocialMediaButtonsComponentState
 
   _onFacebookError(FirebaseAuthException error) {
     if (widget.onErrorFacebookLogin != null) {
-      widget.onErrorFacebookLogin!(error.message ?? "Unknown login error with facebook ");
+      widget.onErrorFacebookLogin!(
+          error.message ?? "Unknown login error with facebook ");
     } else {
       debugPrint("El error fue: $error");
     }
@@ -423,7 +491,8 @@ class SocialMediaButtonsComponentState
 
   _onAppleError(FirebaseAuthException error) {
     if (widget.onErrorAppleLogin != null) {
-      widget.onErrorAppleLogin!(error.message ?? "Unknown login error with apple");
+      widget.onErrorAppleLogin!(
+          error.message ?? "Unknown login error with apple");
     } else {
       debugPrint("El error fue: $error");
     }
@@ -458,7 +527,44 @@ class SocialMediaButtonsComponentState
 
   _onTwitterError(FirebaseAuthException error) {
     if (widget.onErrorTwitterLogin != null) {
-      widget.onErrorTwitterLogin!(error.message ?? "Unknown login error with twitter");
+      widget.onErrorTwitterLogin!(
+          error.message ?? "Unknown login error with twitter");
+    } else {
+      debugPrint("El error fue: $error");
+    }
+  }
+
+  //? LINKEDIN
+  _onLinkedinLogin() async {
+    await LoadingPopup(
+      context: context,
+      onLoading: _onLinkedinLoading(),
+      onResult: (data) => _onLinkedinResult(data),
+      onError: (error) => _onLinkedinError(error),
+    ).show();
+  }
+
+  _onLinkedinLoading() async {
+    await AuthManager().singInWithLinkedin();
+    return AuthManager().getUserCredential();
+  }
+
+  _onLinkedinResult(CurrentUserModel data) async {
+    if (data.token != null) {
+      if (widget.onResultLinkedinLogin != null) {
+        widget.onResultLinkedinLogin!(data);
+      } else {
+        debugPrint("Null result LinkedinLogin");
+      }
+    } else {
+      debugPrint("Error on LinkedinLogin");
+    }
+  }
+
+  _onLinkedinError(FirebaseAuthException error) {
+    if (widget.onErrorLinkedinLogin != null) {
+      widget.onErrorLinkedinLogin!(
+          error.message ?? "Unknown login error with linkedin");
     } else {
       debugPrint("El error fue: $error");
     }
