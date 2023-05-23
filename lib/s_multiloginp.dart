@@ -2,16 +2,14 @@
 import 'package:flutter/material.dart';
 
 //* Project imports
-import 'package:s_multiloginp/src/constants/k_colors.dart';
-import 'package:s_multiloginp/src/enums/component_mode_enum.dart';
-import 'package:s_multiloginp/src/manager/auth_manager.dart';
-import 'package:s_multiloginp/src/models/current_user_model.dart';
-import 'package:s_multiloginp/multilogin_init_model.dart';
-
-//* Components imports
 import 'package:s_multiloginp/src/components/card_background_component.dart';
 import 'package:s_multiloginp/src/components/login_form_component.dart';
 import 'package:s_multiloginp/src/components/social_media_buttons_component.dart';
+import 'package:s_multiloginp/src/constants/k_colors.dart';
+import 'package:s_multiloginp/src/enums/component_mode_enum.dart';
+import 'package:s_multiloginp/src/manager/auth_manager.dart';
+import 'package:s_multiloginp/src/models/multilogin_init_model.dart';
+import 'package:s_multiloginp/src/models/current_user_model.dart';
 
 //* Firebase imports
 import 'package:firebase_core/firebase_core.dart';
@@ -19,7 +17,9 @@ import 'package:firebase_core/firebase_core.dart';
 //* Plugin imports
 import 's_multiloginp_platform_interface.dart';
 
-// Exports:
+//* Models exports:
+export 'package:s_multiloginp/src/models/multilogin_init_model.dart';
+export 'package:s_multiloginp/src/models/twitter_login_model.dart';
 export 'package:s_multiloginp/src/models/linkedin_login_model.dart';
 
 // Plugin class (with Method Channel)

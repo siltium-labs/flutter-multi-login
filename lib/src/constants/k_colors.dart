@@ -12,7 +12,7 @@ const Color kred = Colors.red;
 const Color kblue = Color(0xFF0230C5);
 const Color kyellow = Color(0xFFFFDA00);
 const Color kcyan = Color(0xFF00ACEE);
-const Color kdarkcyan = Color(0xFF0E76A8);
+const Color kdarkcyan = Color(0xFF0077B5);
 
 const Color kgrey = Colors.grey;
 const Color kdarkgrey = Color(0xFF616161);

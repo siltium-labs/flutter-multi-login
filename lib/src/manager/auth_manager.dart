@@ -8,7 +8,7 @@ import 'package:s_multiloginp/src/manager/facebook_login_manager.dart';
 import 'package:s_multiloginp/src/manager/apple_login_manager.dart';
 import 'package:s_multiloginp/src/manager/twitter_login_manager.dart';
 import 'package:s_multiloginp/src/models/current_user_model.dart';
-import 'package:s_multiloginp/twitter_login_model.dart';
+import 'package:s_multiloginp/src/models/twitter_login_model.dart';
 
 class AuthManager {
   static final AuthManager _instance = AuthManager._constructor();
@@ -104,14 +104,7 @@ class AuthManager {
   }
 
   //? LINKEDIN
-  // Future<CurrentUserModel> singInWithLinkedin(BuildContext context) async {
-  //   try {
-  //     return await LinkedinLoginManager()
-  //         .linkedinLogin(linkedinLoginData, context);
-  //   } catch (e) {
-  //     throw Exception(e.toString());
-  //   }
-  // }
+  // Manejado, por ahora, en el widget de la libreria
 
   // OTROS
   Future<void> onFirebaseAuthException(
@@ -124,6 +117,7 @@ class AuthManager {
 
   Future<CurrentUserModel> getUserCredential(
       {CurrentUserModel? currentUser}) async {
+    //TODO: Cambiar logica para guardar todo en el modelo de currentUser y devolver dicho modelo
     if (user != null && user!.user != null) {
       return userCredential = CurrentUserModel(
         token: await user!.user!.getIdToken(),

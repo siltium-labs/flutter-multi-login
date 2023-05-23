@@ -221,35 +221,6 @@ class SocialMediaButtonsComponentState
   }
 
   _simpleLinkedinLoginButton() {
-    // String? lkCode;
-    // String? lkState;
-    // return LinkedInButtonStandardWidget(
-    //   onTap: () {
-    //     Navigator.push(
-    //       context,
-    //       MaterialPageRoute<void>(
-    //         builder: (final BuildContext context) => LinkedInAuthCodeWidget(
-    //           redirectUrl: AuthManager().linkedinLoginData?.redirectUrl,
-    //           clientId: AuthManager().linkedinLoginData?.clientId,
-    //           onError: (final AuthorizationFailedAction e) {
-    //             debugPrint('Error: ${e.toString()}');
-    //             debugPrint('Error: ${e.stackTrace.toString()}');
-    //           },
-    //           onGetAuthCode: (final AuthorizationSucceededAction response) {
-    //             debugPrint('Auth code ${response.codeResponse.code}');
-    //             debugPrint('State: ${response.codeResponse.state}');
-    //               lkCode = response.codeResponse.code;
-    //               lkState = response.codeResponse.state;
-    //             setState(() {});
-
-    //             Navigator.pop(context);
-    //           },
-    //         ),
-    //         fullscreenDialog: true,
-    //       ),
-    //     );
-    //   },
-    // );
     return ButtonComponent(
       onPressed: () => _onLinkedinLogin(),
       icon: widget.linkedinButtonIcon ??
@@ -566,40 +537,6 @@ class SocialMediaButtonsComponentState
   }
 
   //? LINKEDIN
-  // _onLinkedinLogin() async {
-  //   await LoadingPopup(
-  //     context: context,
-  //     onLoading: _onLinkedinLoading(context),
-  //     onResult: (data) => _onLinkedinResult(data),
-  //     onError: (error) => _onLinkedinError(error),
-  //   ).show();
-  // }
-
-  // _onLinkedinLoading(BuildContext context) async {
-  //   return await AuthManager().singInWithLinkedin(context);
-  // }
-
-  // _onLinkedinResult(CurrentUserModel data) async {
-  //   if (data.token != null) {
-  //     if (widget.onResultLinkedinLogin != null) {
-  //       widget.onResultLinkedinLogin!(data);
-  //     } else {
-  //       debugPrint("Null result LinkedinLogin");
-  //     }
-  //   } else {
-  //     debugPrint("Error on LinkedinLogin");
-  //   }
-  // }
-
-  // _onLinkedinError(FirebaseAuthException error) {
-  //   if (widget.onErrorLinkedinLogin != null) {
-  //     widget.onErrorLinkedinLogin!(
-  //         error.message ?? "Unknown login error with linkedin");
-  //   } else {
-  //     debugPrint("El error fue: $error");
-  //   }
-  // }
-
   _onLinkedinLogin() async {
     LinkedinLoginModel? lkLoginData = AuthManager().linkedinLoginData;
     if (lkLoginData != null) {
@@ -612,8 +549,6 @@ class SocialMediaButtonsComponentState
             clientId: lkLoginData.clientId,
             clientSecret: lkLoginData.clientSecret,
             onError: (final UserFailedAction e) {
-              // debugPrint('Error: ${e.toString()}');
-              // debugPrint('Error: ${e.stackTrace.toString()}');
               if (widget.onErrorLinkedinLogin != null) {
                 widget.onErrorLinkedinLogin!(
                     e.toString() /*?? "Unknown login error with linkedin"*/);
@@ -622,10 +557,6 @@ class SocialMediaButtonsComponentState
               }
             },
             onGetUserProfile: (final UserSucceededAction linkedInUser) {
-              // debugPrint('Access token ${linkedInUser.user.token.accessToken}');
-              // debugPrint('User id: ${linkedInUser.user.userId}');
-              // debugPrint(
-              //     'USER EMAIL: ${linkedInUser.user.email?.elements?[0].handleDeep?.emailAddress}');
               CurrentUserModel currentLkUser = CurrentUserModel(
                 token: linkedInUser.user.token.accessToken,
               );

@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:s_multiloginp/src/models/linkedin_login_model.dart';
-import 'package:s_multiloginp/twitter_login_model.dart';
+import 'package:s_multiloginp/src/models/twitter_login_model.dart';
 
 class MultiLoginInitModel {
   FirebaseOptions options;
