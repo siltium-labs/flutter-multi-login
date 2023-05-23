@@ -24,7 +24,9 @@
     </activity>
 
     <!-- LinkedIn config -->
-    <activity android:name="com.linusu.flutter_web_auth.CallbackActivity" tools:node="merge">
+    <activity android:name="com.linusu.flutter_web_auth.CallbackActivity"
+      android:exported="true"
+      tools:node="merge">
       <intent-filter android:label="flutter_web_auth">
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
