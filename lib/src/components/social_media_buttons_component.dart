@@ -228,7 +228,7 @@ class SocialMediaButtonsComponentState
           context,
           MaterialPageRoute<void>(
             builder: (final BuildContext context) => LinkedInAuthCodeWidget(
-              redirectUrl: "s_login_firebase_example://oauth2redirect",
+              redirectUrl: "https://s_login_firebase_example://oauth2redirect",
               clientId: "773hbq4s1icnnm",
               onError: (final AuthorizationFailedAction e) {
                 debugPrint('Error: ${e.toString()}');
