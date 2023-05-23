@@ -274,6 +274,7 @@ class SocialMediaButtonsComponentState
             "assets/icon_google_default.png",
             package: 's_multiloginp',
             height: 30,
+            color: kwhite,
           ),
       buttonStyle: widget.googleButtonStyle ??
           ButtonStyle(
@@ -349,6 +350,7 @@ class SocialMediaButtonsComponentState
             "assets/icon_twitter_default.png",
             package: 's_multiloginp',
             height: 30,
+            color: kwhite,
           ),
       buttonStyle: widget.twitterButtonStyle ??
           ButtonStyle(
@@ -374,6 +376,7 @@ class SocialMediaButtonsComponentState
             "assets/icon_linkedin_default.png",
             package: 's_multiloginp',
             height: 30,
+            color: kwhite,
           ),
       buttonStyle: widget.linkedinButtonStyle ??
           ButtonStyle(
