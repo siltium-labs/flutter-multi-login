@@ -638,6 +638,7 @@ class SocialMediaButtonsComponentState
               } else {
                 debugPrint("Error on LinkedinLogin");
               }
+              Navigator.pop(context);
             },
           ),
           fullscreenDialog: true,
