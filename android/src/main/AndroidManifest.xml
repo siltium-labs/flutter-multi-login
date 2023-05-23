@@ -23,6 +23,16 @@
       </intent-filter>
     </activity>
 
+    <!-- LinkedIn config -->
+    <activity android:name="com.linusu.flutter_web_auth.CallbackActivity" tools:node="merge">
+      <intent-filter android:label="flutter_web_auth">
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="s_login_firebase_example" />
+      </intent-filter>
+    </activity>
+
   </application>
 
 </manifest>

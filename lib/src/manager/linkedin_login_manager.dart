@@ -1,47 +1,46 @@
-//* Package imports
+//* Project imports
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:linkedin_login/linkedin_login.dart';
 import 'package:s_multiloginp/s_multiloginp.dart';
+
+//* Package imports
+import 'package:dio/dio.dart' show Dio, Options, Response;
+import 'package:oauth2_client/linkedin_oauth2_client.dart';
+import 'package:oauth2_client/oauth2_client.dart';
+import 'package:oauth2_client/access_token_response.dart';
+import 'package:s_multiloginp/src/models/linkedin_login_response_model.dart';
 
 class LinkedinLoginManager {
   linkedinLogin(LinkedinLoginModel? lkLoginData) async {
-    OAuthCredential? linkedinOAuthCredential;
-    String? linkedinToken;
     if (lkLoginData != null) {
-      // LinkedInUserWidget(
-      //   redirectUrl: lkLoginData.redirectUrl,
-      //   clientId: lkLoginData.clientId,
-      //   clientSecret: lkLoginData.clientSecret,
-      //   onGetUserProfile: (UserSucceededAction linkedInUser) {
-      //     // // print('Access token ${linkedInUser.user.token.accessToken}');
-      //     // // print('First name: ${linkedInUser.user.firstName.localized.label}');
-      //     // // print('Last name: ${linkedInUser.user.lastName.localized.label}');
-      //     //!OAuthCredential = null;
-      //     // linkedinOAuthCredential = OAuthProvider('linkedin.com').credential(
-      //     //   accessToken: linkedInUser.user.token.accessToken,
-      //     // );
-      //     linkedinToken = linkedInUser.user.token.accessToken;
-      //   },
-      //   onError: (UserFailedAction e) {
-      //     debugPrint('Error: ${e.toString()}');
-      //   },
-      // );
-      // return linkedinOAuthCredential;
-      LinkedInAuthCodeWidget(
-        onGetAuthCode: (final AuthorizationSucceededAction response) {
-          debugPrint('Auth code ${response.codeResponse.code}');
-          debugPrint('State: ${response.codeResponse.state}');
-          linkedinToken = response.codeResponse.code;
-        },
-        redirectUrl: lkLoginData.redirectUrl,
-        clientId: lkLoginData.clientId,
-        onError: (final AuthorizationFailedAction e) {
-          debugPrint('Error: ${e.toString()}');
-          debugPrint('Error: ${e.stackTrace.toString()}');
-        },
+      OAuth2Client lkClient = LinkedInOAuth2Client(
+        redirectUri: lkLoginData.redirectUrl,
+        customUriScheme: lkLoginData.customUriScheme,
       );
-      return linkedinToken;
+      AccessTokenResponse linkedinToken =
+          await lkClient.getTokenWithClientCredentialsFlow(
+        clientId: lkLoginData.clientId,
+        clientSecret: lkLoginData.clientSecret,
+      );
+
+      OAuthCredential lk = OAuthProvider('linkedin').credential(
+        accessToken: linkedinToken.accessToken,
+        secret: lkLoginData.clientSecret,
+      );
+
+      return lk;
+
+      Options options = Options();
+      options.headers = {};
+      options.headers!["authorization"] = 'Bearer ${linkedinToken.accessToken}';
+      Dio dio = Dio();
+
+      Response result = await dio
+          .get<String>("https://api.linkedin.com/v2/userinfo", options: options)
+          .timeout(const Duration(seconds: 5));
+
+      return LinkedinLoginResponseModel.fromJson(result.data);
     } else {
       return throw Exception(
           "No es posible iniciar sesión con LinkedIn si primero no se define \"linkedinInitData\" en \"SMultiLogin().multiLoginInit()\"");

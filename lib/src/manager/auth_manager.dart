@@ -3,13 +3,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 //* Project imports
 import 'package:s_multiloginp/s_multiloginp.dart';
-import 'package:s_multiloginp/src/models/current_user_model.dart';
-import 'package:s_multiloginp/src/manager/apple_login_manager.dart';
-import 'package:s_multiloginp/src/manager/facebook_login_manager.dart';
 import 'package:s_multiloginp/src/manager/google_login_manager.dart';
-import 'package:s_multiloginp/twitter_login_model.dart';
-import 'package:s_multiloginp/src/manager/linkedin_login_manager.dart';
+import 'package:s_multiloginp/src/manager/facebook_login_manager.dart';
+import 'package:s_multiloginp/src/manager/apple_login_manager.dart';
 import 'package:s_multiloginp/src/manager/twitter_login_manager.dart';
+import 'package:s_multiloginp/src/manager/linkedin_login_manager.dart';
+import 'package:s_multiloginp/src/models/current_user_model.dart';
+import 'package:s_multiloginp/twitter_login_model.dart';
 
 class AuthManager {
   static final AuthManager _instance = AuthManager._constructor();
@@ -22,10 +22,24 @@ class AuthManager {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   UserCredential? user;
   CurrentUserModel? userCredential;
-  // Variales init social media
+
+  // Variales inits social media
   String? googleIOSClientId;
   TwitterLoginModel? twitterLoginData;
   LinkedinLoginModel? linkedinLoginData;
+
+  // Inits social media
+  googleLoginInit(String? iOSClientId) {
+    googleIOSClientId = iOSClientId;
+  }
+
+  twitterLoginInit({TwitterLoginModel? newTwLoginData}) {
+    twitterLoginData = newTwLoginData;
+  }
+
+  linkedinLoginInit({LinkedinLoginModel? newLkLoginData}) {
+    linkedinLoginData = newLkLoginData;
+  }
 
   //* EMAIL
   Future<UserCredential?> signInEmailAndPassword(
@@ -81,7 +95,8 @@ class AuthManager {
   //? TWITTER
   Future<UserCredential?> singInWithTwitter() async {
     try {
-      OAuthCredential twitterOAuthCredential = await TwitterLoginManager().twitterLogin(twitterLoginData);
+      OAuthCredential twitterOAuthCredential =
+          await TwitterLoginManager().twitterLogin(twitterLoginData);
       return user = await _auth.signInWithCredential(twitterOAuthCredential);
     } on FirebaseAuthException catch (e) {
       await onFirebaseAuthException(error: e);
@@ -92,10 +107,9 @@ class AuthManager {
   //? LINKEDIN
   Future<UserCredential?> singInWithLinkedin() async {
     try {
-      // OAuthCredential linkedinOAuthCredential = await LinkedinLoginManager().linkedinLogin(linkedinLoginData);
-      // return user = await _auth.signInWithCredential(linkedinOAuthCredential);
-      String token = await LinkedinLoginManager().linkedinLogin(linkedinLoginData);
-      return user = await _auth.signInWithCustomToken(token);
+      OAuthCredential linkedinOAuthCredential =
+          await LinkedinLoginManager().linkedinLogin(linkedinLoginData);
+      return user = await _auth.signInWithCredential(linkedinOAuthCredential);
     } on FirebaseAuthException catch (e) {
       await onFirebaseAuthException(error: e);
       return null;
@@ -103,12 +117,6 @@ class AuthManager {
   }
 
   // OTROS
-  Future<CurrentUserModel> getUserCredential() async {
-    return userCredential = CurrentUserModel(
-      token: await user?.user?.getIdToken(),
-    );
-  }
-
   Future<void> onFirebaseAuthException(
       {required FirebaseAuthException error, String? inputEmail}) async {
     switch (error.code) {
@@ -117,31 +125,24 @@ class AuthManager {
     }
   }
 
-  onLogOut() async {
-    // Firebase Logout
-    await _auth.signOut();
-    // Social Media Logouts
-    GoogleLoginManager().googleLogout();
-    FacebookLoginManager().facebookLogout();
-    //TODO: Apple().logout();
-    // AuthManager Logout
-    user = null;
-    userCredential = null;
+  Future<CurrentUserModel> getUserCredential() async {
+    return userCredential = CurrentUserModel(
+      token: await user?.user?.getIdToken(),
+    );
   }
 
   String getUserData() {
     return user!.user!.email ?? (user!.user!.displayName ?? "No hay datos");
   }
 
-  googleLoginInit(String? iOSClientId){
-    googleIOSClientId = iOSClientId;
-  }
-
-  twitterLoginInit({TwitterLoginModel? newTwLoginData}){
-    twitterLoginData = newTwLoginData;
-  }
-
-  linkedinLoginInit({LinkedinLoginModel? newLkLoginData}){
-    linkedinLoginData = newLkLoginData;
+  onLogOut() async {
+    // Firebase Logout
+    await _auth.signOut();
+    // Social Media Logouts
+    GoogleLoginManager().googleLogout();
+    FacebookLoginManager().facebookLogout();
+    // AuthManager Logout
+    user = null;
+    userCredential = null;
   }
 }
