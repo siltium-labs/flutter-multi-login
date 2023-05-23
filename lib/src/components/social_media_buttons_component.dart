@@ -122,57 +122,28 @@ class SocialMediaButtonsComponentState
   }
 
   _simpleGoogleLoginButton() {
-    String? lkCode;
-    String? lkState;
-    return LinkedInButtonStandardWidget(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute<void>(
-            builder: (final BuildContext context) => LinkedInAuthCodeWidget(
-              redirectUrl: "s_login_firebase_example://oauth2redirect",
-              clientId: "773hbq4s1icnnm",
-              onError: (final AuthorizationFailedAction e) {
-                debugPrint('Error: ${e.toString()}');
-                debugPrint('Error: ${e.stackTrace.toString()}');
-              },
-              onGetAuthCode: (final AuthorizationSucceededAction response) {
-                debugPrint('Auth code ${response.codeResponse.code}');
-                debugPrint('State: ${response.codeResponse.state}');
-                  lkCode = response.codeResponse.code;
-                  lkState = response.codeResponse.state;
-                setState(() {});
-
-                Navigator.pop(context);
-              },
-            ),
-            fullscreenDialog: true,
+    return ButtonComponent(
+      onPressed: () => _onGoogleLogin(),
+      icon: widget.googleButtonIcon ??
+          Image.asset(
+            "assets/icon_google_default.png",
+            package: 's_multiloginp',
+            height: 30,
+            color: kwhite,
           ),
-        );
-      },
+      buttonStyle: widget.googleButtonStyle ??
+          ButtonStyle(
+            backgroundColor: const MaterialStatePropertyAll<Color>(kred),
+            fixedSize: const MaterialStatePropertyAll<Size>(
+              Size(90, 40),
+            ),
+            shape: MaterialStatePropertyAll<OutlinedBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(50),
+              ),
+            ),
+          ),
     );
-    // return ButtonComponent(
-    //   onPressed: () => _onGoogleLogin(),
-    //   icon: widget.googleButtonIcon ??
-    //       Image.asset(
-    //         "assets/icon_google_default.png",
-    //         package: 's_multiloginp',
-    //         height: 30,
-    //         color: kwhite,
-    //       ),
-    //   buttonStyle: widget.googleButtonStyle ??
-    //       ButtonStyle(
-    //         backgroundColor: const MaterialStatePropertyAll<Color>(kred),
-    //         fixedSize: const MaterialStatePropertyAll<Size>(
-    //           Size(90, 40),
-    //         ),
-    //         shape: MaterialStatePropertyAll<OutlinedBorder>(
-    //           RoundedRectangleBorder(
-    //             borderRadius: BorderRadius.circular(50),
-    //           ),
-    //         ),
-    //       ),
-    // );
   }
 
   _simpleFacebookLoginButton() {
@@ -249,28 +220,57 @@ class SocialMediaButtonsComponentState
   }
 
   _simpleLinkedinLoginButton() {
-    return ButtonComponent(
-      onPressed: () => _onLinkedinLogin(),
-      icon: widget.linkedinButtonIcon ??
-          Image.asset(
-            "assets/icon_linkedin_default.png",
-            package: 's_multiloginp',
-            height: 30,
-            color: kwhite,
-          ),
-      buttonStyle: widget.linkedinButtonStyle ??
-          ButtonStyle(
-            backgroundColor: const MaterialStatePropertyAll<Color>(kdarkcyan),
-            fixedSize: const MaterialStatePropertyAll<Size>(
-              Size(90, 40),
+    String? lkCode;
+    String? lkState;
+    return LinkedInButtonStandardWidget(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute<void>(
+            builder: (final BuildContext context) => LinkedInAuthCodeWidget(
+              redirectUrl: "s_login_firebase_example://oauth2redirect",
+              clientId: "773hbq4s1icnnm",
+              onError: (final AuthorizationFailedAction e) {
+                debugPrint('Error: ${e.toString()}');
+                debugPrint('Error: ${e.stackTrace.toString()}');
+              },
+              onGetAuthCode: (final AuthorizationSucceededAction response) {
+                debugPrint('Auth code ${response.codeResponse.code}');
+                debugPrint('State: ${response.codeResponse.state}');
+                  lkCode = response.codeResponse.code;
+                  lkState = response.codeResponse.state;
+                setState(() {});
+
+                Navigator.pop(context);
+              },
             ),
-            shape: MaterialStatePropertyAll<OutlinedBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
-              ),
-            ),
+            fullscreenDialog: true,
           ),
+        );
+      },
     );
+    // return ButtonComponent(
+    //   onPressed: () => _onLinkedinLogin(),
+    //   icon: widget.linkedinButtonIcon ??
+    //       Image.asset(
+    //         "assets/icon_linkedin_default.png",
+    //         package: 's_multiloginp',
+    //         height: 30,
+    //         color: kwhite,
+    //       ),
+    //   buttonStyle: widget.linkedinButtonStyle ??
+    //       ButtonStyle(
+    //         backgroundColor: const MaterialStatePropertyAll<Color>(kdarkcyan),
+    //         fixedSize: const MaterialStatePropertyAll<Size>(
+    //           Size(90, 40),
+    //         ),
+    //         shape: MaterialStatePropertyAll<OutlinedBorder>(
+    //           RoundedRectangleBorder(
+    //             borderRadius: BorderRadius.circular(50),
+    //           ),
+    //         ),
+    //       ),
+    // );
   }
 
   _getComplexLoginButtonsList() {
