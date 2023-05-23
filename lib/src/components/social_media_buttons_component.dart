@@ -630,6 +630,7 @@ class SocialMediaButtonsComponentState
                 token: linkedInUser.user.token.accessToken,
               );
               AuthManager().getUserCredential(currentUser: currentLkUser);
+              Navigator.pop(context);
               if (currentLkUser.token != null) {
                 if (widget.onResultLinkedinLogin != null) {
                   widget.onResultLinkedinLogin!(currentLkUser);
@@ -639,7 +640,6 @@ class SocialMediaButtonsComponentState
               } else {
                 debugPrint("Error on LinkedinLogin");
               }
-              Navigator.pop(context);
             },
           ),
           fullscreenDialog: true,
