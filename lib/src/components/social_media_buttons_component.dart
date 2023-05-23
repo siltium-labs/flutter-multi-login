@@ -566,71 +566,86 @@ class SocialMediaButtonsComponentState
   }
 
   //? LINKEDIN
-  _onLinkedinLogin() async {
-    await LoadingPopup(
-      context: context,
-      onLoading: _onLinkedinLoading(context),
-      onResult: (data) => _onLinkedinResult(data),
-      onError: (error) => _onLinkedinError(error),
-    ).show();
-  }
+  // _onLinkedinLogin() async {
+  //   await LoadingPopup(
+  //     context: context,
+  //     onLoading: _onLinkedinLoading(context),
+  //     onResult: (data) => _onLinkedinResult(data),
+  //     onError: (error) => _onLinkedinError(error),
+  //   ).show();
+  // }
 
-  _onLinkedinLoading(BuildContext context) async {
-    return await AuthManager().singInWithLinkedin(context);
-  }
+  // _onLinkedinLoading(BuildContext context) async {
+  //   return await AuthManager().singInWithLinkedin(context);
+  // }
 
-  _onLinkedinResult(CurrentUserModel data) async {
-    if (data.token != null) {
-      if (widget.onResultLinkedinLogin != null) {
-        widget.onResultLinkedinLogin!(data);
-      } else {
-        debugPrint("Null result LinkedinLogin");
-      }
-    } else {
-      debugPrint("Error on LinkedinLogin");
-    }
-  }
-
-  _onLinkedinError(FirebaseAuthException error) {
-    if (widget.onErrorLinkedinLogin != null) {
-      widget.onErrorLinkedinLogin!(
-          error.message ?? "Unknown login error with linkedin");
-    } else {
-      debugPrint("El error fue: $error");
-    }
-  }
-
-  // _linkedinLogin(
-  //   LinkedinLoginModel? lkLoginData,
-  //   /*BuildContext context*/
-  // ) async {
-  //   if (lkLoginData != null) {
-  //     Navigator.push(
-  //       context,
-  //       MaterialPageRoute<void>(
-  //         builder: (final BuildContext context) => LinkedInUserWidget(
-  //           redirectUrl: lkLoginData.redirectUrl,
-  //           clientId: lkLoginData.clientId,
-  //           clientSecret: lkLoginData.clientSecret,
-  //           onError: (final UserFailedAction e) {
-  //             debugPrint('Error: ${e.toString()}');
-  //             debugPrint('Error: ${e.stackTrace.toString()}');
-  //           },
-  //           onGetUserProfile: (final UserSucceededAction linkedInUser) {
-  //             debugPrint('Access token ${linkedInUser.user.token.accessToken}');
-  //             debugPrint('User id: ${linkedInUser.user.userId}');
-  //             debugPrint('USER EMAIL: ${linkedInUser.user.email}');
-  //             CurrentUserModel currentLkUser = CurrentUserModel(
-  //               token: linkedInUser.user.token.accessToken,
-  //             );
-  //           },
-  //         ),
-  //         fullscreenDialog: true,
-  //       ),
-  //     );
+  // _onLinkedinResult(CurrentUserModel data) async {
+  //   if (data.token != null) {
+  //     if (widget.onResultLinkedinLogin != null) {
+  //       widget.onResultLinkedinLogin!(data);
+  //     } else {
+  //       debugPrint("Null result LinkedinLogin");
+  //     }
   //   } else {
-  //     return throw Exception(
-  //         "No es posible iniciar sesión con LinkedIn si primero no se define \"linkedinInitData\" en \"SMultiLogin().multiLoginInit()\"");
+  //     debugPrint("Error on LinkedinLogin");
   //   }
   // }
+
+  // _onLinkedinError(FirebaseAuthException error) {
+  //   if (widget.onErrorLinkedinLogin != null) {
+  //     widget.onErrorLinkedinLogin!(
+  //         error.message ?? "Unknown login error with linkedin");
+  //   } else {
+  //     debugPrint("El error fue: $error");
+  //   }
+  // }
+
+  _onLinkedinLogin() async {
+    LinkedinLoginModel? lkLoginData = AuthManager().linkedinLoginData;
+    if (lkLoginData != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute<void>(
+          builder: (final BuildContext context) => LinkedInUserWidget(
+            redirectUrl: lkLoginData.redirectUrl,
+            clientId: lkLoginData.clientId,
+            clientSecret: lkLoginData.clientSecret,
+            onError: (final UserFailedAction e) {
+              debugPrint('Error: ${e.toString()}');
+              debugPrint('Error: ${e.stackTrace.toString()}');
+              if (widget.onErrorLinkedinLogin != null) {
+                widget.onErrorLinkedinLogin!(
+                    e.toString() /*?? "Unknown login error with linkedin"*/);
+              } else {
+                debugPrint("El error fue: ${e.toString()}");
+              }
+            },
+            onGetUserProfile: (final UserSucceededAction linkedInUser) {
+              debugPrint('Access token ${linkedInUser.user.token.accessToken}');
+              debugPrint('User id: ${linkedInUser.user.userId}');
+              debugPrint(
+                  'USER EMAIL: ${linkedInUser.user.email?.elements?[0].handleDeep?.emailAddress}');
+              CurrentUserModel currentLkUser = CurrentUserModel(
+                token: linkedInUser.user.token.accessToken,
+              );
+              AuthManager().getUserCredential(currentUser: currentLkUser);
+              if (currentLkUser.token != null) {
+                if (widget.onResultLinkedinLogin != null) {
+                  widget.onResultLinkedinLogin!(currentLkUser);
+                } else {
+                  debugPrint("Null result LinkedinLogin");
+                }
+              } else {
+                debugPrint("Error on LinkedinLogin");
+              }
+            },
+          ),
+          fullscreenDialog: true,
+        ),
+      );
+    } else {
+      return throw Exception(
+          "No es posible iniciar sesión con LinkedIn si primero no se define \"linkedinInitData\" en \"SMultiLogin().multiLoginInit()\"");
+    }
+  }
 }

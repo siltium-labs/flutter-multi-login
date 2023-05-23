@@ -1,6 +1,5 @@
 //* Package imports
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 
 //* Project imports
 import 'package:s_multiloginp/s_multiloginp.dart';
@@ -8,7 +7,6 @@ import 'package:s_multiloginp/src/manager/google_login_manager.dart';
 import 'package:s_multiloginp/src/manager/facebook_login_manager.dart';
 import 'package:s_multiloginp/src/manager/apple_login_manager.dart';
 import 'package:s_multiloginp/src/manager/twitter_login_manager.dart';
-import 'package:s_multiloginp/src/manager/linkedin_login_manager.dart';
 import 'package:s_multiloginp/src/models/current_user_model.dart';
 import 'package:s_multiloginp/twitter_login_model.dart';
 
@@ -106,14 +104,14 @@ class AuthManager {
   }
 
   //? LINKEDIN
-  Future<CurrentUserModel> singInWithLinkedin(BuildContext context) async {
-    try {
-      return await LinkedinLoginManager()
-          .linkedinLogin(linkedinLoginData, context);
-    } catch (e) {
-      throw Exception(e.toString());
-    }
-  }
+  // Future<CurrentUserModel> singInWithLinkedin(BuildContext context) async {
+  //   try {
+  //     return await LinkedinLoginManager()
+  //         .linkedinLogin(linkedinLoginData, context);
+  //   } catch (e) {
+  //     throw Exception(e.toString());
+  //   }
+  // }
 
   // OTROS
   Future<void> onFirebaseAuthException(
@@ -124,10 +122,17 @@ class AuthManager {
     }
   }
 
-  Future<CurrentUserModel> getUserCredential() async {
-    return userCredential = CurrentUserModel(
-      token: await user?.user?.getIdToken(),
-    );
+  Future<CurrentUserModel> getUserCredential(
+      {CurrentUserModel? currentUser}) async {
+    if (user != null && user!.user != null) {
+      return userCredential = CurrentUserModel(
+        token: await user!.user!.getIdToken(),
+      );
+    } else {
+      return userCredential = CurrentUserModel(
+        token: currentUser?.token,
+      );
+    }
   }
 
   String getUserData() {
