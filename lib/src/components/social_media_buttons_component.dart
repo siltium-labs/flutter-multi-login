@@ -344,7 +344,7 @@ class SocialMediaButtonsComponentState
   _complexTwitterLoginButton() {
     return ButtonComponent(
       onPressed: () => _onTwitterLogin(),
-      text: widget.twitterButtonText ?? "Sing In with Google",
+      text: widget.twitterButtonText ?? "Sing In with Twitter",
       icon: widget.twitterButtonIcon ??
           Image.asset(
             "assets/icon_twitter_default.png",
