@@ -22,8 +22,6 @@ dependencies:
   crypto: ^3.0.1
   twitter_login: ^4.4.0
   linkedin_login: ^2.2.1
-  # oauth2_client: ^3.0.0
-  # dio: ^4.0.6
 
 dev_dependencies:
   flutter_test:

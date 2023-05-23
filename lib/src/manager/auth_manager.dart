@@ -106,9 +106,14 @@ class AuthManager {
   }
 
   //? LINKEDIN
-  // Future<CurrentUserModel?> singInWithLinkedin(BuildContext context) async {
-  //   await LinkedinLoginManager().linkedinLogin(linkedinLoginData, context);
-  // }
+  Future<CurrentUserModel> singInWithLinkedin(BuildContext context) async {
+    try {
+      return await LinkedinLoginManager()
+          .linkedinLogin(linkedinLoginData, context);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 
   // OTROS
   Future<void> onFirebaseAuthException(
@@ -126,7 +131,12 @@ class AuthManager {
   }
 
   String getUserData() {
-    return user!.user!.email ?? (user!.user!.displayName ?? "No hay datos");
+    if (user != null && user!.user != null) {
+      return user!.user!.email ??
+          (user!.user!.displayName ?? "No email or name data");
+    } else {
+      return "No user data";
+    }
   }
 
   onLogOut() async {
