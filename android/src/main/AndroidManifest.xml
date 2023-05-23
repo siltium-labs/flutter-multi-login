@@ -24,7 +24,7 @@
     </activity>
 
     <!-- LinkedIn config -->
-    <activity android:name="com.linusu.flutter_web_auth.CallbackActivity"
+    <!-- <activity android:name="com.linusu.flutter_web_auth.CallbackActivity"
       android:exported="true"
       tools:node="merge">
       <intent-filter android:label="flutter_web_auth">
@@ -33,7 +33,7 @@
         <category android:name="android.intent.category.BROWSABLE" />
         <data android:scheme="@string/lkRedirectURL" />
       </intent-filter>
-    </activity>
+    </activity> -->
 
   </application>
 

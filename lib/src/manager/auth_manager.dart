@@ -1,5 +1,6 @@
 //* Package imports
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 
 //* Project imports
 import 'package:s_multiloginp/s_multiloginp.dart';
@@ -105,16 +106,9 @@ class AuthManager {
   }
 
   //? LINKEDIN
-  Future<UserCredential?> singInWithLinkedin() async {
-    try {
-      OAuthCredential linkedinOAuthCredential =
-          await LinkedinLoginManager().linkedinLogin(linkedinLoginData);
-      return user = await _auth.signInWithCredential(linkedinOAuthCredential);
-    } on FirebaseAuthException catch (e) {
-      await onFirebaseAuthException(error: e);
-      return null;
-    }
-  }
+  // Future<CurrentUserModel?> singInWithLinkedin(BuildContext context) async {
+  //   await LinkedinLoginManager().linkedinLogin(linkedinLoginData, context);
+  // }
 
   // OTROS
   Future<void> onFirebaseAuthException(

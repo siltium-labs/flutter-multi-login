@@ -13,6 +13,7 @@ import 'package:s_multiloginp/src/constants/k_colors.dart';
 import 'package:s_multiloginp/src/enums/component_mode_enum.dart';
 import 'package:s_multiloginp/src/manager/auth_manager.dart';
 import 'package:s_multiloginp/src/models/current_user_model.dart';
+import 'package:s_multiloginp/src/models/linkedin_login_model.dart';
 import 'package:s_multiloginp/src/utils/loading_popup.dart';
 import 'package:s_multiloginp/src/components/button_component.dart';
 
@@ -220,57 +221,57 @@ class SocialMediaButtonsComponentState
   }
 
   _simpleLinkedinLoginButton() {
-    String? lkCode;
-    String? lkState;
-    return LinkedInButtonStandardWidget(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute<void>(
-            builder: (final BuildContext context) => LinkedInAuthCodeWidget(
-              redirectUrl: AuthManager().linkedinLoginData?.redirectUrl,
-              clientId: AuthManager().linkedinLoginData?.clientId,
-              onError: (final AuthorizationFailedAction e) {
-                debugPrint('Error: ${e.toString()}');
-                debugPrint('Error: ${e.stackTrace.toString()}');
-              },
-              onGetAuthCode: (final AuthorizationSucceededAction response) {
-                debugPrint('Auth code ${response.codeResponse.code}');
-                debugPrint('State: ${response.codeResponse.state}');
-                  lkCode = response.codeResponse.code;
-                  lkState = response.codeResponse.state;
-                setState(() {});
+    // String? lkCode;
+    // String? lkState;
+    // return LinkedInButtonStandardWidget(
+    //   onTap: () {
+    //     Navigator.push(
+    //       context,
+    //       MaterialPageRoute<void>(
+    //         builder: (final BuildContext context) => LinkedInAuthCodeWidget(
+    //           redirectUrl: AuthManager().linkedinLoginData?.redirectUrl,
+    //           clientId: AuthManager().linkedinLoginData?.clientId,
+    //           onError: (final AuthorizationFailedAction e) {
+    //             debugPrint('Error: ${e.toString()}');
+    //             debugPrint('Error: ${e.stackTrace.toString()}');
+    //           },
+    //           onGetAuthCode: (final AuthorizationSucceededAction response) {
+    //             debugPrint('Auth code ${response.codeResponse.code}');
+    //             debugPrint('State: ${response.codeResponse.state}');
+    //               lkCode = response.codeResponse.code;
+    //               lkState = response.codeResponse.state;
+    //             setState(() {});
 
-                Navigator.pop(context);
-              },
-            ),
-            fullscreenDialog: true,
-          ),
-        );
-      },
-    );
-    // return ButtonComponent(
-    //   onPressed: () => _onLinkedinLogin(),
-    //   icon: widget.linkedinButtonIcon ??
-    //       Image.asset(
-    //         "assets/icon_linkedin_default.png",
-    //         package: 's_multiloginp',
-    //         height: 30,
-    //         color: kwhite,
-    //       ),
-    //   buttonStyle: widget.linkedinButtonStyle ??
-    //       ButtonStyle(
-    //         backgroundColor: const MaterialStatePropertyAll<Color>(kdarkcyan),
-    //         fixedSize: const MaterialStatePropertyAll<Size>(
-    //           Size(90, 40),
+    //             Navigator.pop(context);
+    //           },
     //         ),
-    //         shape: MaterialStatePropertyAll<OutlinedBorder>(
-    //           RoundedRectangleBorder(
-    //             borderRadius: BorderRadius.circular(50),
-    //           ),
-    //         ),
+    //         fullscreenDialog: true,
     //       ),
+    //     );
+    //   },
     // );
+    return ButtonComponent(
+      onPressed: () => _linkedinLogin(AuthManager().linkedinLoginData),
+      icon: widget.linkedinButtonIcon ??
+          Image.asset(
+            "assets/icon_linkedin_default.png",
+            package: 's_multiloginp',
+            height: 30,
+            color: kwhite,
+          ),
+      buttonStyle: widget.linkedinButtonStyle ??
+          ButtonStyle(
+            backgroundColor: const MaterialStatePropertyAll<Color>(kdarkcyan),
+            fixedSize: const MaterialStatePropertyAll<Size>(
+              Size(90, 40),
+            ),
+            shape: MaterialStatePropertyAll<OutlinedBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(50),
+              ),
+            ),
+          ),
+    );
   }
 
   _getComplexLoginButtonsList() {
@@ -395,7 +396,7 @@ class SocialMediaButtonsComponentState
 
   _complexLinkedinLoginButton() {
     return ButtonComponent(
-      onPressed: () => _onLinkedinLogin(),
+      onPressed: () => _linkedinLogin(AuthManager().linkedinLoginData),
       text: widget.linkedinButtonText ?? "Sing In with LinkedIn",
       icon: widget.linkedinButtonIcon ??
           Image.asset(
@@ -565,38 +566,103 @@ class SocialMediaButtonsComponentState
   }
 
   //? LINKEDIN
-  _onLinkedinLogin() async {
-    await LoadingPopup(
-      context: context,
-      onLoading: _onLinkedinLoading(),
-      onResult: (data) => _onLinkedinResult(data),
-      onError: (error) => _onLinkedinError(error),
-    ).show();
-  }
+  // _onLinkedinLogin() async {
+  //   await LoadingPopup(
+  //     context: context,
+  //     onLoading: _onLinkedinLoading(context),
+  //     onResult: (data) => _onLinkedinResult(data),
+  //     onError: (error) => _onLinkedinError(error),
+  //   ).show();
+  // }
 
-  _onLinkedinLoading() async {
-    await AuthManager().singInWithLinkedin();
-    return AuthManager().getUserCredential();
-  }
+  // _onLinkedinLoading(BuildContext context) async {
+  //   await AuthManager().singInWithLinkedin(context);
+  //   // return AuthManager().getUserCredential();
+  // }
 
-  _onLinkedinResult(CurrentUserModel data) async {
-    if (data.token != null) {
-      if (widget.onResultLinkedinLogin != null) {
-        widget.onResultLinkedinLogin!(data);
-      } else {
-        debugPrint("Null result LinkedinLogin");
-      }
+  // _onLinkedinResult(CurrentUserModel data) async {
+  //   if (data.token != null) {
+  //     if (widget.onResultLinkedinLogin != null) {
+  //       widget.onResultLinkedinLogin!(data);
+  //     } else {
+  //       debugPrint("Null result LinkedinLogin");
+  //     }
+  //   } else {
+  //     debugPrint("Error on LinkedinLogin");
+  //   }
+  // }
+
+  // _onLinkedinError(FirebaseAuthException error) {
+  //   if (widget.onErrorLinkedinLogin != null) {
+  //     widget.onErrorLinkedinLogin!(
+  //         error.message ?? "Unknown login error with linkedin");
+  //   } else {
+  //     debugPrint("El error fue: $error");
+  //   }
+  // }
+
+  _linkedinLogin(
+    LinkedinLoginModel? lkLoginData,
+    /*BuildContext context*/
+  ) async {
+    if (lkLoginData != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute<void>(
+          builder: (final BuildContext context) => LinkedInUserWidget(
+            redirectUrl: lkLoginData.redirectUrl,
+            clientId: lkLoginData.clientId,
+            clientSecret: lkLoginData.clientSecret,
+            onError: (final UserFailedAction e) {
+              // debugPrint('Error: ${e.toString()}');
+              // debugPrint('Error: ${e.stackTrace.toString()}');
+              if (widget.onErrorLinkedinLogin != null) {
+                widget.onErrorLinkedinLogin!(e.toString());
+              } else {
+                debugPrint("El error fue: ${e.toString()}");
+              }
+            },
+            onGetUserProfile: (final UserSucceededAction linkedInUser) {
+              debugPrint(
+                'Access token ${linkedInUser.user.token.accessToken}',
+              );
+              debugPrint('User id: ${linkedInUser.user.userId}');
+              debugPrint('USER EMAIL: ${linkedInUser.user.email}');
+
+              // user = UserObject(
+              //   firstName: linkedInUser?.user?.firstName?.localized?.label,
+              //   lastName: linkedInUser?.user?.lastName?.localized?.label,
+              //   email: linkedInUser
+              //       ?.user?.email?.elements[0]?.handleDeep?.emailAddress,
+              //   profileImageUrl: linkedInUser
+              //       ?.user
+              //       ?.profilePicture
+              //       ?.displayImageContent
+              //       ?.elements[0]
+              //       ?.identifiers[0]
+              //       ?.identifier,
+              // );
+              // Navigator.pop(context);
+              CurrentUserModel currentLkUser = CurrentUserModel(
+                token: linkedInUser.user.token.accessToken,
+              );
+              if (currentLkUser.token != null) {
+                if (widget.onResultLinkedinLogin != null) {
+                  widget.onResultLinkedinLogin!(currentLkUser);
+                } else {
+                  debugPrint("Null result LinkedinLogin");
+                }
+              } else {
+                debugPrint("Error on LinkedinLogin");
+              }
+            },
+          ),
+          fullscreenDialog: true,
+        ),
+      );
     } else {
-      debugPrint("Error on LinkedinLogin");
-    }
-  }
-
-  _onLinkedinError(FirebaseAuthException error) {
-    if (widget.onErrorLinkedinLogin != null) {
-      widget.onErrorLinkedinLogin!(
-          error.message ?? "Unknown login error with linkedin");
-    } else {
-      debugPrint("El error fue: $error");
+      return throw Exception(
+          "No es posible iniciar sesión con LinkedIn si primero no se define \"linkedinInitData\" en \"SMultiLogin().multiLoginInit()\"");
     }
   }
 }
