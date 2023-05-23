@@ -607,12 +607,13 @@ class SocialMediaButtonsComponentState
         context,
         MaterialPageRoute<void>(
           builder: (final BuildContext context) => LinkedInUserWidget(
+            destroySession: true,
             redirectUrl: lkLoginData.redirectUrl,
             clientId: lkLoginData.clientId,
             clientSecret: lkLoginData.clientSecret,
             onError: (final UserFailedAction e) {
-              debugPrint('Error: ${e.toString()}');
-              debugPrint('Error: ${e.stackTrace.toString()}');
+              // debugPrint('Error: ${e.toString()}');
+              // debugPrint('Error: ${e.stackTrace.toString()}');
               if (widget.onErrorLinkedinLogin != null) {
                 widget.onErrorLinkedinLogin!(
                     e.toString() /*?? "Unknown login error with linkedin"*/);
@@ -621,10 +622,10 @@ class SocialMediaButtonsComponentState
               }
             },
             onGetUserProfile: (final UserSucceededAction linkedInUser) {
-              debugPrint('Access token ${linkedInUser.user.token.accessToken}');
-              debugPrint('User id: ${linkedInUser.user.userId}');
-              debugPrint(
-                  'USER EMAIL: ${linkedInUser.user.email?.elements?[0].handleDeep?.emailAddress}');
+              // debugPrint('Access token ${linkedInUser.user.token.accessToken}');
+              // debugPrint('User id: ${linkedInUser.user.userId}');
+              // debugPrint(
+              //     'USER EMAIL: ${linkedInUser.user.email?.elements?[0].handleDeep?.emailAddress}');
               CurrentUserModel currentLkUser = CurrentUserModel(
                 token: linkedInUser.user.token.accessToken,
               );
