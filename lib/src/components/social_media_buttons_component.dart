@@ -134,7 +134,7 @@ class SocialMediaButtonsComponentState
           ),
       buttonStyle: widget.googleButtonStyle ??
           ButtonStyle(
-            backgroundColor: const MaterialStatePropertyAll<Color>(kred),
+            backgroundColor: const MaterialStatePropertyAll<Color>(kGoogle),
             fixedSize: const MaterialStatePropertyAll<Size>(
               Size(90, 40),
             ),
@@ -158,7 +158,7 @@ class SocialMediaButtonsComponentState
           ),
       buttonStyle: widget.facebookButtonStyle ??
           ButtonStyle(
-            backgroundColor: const MaterialStatePropertyAll<Color>(kblue),
+            backgroundColor: const MaterialStatePropertyAll<Color>(kFacebook),
             fixedSize: const MaterialStatePropertyAll<Size>(
               Size(90, 40),
             ),
@@ -182,7 +182,7 @@ class SocialMediaButtonsComponentState
           ),
       buttonStyle: widget.appleButtonStyle ??
           ButtonStyle(
-            backgroundColor: const MaterialStatePropertyAll<Color>(kblack),
+            backgroundColor: const MaterialStatePropertyAll<Color>(kApple),
             fixedSize: const MaterialStatePropertyAll<Size>(
               Size(90, 40),
             ),
@@ -207,7 +207,7 @@ class SocialMediaButtonsComponentState
           ),
       buttonStyle: widget.twitterButtonStyle ??
           ButtonStyle(
-            backgroundColor: const MaterialStatePropertyAll<Color>(kcyan),
+            backgroundColor: const MaterialStatePropertyAll<Color>(kTwitter),
             fixedSize: const MaterialStatePropertyAll<Size>(
               Size(90, 40),
             ),
@@ -232,7 +232,7 @@ class SocialMediaButtonsComponentState
           ),
       buttonStyle: widget.linkedinButtonStyle ??
           ButtonStyle(
-            backgroundColor: const MaterialStatePropertyAll<Color>(kdarkcyan),
+            backgroundColor: const MaterialStatePropertyAll<Color>(kLinkedin),
             fixedSize: const MaterialStatePropertyAll<Size>(
               Size(90, 40),
             ),
@@ -277,7 +277,7 @@ class SocialMediaButtonsComponentState
           ),
       buttonStyle: widget.googleButtonStyle ??
           ButtonStyle(
-            backgroundColor: const MaterialStatePropertyAll<Color>(kred),
+            backgroundColor: const MaterialStatePropertyAll<Color>(kGoogle),
             minimumSize: const MaterialStatePropertyAll<Size>(
               Size(double.infinity, 40),
             ),
@@ -302,7 +302,7 @@ class SocialMediaButtonsComponentState
           ),
       buttonStyle: widget.facebookButtonStyle ??
           ButtonStyle(
-            backgroundColor: const MaterialStatePropertyAll<Color>(kblue),
+            backgroundColor: const MaterialStatePropertyAll<Color>(kFacebook),
             minimumSize: const MaterialStatePropertyAll<Size>(
               Size(double.infinity, 40),
             ),
@@ -327,7 +327,7 @@ class SocialMediaButtonsComponentState
           ),
       buttonStyle: widget.appleButtonStyle ??
           ButtonStyle(
-            backgroundColor: const MaterialStatePropertyAll<Color>(kblack),
+            backgroundColor: const MaterialStatePropertyAll<Color>(kApple),
             minimumSize: const MaterialStatePropertyAll<Size>(
               Size(double.infinity, 40),
             ),
@@ -352,7 +352,7 @@ class SocialMediaButtonsComponentState
           ),
       buttonStyle: widget.twitterButtonStyle ??
           ButtonStyle(
-            backgroundColor: const MaterialStatePropertyAll<Color>(kcyan),
+            backgroundColor: const MaterialStatePropertyAll<Color>(kTwitter),
             minimumSize: const MaterialStatePropertyAll<Size>(
               Size(double.infinity, 40),
             ),
@@ -377,7 +377,7 @@ class SocialMediaButtonsComponentState
           ),
       buttonStyle: widget.linkedinButtonStyle ??
           ButtonStyle(
-            backgroundColor: const MaterialStatePropertyAll<Color>(kdarkcyan),
+            backgroundColor: const MaterialStatePropertyAll<Color>(kLinkedin),
             minimumSize: const MaterialStatePropertyAll<Size>(
               Size(double.infinity, 40),
             ),
