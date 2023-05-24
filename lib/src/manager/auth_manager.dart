@@ -111,9 +111,11 @@ class AuthManager {
   //* MICROSOFT
   Future<UserCredential?> signInWithMicrosoft() async {
     try {
-      OAuthCredential microsoftOAuthCredential =
-          await MicrosoftLoginManager().microsoftLogin(microsoftLoginData);
-      return user = await _auth.signInWithCredential(microsoftOAuthCredential);
+      final microsoftProvider = MicrosoftAuthProvider();
+      return user = await _auth.signInWithProvider(microsoftProvider);
+      // OAuthCredential microsoftOAuthCredential =
+      //     await MicrosoftLoginManager().microsoftLogin(microsoftLoginData);
+      // return user = await _auth.signInWithCredential(microsoftOAuthCredential);
     } on FirebaseAuthException catch (e) {
       await onFirebaseAuthException(error: e);
       return null;
