@@ -41,6 +41,6 @@ flutter:
 
   assets:
     - assets/
-    - assets/icon_google_default.png
-    - assets/icon_twitter_default.png
-    - assets/icon_linkedin_default.png
+    #- assets/icon_google_default.png
+    #- assets/icon_twitter_default.png
+    #- assets/icon_linkedin_default.png
