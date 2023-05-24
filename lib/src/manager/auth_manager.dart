@@ -105,6 +105,18 @@ class AuthManager {
   //? LINKEDIN
   // Manejado, por ahora, en el widget de la libreria
 
+  //* MICROSOFT
+  // Future<UserCredential?> signInWithMicrosoft() async {
+  //   try {
+  //     OAuthCredential microsoftOAuthCredential = ;
+  //     MicrosoftAuthProvider();
+  //     // return user = await _auth.signInWithCredential(twitterOAuthCredential);
+  //   } on FirebaseAuthException catch (e) {
+  //     await onFirebaseAuthException(error: e);
+  //     return null;
+  //   }
+  // }
+
   // OTROS
   Future<void> onFirebaseAuthException(
       {required FirebaseAuthException error, String? inputEmail}) async {
