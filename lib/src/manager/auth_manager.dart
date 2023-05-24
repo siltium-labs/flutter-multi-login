@@ -91,7 +91,7 @@ class AuthManager {
   }
 
   //? TWITTER
-  Future<UserCredential?> singInWithTwitter() async {
+  Future<UserCredential?> signInWithTwitter() async {
     try {
       OAuthCredential twitterOAuthCredential =
           await TwitterLoginManager().twitterLogin(twitterLoginData);
