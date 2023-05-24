@@ -6,6 +6,7 @@ import 'package:s_multiloginp/s_multiloginp.dart';
 
 class MicrosoftLoginManager {
   AadOAuth? oauth;
+  OAuthCredential? microsoftOAuthCredential;
 
   microsoftLogin(MicrosoftLoginModel? msLoginData) async {
     if (msLoginData != null) {
@@ -14,7 +15,8 @@ class MicrosoftLoginManager {
         tenant: msLoginData.tenant,
         clientId: msLoginData.clientId,
         clientSecret: msLoginData.clientSecret,
-        scope: "email openid profile User.Read", // "openid profile offline_access",
+        scope:
+            "email openid profile User.Read", // "openid profile offline_access",
         redirectUri: msLoginData.redirectUri,
         navigatorKey: msLoginData.navigatorKey,
       );
@@ -26,17 +28,12 @@ class MicrosoftLoginManager {
           throw Exception(failure.toString());
         },
         (token) {
-          String accessToken =
-              token.accessToken!; //await oauth.getAccessToken(),
-
           // Create a credential from the access token
-          final microsoftOAuthCredential =
-              MicrosoftAuthProvider.credential(accessToken);
-
-          // Once signed in, return the UserCredential (inicio de sesion, en AuthManager)
-          return microsoftOAuthCredential;
+          microsoftOAuthCredential =
+              MicrosoftAuthProvider.credential(token.accessToken!);
         },
       );
+      return microsoftOAuthCredential;
     } else {
       return throw Exception(
           "No es posible iniciar sesión con Microsoft si primero no se define \"microsoftInitData\" en \"SMultiLogin().multiLoginInit()\"");
