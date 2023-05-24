@@ -13,6 +13,7 @@ class MicrosoftLoginManager {
       final Config config = Config(
         tenant: msLoginData.tenant,
         clientId: msLoginData.clientId,
+        clientSecret: msLoginData.clientSecret,
         scope: "email openid profile User.Read", // "openid profile offline_access",
         redirectUri: msLoginData.redirectUri,
         navigatorKey: msLoginData.navigatorKey,
