@@ -21,6 +21,7 @@ import 's_multiloginp_platform_interface.dart';
 export 'package:s_multiloginp/src/models/multilogin_init_model.dart';
 export 'package:s_multiloginp/src/models/twitter_login_model.dart';
 export 'package:s_multiloginp/src/models/linkedin_login_model.dart';
+export 'package:s_multiloginp/src/models/microsoft_login_model.dart';
 
 // Plugin class (with Method Channel)
 class SMultiloginp {
@@ -57,6 +58,11 @@ class SMultiLogin {
     if (initModel.linkedinInitData != null) {
       AuthManager()
           .linkedinLoginInit(newLkLoginData: initModel.linkedinInitData!);
+    }
+    // Init Microsoft (Android & iOS)
+    if (initModel.microsoftInitData != null) {
+      AuthManager()
+          .microsoftLoginInit(newMsLoginData: initModel.microsoftInitData!);
     }
   }
 

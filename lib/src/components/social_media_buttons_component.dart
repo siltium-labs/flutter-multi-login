@@ -268,7 +268,7 @@ class SocialMediaButtonsComponentState
   _complexGoogleLoginButton() {
     return ButtonComponent(
       onPressed: () => _onGoogleLogin(),
-      text: widget.googleButtonText ?? "Sing In with Google",
+      text: widget.googleButtonText ?? "Sign In with Google",
       icon: widget.googleButtonIcon ??
           Image.asset(
             "assets/icon_google_default.png",
@@ -294,7 +294,7 @@ class SocialMediaButtonsComponentState
   _complexFacebookLoginButton() {
     return ButtonComponent(
       onPressed: () => _onFacebookLogin(),
-      text: widget.facebookButtonText ?? "Sing In with Facebook",
+      text: widget.facebookButtonText ?? "Sign In with Facebook",
       icon: widget.facebookButtonIcon ??
           const Icon(
             Icons.facebook,
@@ -319,7 +319,7 @@ class SocialMediaButtonsComponentState
   _complexAppleLoginButton() {
     return ButtonComponent(
       onPressed: () => _onAppleLogin(),
-      text: widget.appleButtonText ?? "Sing In with Apple",
+      text: widget.appleButtonText ?? "Sign In with Apple",
       icon: widget.appleButtonIcon ??
           const Icon(
             Icons.apple,
@@ -344,7 +344,7 @@ class SocialMediaButtonsComponentState
   _complexTwitterLoginButton() {
     return ButtonComponent(
       onPressed: () => _onTwitterLogin(),
-      text: widget.twitterButtonText ?? "Sing In with Twitter",
+      text: widget.twitterButtonText ?? "Sign In with Twitter",
       icon: widget.twitterButtonIcon ??
           Image.asset(
             "assets/icon_twitter_default.png",
@@ -370,7 +370,7 @@ class SocialMediaButtonsComponentState
   _complexLinkedinLoginButton() {
     return ButtonComponent(
       onPressed: () => _onLinkedinLogin(),
-      text: widget.linkedinButtonText ?? "Sing In with LinkedIn",
+      text: widget.linkedinButtonText ?? "Sign In with LinkedIn",
       icon: widget.linkedinButtonIcon ??
           Image.asset(
             "assets/icon_linkedin_default.png",
@@ -514,7 +514,7 @@ class SocialMediaButtonsComponentState
   }
 
   _onTwitterLoading() async {
-    await AuthManager().singInWithTwitter();
+    await AuthManager().signInWithTwitter();
     return AuthManager().getUserCredential();
   }
 

@@ -95,7 +95,7 @@ También puedes seguir la guía de la [Documentación oficial para Agregar Fireb
 
 ## **Habilitar los Inicio de sesión (Android y iOS)**
 
-Nota: Para habilitar los diferentes proveedores, dirigirse a Authentication -> Sing-in method -> Agregar proveedor nuevo:
+Nota: Para habilitar los diferentes proveedores, dirigirse a Authentication -> Sign-in method -> Agregar proveedor nuevo:
 
 ![Agregar nuevo proveedor](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/login_01.png)
 

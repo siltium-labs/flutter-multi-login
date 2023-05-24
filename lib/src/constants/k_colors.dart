@@ -20,5 +20,3 @@ const Color kLinkedin = Color(0xFF007BB6);
 const Color kInstagram = Color(0xFFD43089);
 const Color kMicrosoft = Color(0xFF7cbb00);
 const Color kPinterest = Color(0xFFCB2027);
-
-

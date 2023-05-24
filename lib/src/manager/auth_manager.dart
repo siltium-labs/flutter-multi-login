@@ -7,6 +7,7 @@ import 'package:s_multiloginp/src/manager/google_login_manager.dart';
 import 'package:s_multiloginp/src/manager/facebook_login_manager.dart';
 import 'package:s_multiloginp/src/manager/apple_login_manager.dart';
 import 'package:s_multiloginp/src/manager/twitter_login_manager.dart';
+import 'package:s_multiloginp/src/manager/microsoft_login_manager.dart';
 import 'package:s_multiloginp/src/models/current_user_model.dart';
 
 class AuthManager {
@@ -25,6 +26,7 @@ class AuthManager {
   String? googleIOSClientId;
   TwitterLoginModel? twitterLoginData;
   LinkedinLoginModel? linkedinLoginData;
+  MicrosoftLoginModel? microsoftLoginData;
 
   // Inits social media
   googleLoginInit(String? iOSClientId) {
@@ -37,6 +39,10 @@ class AuthManager {
 
   linkedinLoginInit({LinkedinLoginModel? newLkLoginData}) {
     linkedinLoginData = newLkLoginData;
+  }
+
+  microsoftLoginInit({MicrosoftLoginModel? newMsLoginData}) {
+    microsoftLoginData = newMsLoginData;
   }
 
   //* EMAIL
@@ -91,7 +97,7 @@ class AuthManager {
   }
 
   //? TWITTER
-  Future<UserCredential?> singInWithTwitter() async {
+  Future<UserCredential?> signInWithTwitter() async {
     try {
       OAuthCredential twitterOAuthCredential =
           await TwitterLoginManager().twitterLogin(twitterLoginData);
@@ -102,20 +108,20 @@ class AuthManager {
     }
   }
 
+  //* MICROSOFT
+  Future<UserCredential?> signInWithMicrosoft() async {
+    try {
+      OAuthCredential microsoftOAuthCredential =
+          await MicrosoftLoginManager().microsoftLogin(microsoftLoginData);
+      return user = await _auth.signInWithCredential(microsoftOAuthCredential);
+    } on FirebaseAuthException catch (e) {
+      await onFirebaseAuthException(error: e);
+      return null;
+    }
+  }
+
   //? LINKEDIN
   // Manejado, por ahora, en el widget de la libreria
-
-  //* MICROSOFT
-  // Future<UserCredential?> signInWithMicrosoft() async {
-  //   try {
-  //     OAuthCredential microsoftOAuthCredential = ;
-  //     MicrosoftAuthProvider();
-  //     // return user = await _auth.signInWithCredential(twitterOAuthCredential);
-  //   } on FirebaseAuthException catch (e) {
-  //     await onFirebaseAuthException(error: e);
-  //     return null;
-  //   }
-  // }
 
   // OTROS
   Future<void> onFirebaseAuthException(

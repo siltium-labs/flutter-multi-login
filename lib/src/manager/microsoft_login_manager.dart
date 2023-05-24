@@ -1,31 +1,48 @@
-// //* Package imports
-// import 'package:firebase_auth/firebase_auth.dart';
+//* Package imports
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:aad_oauth/aad_oauth.dart';
+import 'package:aad_oauth/model/config.dart';
+import 'package:s_multiloginp/s_multiloginp.dart';
 
-// class TwitterLoginManager {
-//   twitterLogin() async {
-//     if (twLoginData != null) {
-//       // Create a TwitterLogin instance
-//       final twitterLogin = TwitterLogin(
-//         apiKey: twLoginData.apiKey,
-//         apiSecretKey: twLoginData.apiSecretKey,
-//         redirectURI: twLoginData.redirectURI,
-//       );
+class MicrosoftLoginManager {
+  AadOAuth? oauth;
 
-//       // Trigger the sign-in flow
-//       final authResult = await twitterLogin.loginV2();
+  microsoftLogin(MicrosoftLoginModel? msLoginData) async {
+    if (msLoginData != null) {
+      // Login with microsoft
+      final Config config = Config(
+        tenant: msLoginData.tenant,
+        clientId: msLoginData.clientId,
+        scope: "openid profile offline_access",
+        redirectUri: msLoginData.redirectUri,
+        navigatorKey: msLoginData.navigatorKey,
+      );
 
-//       // Create a credential from the access token
-//       final twitterOAuthCredential = TwitterAuthProvider.credential(
-//         accessToken: authResult.authToken!,
-//         secret: authResult.authTokenSecret!,
-//       );
+      AadOAuth oauth = AadOAuth(config);
+      final result = await oauth.login();
+      result.fold(
+        (failure) {
+          throw Exception(failure.toString());
+        },
+        (token) {
+          String accessToken =
+              token.accessToken!; //await oauth.getAccessToken(),
 
-//       // Once signed in, return the UserCredential (inicio de sesion, en AuthManager)
-//       return twitterOAuthCredential;
-//     } else {
-//       return throw Exception("No es posible iniciar sesión con Twitter si primero no se define \"twitterInitData\" en \"SMultiLogin().multiLoginInit()\"");
-//     }
-//   }
+          // Create a credential from the access token
+          final microsoftOAuthCredential =
+              MicrosoftAuthProvider.credential(accessToken);
 
-//   // twitterLogout() async {}
-// }
+          // Once signed in, return the UserCredential (inicio de sesion, en AuthManager)
+          return microsoftOAuthCredential;
+        },
+      );
+    } else {
+      return throw Exception(
+          "No es posible iniciar sesión con Microsoft si primero no se define \"microsoftInitData\" en \"SMultiLogin().multiLoginInit()\"");
+    }
+  }
+
+  microsoftLogout() async {
+    await oauth?.logout();
+  }
+}
