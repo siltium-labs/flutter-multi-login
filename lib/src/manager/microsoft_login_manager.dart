@@ -8,7 +8,8 @@ class MicrosoftLoginManager {
   AadOAuth? oauth;
   OAuthCredential? microsoftOAuthCredential;
 
-  microsoftLogin(MicrosoftLoginModel? msLoginData) async {
+  Future<MicrosoftAuthProvider> microsoftLogin(
+      MicrosoftLoginModel? msLoginData) async {
     if (msLoginData != null) {
       // // Login with microsoft
       // final Config config = Config(

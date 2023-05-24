@@ -111,7 +111,8 @@ class AuthManager {
   //* MICROSOFT
   Future<UserCredential?> signInWithMicrosoft() async {
     try {
-      MicrosoftAuthProvider microsoftProvider = MicrosoftLoginManager().microsoftLogin(microsoftLoginData);
+      MicrosoftAuthProvider microsoftProvider =
+          await MicrosoftLoginManager().microsoftLogin(microsoftLoginData);
       return user = await _auth.signInWithProvider(microsoftProvider);
       // OAuthCredential microsoftOAuthCredential =
       //     await MicrosoftLoginManager().microsoftLogin(microsoftLoginData);
