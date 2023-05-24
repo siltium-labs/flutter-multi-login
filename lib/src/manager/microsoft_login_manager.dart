@@ -39,7 +39,7 @@ class MicrosoftLoginManager {
       MicrosoftAuthProvider microsoftProvider =
           MicrosoftAuthProvider().setCustomParameters({
         'tenant': msLoginData.tenant,
-        'client_id': msLoginData.clientId,
+        // 'client_id': msLoginData.clientId,
         'redirect_uri': msLoginData.redirectUri,
         'scope ': 'User.Read',
       });
