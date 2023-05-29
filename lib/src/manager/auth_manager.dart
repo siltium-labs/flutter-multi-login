@@ -26,7 +26,7 @@ class AuthManager {
   String? googleIOSClientId;
   TwitterLoginModel? twitterLoginData;
   LinkedinLoginModel? linkedinLoginData;
-  MicrosoftLoginModel? microsoftLoginData;
+  //! MicrosoftLoginModel? microsoftLoginData;
 
   // Inits social media
   googleLoginInit(String? iOSClientId) {
@@ -41,9 +41,9 @@ class AuthManager {
     linkedinLoginData = newLkLoginData;
   }
 
-  microsoftLoginInit({MicrosoftLoginModel? newMsLoginData}) {
-    microsoftLoginData = newMsLoginData;
-  }
+  //! microsoftLoginInit({MicrosoftLoginModel? newMsLoginData}) {
+  //!   microsoftLoginData = newMsLoginData;
+  //! }
 
   //* EMAIL
   Future<UserCredential?> signInEmailAndPassword(
@@ -112,7 +112,7 @@ class AuthManager {
   Future<UserCredential?> signInWithMicrosoft() async {
     try {
       MicrosoftAuthProvider microsoftProvider =
-          await MicrosoftLoginManager().microsoftLogin(microsoftLoginData);
+          await MicrosoftLoginManager().microsoftLogin(/*microsoftLoginData*/);
       return user = await _auth.signInWithProvider(microsoftProvider);
     } on FirebaseAuthException catch (e) {
       await onFirebaseAuthException(error: e);

@@ -59,11 +59,11 @@ class SMultiLogin {
       AuthManager()
           .linkedinLoginInit(newLkLoginData: initModel.linkedinInitData!);
     }
-    // Init Microsoft (Android & iOS)
-    if (initModel.microsoftInitData != null) {
-      AuthManager()
-          .microsoftLoginInit(newMsLoginData: initModel.microsoftInitData!);
-    }
+    //! Init Microsoft (Android & iOS)
+    // if (initModel.microsoftInitData != null) {
+    //   AuthManager()
+    //       .microsoftLoginInit(newMsLoginData: initModel.microsoftInitData!);
+    // }
   }
 
   logout() async {
