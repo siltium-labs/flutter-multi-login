@@ -64,7 +64,7 @@ class SMultiLogin {
     AuthManager().onLogOut();
   }
 
-  userData() {
+  CurrentUserModel? userData() {
     return AuthManager().getUserData();
   }
 }
