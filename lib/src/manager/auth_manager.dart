@@ -129,24 +129,34 @@ class AuthManager {
 
   Future<CurrentUserModel> getUserCredential(
       {CurrentUserModel? currentUser}) async {
-    //TODO: Cambiar logica para guardar todo en el modelo de currentUser y devolver dicho modelo
     if (user != null && user!.user != null) {
       return userCredential = CurrentUserModel(
+        displayName: user!.user!.displayName,
+        email: user!.user!.email,
+        phoneNumber: user!.user!.phoneNumber,
+        photoURL: user!.user!.photoURL,
         token: await user!.user!.getIdToken(),
+        refreshToken: user!.user!.refreshToken,
+      );
+    } else if (currentUser != null) {
+      return userCredential = CurrentUserModel(
+        displayName: currentUser.displayName,
+        email: currentUser.email,
+        phoneNumber: currentUser.phoneNumber,
+        photoURL: currentUser.photoURL,
+        token: currentUser.token,
+        refreshToken: currentUser.refreshToken,
       );
     } else {
-      return userCredential = CurrentUserModel(
-        token: currentUser?.token,
-      );
+      throw Exception("Error in fetching user data: The user was not given");
     }
   }
 
-  String getUserData() {
-    if (user != null && user!.user != null) {
-      return user!.user!.email ??
-          (user!.user!.displayName ?? "No email or name data");
+  CurrentUserModel? getUserData() {
+    if (userCredential != null) {
+      return userCredential!;
     } else {
-      return "No user data";
+      return null;
     }
   }
 
