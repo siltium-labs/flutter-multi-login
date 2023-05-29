@@ -1,17 +1,13 @@
-import 'package:flutter/material.dart';
-
 class MicrosoftLoginModel {
   String tenant;
-  String clientId;
+  // String clientId;
   // String clientSecret;
-  String redirectUri;
-  GlobalKey<NavigatorState> navigatorKey;
+  // String redirectUri;
 
   MicrosoftLoginModel({
     required this.tenant,
-    required this.clientId,
+    // required this.clientId,
     // required this.clientSecret,
-    required this.redirectUri,
-    required this.navigatorKey,
+    // required this.redirectUri,
   });
 }
