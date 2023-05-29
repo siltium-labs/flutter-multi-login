@@ -7,6 +7,7 @@ import 'package:s_multiloginp/src/manager/google_login_manager.dart';
 import 'package:s_multiloginp/src/manager/facebook_login_manager.dart';
 import 'package:s_multiloginp/src/manager/apple_login_manager.dart';
 import 'package:s_multiloginp/src/manager/twitter_login_manager.dart';
+import 'package:s_multiloginp/src/manager/microsoft_login_manager.dart';
 import 'package:s_multiloginp/src/models/current_user_model.dart';
 
 class AuthManager {
@@ -96,6 +97,18 @@ class AuthManager {
       OAuthCredential twitterOAuthCredential =
           await TwitterLoginManager().twitterLogin(twitterLoginData);
       return user = await _auth.signInWithCredential(twitterOAuthCredential);
+    } on FirebaseAuthException catch (e) {
+      await onFirebaseAuthException(error: e);
+      return null;
+    }
+  }
+
+  //* MICROSOFT
+  Future<UserCredential?> signInWithMicrosoft() async {
+    try {
+      MicrosoftAuthProvider microsoftProvider =
+          await MicrosoftLoginManager().microsoftLogin();
+      return user = await _auth.signInWithProvider(microsoftProvider);
     } on FirebaseAuthException catch (e) {
       await onFirebaseAuthException(error: e);
       return null;

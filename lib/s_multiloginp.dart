@@ -99,6 +99,9 @@ class SMultiLoginComponent extends StatefulWidget {
   ButtonStyle? linkedinButtonStyle;
   String? linkedinButtonText;
   Widget? linkedinButtonIcon;
+  ButtonStyle? microsoftButtonStyle;
+  String? microsoftButtonText;
+  Widget? microsoftButtonIcon;
   // Functions
   Function(CurrentUserModel)? onResultEmailLogin;
   Function(CurrentUserModel)? onResultGoogleLogin;
@@ -106,12 +109,14 @@ class SMultiLoginComponent extends StatefulWidget {
   Function(CurrentUserModel)? onResultAppleLogin;
   Function(CurrentUserModel)? onResultTwitterLogin;
   Function(CurrentUserModel)? onResultLinkedinLogin;
+  Function(CurrentUserModel)? onResultMicrosoftLogin;
   Function(String)? onErrorEmailLogin;
   Function(String)? onErrorGoogleLogin;
   Function(String)? onErrorFacebookLogin;
   Function(String)? onErrorAppleLogin;
   Function(String)? onErrorTwitterLogin;
   Function(String)? onErrorLinkedinLogin;
+  Function(String)? onErrorMicrosoftLogin;
 
   SMultiLoginComponent.simpleCardMode({
     Key? key,
@@ -141,6 +146,8 @@ class SMultiLoginComponent extends StatefulWidget {
     this.twitterButtonIcon,
     this.linkedinButtonStyle,
     this.linkedinButtonIcon,
+    this.microsoftButtonStyle,
+    this.microsoftButtonIcon,
     // Functions
     this.onResultEmailLogin,
     this.onResultGoogleLogin,
@@ -148,12 +155,14 @@ class SMultiLoginComponent extends StatefulWidget {
     this.onResultAppleLogin,
     this.onResultTwitterLogin,
     this.onResultLinkedinLogin,
+    this.onResultMicrosoftLogin,
     this.onErrorEmailLogin,
     this.onErrorGoogleLogin,
     this.onErrorFacebookLogin,
     this.onErrorAppleLogin,
     this.onErrorTwitterLogin,
     this.onErrorLinkedinLogin,
+    this.onErrorMicrosoftLogin,
   }) : super(key: key) {
     componentMode = ComponentMode.simpleCardMode;
   }
@@ -184,6 +193,8 @@ class SMultiLoginComponent extends StatefulWidget {
     this.twitterButtonIcon,
     this.linkedinButtonStyle,
     this.linkedinButtonIcon,
+    this.microsoftButtonStyle,
+    this.microsoftButtonIcon,
     // Functions
     this.onResultEmailLogin,
     this.onResultGoogleLogin,
@@ -191,12 +202,14 @@ class SMultiLoginComponent extends StatefulWidget {
     this.onResultAppleLogin,
     this.onResultTwitterLogin,
     this.onResultLinkedinLogin,
+    this.onResultMicrosoftLogin,
     this.onErrorEmailLogin,
     this.onErrorGoogleLogin,
     this.onErrorFacebookLogin,
     this.onErrorAppleLogin,
     this.onErrorTwitterLogin,
     this.onErrorLinkedinLogin,
+    this.onErrorMicrosoftLogin,
   }) : super(key: key) {
     componentMode = ComponentMode.simpleMode;
   }
@@ -234,6 +247,9 @@ class SMultiLoginComponent extends StatefulWidget {
     this.linkedinButtonStyle,
     this.linkedinButtonText,
     this.linkedinButtonIcon,
+    this.microsoftButtonStyle,
+    this.microsoftButtonText,
+    this.microsoftButtonIcon,
     // Functions
     this.onResultEmailLogin,
     this.onResultGoogleLogin,
@@ -241,12 +257,14 @@ class SMultiLoginComponent extends StatefulWidget {
     this.onResultAppleLogin,
     this.onResultTwitterLogin,
     this.onResultLinkedinLogin,
+    this.onResultMicrosoftLogin,
     this.onErrorEmailLogin,
     this.onErrorGoogleLogin,
     this.onErrorFacebookLogin,
     this.onErrorAppleLogin,
     this.onErrorTwitterLogin,
     this.onErrorLinkedinLogin,
+    this.onErrorMicrosoftLogin,
   }) : super(key: key) {
     componentMode = ComponentMode.complexCardMode;
   }
@@ -282,6 +300,9 @@ class SMultiLoginComponent extends StatefulWidget {
     this.linkedinButtonStyle,
     this.linkedinButtonText,
     this.linkedinButtonIcon,
+    this.microsoftButtonStyle,
+    this.microsoftButtonText,
+    this.microsoftButtonIcon,
     // Functions
     this.onResultEmailLogin,
     this.onResultGoogleLogin,
@@ -289,12 +310,14 @@ class SMultiLoginComponent extends StatefulWidget {
     this.onResultAppleLogin,
     this.onResultTwitterLogin,
     this.onResultLinkedinLogin,
+    this.onResultMicrosoftLogin,
     this.onErrorEmailLogin,
     this.onErrorGoogleLogin,
     this.onErrorFacebookLogin,
     this.onErrorAppleLogin,
     this.onErrorTwitterLogin,
     this.onErrorLinkedinLogin,
+    this.onErrorMicrosoftLogin,
   }) : super(key: key) {
     componentMode = ComponentMode.complexMode;
   }
@@ -383,16 +406,21 @@ class SMultiLoginComponentState extends State<SMultiLoginComponent> {
               linkedinButtonStyle: widget.linkedinButtonStyle,
               linkedinButtonText: widget.linkedinButtonText,
               linkedinButtonIcon: widget.linkedinButtonIcon,
+              microsoftButtonStyle: widget.microsoftButtonStyle,
+              microsoftButtonText: widget.microsoftButtonText,
+              microsoftButtonIcon: widget.microsoftButtonIcon,
               onResultGoogleLogin: widget.onResultGoogleLogin,
               onResultFacebookLogin: widget.onResultFacebookLogin,
               onResultAppleLogin: widget.onResultAppleLogin,
               onResultTwitterLogin: widget.onResultTwitterLogin,
               onResultLinkedinLogin: widget.onResultLinkedinLogin,
+              onResultMicrosoftLogin: widget.onResultMicrosoftLogin,
               onErrorGoogleLogin: widget.onErrorGoogleLogin,
               onErrorFacebookLogin: widget.onErrorFacebookLogin,
               onErrorAppleLogin: widget.onErrorAppleLogin,
               onErrorTwitterLogin: widget.onErrorTwitterLogin,
               onErrorLinkedinLogin: widget.onErrorLinkedinLogin,
+              onErrorMicrosoftLogin: widget.onErrorMicrosoftLogin,
             ),
           ],
         ),

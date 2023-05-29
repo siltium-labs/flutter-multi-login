@@ -36,17 +36,22 @@ class SocialMediaButtonsComponent extends StatefulWidget {
   ButtonStyle? linkedinButtonStyle;
   String? linkedinButtonText;
   Widget? linkedinButtonIcon;
+  ButtonStyle? microsoftButtonStyle;
+  String? microsoftButtonText;
+  Widget? microsoftButtonIcon;
   // Functions
   Function(CurrentUserModel)? onResultGoogleLogin;
   Function(CurrentUserModel)? onResultFacebookLogin;
   Function(CurrentUserModel)? onResultAppleLogin;
   Function(CurrentUserModel)? onResultTwitterLogin;
   Function(CurrentUserModel)? onResultLinkedinLogin;
+  Function(CurrentUserModel)? onResultMicrosoftLogin;
   Function(String)? onErrorGoogleLogin;
   Function(String)? onErrorFacebookLogin;
   Function(String)? onErrorAppleLogin;
   Function(String)? onErrorTwitterLogin;
   Function(String)? onErrorLinkedinLogin;
+  Function(String)? onErrorMicrosoftLogin;
 
   SocialMediaButtonsComponent({
     Key? key,
@@ -67,17 +72,22 @@ class SocialMediaButtonsComponent extends StatefulWidget {
     required this.linkedinButtonStyle,
     required this.linkedinButtonText,
     required this.linkedinButtonIcon,
+    required this.microsoftButtonStyle,
+    required this.microsoftButtonText,
+    required this.microsoftButtonIcon,
     // Functions
     required this.onResultGoogleLogin,
     required this.onResultFacebookLogin,
     required this.onResultAppleLogin,
     required this.onResultTwitterLogin,
     required this.onResultLinkedinLogin,
+    required this.onResultMicrosoftLogin,
     required this.onErrorGoogleLogin,
     required this.onErrorFacebookLogin,
     required this.onErrorAppleLogin,
     required this.onErrorTwitterLogin,
     required this.onErrorLinkedinLogin,
+    required this.onErrorMicrosoftLogin,
   }) : super(key: key);
 
   @override
@@ -118,6 +128,9 @@ class SocialMediaButtonsComponentState
     }
     if (widget.onResultLinkedinLogin != null) {
       buttonsList.add(_simpleLinkedinLoginButton());
+    }
+    if (widget.onResultMicrosoftLogin != null) {
+      buttonsList.add(_simpleMicrosoftLoginButton());
     }
     return buttonsList;
   }
@@ -245,6 +258,31 @@ class SocialMediaButtonsComponentState
     );
   }
 
+  _simpleMicrosoftLoginButton() {
+    return ButtonComponent(
+      onPressed: () => _onMicrosoftLogin(),
+      icon: widget.microsoftButtonIcon ??
+          Image.asset(
+            "assets/icon_microsoft_default.png",
+            package: 's_multiloginp',
+            height: 30,
+            color: kwhite,
+          ),
+      buttonStyle: widget.microsoftButtonStyle ??
+          ButtonStyle(
+            backgroundColor: const MaterialStatePropertyAll<Color>(kMicrosoft),
+            fixedSize: const MaterialStatePropertyAll<Size>(
+              Size(90, 40),
+            ),
+            shape: MaterialStatePropertyAll<OutlinedBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(50),
+              ),
+            ),
+          ),
+    );
+  }
+
   _getComplexLoginButtonsList() {
     List<Widget> buttonsList = [];
     if (widget.onResultGoogleLogin != null) {
@@ -261,6 +299,9 @@ class SocialMediaButtonsComponentState
     }
     if (widget.onResultLinkedinLogin != null) {
       buttonsList.add(_complexLinkedinLoginButton());
+    }
+    if (widget.onResultMicrosoftLogin != null) {
+      buttonsList.add(_complexMicrosoftLoginButton());
     }
     return buttonsList;
   }
@@ -381,6 +422,32 @@ class SocialMediaButtonsComponentState
       buttonStyle: widget.linkedinButtonStyle ??
           ButtonStyle(
             backgroundColor: const MaterialStatePropertyAll<Color>(kLinkedin),
+            minimumSize: const MaterialStatePropertyAll<Size>(
+              Size(double.infinity, 40),
+            ),
+            shape: MaterialStatePropertyAll<OutlinedBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(50),
+              ),
+            ),
+          ),
+    );
+  }
+
+  _complexMicrosoftLoginButton() {
+    return ButtonComponent(
+      onPressed: () => _onMicrosoftLogin(),
+      text: widget.microsoftButtonText ?? "Sign In with Microsoft",
+      icon: widget.microsoftButtonIcon ??
+          Image.asset(
+            "assets/icon_microsoft_default.png",
+            package: 's_multiloginp',
+            height: 30,
+            color: kwhite,
+          ),
+      buttonStyle: widget.microsoftButtonStyle ??
+          ButtonStyle(
+            backgroundColor: const MaterialStatePropertyAll<Color>(kMicrosoft),
             minimumSize: const MaterialStatePropertyAll<Size>(
               Size(double.infinity, 40),
             ),
@@ -534,6 +601,42 @@ class SocialMediaButtonsComponentState
     if (widget.onErrorTwitterLogin != null) {
       widget.onErrorTwitterLogin!(
           error.message ?? "Unknown login error with twitter");
+    } else {
+      debugPrint("El error fue: $error");
+    }
+  }
+
+  //* MICROSOFT
+  _onMicrosoftLogin() async {
+    await LoadingPopup(
+      context: context,
+      onLoading: _onMicrosoftLoading(),
+      onResult: (data) => _onMicrosoftResult(data),
+      onError: (error) => _onMicrosoftError(error),
+    ).show();
+  }
+
+  _onMicrosoftLoading() async {
+    await AuthManager().signInWithMicrosoft();
+    return AuthManager().getUserCredential();
+  }
+
+  _onMicrosoftResult(CurrentUserModel data) async {
+    if (data.token != null) {
+      if (widget.onResultMicrosoftLogin != null) {
+        widget.onResultMicrosoftLogin!(data);
+      } else {
+        debugPrint("Null result MicrosoftLogin");
+      }
+    } else {
+      debugPrint("Error on MicrosoftLogin");
+    }
+  }
+
+  _onMicrosoftError(FirebaseAuthException error) {
+    if (widget.onErrorMicrosoftLogin != null) {
+      widget.onErrorMicrosoftLogin!(
+          error.message ?? "Unknown login error with microsoft");
     } else {
       debugPrint("El error fue: $error");
     }
