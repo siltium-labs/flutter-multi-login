@@ -1,47 +1,21 @@
 //* Package imports
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:aad_oauth/aad_oauth.dart';
-import 'package:aad_oauth/model/config.dart';
 import 'package:s_multiloginp/s_multiloginp.dart';
 
 class MicrosoftLoginManager {
-  AadOAuth? oauth;
   OAuthCredential? microsoftOAuthCredential;
 
   Future<MicrosoftAuthProvider> microsoftLogin(
       MicrosoftLoginModel? msLoginData) async {
     if (msLoginData != null) {
-      // // Login with microsoft
-      // final Config config = Config(
-      //   tenant: msLoginData.tenant,
-      //   clientId: msLoginData.clientId,
-      //   // clientSecret: msLoginData.clientSecret,
-      //   scope:
-      //       "email openid profile User.Read", // "openid profile offline_access",
-      //   redirectUri: msLoginData.redirectUri,
-      //   navigatorKey: msLoginData.navigatorKey,
-      // );
-
-      // AadOAuth oauth = AadOAuth(config);
-      // final result = await oauth.login();
-      // result.fold(
-      //   (failure) {
-      //     throw Exception(failure.toString());
-      //   },
-      //   (token) {
-      //     // Create a credential from the access token
-      //     microsoftOAuthCredential =
-      //         MicrosoftAuthProvider.credential(token.accessToken!);
-      //   },
-      // );
-      // return microsoftOAuthCredential;
-
+      // Login with microsoft, using auth provider
       MicrosoftAuthProvider microsoftProvider =
           MicrosoftAuthProvider().setCustomParameters({
         'tenant': msLoginData.tenant,
-        // 'client_id': msLoginData.clientId,
         'redirect_uri': msLoginData.redirectUri,
         'scope ': 'User.Read',
+        // Tambien el scope puede ser: "email openid profile User.Read",
+        // ó "email openid profile offline_access",
       });
       return microsoftProvider;
     } else {
@@ -50,7 +24,5 @@ class MicrosoftLoginManager {
     }
   }
 
-  microsoftLogout() async {
-    await oauth?.logout();
-  }
+  // microsoftLogout() {}
 }
