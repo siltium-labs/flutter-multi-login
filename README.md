@@ -355,7 +355,59 @@ Para IOS:
 Nota: NO colocar "://" al final del nombre del esquema.
 
 ~
+### **LOGIN CON LINKEDIN:**
+1) Iniciar sesión con una cuenta de LinkedIn en LinkedIn Developers (https://developer.linkedin.com/) y entrar en la pestaña "My apps".
 
+foto
+
+2) Crear una app, indicando nombre de la misma, agregando una foto/logo y vinculandola a una página de LinkedIn existente.
+Nota: Vincular una página a la aplicación es Obligatorio.
+
+foto 2<br>
+foto 3
+
+3) Luego ir a la página vinculada con la aplicación y verificar que esta última pertenece a la organización de dicha página.
+
+fotos de la verificacion
+
+4) Una vez verificada, en la pestaña "Products" de la app en LinkedIN Developers activar el inicio de sesion (el default y el standar).
+
+foto
+
+5) De la pestaña "Auth" de la app en LinkedIn Developers, obtener y copiar el Client ID y Client Secret, los cuales serán utilizados para inicializar la configuración de dicho login en tu proyecto flutter.
+
+foto
+
+EN FLUTTER:
+
+Inicializar el login de linkedin en tu proyecto, pasando como parámetros al método `SMultiLogin().multiLoginInit()` (anteriormente iniciado en `main.dart`) tu Client ID, tu Client Secret y el URI de redireccionamiento de LinkedIn, como se detalla a continuación:
+```dart
+await SMultiLogin().multiLoginInit(
+  initModel: MultiLoginInitModel(
+    linkedinInitData: LinkedinLoginModel(
+      clientId: "TU_CLIENT_ID",
+      clientSecret: "TU_CLIENT_SECRET",
+      redirectUrl: 'https://www.linkedin.com/callback',
+    ),
+  ),
+);
+```
+
+~
+### **LOGIN CON MICROSOFT:**
+1) Iniciar sesión con una cuenta de Microsoft en Microsoft Azure Portal (https://portal.azure.com/#home) y entrar en la pestaña "Azure Active Directory".
+
+foto
+
+poner aca primero, habilitar microsoft en firebase
+
+2) Una vez allí, ir a la pestaña "Registro de aplicaciones" y registrar una nueva aplicación. Esta debe tener un nombre, que los tipos de cuentas compatibles sean "Cuentas en cualquier directorio organizativo y cuentas de Microsoft personales" y en la URI de redirección elegir "Web" y colocal la Uri de redireccionamiento brimdada por Firebase.
+
+fotos
+
+Nota: No hacen falta configuraciones adicionales en tu proyecto Flutter para habilitar el inicio de sesión con Microsoft.
+
+~
 <br>
 
 ## **Uso de la Librería**
@@ -386,10 +438,19 @@ El resto de parametros son opcionales para personalizar el diseño del component
 // Para cerrar sesión en la instancia Firebase.
 // LLamarlo al cerrar sesión en la app
 SMultiLogin().logout();
-// Para obtener el correo o el nombre del
+
+// Para obtener información del
 // usuario que inició sesión.
-// Se puede usar para verificar el login. Trae data del usuario...
-SMultiLogin().userData(),
+// Se puede usar para verificar el
+// login o guardar los datos del usuario logueado:
+SMultiLogin().userData(); // Trae todos lo datos del usuario como un modelo
+
+SMultiLogin().userData().displayName; // Trae el nombre para mostrar del usuario logueado
+SMultiLogin().userData().email; // Trae el email del usuario logueado
+SMultiLogin().userData().phoneNumber; // Trae el número de teléfono del usuario logueado
+SMultiLogin().userData().photoURL; // Trae la URL de la foto del usuario logueado
+SMultiLogin().userData().token; // Trae el token de acceso del usuario logueado
+
 ```
 
 EJEMPLOS:
