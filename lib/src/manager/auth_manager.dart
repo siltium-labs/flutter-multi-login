@@ -2,13 +2,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
 //* Project imports
-import 'package:s_multiloginp/s_multiloginp.dart';
 import 'package:s_multiloginp/src/manager/google_login_manager.dart';
 import 'package:s_multiloginp/src/manager/facebook_login_manager.dart';
 import 'package:s_multiloginp/src/manager/apple_login_manager.dart';
 import 'package:s_multiloginp/src/manager/twitter_login_manager.dart';
 import 'package:s_multiloginp/src/manager/microsoft_login_manager.dart';
 import 'package:s_multiloginp/src/models/current_user_model.dart';
+import 'package:s_multiloginp/src/models/linkedin_login_model.dart';
+import 'package:s_multiloginp/src/models/twitter_login_model.dart';
 
 class AuthManager {
   static final AuthManager _instance = AuthManager._constructor();
@@ -17,17 +18,16 @@ class AuthManager {
   }
   AuthManager._constructor();
 
-  // Variables
+  // Variables:
   final FirebaseAuth _auth = FirebaseAuth.instance;
   UserCredential? user;
   CurrentUserModel? userCredential;
-
-  // Variales inits social media
+  // Variables Social Media Inits:
   String? googleIOSClientId;
   TwitterLoginModel? twitterLoginData;
   LinkedinLoginModel? linkedinLoginData;
 
-  // Inits social media
+  // Social Media Inits:
   googleLoginInit(String? iOSClientId) {
     googleIOSClientId = iOSClientId;
   }
@@ -40,6 +40,7 @@ class AuthManager {
     linkedinLoginData = newLkLoginData;
   }
 
+  // Login Methods:
   //* EMAIL
   Future<UserCredential?> signInEmailAndPassword(
       {required String email, required String password}) async {

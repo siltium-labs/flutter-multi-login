@@ -4,12 +4,12 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 class FacebookLoginManager {
   facebookLogin() async {
-    // Trigger the sign-in flow (abre sdk login facebook)
+    // Trigger the sign-in flow
     final LoginResult loginResult = await FacebookAuth.instance.login(
       loginBehavior: LoginBehavior.webOnly,
     );
 
-    // Create a credential from the access token (guardar credenciales)
+    // Create a credential from the access toke
     final OAuthCredential facebookOAuthCredential =
         FacebookAuthProvider.credential(loginResult.accessToken!.token);
 

@@ -1,6 +1,6 @@
 name: s_multiloginp
 description: Siltium social media sign in with Firebase.
-version: 0.3.0
+version: 0.4.0
 homepage:
 
 environment:
@@ -40,6 +40,3 @@ flutter:
 
   assets:
     - assets/
-    #- assets/icon_google_default.png
-    #- assets/icon_twitter_default.png
-    #- assets/icon_linkedin_default.png

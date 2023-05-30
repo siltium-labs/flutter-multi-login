@@ -25,7 +25,8 @@ class TwitterLoginManager {
       // Once signed in, return the UserCredential (inicio de sesion, en AuthManager)
       return twitterOAuthCredential;
     } else {
-      return throw Exception("No es posible iniciar sesión con Twitter si primero no se define \"twitterInitData\" en \"SMultiLogin().multiLoginInit()\"");
+      return throw Exception(
+          "No es posible iniciar sesión con Twitter si primero no se define \"twitterInitData\" en \"SMultiLogin().multiLoginInit()\"");
     }
   }
 

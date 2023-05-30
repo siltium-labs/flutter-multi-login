@@ -1,4 +1,7 @@
+//* Packages imports
 import 'package:firebase_core/firebase_core.dart';
+
+//* Project imports
 import 'package:s_multiloginp/src/models/linkedin_login_model.dart';
 import 'package:s_multiloginp/src/models/twitter_login_model.dart';
 

@@ -1,4 +1,4 @@
-//* Dart impors
+//* Dart imports
 import 'dart:io';
 
 //* Flutter imports
@@ -20,7 +20,7 @@ import 'package:s_multiloginp/src/components/button_component.dart';
 // ignore: must_be_immutable
 class SocialMediaButtonsComponent extends StatefulWidget {
   ComponentMode componentMode;
-  // Styles
+  // Custom style parameters
   ButtonStyle? googleButtonStyle;
   String? googleButtonText;
   Widget? googleButtonIcon;
@@ -56,7 +56,7 @@ class SocialMediaButtonsComponent extends StatefulWidget {
   SocialMediaButtonsComponent({
     Key? key,
     required this.componentMode,
-    // Styles
+    // Custom style parameters
     required this.googleButtonStyle,
     required this.googleButtonText,
     required this.googleButtonIcon,

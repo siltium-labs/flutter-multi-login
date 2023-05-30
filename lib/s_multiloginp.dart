@@ -1,6 +1,9 @@
 //* Flutter imports
 import 'package:flutter/material.dart';
 
+//* Package/Firebase imports
+import 'package:firebase_core/firebase_core.dart';
+
 //* Project imports
 import 'package:s_multiloginp/src/components/card_background_component.dart';
 import 'package:s_multiloginp/src/components/login_form_component.dart';
@@ -11,18 +14,14 @@ import 'package:s_multiloginp/src/manager/auth_manager.dart';
 import 'package:s_multiloginp/src/models/multilogin_init_model.dart';
 import 'package:s_multiloginp/src/models/current_user_model.dart';
 
-//* Firebase imports
-import 'package:firebase_core/firebase_core.dart';
-
-//* Plugin imports
-import 's_multiloginp_platform_interface.dart';
-
-//* Models exports:
+//* Models exports
 export 'package:s_multiloginp/src/models/multilogin_init_model.dart';
 export 'package:s_multiloginp/src/models/twitter_login_model.dart';
 export 'package:s_multiloginp/src/models/linkedin_login_model.dart';
 
 // Plugin class (with Method Channel)
+import 's_multiloginp_platform_interface.dart';
+
 class SMultiloginp {
   Future<String?> getPlatformVersion() {
     return SMultiloginpPlatform.instance.getPlatformVersion();
@@ -38,12 +37,12 @@ class SMultiLogin {
   SMultiLogin._constructor();
 
   multiLoginInit({required MultiLoginInitModel initModel}) async {
-    // Init de Firebase (Correo, Android & iOS)
+    // Init de Firebase -Correo y redes sociales- (Android & iOS)
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp(
       options: initModel.options,
     );
-    // Init de Google (iOS)
+    // Init Google (iOS)
     if (initModel.googleIOSClientId != null &&
         initModel.googleIOSClientId!.isNotEmpty) {
       AuthManager().googleLoginInit(initModel.googleIOSClientId!);
@@ -72,7 +71,7 @@ class SMultiLogin {
 // ignore: must_be_immutable
 class SMultiLoginComponent extends StatefulWidget {
   late ComponentMode componentMode;
-  // Custom parameters
+  // Custom style parameters
   BoxDecoration? cardDecoration;
   EdgeInsets? cardInnerPadding;
   InputDecoration? emailInputDecoration;
@@ -120,7 +119,7 @@ class SMultiLoginComponent extends StatefulWidget {
 
   SMultiLoginComponent.simpleCardMode({
     Key? key,
-    // Custom parameters
+    // Custom style parameters
     this.cardDecoration,
     this.cardInnerPadding,
     this.emailInputDecoration,
@@ -169,7 +168,7 @@ class SMultiLoginComponent extends StatefulWidget {
 
   SMultiLoginComponent.simpleMode({
     Key? key,
-    // Custom parameters
+    // Custom style parameters
     this.emailInputDecoration,
     this.passwordInputDecoration,
     this.emailInputTextStyle,
@@ -216,7 +215,7 @@ class SMultiLoginComponent extends StatefulWidget {
 
   SMultiLoginComponent.complexCardMode({
     Key? key,
-    // Custom parameters
+    // Custom style parameters
     this.cardDecoration,
     this.cardInnerPadding,
     this.emailInputDecoration,
@@ -271,7 +270,7 @@ class SMultiLoginComponent extends StatefulWidget {
 
   SMultiLoginComponent.complexMode({
     Key? key,
-    // Custom parameters
+    // Custom style parameters
     this.emailInputDecoration,
     this.passwordInputDecoration,
     this.emailInputTextStyle,

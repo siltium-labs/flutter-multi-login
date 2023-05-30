@@ -9,7 +9,7 @@ class GoogleLoginManager {
   googleLogin(String? iOSClientId) async {
     final GoogleSignInAccount? googleUser;
 
-    // Trigger the authentication flow (abre sdk login google)
+    // Trigger the authentication flow
     if (Platform.isIOS && (iOSClientId == null || iOSClientId.isEmpty)) {
       return throw Exception(
           "No es posible iniciar sesión con Google en iOS si primero no se define \"googleIOSClientId\" en \"SMultiLogin().multiLoginInit()\"");
@@ -21,11 +21,11 @@ class GoogleLoginManager {
       googleUser = await GoogleSignIn().signIn();
     }
 
-    // Obtain the auth details from the request (despues de elegir el usuario)
+    // Obtain the auth details from the request
     final GoogleSignInAuthentication? googleAuth =
         await googleUser?.authentication;
 
-    // Create a new credential (guardar credenciales)
+    // Create a new credential
     AuthCredential googleOAuthCredential = GoogleAuthProvider.credential(
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
