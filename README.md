@@ -1,6 +1,6 @@
 
 ------------------------------------------
-# **S-MultiLogin: Siltium Component for Social Media Login**<br> ![](https://img.shields.io/badge/Dart-Flutter-blue) ![](https://img.shields.io/badge/iOS-Android-green) ![](https://img.shields.io/badge/Email&Pass-yellow) ![](https://img.shields.io/badge/Google-red) ![](https://img.shields.io/badge/Facebook-blue) ![](https://img.shields.io/badge/en%20test-Apple-black)
+# **S-MultiLogin: Siltium Component for Social Media Login**<br> ![](https://img.shields.io/badge/Dart-Flutter-blue) ![](https://img.shields.io/badge/iOS-Android-green) <br> ![](https://img.shields.io/badge/Email&Pass-yellow) ![](https://img.shields.io/badge/Google-DD4B39) ![](https://img.shields.io/badge/Facebook-3B5998) ![](https://img.shields.io/badge/en%20test-Apple-black) ![](https://img.shields.io/badge/en%20test%20iOS-Twitter-00ACED) ![](https://img.shields.io/badge/en%20test%20iOS-LinkedIn-007BB6) ![](https://img.shields.io/badge/en%20test%20iOS-Microsoft-7cbb00)
 
 
 ## **Descripción**
@@ -9,15 +9,17 @@ Plugin para incluir en proyectos mobile de Siltium que permite utilizar el compo
 <br>
 
 ## **Versión**
-0.1.0 - **Version inicial -** Inicio de sesión con Email & Contraseña, Google y Facebook para Android.
+0.1.0 - **Version inicial -** Inicio de sesión con Email & Contraseña, Google y Facebook disponibles para Android.
 <br>
-0.2.0 - Inicio de sesión con Email & Contraseña, Google y Facebook para Android & iOS. Inicios de sesión con iOS y Apple en testing.
+0.2.0 - Inicio de sesión con Email & Contraseña, Google y Facebook disponibles para Android & iOS. Inicio de sesión con iOS y Apple en testing.
 <br>
-0.3.0 - Inicios de sesión con Email & Contraseña, Google y Facebook para Android & iOS. Inicio de sesión con Apple en testing.
+0.3.0 - Inicio de sesión con Email & Contraseña, Google y Facebook disponibles para Android & iOS. Inicio de sesión con Apple en testing.
+<br>
+0.4.0 - Inicio de sesión con Email & Contraseña, Google y Facebook disponibles para Android & iOS. Inicio de sesión con Twitter, LinkedIn y Microsoft disponibles para Android y en testing para iOS. Inicio de sesión con Apple en testing.
 <br>
 <br>
 
-## **Instalación (Android y iOS)**
+## **Instalación de la Librería (Android y iOS)**
 EN FLUTTER:
 
 1) Agregar la libreria en `pubspec.yaml`:
@@ -28,7 +30,7 @@ dependencies:
       url: https://github.com/YamiTeyssier/s-multilogin-plug.git
       ref: development
 ```
-Nota: Si se realizan cambios en la rama de dicho repositorio, es necesario realizar un `flutter clean` y un `flutter pub get` para ver reflejados dichos cambios en un proyecto externo.
+Nota: Si se realizan cambios en la rama de dicho repositorio, es necesario quitar la librería (comentarla), correr el comando `flutter pub get`, volver a agregar la librería (descomentarla) y finalmente volver a correr el comando `flutter pub get`.
 
 PARA ANDROID:
 
@@ -93,8 +95,34 @@ También puedes seguir la guía de la [Documentación oficial para Agregar Fireb
 
 <br>
 
-## **Habilitar los Inicio de sesión (Android y iOS)**
+## **Inicialización de la Librería (Android y iOS)**
+Para agregar y utilizar en tu proyecto el inicio de sesión de cualquier plataforma, primero debes seguir estos pasos:
+1) Importar la librería `s_multiloginp` y el archivo `firebase_options.dart` (generado anteriormente con la intalación/configuración de Firebase) en el archivo `main.dart` de tu proyecto:
+```dart
+// Package and Firebase options file import
+import 'package:s_multiloginp/s_multiloginp.dart';
+import 'firebase_options.dart';
+```
 
+2) Inicializar la librería en `main.dart` con `SMultiLogin().multiLoginInit()`, pasando a `MultiLoginInitModel` como parámetro un FirebaseOptions, que se encuentra en el archivo `firebase_options.dart`, como se muestra a continuación:
+```dart
+void main() async {
+  // Add package init
+  await SMultiLogin().multiLoginInit(
+    initModel: MultiLoginInitModel(
+      options: DefaultFirebaseOptions.currentPlatform, // FirebaseOptions de "firebase_options.dart"
+    ),
+  );
+  runApp(const MyApp());
+}
+```
+Nota: No olvidar agregar el `async` al `main()`.
+
+Ahora ya puedes agregar el login de diferentes plataformas/proveedores.
+
+<br>
+
+## **Agregar y Usar los Inicio de sesión (Android y iOS)**
 Nota: Para habilitar los diferentes proveedores, dirigirse a Authentication -> Sign-in method -> Agregar proveedor nuevo:
 
 ![Agregar nuevo proveedor](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/login_01.png)
@@ -148,7 +176,15 @@ Por lo tanto, es necesario realizar los siguientes pasos para iOS:
 
 ![Obtener CLIENT_ID y REVERSED_CLIENT_ID](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/google_06.png)
 
-2) Copiar el `CLIENT_ID` y colocarlo como parte del método `SMultiLogin().multiLoginInit()`, como se detalla más adelante en el uso de la librería (paso 2 de "Uso").
+2) Copiar el `CLIENT_ID` y colocarlo como parte del método `SMultiLogin().multiLoginInit()` (anteriormente iniciado en `main.dart`) como se detalla a continuación:
+```dart
+await SMultiLogin().multiLoginInit(
+  initModel: MultiLoginInitModel(
+    googleIOSClientId: "TU_CLIENT_ID", // CLIENT_ID de "GoogleService-Info.plist"
+  ),
+);
+```
+
 3) Luego, en el archivo `project_name\ios\Runner\Info.plist` agregar el siguiente código dentro de `<dict>...</dict>`, agregando el campo `REVERSED_CLIENT_ID` obtenido del archivo `GoogleService-Info.plist`:
 ```plist
 <!-- Google config-->
@@ -197,10 +233,10 @@ EN FLUTTER, resumen:
 PARA ANDROID:
 
 1) En el archivo `project_name\android\app\build.gradle` importar el SDK de Facebook y agregar un par de strings, con el `fbAppID` y el `fbClientToken` (Secret App) respectivamente y con esos nombres de variable:
-```
+```gradle
 defaultConfig {
         ...
-
+        // Facebook Android config
         resValue "string", "fbAppID", "\"TU_FB_APP_ID\""
         resValue "string", "facebook_client_token", "\"TU_FB_CLIENT_TOKEN\""
     }
@@ -246,30 +282,84 @@ Nota: En `CFBundleURLSchemes` en necesario colocar el texto "fb" antes del `FB_A
 ### **LOGIN CON APPLE:** Pendiente de configuración en Apple Dev.
 
 ~
+### **LOGIN CON TWITTER:**
+1) Iniciar sesión con una cuenta de twitter, ingresar a [Twitter Developers](https://developer.twitter.com/) e ir a "Developer Portal", para crear un proyecto (o usar el creado por defecto) y una aplicación de twitter.<br>
+Nota: si no tienes una cuenta developer, necesitarás activarla enviando las razones de uso de la misma. Finalizado esto te enviará a tu dashboard. Si te generó automáticamente una aplicación por defecto, será necesario borrarla y hacer una nueva app para que asi te den las API Keys y Secret, necesarias para la implementacion del login en flutter.
+
+![Developer Portal](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/twitter_01.png)
+
+![Crear proyecto y app en twitter Devs](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/twitter_02.png)
+
+2) Estas API key y secret, colocarlas en la configuracion de la consola de firebase para habilitar el inicio de sesión con twitter.
+
+![Habilitar twitter login](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/twitter_03.png)
+
+![Agregar keys de twitter](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/twitter_04.png)
+
+3) Configurar la autenticación de usuarios en el Developer Portal, seleccionando la aplicación y desplazandote hasta el fondo, donde deberás hacer clik en "Set up" en la parte "User authentication settings".
+Deberás elegir que permisos necesitas para la aplicación (lectura de tuits y perfil, lectura y escritura de tuits, etc.), el tipo de tu app (en este caso, Native App) y te mostrará la información del Client ID. Aqui tambien deberas colocar una URL tipo esquema (sheme//:) que NO sea la que da firebase, sino una custom que tambien será definida en la aplicación para asi poder redirigir desde el navegador a la misma.
+
+![User auth settings en dashboard](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/twitter_05.png)
+
+![User auth settings](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/twitter_06.png)
+
+![App scheme](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/twitter_07.png)
+
+~
+
+EN FLUTTER, resumen:
+
+1) Inicializar el login de twitter en tu proyecto, pasando como parámetros al método `SMultiLogin().multiLoginInit()` (anteriormente iniciado en `main.dart`) tu API Key, API Secret y esquema de redireccionamiento de Twitter, como se detalla a continuación:
+```dart
+await SMultiLogin().multiLoginInit(
+  initModel: MultiLoginInitModel(
+    twitterInitData: TwitterLoginModel(
+      apiKey: "TU_API_KEY",
+      apiSecretKey: "TU_API_SECRET",
+      redirectURI: "customscheme://",
+    ),
+  ),
+);
+```
+
+PARA ANDROID:
+
+1) En el archivo `project_name\android\app\build.gradle` agregar el mismo esquema de redireccionamiento como un string con el nombre de variable `twRedirectURL`:
+```gradle
+defaultConfig {
+        ...
+        // Twitter Android config
+         resValue "string", "twRedirectURL", "\"customscheme\""
+    }
+```
+Nota: Es necesario escapar las comillas para que el archivo `build.gradle` lo tome como un string y NO colocar "://" al final del nombre del esquema.<br>
+~
+
+Para IOS:
+
+1) En el archivo `project_name\ios\Runner\Info.plist` agregar el siguiente código dentro de `<dict>...</dict>`, agregando también en él tu esquema de redireccionamiento:
+```plist
+<!-- Twitter iOS config -->
+    <key>CFBundleURLTypes</key>
+		<array>
+			<dict>
+				<key>CFBundleTypeRole</key>
+				<string>Editor</string>
+				<key>CFBundleURLSchemes</key>
+				<array>
+					<string>customscheme</string>
+				</array>
+			</dict>
+		</array>
+```
+Nota: NO colocar "://" al final del nombre del esquema.
+
+~
+
 <br>
 
-## **Uso**
-1) Importar el paquete en `main.dart` y el archivo `firebase_options.dart`, generado anteriormente con la intalación/configuración de Firebase en el proyecto:
-```dart
-// Package and Firebase options file import
-import 'package:s_multiloginp/s_multiloginp.dart';
-import 'firebase_options.dart';
-```
-
-2) Inicializar el paquete en `main.dart` con `SMultiLogin().multiLoginInit()` pasando como parámetros un FirebaseOptions, que se encuentra en el archivo `firebase_options.dart`, y el `CLIENT_ID` obtenido del archivo `GoogleService-Info.plist` (paso 1 de Login con Google-iOS):
-```dart
-void main() async {
-  // Add package init (for Android)
-  await SMultiLogin().multiLoginInit(
-    DefaultFirebaseOptions.currentPlatform, // FirebaseOptions de "firebase_options.dart"
-    "TU_CLIENT_ID", // CLIENT_ID de "GoogleService-Info.plist"
-  );
-  runApp(const MyApp());
-}
-```
-Nota: No olvidar agregar el `async` al `main()`.
-
-3) Llamar a `SMultiLoginComponent()`.<br>
+## **Uso de la Librería**
+1) Llamar a `SMultiLoginComponent()` en tu proyecto.<br>
 Nota: Se puede elegir uno de entre 4 "modos" de diseño por defecto, que son:
 ```dart
 // Dos modos, uno minimalista y otro con más detalle respectivamente, encerrados en una Card con un estilo el cual es personalizable:
@@ -282,7 +372,7 @@ SMultiLoginComponent.complexMode();
 ```
 Cada uno de estos "modos", a su vez, también es personalizable.
 
-4) Especificar los parametros deseados:
+2) Especificar los parametros deseados:
 	- `onResultEmailLogin` - para incluir en inicio de sesión con correo y contraseña
 	- `onResultGoogleLogin` - para incluir en inicio de sesión con una cuenta de Google
 	- `onResultFacebookLogin` - para incluir en inicio de sesión con Facebook (por el momento, solo con android)
@@ -291,20 +381,20 @@ Cada uno de estos "modos", a su vez, también es personalizable.
 Nota: para contar con un metodo de inicio de sesión, incluir el metodo onResult deseado. En caso contrario, no incluirlo.<br>
 El resto de parametros son opcionales para personalizar el diseño del componente, de ser necesario.
 
-5) Otros Metodos disponibles:
+3) Otros Metodos disponibles:
 ```dart
 // Para cerrar sesión en la instancia Firebase.
 // LLamarlo al cerrar sesión en la app
 SMultiLogin().logout();
 // Para obtener el correo o el nombre del
 // usuario que inició sesión.
-// Se puede usar para verificar el login
+// Se puede usar para verificar el login. Trae data del usuario...
 SMultiLogin().userData(),
 ```
 
 EJEMPLOS:
 ```dart
-// Ejemplo de SMultiLoginComponent.simpleCardMode(), diseño por defecto e inicio de sesión a través de correo, google y facebook:
+// Ejemplo de SMultiLoginComponent.simpleCardMode(), diseño por defecto e inicio de sesión a través de correo, google, facebook, twitter, linkedin y microsoft:
 SMultiLoginComponent.simpleCardMode(
   footerText: "O podés ingresar con:",
   onResultEmailLogin: (data) {
@@ -324,6 +414,24 @@ SMultiLoginComponent.simpleCardMode(
   },
   onErrorFacebookLogin: (error) {
     // código onError Facebook
+  },
+  onResultTwitterLogin: (data) {
+    // código onResult Twitter
+  },
+  onErrorTwitterLogin: (error) {
+    // código onError Twitter
+  },
+  onResultLinkedinLogin: (data) {
+    // código onResult LinkedIn
+  },
+  onErrorLinkedinLogin: (error) {
+    // código onError LinkedIn
+  },
+  onResultMicrosoftLogin: (data) {
+    // código onResult Microsoft
+  },
+  onErrorMicrosoftLogin: (error) {
+    // código onError Microsoft
   },
 );
 ```
