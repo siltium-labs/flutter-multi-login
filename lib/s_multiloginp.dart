@@ -9,7 +9,7 @@ import 'package:firebase_core/firebase_core.dart';
 
 //* Project imports
 import 'package:s_multiloginp/src/components/card_background_component.dart';
-import 'package:s_multiloginp/src/components/login_form_component.dart';
+import 'package:s_multiloginp/src/components/email_login_component.dart';
 import 'package:s_multiloginp/src/components/social_media_buttons/google_btn_component.dart';
 import 'package:s_multiloginp/src/components/social_media_buttons/facebook_btn_component.dart';
 import 'package:s_multiloginp/src/components/social_media_buttons/apple_btn_component.dart';
@@ -392,7 +392,7 @@ class SMultiLoginComponentState extends State<SMultiLoginComponent> {
           visible: widget.onResultEmailLogin != null,
           child: Column(
             children: [
-              LoginFormComponent(
+              EmailLoginComponent(
                 emailInputDecoration: widget.emailInputDecoration,
                 emailInputTextStyle: widget.emailInputTextStyle,
                 passwordInputDecoration: widget.passwordInputDecoration,
