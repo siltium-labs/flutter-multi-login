@@ -465,10 +465,13 @@ SMultiLoginComponent.complexMode();
 Cada uno de estos "modos", a su vez, también es personalizable.
 
 2) Especificar los parametros deseados:
-	- `onResultEmailLogin` - para incluir en inicio de sesión con correo y contraseña
-	- `onResultGoogleLogin` - para incluir en inicio de sesión con una cuenta de Google
-	- `onResultFacebookLogin` - para incluir en inicio de sesión con Facebook (por el momento, solo con android)
-	- `onResultAppleLogin` - para incluir en inicio de sesión con Apple (pendiente)
+  - `onResultEmailLogin` - para incluir en inicio de sesión con correo y contraseña
+  - `onResultGoogleLogin` - para incluir en inicio de sesión con una cuenta de Google
+  - `onResultFacebookLogin` - para incluir en inicio de sesión con una cuenta de Facebook
+  - `onResultAppleLogin` - para incluir en inicio de sesión con una cuenta de Apple (pendiente)
+  - `onResultTwitterLogin` - para incluir en inicio de sesión con una cuenta de Twitter
+  - `onResultLinkedinLogin` - para incluir en inicio de sesión con una cuenta de LinkedIn
+  - `onResultMicrosoftLogin` - para incluir en inicio de sesión con una cuenta de Microsoft
 
 Nota: para contar con un metodo de inicio de sesión, incluir el metodo onResult deseado. En caso contrario, no incluirlo.<br>
 El resto de parametros son opcionales para personalizar el diseño del componente, de ser necesario.
@@ -483,7 +486,7 @@ SMultiLogin().logout();
 // usuario que inició sesión.
 // Se puede usar para verificar el
 // login o guardar los datos del usuario logueado:
-SMultiLogin().userData(); // Trae todos lo datos del usuario como un modelo
+SMultiLogin().userData(); // Trae todos lo datos del usuario, como un modelo
 
 SMultiLogin().userData().displayName; // Trae el nombre para mostrar del usuario logueado
 SMultiLogin().userData().email; // Trae el email del usuario logueado
