@@ -1,3 +1,6 @@
+//* Dart imports
+import 'dart:io';
+
 //* Flutter imports
 import 'package:flutter/material.dart';
 
@@ -8,7 +11,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:s_multiloginp/src/components/card_background_component.dart';
 import 'package:s_multiloginp/src/components/login_form_component.dart';
 import 'package:s_multiloginp/src/components/social_media_buttons/google_btn_component.dart';
-// import 'package:s_multiloginp/src/components/social_media_buttons_component.dart';
+import 'package:s_multiloginp/src/components/social_media_buttons/facebook_btn_component.dart';
+import 'package:s_multiloginp/src/components/social_media_buttons/apple_btn_component.dart';
+import 'package:s_multiloginp/src/components/social_media_buttons/twitter_btn_component.dart';
+import 'package:s_multiloginp/src/components/social_media_buttons/microsoft_btn_component.dart';
+import 'package:s_multiloginp/src/components/social_media_buttons/linkedin_btn_component.dart';
 import 'package:s_multiloginp/src/constants/k_colors.dart';
 import 'package:s_multiloginp/src/enums/component_mode_enum.dart';
 import 'package:s_multiloginp/src/manager/auth_manager.dart';
@@ -72,252 +79,281 @@ class SMultiLogin {
 // ignore: must_be_immutable
 class SMultiLoginComponent extends StatefulWidget {
   late ComponentMode componentMode;
-  // Custom style parameters
   BoxDecoration? cardDecoration;
   EdgeInsets? cardInnerPadding;
+  String? footerText;
+  TextStyle footerTextStyle;
+  //* EMAIL
   InputDecoration? emailInputDecoration;
   InputDecoration? passwordInputDecoration;
   TextStyle? emailInputTextStyle;
   TextStyle? passwordInputTextStyle;
-  String? footerText;
-  TextStyle footerTextStyle;
   ButtonStyle? emailButtonStyle;
   String? emailButtonText;
   Widget? emailButtonIcon;
+  Function(CurrentUserModel)? onResultEmailLogin;
+  Function(String)? onErrorEmailLogin;
+  //! GOOGLE
   ButtonStyle? googleButtonStyle;
   String? googleButtonText;
   Widget? googleButtonIcon;
+  Function(CurrentUserModel)? onResultGoogleLogin;
+  Function(String)? onErrorGoogleLogin;
+  //? FACEBOOK
   ButtonStyle? facebookButtonStyle;
   String? facebookButtonText;
   Widget? facebookButtonIcon;
+  Function(CurrentUserModel)? onResultFacebookLogin;
+  Function(String)? onErrorFacebookLogin;
+  // TODO: APPLE
   ButtonStyle? appleButtonStyle;
   String? appleButtonText;
   Widget? appleButtonIcon;
+  Function(CurrentUserModel)? onResultAppleLogin;
+  Function(String)? onErrorAppleLogin;
+  //? TWITTER
   ButtonStyle? twitterButtonStyle;
   String? twitterButtonText;
   Widget? twitterButtonIcon;
-  ButtonStyle? linkedinButtonStyle;
-  String? linkedinButtonText;
-  Widget? linkedinButtonIcon;
+  Function(CurrentUserModel)? onResultTwitterLogin;
+  Function(String)? onErrorTwitterLogin;
+  //* MICROSOFT
   ButtonStyle? microsoftButtonStyle;
   String? microsoftButtonText;
   Widget? microsoftButtonIcon;
-  // Functions
-  Function(CurrentUserModel)? onResultEmailLogin;
-  Function(CurrentUserModel)? onResultGoogleLogin;
-  Function(CurrentUserModel)? onResultFacebookLogin;
-  Function(CurrentUserModel)? onResultAppleLogin;
-  Function(CurrentUserModel)? onResultTwitterLogin;
-  Function(CurrentUserModel)? onResultLinkedinLogin;
   Function(CurrentUserModel)? onResultMicrosoftLogin;
-  Function(String)? onErrorEmailLogin;
-  Function(String)? onErrorGoogleLogin;
-  Function(String)? onErrorFacebookLogin;
-  Function(String)? onErrorAppleLogin;
-  Function(String)? onErrorTwitterLogin;
-  Function(String)? onErrorLinkedinLogin;
   Function(String)? onErrorMicrosoftLogin;
+  //? LINKEDIN
+  ButtonStyle? linkedinButtonStyle;
+  String? linkedinButtonText;
+  Widget? linkedinButtonIcon;
+  Function(CurrentUserModel)? onResultLinkedinLogin;
+  Function(String)? onErrorLinkedinLogin;
 
   SMultiLoginComponent.simpleCardMode({
     Key? key,
-    // Custom style parameters
     this.cardDecoration,
     this.cardInnerPadding,
-    this.emailInputDecoration,
-    this.passwordInputDecoration,
-    this.emailInputTextStyle,
-    this.passwordInputTextStyle,
     this.footerText,
     this.footerTextStyle = const TextStyle(
       color: kblack,
       fontSize: 15,
       fontWeight: FontWeight.normal,
     ),
+    //* EMAIL
+    this.emailInputDecoration,
+    this.passwordInputDecoration,
+    this.emailInputTextStyle,
+    this.passwordInputTextStyle,
     this.emailButtonStyle,
     this.emailButtonText,
     this.emailButtonIcon,
+    this.onResultEmailLogin,
+    this.onErrorEmailLogin,
+    //! GOOGLE
     this.googleButtonStyle,
     this.googleButtonIcon,
+    this.onResultGoogleLogin,
+    this.onErrorGoogleLogin,
+    //? FACEBOOK
     this.facebookButtonStyle,
     this.facebookButtonIcon,
+    this.onResultFacebookLogin,
+    this.onErrorFacebookLogin,
+    // TODO: APPLE
     this.appleButtonStyle,
     this.appleButtonIcon,
+    this.onResultAppleLogin,
+    this.onErrorAppleLogin,
+    //? TWITTER
     this.twitterButtonStyle,
     this.twitterButtonIcon,
-    this.linkedinButtonStyle,
-    this.linkedinButtonIcon,
+    this.onResultTwitterLogin,
+    this.onErrorTwitterLogin,
+    //* MICROSOFT
     this.microsoftButtonStyle,
     this.microsoftButtonIcon,
-    // Functions
-    this.onResultEmailLogin,
-    this.onResultGoogleLogin,
-    this.onResultFacebookLogin,
-    this.onResultAppleLogin,
-    this.onResultTwitterLogin,
-    this.onResultLinkedinLogin,
     this.onResultMicrosoftLogin,
-    this.onErrorEmailLogin,
-    this.onErrorGoogleLogin,
-    this.onErrorFacebookLogin,
-    this.onErrorAppleLogin,
-    this.onErrorTwitterLogin,
-    this.onErrorLinkedinLogin,
     this.onErrorMicrosoftLogin,
+    //? LINKEDIN
+    this.linkedinButtonStyle,
+    this.linkedinButtonIcon,
+    this.onResultLinkedinLogin,
+    this.onErrorLinkedinLogin,
   }) : super(key: key) {
     componentMode = ComponentMode.simpleCardMode;
   }
 
   SMultiLoginComponent.simpleMode({
     Key? key,
-    // Custom style parameters
-    this.emailInputDecoration,
-    this.passwordInputDecoration,
-    this.emailInputTextStyle,
-    this.passwordInputTextStyle,
+    this.cardDecoration,
+    this.cardInnerPadding,
     this.footerText,
     this.footerTextStyle = const TextStyle(
       color: kblack,
       fontSize: 15,
       fontWeight: FontWeight.normal,
     ),
+    //* EMAIL
+    this.emailInputDecoration,
+    this.passwordInputDecoration,
+    this.emailInputTextStyle,
+    this.passwordInputTextStyle,
     this.emailButtonStyle,
     this.emailButtonText,
     this.emailButtonIcon,
+    this.onResultEmailLogin,
+    this.onErrorEmailLogin,
+    //! GOOGLE
     this.googleButtonStyle,
     this.googleButtonIcon,
+    this.onResultGoogleLogin,
+    this.onErrorGoogleLogin,
+    //? FACEBOOK
     this.facebookButtonStyle,
     this.facebookButtonIcon,
+    this.onResultFacebookLogin,
+    this.onErrorFacebookLogin,
+    // TODO: APPLE
     this.appleButtonStyle,
     this.appleButtonIcon,
+    this.onResultAppleLogin,
+    this.onErrorAppleLogin,
+    //? TWITTER
     this.twitterButtonStyle,
     this.twitterButtonIcon,
-    this.linkedinButtonStyle,
-    this.linkedinButtonIcon,
+    this.onResultTwitterLogin,
+    this.onErrorTwitterLogin,
+    //* MICROSOFT
     this.microsoftButtonStyle,
     this.microsoftButtonIcon,
-    // Functions
-    this.onResultEmailLogin,
-    this.onResultGoogleLogin,
-    this.onResultFacebookLogin,
-    this.onResultAppleLogin,
-    this.onResultTwitterLogin,
-    this.onResultLinkedinLogin,
     this.onResultMicrosoftLogin,
-    this.onErrorEmailLogin,
-    this.onErrorGoogleLogin,
-    this.onErrorFacebookLogin,
-    this.onErrorAppleLogin,
-    this.onErrorTwitterLogin,
-    this.onErrorLinkedinLogin,
     this.onErrorMicrosoftLogin,
+    //? LINKEDIN
+    this.linkedinButtonStyle,
+    this.linkedinButtonIcon,
+    this.onResultLinkedinLogin,
+    this.onErrorLinkedinLogin,
   }) : super(key: key) {
     componentMode = ComponentMode.simpleMode;
   }
 
   SMultiLoginComponent.complexCardMode({
     Key? key,
-    // Custom style parameters
     this.cardDecoration,
     this.cardInnerPadding,
-    this.emailInputDecoration,
-    this.passwordInputDecoration,
-    this.emailInputTextStyle,
-    this.passwordInputTextStyle,
     this.footerText,
     this.footerTextStyle = const TextStyle(
       color: kblack,
       fontSize: 15,
       fontWeight: FontWeight.normal,
     ),
+    //* EMAIL
+    this.emailInputDecoration,
+    this.passwordInputDecoration,
+    this.emailInputTextStyle,
+    this.passwordInputTextStyle,
     this.emailButtonStyle,
     this.emailButtonText,
     this.emailButtonIcon,
+    this.onResultEmailLogin,
+    this.onErrorEmailLogin,
+    //! GOOGLE
     this.googleButtonStyle,
     this.googleButtonText,
     this.googleButtonIcon,
+    this.onResultGoogleLogin,
+    this.onErrorGoogleLogin,
+    //? FACEBOOK
     this.facebookButtonStyle,
     this.facebookButtonText,
     this.facebookButtonIcon,
+    this.onResultFacebookLogin,
+    this.onErrorFacebookLogin,
+    // TODO: APPLE
     this.appleButtonStyle,
     this.appleButtonText,
     this.appleButtonIcon,
+    this.onResultAppleLogin,
+    this.onErrorAppleLogin,
+    //? TWITTER
     this.twitterButtonStyle,
     this.twitterButtonText,
     this.twitterButtonIcon,
-    this.linkedinButtonStyle,
-    this.linkedinButtonText,
-    this.linkedinButtonIcon,
+    this.onResultTwitterLogin,
+    this.onErrorTwitterLogin,
+    //* MICROSOFT
     this.microsoftButtonStyle,
     this.microsoftButtonText,
     this.microsoftButtonIcon,
-    // Functions
-    this.onResultEmailLogin,
-    this.onResultGoogleLogin,
-    this.onResultFacebookLogin,
-    this.onResultAppleLogin,
-    this.onResultTwitterLogin,
-    this.onResultLinkedinLogin,
     this.onResultMicrosoftLogin,
-    this.onErrorEmailLogin,
-    this.onErrorGoogleLogin,
-    this.onErrorFacebookLogin,
-    this.onErrorAppleLogin,
-    this.onErrorTwitterLogin,
-    this.onErrorLinkedinLogin,
     this.onErrorMicrosoftLogin,
+    //? LINKEDIN
+    this.linkedinButtonStyle,
+    this.linkedinButtonText,
+    this.linkedinButtonIcon,
+    this.onResultLinkedinLogin,
+    this.onErrorLinkedinLogin,
   }) : super(key: key) {
     componentMode = ComponentMode.complexCardMode;
   }
 
   SMultiLoginComponent.complexMode({
     Key? key,
-    // Custom style parameters
-    this.emailInputDecoration,
-    this.passwordInputDecoration,
-    this.emailInputTextStyle,
-    this.passwordInputTextStyle,
+    this.cardDecoration,
+    this.cardInnerPadding,
     this.footerText,
     this.footerTextStyle = const TextStyle(
       color: kblack,
       fontSize: 15,
       fontWeight: FontWeight.normal,
     ),
+    //* EMAIL
+    this.emailInputDecoration,
+    this.passwordInputDecoration,
+    this.emailInputTextStyle,
+    this.passwordInputTextStyle,
     this.emailButtonStyle,
     this.emailButtonText,
     this.emailButtonIcon,
+    this.onResultEmailLogin,
+    this.onErrorEmailLogin,
+    //! GOOGLE
     this.googleButtonStyle,
     this.googleButtonText,
     this.googleButtonIcon,
+    this.onResultGoogleLogin,
+    this.onErrorGoogleLogin,
+    //? FACEBOOK
     this.facebookButtonStyle,
     this.facebookButtonText,
     this.facebookButtonIcon,
+    this.onResultFacebookLogin,
+    this.onErrorFacebookLogin,
+    // TODO: APPLE
     this.appleButtonStyle,
     this.appleButtonText,
     this.appleButtonIcon,
+    this.onResultAppleLogin,
+    this.onErrorAppleLogin,
+    //? TWITTER
     this.twitterButtonStyle,
     this.twitterButtonText,
     this.twitterButtonIcon,
-    this.linkedinButtonStyle,
-    this.linkedinButtonText,
-    this.linkedinButtonIcon,
+    this.onResultTwitterLogin,
+    this.onErrorTwitterLogin,
+    //* MICROSOFT
     this.microsoftButtonStyle,
     this.microsoftButtonText,
     this.microsoftButtonIcon,
-    // Functions
-    this.onResultEmailLogin,
-    this.onResultGoogleLogin,
-    this.onResultFacebookLogin,
-    this.onResultAppleLogin,
-    this.onResultTwitterLogin,
-    this.onResultLinkedinLogin,
     this.onResultMicrosoftLogin,
-    this.onErrorEmailLogin,
-    this.onErrorGoogleLogin,
-    this.onErrorFacebookLogin,
-    this.onErrorAppleLogin,
-    this.onErrorTwitterLogin,
-    this.onErrorLinkedinLogin,
     this.onErrorMicrosoftLogin,
+    //? LINKEDIN
+    this.linkedinButtonStyle,
+    this.linkedinButtonText,
+    this.linkedinButtonIcon,
+    this.onResultLinkedinLogin,
+    this.onErrorLinkedinLogin,
   }) : super(key: key) {
     componentMode = ComponentMode.complexMode;
   }
@@ -370,6 +406,7 @@ class SMultiLoginComponentState extends State<SMultiLoginComponent> {
             ],
           ),
         ),
+        // Text before Social Media Login Buttons
         Visibility(
           visible: widget.footerText != null,
           child: Column(
@@ -389,39 +426,6 @@ class SMultiLoginComponentState extends State<SMultiLoginComponent> {
           spacing: 10,
           runSpacing: 10,
           children: [
-            // SocialMediaButtonsComponent(
-            //   componentMode: widget.componentMode,
-            //   googleButtonStyle: widget.googleButtonStyle,
-            //   googleButtonText: widget.googleButtonText,
-            //   googleButtonIcon: widget.googleButtonIcon,
-            //   facebookButtonStyle: widget.facebookButtonStyle,
-            //   facebookButtonText: widget.facebookButtonText,
-            //   facebookButtonIcon: widget.facebookButtonIcon,
-            //   appleButtonStyle: widget.appleButtonStyle,
-            //   appleButtonText: widget.appleButtonText,
-            //   appleButtonIcon: widget.appleButtonIcon,
-            //   twitterButtonStyle: widget.twitterButtonStyle,
-            //   twitterButtonText: widget.twitterButtonText,
-            //   twitterButtonIcon: widget.twitterButtonIcon,
-            //   linkedinButtonStyle: widget.linkedinButtonStyle,
-            //   linkedinButtonText: widget.linkedinButtonText,
-            //   linkedinButtonIcon: widget.linkedinButtonIcon,
-            //   microsoftButtonStyle: widget.microsoftButtonStyle,
-            //   microsoftButtonText: widget.microsoftButtonText,
-            //   microsoftButtonIcon: widget.microsoftButtonIcon,
-            //   onResultGoogleLogin: widget.onResultGoogleLogin,
-            //   onResultFacebookLogin: widget.onResultFacebookLogin,
-            //   onResultAppleLogin: widget.onResultAppleLogin,
-            //   onResultTwitterLogin: widget.onResultTwitterLogin,
-            //   onResultLinkedinLogin: widget.onResultLinkedinLogin,
-            //   onResultMicrosoftLogin: widget.onResultMicrosoftLogin,
-            //   onErrorGoogleLogin: widget.onErrorGoogleLogin,
-            //   onErrorFacebookLogin: widget.onErrorFacebookLogin,
-            //   onErrorAppleLogin: widget.onErrorAppleLogin,
-            //   onErrorTwitterLogin: widget.onErrorTwitterLogin,
-            //   onErrorLinkedinLogin: widget.onErrorLinkedinLogin,
-            //   onErrorMicrosoftLogin: widget.onErrorMicrosoftLogin,
-            // ),
             ...(widget.componentMode == ComponentMode.simpleCardMode ||
                     widget.componentMode == ComponentMode.simpleMode)
                 ? _getSimpleLoginButtonsList()
@@ -438,28 +442,62 @@ class SMultiLoginComponentState extends State<SMultiLoginComponent> {
       buttonsList.add(
         GoogleBtnComponent.simple(
           googleButtonStyle: widget.googleButtonStyle,
-          googleButtonText: widget.googleButtonText,
           googleButtonIcon: widget.googleButtonIcon,
           onResultGoogleLogin: widget.onResultGoogleLogin,
           onErrorGoogleLogin: widget.onErrorGoogleLogin,
         ),
       );
     }
-    // if (widget.onResultFacebookLogin != null) {
-    //   buttonsList.add(_simpleFacebookLoginButton());
-    // }
-    // if (widget.onResultAppleLogin != null && Platform.isIOS) {
-    //   buttonsList.add(_simpleAppleLoginButton());
-    // }
-    // if (widget.onResultTwitterLogin != null) {
-    //   buttonsList.add(_simpleTwitterLoginButton());
-    // }
-    // if (widget.onResultLinkedinLogin != null) {
-    //   buttonsList.add(_simpleLinkedinLoginButton());
-    // }
-    // if (widget.onResultMicrosoftLogin != null) {
-    //   buttonsList.add(_simpleMicrosoftLoginButton());
-    // }
+    if (widget.onResultFacebookLogin != null) {
+      buttonsList.add(
+        FacebookBtnComponent.simple(
+          facebookButtonStyle: widget.facebookButtonStyle,
+          facebookButtonIcon: widget.facebookButtonIcon,
+          onResultFacebookLogin: widget.onResultFacebookLogin,
+          onErrorFacebookLogin: widget.onErrorFacebookLogin,
+        ),
+      );
+    }
+    if (widget.onResultAppleLogin != null && Platform.isIOS) {
+      buttonsList.add(
+        AppleBtnComponent.simple(
+          appleButtonStyle: widget.appleButtonStyle,
+          appleButtonIcon: widget.appleButtonIcon,
+          onResultAppleLogin: widget.onResultAppleLogin,
+          onErrorAppleLogin: widget.onErrorAppleLogin,
+        ),
+      );
+    }
+    if (widget.onResultTwitterLogin != null) {
+      buttonsList.add(
+        TwitterBtnComponent.simple(
+          twitterButtonStyle: widget.twitterButtonStyle,
+          twitterButtonIcon: widget.twitterButtonIcon,
+          onResultTwitterLogin: widget.onResultTwitterLogin,
+          onErrorTwitterLogin: widget.onErrorTwitterLogin,
+        ),
+      );
+    }
+    if (widget.onResultLinkedinLogin != null) {
+      buttonsList.add(
+        LinkedinBtnComponent.simple(
+          linkedinButtonStyle: widget.linkedinButtonStyle,
+          linkedinButtonIcon: widget.linkedinButtonIcon,
+          onResultLinkedinLogin: widget.onResultLinkedinLogin,
+          onErrorLinkedinLogin: widget.onErrorLinkedinLogin,
+        ),
+      );
+    }
+    if (widget.onResultMicrosoftLogin != null) {
+      buttonsList.add(
+        MicrosoftBtnComponent.simple(
+          microsoftButtonStyle: widget.microsoftButtonStyle,
+          microsoftButtonIcon: widget.microsoftButtonIcon,
+          onResultMicrosoftLogin: widget.onResultMicrosoftLogin,
+          onErrorMicrosoftLogin: widget.onErrorMicrosoftLogin,
+        ),
+      );
+    }
     return buttonsList;
   }
 
@@ -476,21 +514,61 @@ class SMultiLoginComponentState extends State<SMultiLoginComponent> {
         ),
       );
     }
-    // if (widget.onResultFacebookLogin != null) {
-    //   buttonsList.add(_complexFacebookLoginButton());
-    // }
-    // if (widget.onResultAppleLogin != null && Platform.isIOS) {
-    //   buttonsList.add(_complexAppleLoginButton());
-    // }
-    // if (widget.onResultTwitterLogin != null) {
-    //   buttonsList.add(_complexTwitterLoginButton());
-    // }
-    // if (widget.onResultLinkedinLogin != null) {
-    //   buttonsList.add(_complexLinkedinLoginButton());
-    // }
-    // if (widget.onResultMicrosoftLogin != null) {
-    //   buttonsList.add(_complexMicrosoftLoginButton());
-    // }
+    if (widget.onResultFacebookLogin != null) {
+      buttonsList.add(
+        FacebookBtnComponent.complex(
+          facebookButtonStyle: widget.facebookButtonStyle,
+          facebookButtonText: widget.facebookButtonText,
+          facebookButtonIcon: widget.facebookButtonIcon,
+          onResultFacebookLogin: widget.onResultFacebookLogin,
+          onErrorFacebookLogin: widget.onErrorFacebookLogin,
+        ),
+      );
+    }
+    if (widget.onResultAppleLogin != null && Platform.isIOS) {
+      buttonsList.add(
+        AppleBtnComponent.complex(
+          appleButtonStyle: widget.appleButtonStyle,
+          appleButtonText: widget.appleButtonText,
+          appleButtonIcon: widget.appleButtonIcon,
+          onResultAppleLogin: widget.onResultAppleLogin,
+          onErrorAppleLogin: widget.onErrorAppleLogin,
+        ),
+      );
+    }
+    if (widget.onResultTwitterLogin != null) {
+      buttonsList.add(
+        TwitterBtnComponent.complex(
+          twitterButtonStyle: widget.twitterButtonStyle,
+          twitterButtonText: widget.twitterButtonText,
+          twitterButtonIcon: widget.twitterButtonIcon,
+          onResultTwitterLogin: widget.onResultTwitterLogin,
+          onErrorTwitterLogin: widget.onErrorTwitterLogin,
+        ),
+      );
+    }
+    if (widget.onResultLinkedinLogin != null) {
+      buttonsList.add(
+        LinkedinBtnComponent.complex(
+          linkedinButtonStyle: widget.linkedinButtonStyle,
+          linkedinButtonText: widget.linkedinButtonText,
+          linkedinButtonIcon: widget.linkedinButtonIcon,
+          onResultLinkedinLogin: widget.onResultLinkedinLogin,
+          onErrorLinkedinLogin: widget.onErrorLinkedinLogin,
+        ),
+      );
+    }
+    if (widget.onResultMicrosoftLogin != null) {
+      buttonsList.add(
+        MicrosoftBtnComponent.complex(
+          microsoftButtonStyle: widget.microsoftButtonStyle,
+          microsoftButtonText: widget.microsoftButtonText,
+          microsoftButtonIcon: widget.microsoftButtonIcon,
+          onResultMicrosoftLogin: widget.onResultMicrosoftLogin,
+          onErrorMicrosoftLogin: widget.onErrorMicrosoftLogin,
+        ),
+      );
+    }
     return buttonsList;
   }
 }

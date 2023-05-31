@@ -13,60 +13,60 @@ import 'package:s_multiloginp/src/utils/loading_popup.dart';
 import 'package:s_multiloginp/src/components/button_component.dart';
 
 // ignore: must_be_immutable
-class GoogleBtnComponent extends StatefulWidget {
-  ButtonStyle? googleButtonStyle;
-  String? googleButtonText;
-  Widget? googleButtonIcon;
-  Function(CurrentUserModel)? onResultGoogleLogin;
-  Function(String)? onErrorGoogleLogin;
+class TwitterBtnComponent extends StatefulWidget {
+  ButtonStyle? twitterButtonStyle;
+  String? twitterButtonText;
+  Widget? twitterButtonIcon;
+  Function(CurrentUserModel)? onResultTwitterLogin;
+  Function(String)? onErrorTwitterLogin;
   late ComponentMode componentMode;
 
-  GoogleBtnComponent.simple({
+  TwitterBtnComponent.simple({
     Key? key,
-    required this.googleButtonStyle,
-    required this.googleButtonIcon,
-    required this.onResultGoogleLogin,
-    required this.onErrorGoogleLogin,
+    required this.twitterButtonStyle,
+    required this.twitterButtonIcon,
+    required this.onResultTwitterLogin,
+    required this.onErrorTwitterLogin,
   }) : super(key: key) {
     componentMode = ComponentMode.simpleMode;
   }
 
-  GoogleBtnComponent.complex({
+  TwitterBtnComponent.complex({
     Key? key,
-    required this.googleButtonStyle,
-    required this.googleButtonText,
-    required this.googleButtonIcon,
-    required this.onResultGoogleLogin,
-    required this.onErrorGoogleLogin,
+    required this.twitterButtonStyle,
+    required this.twitterButtonText,
+    required this.twitterButtonIcon,
+    required this.onResultTwitterLogin,
+    required this.onErrorTwitterLogin,
   }) : super(key: key) {
     componentMode = ComponentMode.complexMode;
   }
 
   @override
-  GoogleBtnComponentState createState() => GoogleBtnComponentState();
+  TwitterBtnComponentState createState() => TwitterBtnComponentState();
 }
 
-class GoogleBtnComponentState extends State<GoogleBtnComponent> {
+class TwitterBtnComponentState extends State<TwitterBtnComponent> {
   @override
   Widget build(BuildContext context) {
     return widget.componentMode == ComponentMode.simpleMode
-        ? _simpleGoogleLoginButton()
-        : _complexGoogleLoginButton();
+        ? _simpleTwitterLoginButton()
+        : _complexTwitterLoginButton();
   }
 
-  _simpleGoogleLoginButton() {
+  _simpleTwitterLoginButton() {
     return ButtonComponent(
-      onPressed: () => _onGoogleLogin(),
-      icon: widget.googleButtonIcon ??
+      onPressed: () => _onTwitterLogin(),
+      icon: widget.twitterButtonIcon ??
           Image.asset(
-            "assets/icon_google_default.png",
+            "assets/icon_twitter_default.png",
             package: 's_multiloginp',
             height: 30,
             color: kwhite,
           ),
-      buttonStyle: widget.googleButtonStyle ??
+      buttonStyle: widget.twitterButtonStyle ??
           ButtonStyle(
-            backgroundColor: const MaterialStatePropertyAll<Color>(kGoogle),
+            backgroundColor: const MaterialStatePropertyAll<Color>(kTwitter),
             fixedSize: const MaterialStatePropertyAll<Size>(
               Size(90, 40),
             ),
@@ -79,20 +79,20 @@ class GoogleBtnComponentState extends State<GoogleBtnComponent> {
     );
   }
 
-  _complexGoogleLoginButton() {
+  _complexTwitterLoginButton() {
     return ButtonComponent(
-      onPressed: () => _onGoogleLogin(),
-      text: widget.googleButtonText ?? "Sign In with Google",
-      icon: widget.googleButtonIcon ??
+      onPressed: () => _onTwitterLogin(),
+      text: widget.twitterButtonText ?? "Sign In with Twitter",
+      icon: widget.twitterButtonIcon ??
           Image.asset(
-            "assets/icon_google_default.png",
+            "assets/icon_twitter_default.png",
             package: 's_multiloginp',
             height: 30,
             color: kwhite,
           ),
-      buttonStyle: widget.googleButtonStyle ??
+      buttonStyle: widget.twitterButtonStyle ??
           ButtonStyle(
-            backgroundColor: const MaterialStatePropertyAll<Color>(kGoogle),
+            backgroundColor: const MaterialStatePropertyAll<Color>(kTwitter),
             minimumSize: const MaterialStatePropertyAll<Size>(
               Size(double.infinity, 40),
             ),
@@ -106,36 +106,36 @@ class GoogleBtnComponentState extends State<GoogleBtnComponent> {
   }
 
   // CONTROLLER----------------------------------------------------
-  _onGoogleLogin() async {
+  _onTwitterLogin() async {
     await LoadingPopup(
       context: context,
-      onLoading: _onGoogleLoading(),
-      onResult: (data) => _onGoogleResult(data),
-      onError: (error) => _onGoogleError(error),
+      onLoading: _onTwitterLoading(),
+      onResult: (data) => _onTwitterResult(data),
+      onError: (error) => _onTwitterError(error),
     ).show();
   }
 
-  _onGoogleLoading() async {
-    await AuthManager().signInWithGoogle();
+  _onTwitterLoading() async {
+    await AuthManager().signInWithTwitter();
     return AuthManager().getUserCredential();
   }
 
-  _onGoogleResult(CurrentUserModel data) async {
+  _onTwitterResult(CurrentUserModel data) async {
     if (data.token != null) {
-      if (widget.onResultGoogleLogin != null) {
-        widget.onResultGoogleLogin!(data);
+      if (widget.onResultTwitterLogin != null) {
+        widget.onResultTwitterLogin!(data);
       } else {
-        debugPrint("Null result GoogleLogin");
+        debugPrint("Null result TwitterLogin");
       }
     } else {
-      debugPrint("Error on GoogleLogin");
+      debugPrint("Error on TwitterLogin");
     }
   }
 
-  _onGoogleError(FirebaseAuthException error) {
-    if (widget.onErrorGoogleLogin != null) {
-      widget.onErrorGoogleLogin!(
-          error.message ?? "Unknown login error with google");
+  _onTwitterError(FirebaseAuthException error) {
+    if (widget.onErrorTwitterLogin != null) {
+      widget.onErrorTwitterLogin!(
+          error.message ?? "Unknown login error with twitter");
     } else {
       debugPrint("El error fue: $error");
     }
