@@ -414,15 +414,36 @@ await SMultiLogin().multiLoginInit(
 
 ~
 ### **LOGIN CON MICROSOFT:**
-1) Iniciar sesión con una cuenta de Microsoft en Microsoft Azure Portal (https://portal.azure.com/#home) y entrar en la pestaña "Azure Active Directory".
+1) Iniciar sesión con una cuenta de Microsoft en [Microsoft Azure Portal](https://portal.azure.com/#home) y entrar en la pestaña "Azure Active Directory". Se puede entrar allí desde el dashboard o desde el menú lateral, como se muestra a continuación.
 
-foto
+![Microsoft inicio](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/microsoft_01.png)
 
-poner aca primero, habilitar microsoft en firebase
+2) Una vez allí, ir a la pestaña "Registro de aplicaciones" y registrar una nueva aplicación. Esta debe tener un nombre y que los tipos de cuentas compatibles sean "Cuentas en cualquier directorio organizativo y cuentas de Microsoft personales". Por último, poner "Registrar".<br>
+Nota: Aquí todavía no agregamos una URI de redireccionamiento.
 
-2) Una vez allí, ir a la pestaña "Registro de aplicaciones" y registrar una nueva aplicación. Esta debe tener un nombre, que los tipos de cuentas compatibles sean "Cuentas en cualquier directorio organizativo y cuentas de Microsoft personales" y en la URI de redirección elegir "Web" y colocal la Uri de redireccionamiento brimdada por Firebase.
+![Ir a registro de app](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/microsoft_02.png)
 
-fotos
+![Registrar app](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/microsoft_03.png)
+
+3) Luego, en la app, obtenemos los datos necesarios para habilitar el inicio de sesión en Firebase. Primero copiamos el "Id. de aplicación" que lo obtenemos de la pestaña "Información general" y luego, en la pestaña "Certificados y Secretos", generamos un nuevo Secreto de cliente para nuestra app y copiamos su valor.<br>
+Nota importante: Copiar el VALOR del secreto, NO el Id.<br>
+Además, es necesario copiarlo en ese momento, ya que una vez que salimos de la página el valor de dicho secreto ya no estará visible.
+
+![Obtener Id de la app](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/microsoft_04.png)
+
+![Obtener secret client](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/microsoft_05.png)
+
+4) Ahora, en la [Consola de Firebase](https://firebase.google.com), habilitamos el inicio de sesión con Microsoft y agregamos los datos obtenidos, es decir, el Id de aplicación y el Secreto de cliente. También copiamos la URI de redireccionamiento que nos provee Firebase para agregar en nuestra app.
+
+![Obtener secret client](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/microsoft_06.png)
+
+![Obtener secret client](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/microsoft_07.png)
+
+5) Finalmente, nos dirigimos a la pestaña "Autenticación" del menú lateral, ponemos "Agregar una plataforma" y es necesario elegir "Web". Aquí agregamos la URI de redireccionamiento brindada por Firebase y hacemos click en "Configurar".
+
+![Obtener secret client](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/microsoft_08.png)
+
+![Obtener secret client](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/microsoft_09.png)
 
 Nota: No hacen falta configuraciones adicionales en tu proyecto Flutter para habilitar el inicio de sesión con Microsoft.
 
