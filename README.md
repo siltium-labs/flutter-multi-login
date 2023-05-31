@@ -356,27 +356,46 @@ Nota: NO colocar "://" al final del nombre del esquema.
 
 ~
 ### **LOGIN CON LINKEDIN:**
-1) Iniciar sesión con una cuenta de LinkedIn en LinkedIn Developers (https://developer.linkedin.com/) y entrar en la pestaña "My apps".
+1) Iniciar sesión con una cuenta de LinkedIn en [LinkedIn Developers](https://developer.linkedin.com/) y entrar en la pestaña "My apps".
 
-foto
+![Linkedin devs](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/linkedin_01.png)
 
 2) Crear una app, indicando nombre de la misma, agregando una foto/logo y vinculandola a una página de LinkedIn existente.
 Nota: Vincular una página a la aplicación es Obligatorio.
 
-foto 2<br>
-foto 3
+![Crear app](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/linkedin_02.png)
 
-3) Luego ir a la página vinculada con la aplicación y verificar que esta última pertenece a la organización de dicha página.
+![Configurar app 1](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/linkedin_03.png)
 
-fotos de la verificacion
+![Configurar app 2](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/linkedin_04.png)
 
-4) Una vez verificada, en la pestaña "Products" de la app en LinkedIN Developers activar el inicio de sesion (el default y el standar).
+3) Luego ir a la pestaña "Settings" para verificar la aplicación con la página vinculada anteriormente. Para eso hacemos click en "Verify" el cual nos abrira un popup en el que tenemos que generar una URL para dirigirnos a la página de verificación.
 
-foto
+![Verificar app 1](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/linkedin_05.png)
 
-5) De la pestaña "Auth" de la app en LinkedIn Developers, obtener y copiar el Client ID y Client Secret, los cuales serán utilizados para inicializar la configuración de dicho login en tu proyecto flutter.
+![Verificar app 2](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/linkedin_06.png)
 
-foto
+4) Una vez generado el URL, lo copiamos y pegamos en una nueva pestaña del navegador y nos redirigirá a una pagina para ahora sí verificar la app con la pagina vinculada en su creación. Una vez hecho esto cerramos esta pestaña, volvemos a nuestra app, ponemos "I'm done" y recargamos la pagina para comprobar que la app ya esta verificada.
+
+![Verificar app 3](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/linkedin_07.png)
+
+![Verificar app 4](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/linkedin_08.png)
+
+5) Una vez verificada la app, podemos agregar el inicio de sesión a la misma. En la pestaña "Products" de la app pedir el acceso al inicio de sesion, tanto al "Sign In with LinkedIn" como asi también al "Sign In with LinkedIn v2".
+
+![Agregar login 1](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/linkedin_09.png)
+
+![Agregar login 2](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/linkedin_10.png)
+
+![Agregar login 3](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/linkedin_11.png)
+
+6) Finalmente, obtener los datos que serán utilizados para inicializar la configuración de dicho login en tu proyecto flutter.
+Primero, en la pestaña "Auth" de la app, agregar una URL de redireccionamiento para la misma. Esta debe ser exactamente la siguiente: "https://www.linkedin.com/callback"
+Y por último, de la misma pestaña "Auth", obtener y copiar el Client ID y Client Secret.
+
+![Obtener redirect Url](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/linkedin_12.png)
+
+![Obtener keys](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/linkedin_13.png)
 
 EN FLUTTER:
 
