@@ -7,7 +7,8 @@ import 'package:firebase_core/firebase_core.dart';
 //* Project imports
 import 'package:s_multiloginp/src/components/card_background_component.dart';
 import 'package:s_multiloginp/src/components/login_form_component.dart';
-import 'package:s_multiloginp/src/components/social_media_buttons_component.dart';
+import 'package:s_multiloginp/src/components/social_media_buttons/google_btn_component.dart';
+// import 'package:s_multiloginp/src/components/social_media_buttons_component.dart';
 import 'package:s_multiloginp/src/constants/k_colors.dart';
 import 'package:s_multiloginp/src/enums/component_mode_enum.dart';
 import 'package:s_multiloginp/src/manager/auth_manager.dart';
@@ -388,42 +389,108 @@ class SMultiLoginComponentState extends State<SMultiLoginComponent> {
           spacing: 10,
           runSpacing: 10,
           children: [
-            SocialMediaButtonsComponent(
-              componentMode: widget.componentMode,
-              googleButtonStyle: widget.googleButtonStyle,
-              googleButtonText: widget.googleButtonText,
-              googleButtonIcon: widget.googleButtonIcon,
-              facebookButtonStyle: widget.facebookButtonStyle,
-              facebookButtonText: widget.facebookButtonText,
-              facebookButtonIcon: widget.facebookButtonIcon,
-              appleButtonStyle: widget.appleButtonStyle,
-              appleButtonText: widget.appleButtonText,
-              appleButtonIcon: widget.appleButtonIcon,
-              twitterButtonStyle: widget.twitterButtonStyle,
-              twitterButtonText: widget.twitterButtonText,
-              twitterButtonIcon: widget.twitterButtonIcon,
-              linkedinButtonStyle: widget.linkedinButtonStyle,
-              linkedinButtonText: widget.linkedinButtonText,
-              linkedinButtonIcon: widget.linkedinButtonIcon,
-              microsoftButtonStyle: widget.microsoftButtonStyle,
-              microsoftButtonText: widget.microsoftButtonText,
-              microsoftButtonIcon: widget.microsoftButtonIcon,
-              onResultGoogleLogin: widget.onResultGoogleLogin,
-              onResultFacebookLogin: widget.onResultFacebookLogin,
-              onResultAppleLogin: widget.onResultAppleLogin,
-              onResultTwitterLogin: widget.onResultTwitterLogin,
-              onResultLinkedinLogin: widget.onResultLinkedinLogin,
-              onResultMicrosoftLogin: widget.onResultMicrosoftLogin,
-              onErrorGoogleLogin: widget.onErrorGoogleLogin,
-              onErrorFacebookLogin: widget.onErrorFacebookLogin,
-              onErrorAppleLogin: widget.onErrorAppleLogin,
-              onErrorTwitterLogin: widget.onErrorTwitterLogin,
-              onErrorLinkedinLogin: widget.onErrorLinkedinLogin,
-              onErrorMicrosoftLogin: widget.onErrorMicrosoftLogin,
-            ),
+            // SocialMediaButtonsComponent(
+            //   componentMode: widget.componentMode,
+            //   googleButtonStyle: widget.googleButtonStyle,
+            //   googleButtonText: widget.googleButtonText,
+            //   googleButtonIcon: widget.googleButtonIcon,
+            //   facebookButtonStyle: widget.facebookButtonStyle,
+            //   facebookButtonText: widget.facebookButtonText,
+            //   facebookButtonIcon: widget.facebookButtonIcon,
+            //   appleButtonStyle: widget.appleButtonStyle,
+            //   appleButtonText: widget.appleButtonText,
+            //   appleButtonIcon: widget.appleButtonIcon,
+            //   twitterButtonStyle: widget.twitterButtonStyle,
+            //   twitterButtonText: widget.twitterButtonText,
+            //   twitterButtonIcon: widget.twitterButtonIcon,
+            //   linkedinButtonStyle: widget.linkedinButtonStyle,
+            //   linkedinButtonText: widget.linkedinButtonText,
+            //   linkedinButtonIcon: widget.linkedinButtonIcon,
+            //   microsoftButtonStyle: widget.microsoftButtonStyle,
+            //   microsoftButtonText: widget.microsoftButtonText,
+            //   microsoftButtonIcon: widget.microsoftButtonIcon,
+            //   onResultGoogleLogin: widget.onResultGoogleLogin,
+            //   onResultFacebookLogin: widget.onResultFacebookLogin,
+            //   onResultAppleLogin: widget.onResultAppleLogin,
+            //   onResultTwitterLogin: widget.onResultTwitterLogin,
+            //   onResultLinkedinLogin: widget.onResultLinkedinLogin,
+            //   onResultMicrosoftLogin: widget.onResultMicrosoftLogin,
+            //   onErrorGoogleLogin: widget.onErrorGoogleLogin,
+            //   onErrorFacebookLogin: widget.onErrorFacebookLogin,
+            //   onErrorAppleLogin: widget.onErrorAppleLogin,
+            //   onErrorTwitterLogin: widget.onErrorTwitterLogin,
+            //   onErrorLinkedinLogin: widget.onErrorLinkedinLogin,
+            //   onErrorMicrosoftLogin: widget.onErrorMicrosoftLogin,
+            // ),
+            ...(widget.componentMode == ComponentMode.simpleCardMode ||
+                    widget.componentMode == ComponentMode.simpleMode)
+                ? _getSimpleLoginButtonsList()
+                : _getComplexLoginButtonsList()
           ],
         ),
       ],
     );
+  }
+
+  _getSimpleLoginButtonsList() {
+    List<Widget> buttonsList = [];
+    if (widget.onResultGoogleLogin != null) {
+      buttonsList.add(
+        GoogleBtnComponent.simple(
+          googleButtonStyle: widget.googleButtonStyle,
+          googleButtonText: widget.googleButtonText,
+          googleButtonIcon: widget.googleButtonIcon,
+          onResultGoogleLogin: widget.onResultGoogleLogin,
+          onErrorGoogleLogin: widget.onErrorGoogleLogin,
+        ),
+      );
+    }
+    // if (widget.onResultFacebookLogin != null) {
+    //   buttonsList.add(_simpleFacebookLoginButton());
+    // }
+    // if (widget.onResultAppleLogin != null && Platform.isIOS) {
+    //   buttonsList.add(_simpleAppleLoginButton());
+    // }
+    // if (widget.onResultTwitterLogin != null) {
+    //   buttonsList.add(_simpleTwitterLoginButton());
+    // }
+    // if (widget.onResultLinkedinLogin != null) {
+    //   buttonsList.add(_simpleLinkedinLoginButton());
+    // }
+    // if (widget.onResultMicrosoftLogin != null) {
+    //   buttonsList.add(_simpleMicrosoftLoginButton());
+    // }
+    return buttonsList;
+  }
+
+  _getComplexLoginButtonsList() {
+    List<Widget> buttonsList = [];
+    if (widget.onResultGoogleLogin != null) {
+      buttonsList.add(
+        GoogleBtnComponent.complex(
+          googleButtonStyle: widget.googleButtonStyle,
+          googleButtonText: widget.googleButtonText,
+          googleButtonIcon: widget.googleButtonIcon,
+          onResultGoogleLogin: widget.onResultGoogleLogin,
+          onErrorGoogleLogin: widget.onErrorGoogleLogin,
+        ),
+      );
+    }
+    // if (widget.onResultFacebookLogin != null) {
+    //   buttonsList.add(_complexFacebookLoginButton());
+    // }
+    // if (widget.onResultAppleLogin != null && Platform.isIOS) {
+    //   buttonsList.add(_complexAppleLoginButton());
+    // }
+    // if (widget.onResultTwitterLogin != null) {
+    //   buttonsList.add(_complexTwitterLoginButton());
+    // }
+    // if (widget.onResultLinkedinLogin != null) {
+    //   buttonsList.add(_complexLinkedinLoginButton());
+    // }
+    // if (widget.onResultMicrosoftLogin != null) {
+    //   buttonsList.add(_complexMicrosoftLoginButton());
+    // }
+    return buttonsList;
   }
 }

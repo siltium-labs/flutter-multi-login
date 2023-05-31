@@ -21,9 +21,9 @@ import 'package:s_multiloginp/src/components/button_component.dart';
 class SocialMediaButtonsComponent extends StatefulWidget {
   ComponentMode componentMode;
   // Custom style parameters
-  ButtonStyle? googleButtonStyle;
-  String? googleButtonText;
-  Widget? googleButtonIcon;
+  // ButtonStyle? googleButtonStyle;
+  // String? googleButtonText;
+  // Widget? googleButtonIcon;
   ButtonStyle? facebookButtonStyle;
   String? facebookButtonText;
   Widget? facebookButtonIcon;
@@ -40,13 +40,13 @@ class SocialMediaButtonsComponent extends StatefulWidget {
   String? microsoftButtonText;
   Widget? microsoftButtonIcon;
   // Functions
-  Function(CurrentUserModel)? onResultGoogleLogin;
+  // Function(CurrentUserModel)? onResultGoogleLogin;
   Function(CurrentUserModel)? onResultFacebookLogin;
   Function(CurrentUserModel)? onResultAppleLogin;
   Function(CurrentUserModel)? onResultTwitterLogin;
   Function(CurrentUserModel)? onResultLinkedinLogin;
   Function(CurrentUserModel)? onResultMicrosoftLogin;
-  Function(String)? onErrorGoogleLogin;
+  // Function(String)? onErrorGoogleLogin;
   Function(String)? onErrorFacebookLogin;
   Function(String)? onErrorAppleLogin;
   Function(String)? onErrorTwitterLogin;
@@ -57,9 +57,9 @@ class SocialMediaButtonsComponent extends StatefulWidget {
     Key? key,
     required this.componentMode,
     // Custom style parameters
-    required this.googleButtonStyle,
-    required this.googleButtonText,
-    required this.googleButtonIcon,
+    // required this.googleButtonStyle,
+    // required this.googleButtonText,
+    // required this.googleButtonIcon,
     required this.facebookButtonStyle,
     required this.facebookButtonText,
     required this.facebookButtonIcon,
@@ -76,13 +76,13 @@ class SocialMediaButtonsComponent extends StatefulWidget {
     required this.microsoftButtonText,
     required this.microsoftButtonIcon,
     // Functions
-    required this.onResultGoogleLogin,
+    // required this.onResultGoogleLogin,
     required this.onResultFacebookLogin,
     required this.onResultAppleLogin,
     required this.onResultTwitterLogin,
     required this.onResultLinkedinLogin,
     required this.onResultMicrosoftLogin,
-    required this.onErrorGoogleLogin,
+    // required this.onErrorGoogleLogin,
     required this.onErrorFacebookLogin,
     required this.onErrorAppleLogin,
     required this.onErrorTwitterLogin,
@@ -114,9 +114,9 @@ class SocialMediaButtonsComponentState
 
   _getSimpleLoginButtonsList() {
     List<Widget> buttonsList = [];
-    if (widget.onResultGoogleLogin != null) {
-      buttonsList.add(_simpleGoogleLoginButton());
-    }
+    // if (widget.onResultGoogleLogin != null) {
+    //   buttonsList.add(_simpleGoogleLoginButton());
+    // }
     if (widget.onResultFacebookLogin != null) {
       buttonsList.add(_simpleFacebookLoginButton());
     }
@@ -135,30 +135,30 @@ class SocialMediaButtonsComponentState
     return buttonsList;
   }
 
-  _simpleGoogleLoginButton() {
-    return ButtonComponent(
-      onPressed: () => _onGoogleLogin(),
-      icon: widget.googleButtonIcon ??
-          Image.asset(
-            "assets/icon_google_default.png",
-            package: 's_multiloginp',
-            height: 30,
-            color: kwhite,
-          ),
-      buttonStyle: widget.googleButtonStyle ??
-          ButtonStyle(
-            backgroundColor: const MaterialStatePropertyAll<Color>(kGoogle),
-            fixedSize: const MaterialStatePropertyAll<Size>(
-              Size(90, 40),
-            ),
-            shape: MaterialStatePropertyAll<OutlinedBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
-              ),
-            ),
-          ),
-    );
-  }
+  // _simpleGoogleLoginButton() {
+  //   return ButtonComponent(
+  //     onPressed: () => _onGoogleLogin(),
+  //     icon: widget.googleButtonIcon ??
+  //         Image.asset(
+  //           "assets/icon_google_default.png",
+  //           package: 's_multiloginp',
+  //           height: 30,
+  //           color: kwhite,
+  //         ),
+  //     buttonStyle: widget.googleButtonStyle ??
+  //         ButtonStyle(
+  //           backgroundColor: const MaterialStatePropertyAll<Color>(kGoogle),
+  //           fixedSize: const MaterialStatePropertyAll<Size>(
+  //             Size(90, 40),
+  //           ),
+  //           shape: MaterialStatePropertyAll<OutlinedBorder>(
+  //             RoundedRectangleBorder(
+  //               borderRadius: BorderRadius.circular(50),
+  //             ),
+  //           ),
+  //         ),
+  //   );
+  // }
 
   _simpleFacebookLoginButton() {
     return ButtonComponent(
@@ -285,9 +285,9 @@ class SocialMediaButtonsComponentState
 
   _getComplexLoginButtonsList() {
     List<Widget> buttonsList = [];
-    if (widget.onResultGoogleLogin != null) {
-      buttonsList.add(_complexGoogleLoginButton());
-    }
+    // if (widget.onResultGoogleLogin != null) {
+    //   buttonsList.add(_complexGoogleLoginButton());
+    // }
     if (widget.onResultFacebookLogin != null) {
       buttonsList.add(_complexFacebookLoginButton());
     }
@@ -306,31 +306,31 @@ class SocialMediaButtonsComponentState
     return buttonsList;
   }
 
-  _complexGoogleLoginButton() {
-    return ButtonComponent(
-      onPressed: () => _onGoogleLogin(),
-      text: widget.googleButtonText ?? "Sign In with Google",
-      icon: widget.googleButtonIcon ??
-          Image.asset(
-            "assets/icon_google_default.png",
-            package: 's_multiloginp',
-            height: 30,
-            color: kwhite,
-          ),
-      buttonStyle: widget.googleButtonStyle ??
-          ButtonStyle(
-            backgroundColor: const MaterialStatePropertyAll<Color>(kGoogle),
-            minimumSize: const MaterialStatePropertyAll<Size>(
-              Size(double.infinity, 40),
-            ),
-            shape: MaterialStatePropertyAll<OutlinedBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
-              ),
-            ),
-          ),
-    );
-  }
+  // _complexGoogleLoginButton() {
+  //   return ButtonComponent(
+  //     onPressed: () => _onGoogleLogin(),
+  //     text: widget.googleButtonText ?? "Sign In with Google",
+  //     icon: widget.googleButtonIcon ??
+  //         Image.asset(
+  //           "assets/icon_google_default.png",
+  //           package: 's_multiloginp',
+  //           height: 30,
+  //           color: kwhite,
+  //         ),
+  //     buttonStyle: widget.googleButtonStyle ??
+  //         ButtonStyle(
+  //           backgroundColor: const MaterialStatePropertyAll<Color>(kGoogle),
+  //           minimumSize: const MaterialStatePropertyAll<Size>(
+  //             Size(double.infinity, 40),
+  //           ),
+  //           shape: MaterialStatePropertyAll<OutlinedBorder>(
+  //             RoundedRectangleBorder(
+  //               borderRadius: BorderRadius.circular(50),
+  //             ),
+  //           ),
+  //         ),
+  //   );
+  // }
 
   _complexFacebookLoginButton() {
     return ButtonComponent(
@@ -462,40 +462,40 @@ class SocialMediaButtonsComponentState
 
   //CONTROLLER----------------------------------------------------
   //! GOOGLE
-  _onGoogleLogin() async {
-    await LoadingPopup(
-      context: context,
-      onLoading: _onGoogleLoading(),
-      onResult: (data) => _onGoogleResult(data),
-      onError: (error) => _onGoogleError(error),
-    ).show();
-  }
+  // _onGoogleLogin() async {
+  //   await LoadingPopup(
+  //     context: context,
+  //     onLoading: _onGoogleLoading(),
+  //     onResult: (data) => _onGoogleResult(data),
+  //     onError: (error) => _onGoogleError(error),
+  //   ).show();
+  // }
 
-  _onGoogleLoading() async {
-    await AuthManager().signInWithGoogle();
-    return AuthManager().getUserCredential();
-  }
+  // _onGoogleLoading() async {
+  //   await AuthManager().signInWithGoogle();
+  //   return AuthManager().getUserCredential();
+  // }
 
-  _onGoogleResult(CurrentUserModel data) async {
-    if (data.token != null) {
-      if (widget.onResultGoogleLogin != null) {
-        widget.onResultGoogleLogin!(data);
-      } else {
-        debugPrint("Null result GoogleLogin");
-      }
-    } else {
-      debugPrint("Error on GoogleLogin");
-    }
-  }
+  // _onGoogleResult(CurrentUserModel data) async {
+  //   if (data.token != null) {
+  //     if (widget.onResultGoogleLogin != null) {
+  //       widget.onResultGoogleLogin!(data);
+  //     } else {
+  //       debugPrint("Null result GoogleLogin");
+  //     }
+  //   } else {
+  //     debugPrint("Error on GoogleLogin");
+  //   }
+  // }
 
-  _onGoogleError(FirebaseAuthException error) {
-    if (widget.onErrorGoogleLogin != null) {
-      widget.onErrorGoogleLogin!(
-          error.message ?? "Unknown login error with google");
-    } else {
-      debugPrint("El error fue: $error");
-    }
-  }
+  // _onGoogleError(FirebaseAuthException error) {
+  //   if (widget.onErrorGoogleLogin != null) {
+  //     widget.onErrorGoogleLogin!(
+  //         error.message ?? "Unknown login error with google");
+  //   } else {
+  //     debugPrint("El error fue: $error");
+  //   }
+  // }
 
   //? FACEBOOK
   _onFacebookLogin() async {
