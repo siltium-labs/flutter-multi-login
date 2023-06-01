@@ -1,6 +1,6 @@
 
 ------------------------------------------
-# **S-MultiLogin: Siltium Component for Social Media Login**<br> ![](https://img.shields.io/badge/Dart-Flutter-blue) ![](https://img.shields.io/badge/iOS-Android-green) <br> ![](https://img.shields.io/badge/Email&Pass-yellow) ![](https://img.shields.io/badge/Google-DD4B39) ![](https://img.shields.io/badge/Facebook-3B5998) ![](https://img.shields.io/badge/en%20test-Apple-black) ![](https://img.shields.io/badge/en%20test%20iOS-Twitter-00ACED) ![](https://img.shields.io/badge/en%20test%20iOS-LinkedIn-007BB6) ![](https://img.shields.io/badge/en%20test%20iOS-Microsoft-7cbb00)
+# **S-MultiLogin: Siltium Component for Social Media Login**<br> ![](https://img.shields.io/badge/Dart-Flutter-blue) ![](https://img.shields.io/badge/iOS-Android-green) <br> ![](https://img.shields.io/badge/Email&Pass-yellow) ![](https://img.shields.io/badge/Google-DD4B39) ![](https://img.shields.io/badge/Facebook-3B5998) ![](https://img.shields.io/badge/Twitter-00ACED) ![](https://img.shields.io/badge/LinkedIn-007BB6) ![](https://img.shields.io/badge/Microsoft-7cbb00) ![](https://img.shields.io/badge/en%20test-Apple-black)
 
 
 ## **Descripción**
@@ -9,13 +9,15 @@ Plugin para incluir en proyectos mobile de Siltium que permite utilizar el compo
 <br>
 
 ## **Versión**
-0.1.0 - **Version inicial -** Inicio de sesión con Email & Contraseña, Google y Facebook disponibles para Android.
+**0.1.0 - Version inicial** - Inicio de sesión con Email & Contraseña, Google y Facebook disponibles para Android.
 <br>
-0.2.0 - Inicio de sesión con Email & Contraseña, Google y Facebook disponibles para Android & iOS. Inicio de sesión con iOS y Apple en testing.
+**0.2.0** - Inicio de sesión con Email & Contraseña, Google y Facebook disponibles para Android & iOS. Inicio de sesión con iOS y Apple en testing.
 <br>
-0.3.0 - Inicio de sesión con Email & Contraseña, Google y Facebook disponibles para Android & iOS. Inicio de sesión con Apple en testing.
+**0.3.0** - Inicio de sesión con Email & Contraseña, Google y Facebook disponibles para Android & iOS. Inicio de sesión con Apple en testing.
 <br>
-0.4.0 - Inicio de sesión con Email & Contraseña, Google y Facebook disponibles para Android & iOS. Inicio de sesión con Twitter, LinkedIn y Microsoft disponibles para Android y en testing para iOS. Inicio de sesión con Apple en testing.
+**0.4.0** - Inicio de sesión con Email & Contraseña, Google y Facebook disponibles para Android & iOS. Inicio de sesión con Twitter, LinkedIn y Microsoft disponibles para Android y en testing para iOS. Inicio de sesión con Apple en testing.
+<br>
+**1.0.0** - Inicio de sesión con Email & Contraseña, Google, Facebook, Twitter, LinkedIn y Microsoft disponibles para Android & iOS. Inicio de sesión con Apple en testing.
 <br>
 <br>
 
@@ -53,17 +55,24 @@ android {
 
 PARA IOS:
 
-4) Correr el comando `flutter pub get` y, a continuación, en el archivo `project_name\ios\Podfile` modificar la version de la plataforma ios a 12:
+4) Ejecutar el comando `flutter clean` y borrar el archivo `project_name\ios\Podfile`.<br>
+Nota: Este paso es necesario debido a una mala generación de un fragmento de código en dicho archivo.
+
+5) Correr el comando `flutter pub get` para generar el archivo nuevamente, y a continuación verificar que el siguiente fragmento ya no se encuentre generado en él:
+
+![Agregar email login](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/ios_init_config.png)
+
+y también en el mismo archivo modificar la versión de la plataforma iOS a 12:
 ```ruby
 # Uncomment the next line to define a global platform for your project
 platform :ios, '12.0'
 ```
-5) Luego correr el comando `pod install` y, finalmente, podrás correr el comando `flutter run`.
+6) Luego correr el comando `pod install` y, finalmente, podrás correr el comando `flutter run`.
 
 
 EN FIREBASE:
 
-6) En Firebase, Ir a la [Consola Firebase](https://firebase.google.com) y crear un nuevo proyecto:
+7) En Firebase, Ir a la [Consola Firebase](https://firebase.google.com) y crear un nuevo proyecto:
 
 ![Crear nuevo proyecto firebase](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/install_01.png)
 
@@ -79,7 +88,7 @@ Al habilitar Google Analytics es necesario configurarlo y aceptar las condicione
 
 ![Finalizar y crear el proyecto](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/install_04.png)
 
-7) Luego, añadir Firebase a tu aplicación: NuevoProyectoFirebase -> Agregar app -> Flutter<br>
+8) Luego, añadir Firebase a tu aplicación: NuevoProyectoFirebase -> Agregar app -> Flutter<br>
 
 ![Crear App de Flutter en Firebase](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/install_05.png)
 
@@ -104,14 +113,12 @@ import 'package:s_multiloginp/s_multiloginp.dart';
 import 'firebase_options.dart';
 ```
 
-2) Inicializar la librería en `main.dart` con `SMultiLogin().multiLoginInit()`, pasando a `MultiLoginInitModel` como parámetro un FirebaseOptions, que se encuentra en el archivo `firebase_options.dart`, como se muestra a continuación:
+2) Inicializar la librería en `main.dart` con `SMultiLogin().multiLoginInit()`, pasando a `options` como parámetro un FirebaseOptions, que se encuentra en el archivo `firebase_options.dart`, como se muestra a continuación:
 ```dart
 void main() async {
   // Add package init
   await SMultiLogin().multiLoginInit(
-    initModel: MultiLoginInitModel(
-      options: DefaultFirebaseOptions.currentPlatform, // FirebaseOptions de "firebase_options.dart"
-    ),
+    options: DefaultFirebaseOptions.currentPlatform, // FirebaseOptions de "firebase_options.dart"
   );
   runApp(const MyApp());
 }
@@ -179,9 +186,8 @@ Por lo tanto, es necesario realizar los siguientes pasos para iOS:
 2) Copiar el `CLIENT_ID` y colocarlo como parte del método `SMultiLogin().multiLoginInit()` (anteriormente iniciado en `main.dart`) como se detalla a continuación:
 ```dart
 await SMultiLogin().multiLoginInit(
-  initModel: MultiLoginInitModel(
-    googleIOSClientId: "TU_CLIENT_ID", // CLIENT_ID de "GoogleService-Info.plist"
-  ),
+  ...
+  googleIOSClientId: "TU_CLIENT_ID", // CLIENT_ID de "GoogleService-Info.plist"
 );
 ```
 
@@ -312,13 +318,10 @@ EN FLUTTER, resumen:
 1) Inicializar el login de twitter en tu proyecto, pasando como parámetros al método `SMultiLogin().multiLoginInit()` (anteriormente iniciado en `main.dart`) tu API Key, API Secret y esquema de redireccionamiento de Twitter, como se detalla a continuación:
 ```dart
 await SMultiLogin().multiLoginInit(
-  initModel: MultiLoginInitModel(
-    twitterInitData: TwitterLoginModel(
-      apiKey: "TU_API_KEY",
-      apiSecretKey: "TU_API_SECRET",
-      redirectURI: "customscheme://",
-    ),
-  ),
+  ...
+  twitterApiKey: "TU_API_KEY",
+  twitterApiSecretKey: "TU_API_SECRET",
+  twitterRedirectURI: "customscheme://",
 );
 ```
 
@@ -402,13 +405,9 @@ EN FLUTTER:
 Inicializar el login de linkedin en tu proyecto, pasando como parámetros al método `SMultiLogin().multiLoginInit()` (anteriormente iniciado en `main.dart`) tu Client ID, tu Client Secret y el URI de redireccionamiento de LinkedIn, como se detalla a continuación:
 ```dart
 await SMultiLogin().multiLoginInit(
-  initModel: MultiLoginInitModel(
-    linkedinInitData: LinkedinLoginModel(
-      clientId: "TU_CLIENT_ID",
-      clientSecret: "TU_CLIENT_SECRET",
-      redirectUrl: 'https://www.linkedin.com/callback',
-    ),
-  ),
+  linkedinClientId: "TU_CLIENT_ID",
+  linkedinClientSecret: "TU_CLIENT_SECRET",
+  linkedinRedirectUrl: 'https://www.linkedin.com/callback',
 );
 ```
 
