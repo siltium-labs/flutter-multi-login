@@ -19,13 +19,10 @@ import 'package:s_multiloginp/src/components/social_media_buttons/linkedin_btn_c
 import 'package:s_multiloginp/src/constants/k_colors.dart';
 import 'package:s_multiloginp/src/enums/component_mode_enum.dart';
 import 'package:s_multiloginp/src/manager/auth_manager.dart';
-import 'package:s_multiloginp/src/models/multilogin_init_model.dart';
 import 'package:s_multiloginp/src/models/current_user_model.dart';
-
-//* Models exports
-export 'package:s_multiloginp/src/models/multilogin_init_model.dart';
-export 'package:s_multiloginp/src/models/twitter_login_model.dart';
-export 'package:s_multiloginp/src/models/linkedin_login_model.dart';
+import 'package:s_multiloginp/src/models/linkedin_init_login_model.dart';
+import 'package:s_multiloginp/src/models/twitter_init_login_model.dart';
+import 'package:s_multiloginp/src/utils/extensions.dart';
 
 // Plugin class (with Method Channel)
 import 's_multiloginp_platform_interface.dart';
@@ -44,26 +41,48 @@ class SMultiLogin {
   }
   SMultiLogin._constructor();
 
-  multiLoginInit({required MultiLoginInitModel initModel}) async {
+  multiLoginInit({
+    required FirebaseOptions options,
+    String? googleIOSClientId,
+    String? twitterApiKey,
+    String? twitterApiSecretKey,
+    String? twitterRedirectURI,
+    String? linkedinClientId,
+    String? linkedinClientSecret,
+    String? linkedinRedirectUrl,
+  }) async {
     // Init de Firebase -Correo y redes sociales- (Android & iOS)
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp(
-      options: initModel.options,
+      options: options,
     );
     // Init Google (iOS)
-    if (initModel.googleIOSClientId != null &&
-        initModel.googleIOSClientId!.isNotEmpty) {
-      AuthManager().googleLoginInit(initModel.googleIOSClientId!);
+    if (googleIOSClientId.isNotNullOrEmpty()) {
+      AuthManager().googleLoginInit(googleIOSClientId);
     }
     // Init Twitter (Android & iOS)
-    if (initModel.twitterInitData != null) {
-      AuthManager()
-          .twitterLoginInit(newTwLoginData: initModel.twitterInitData!);
+    if (twitterApiKey.isNotNullOrEmpty() &&
+        twitterApiSecretKey.isNotNullOrEmpty() &&
+        twitterRedirectURI.isNotNullOrEmpty()) {
+      AuthManager().twitterLoginInit(
+        newTwLoginData: TwitterInitLoginModel(
+          apiKey: twitterApiKey!,
+          apiSecretKey: twitterApiSecretKey!,
+          redirectURI: twitterRedirectURI!,
+        ),
+      );
     }
     // Init LinkedIn (Android & iOS)
-    if (initModel.linkedinInitData != null) {
-      AuthManager()
-          .linkedinLoginInit(newLkLoginData: initModel.linkedinInitData!);
+    if (linkedinClientId.isNotNullOrEmpty() &&
+        linkedinClientSecret.isNotNullOrEmpty() &&
+        linkedinRedirectUrl.isNotNullOrEmpty()) {
+      AuthManager().linkedinLoginInit(
+        newLkLoginData: LinkedinInitLoginModel(
+          clientId: linkedinClientId!,
+          clientSecret: linkedinClientSecret!,
+          redirectUrl: linkedinRedirectUrl!,
+        ),
+      );
     }
   }
 

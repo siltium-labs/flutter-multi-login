@@ -9,7 +9,7 @@ import 'package:s_multiloginp/src/constants/k_colors.dart';
 import 'package:s_multiloginp/src/enums/component_mode_enum.dart';
 import 'package:s_multiloginp/src/manager/auth_manager.dart';
 import 'package:s_multiloginp/src/models/current_user_model.dart';
-import 'package:s_multiloginp/src/models/linkedin_login_model.dart';
+import 'package:s_multiloginp/src/models/linkedin_init_login_model.dart';
 import 'package:s_multiloginp/src/components/button_component.dart';
 
 // ignore: must_be_immutable
@@ -107,7 +107,7 @@ class LinkedinBtnComponentState extends State<LinkedinBtnComponent> {
 
   // CONTROLLER----------------------------------------------------
   _onLinkedinLogin() async {
-    LinkedinLoginModel? lkLoginData = AuthManager().linkedinLoginData;
+    LinkedinInitLoginModel? lkLoginData = AuthManager().linkedinLoginData;
     if (lkLoginData != null) {
       Navigator.push(
         context,
