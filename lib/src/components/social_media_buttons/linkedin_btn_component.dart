@@ -18,7 +18,7 @@ class LinkedinBtnComponent extends StatefulWidget {
   String? linkedinButtonText;
   Widget? linkedinButtonIcon;
   Function(CurrentUserModel)? onResultLinkedinLogin;
-  Function(String)? onErrorLinkedinLogin;
+  Function? onErrorLinkedinLogin;
   late ComponentMode componentMode;
 
   LinkedinBtnComponent.simple({
@@ -117,12 +117,11 @@ class LinkedinBtnComponentState extends State<LinkedinBtnComponent> {
             redirectUrl: lkLoginData.redirectUrl,
             clientId: lkLoginData.clientId,
             clientSecret: lkLoginData.clientSecret,
-            onError: (final UserFailedAction e) {
+            onError: (final UserFailedAction error) {
               if (widget.onErrorLinkedinLogin != null) {
-                widget.onErrorLinkedinLogin!(
-                    e.toString() /*?? "Unknown login error with linkedin"*/);
+                widget.onErrorLinkedinLogin!(error);
               } else {
-                debugPrint("El error fue: ${e.toString()}");
+                debugPrint("El error fue: ${error.toString()}");
               }
             },
             onGetUserProfile: (final UserSucceededAction linkedInUser) {
@@ -153,7 +152,7 @@ class LinkedinBtnComponentState extends State<LinkedinBtnComponent> {
       );
     } else {
       return throw Exception(
-          "No es posible iniciar sesión con LinkedIn si primero no se define \"linkedinInitData\" en \"SMultiLogin().multiLoginInit()\"");
+          "No es posible iniciar sesión con LinkedIn si primero no se definen los parámetros \"linkedinClientId\", \"linkedinClientSecret\" y \"linkedinRedirectUrl\" en \"SMultiLogin().multiLoginInit()\"");
     }
   }
 }

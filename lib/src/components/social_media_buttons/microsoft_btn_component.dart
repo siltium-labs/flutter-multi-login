@@ -18,7 +18,7 @@ class MicrosoftBtnComponent extends StatefulWidget {
   String? microsoftButtonText;
   Widget? microsoftButtonIcon;
   Function(CurrentUserModel)? onResultMicrosoftLogin;
-  Function(String)? onErrorMicrosoftLogin;
+  Function? onErrorMicrosoftLogin;
   late ComponentMode componentMode;
 
   MicrosoftBtnComponent.simple({
@@ -134,8 +134,7 @@ class MicrosoftBtnComponentState extends State<MicrosoftBtnComponent> {
 
   _onMicrosoftError(FirebaseAuthException error) {
     if (widget.onErrorMicrosoftLogin != null) {
-      widget.onErrorMicrosoftLogin!(
-          error.message ?? "Unknown login error with microsoft");
+      widget.onErrorMicrosoftLogin!(error);
     } else {
       debugPrint("El error fue: $error");
     }

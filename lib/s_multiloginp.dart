@@ -111,43 +111,43 @@ class SMultiLoginComponent extends StatefulWidget {
   String? emailButtonText;
   Widget? emailButtonIcon;
   Function(CurrentUserModel)? onResultEmailLogin;
-  Function(String)? onErrorEmailLogin;
+  Function? onErrorEmailLogin;
   //! GOOGLE
   ButtonStyle? googleButtonStyle;
   String? googleButtonText;
   Widget? googleButtonIcon;
   Function(CurrentUserModel)? onResultGoogleLogin;
-  Function(String)? onErrorGoogleLogin;
+  Function? onErrorGoogleLogin;
   //? FACEBOOK
   ButtonStyle? facebookButtonStyle;
   String? facebookButtonText;
   Widget? facebookButtonIcon;
   Function(CurrentUserModel)? onResultFacebookLogin;
-  Function(String)? onErrorFacebookLogin;
+  Function? onErrorFacebookLogin;
   // TODO: APPLE
   ButtonStyle? appleButtonStyle;
   String? appleButtonText;
   Widget? appleButtonIcon;
   Function(CurrentUserModel)? onResultAppleLogin;
-  Function(String)? onErrorAppleLogin;
+  Function? onErrorAppleLogin;
   //? TWITTER
   ButtonStyle? twitterButtonStyle;
   String? twitterButtonText;
   Widget? twitterButtonIcon;
   Function(CurrentUserModel)? onResultTwitterLogin;
-  Function(String)? onErrorTwitterLogin;
+  Function? onErrorTwitterLogin;
   //* MICROSOFT
   ButtonStyle? microsoftButtonStyle;
   String? microsoftButtonText;
   Widget? microsoftButtonIcon;
   Function(CurrentUserModel)? onResultMicrosoftLogin;
-  Function(String)? onErrorMicrosoftLogin;
+  Function? onErrorMicrosoftLogin;
   //? LINKEDIN
   ButtonStyle? linkedinButtonStyle;
   String? linkedinButtonText;
   Widget? linkedinButtonIcon;
   Function(CurrentUserModel)? onResultLinkedinLogin;
-  Function(String)? onErrorLinkedinLogin;
+  Function? onErrorLinkedinLogin;
 
   SMultiLoginComponent.simpleCardMode({
     Key? key,

@@ -18,7 +18,7 @@ class FacebookBtnComponent extends StatefulWidget {
   String? facebookButtonText;
   Widget? facebookButtonIcon;
   Function(CurrentUserModel)? onResultFacebookLogin;
-  Function(String)? onErrorFacebookLogin;
+  Function? onErrorFacebookLogin;
   late ComponentMode componentMode;
 
   FacebookBtnComponent.simple({
@@ -132,8 +132,7 @@ class FacebookBtnComponentState extends State<FacebookBtnComponent> {
 
   _onFacebookError(FirebaseAuthException error) {
     if (widget.onErrorFacebookLogin != null) {
-      widget.onErrorFacebookLogin!(
-          error.message ?? "Unknown login error with facebook ");
+      widget.onErrorFacebookLogin!(error);
     } else {
       debugPrint("El error fue: $error");
     }

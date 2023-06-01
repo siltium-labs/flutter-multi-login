@@ -23,7 +23,7 @@ class EmailLoginComponent extends StatefulWidget {
   final Widget? emailButtonIcon;
   // Functions
   Function(CurrentUserModel)? onResultEmailLogin;
-  Function(String)? onErrorEmailLogin;
+  Function? onErrorEmailLogin;
 
   EmailLoginComponent({
     Key? key,
@@ -193,8 +193,7 @@ class EmailLoginComponentState extends State<EmailLoginComponent> {
 
   _onEmailError(FirebaseAuthException error) {
     if (widget.onErrorEmailLogin != null) {
-      widget.onErrorEmailLogin!(
-          error.message ?? "Unknown login error with email & password");
+      widget.onErrorEmailLogin!(error);
     } else {
       debugPrint("El error fue: $error");
     }

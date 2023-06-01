@@ -18,7 +18,7 @@ class TwitterBtnComponent extends StatefulWidget {
   String? twitterButtonText;
   Widget? twitterButtonIcon;
   Function(CurrentUserModel)? onResultTwitterLogin;
-  Function(String)? onErrorTwitterLogin;
+  Function? onErrorTwitterLogin;
   late ComponentMode componentMode;
 
   TwitterBtnComponent.simple({
@@ -134,8 +134,7 @@ class TwitterBtnComponentState extends State<TwitterBtnComponent> {
 
   _onTwitterError(FirebaseAuthException error) {
     if (widget.onErrorTwitterLogin != null) {
-      widget.onErrorTwitterLogin!(
-          error.message ?? "Unknown login error with twitter");
+      widget.onErrorTwitterLogin!(error);
     } else {
       debugPrint("El error fue: $error");
     }

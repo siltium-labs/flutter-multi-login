@@ -18,7 +18,7 @@ class GoogleBtnComponent extends StatefulWidget {
   String? googleButtonText;
   Widget? googleButtonIcon;
   Function(CurrentUserModel)? onResultGoogleLogin;
-  Function(String)? onErrorGoogleLogin;
+  Function? onErrorGoogleLogin;
   late ComponentMode componentMode;
 
   GoogleBtnComponent.simple({
@@ -134,8 +134,7 @@ class GoogleBtnComponentState extends State<GoogleBtnComponent> {
 
   _onGoogleError(FirebaseAuthException error) {
     if (widget.onErrorGoogleLogin != null) {
-      widget.onErrorGoogleLogin!(
-          error.message ?? "Unknown login error with google");
+      widget.onErrorGoogleLogin!(error);
     } else {
       debugPrint("El error fue: $error");
     }

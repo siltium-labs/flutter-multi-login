@@ -26,7 +26,7 @@ class TwitterLoginManager {
       return twitterOAuthCredential;
     } else {
       return throw Exception(
-          "No es posible iniciar sesión con Twitter si primero no se define \"twitterInitData\" en \"SMultiLogin().multiLoginInit()\"");
+          "No es posible iniciar sesión con Twitter si primero no se definen los parámetros \"twitterApiKey\", \"twitterApiSecretKey\" y \"twitterRedirectURI\" en \"SMultiLogin().multiLoginInit()\"");
     }
   }
 

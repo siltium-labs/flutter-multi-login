@@ -18,7 +18,7 @@ class AppleBtnComponent extends StatefulWidget {
   String? appleButtonText;
   Widget? appleButtonIcon;
   Function(CurrentUserModel)? onResultAppleLogin;
-  Function(String)? onErrorAppleLogin;
+  Function? onErrorAppleLogin;
   late ComponentMode componentMode;
 
   AppleBtnComponent.simple({
@@ -134,8 +134,7 @@ class AppleBtnComponentState extends State<AppleBtnComponent> {
 
   _onAppleError(FirebaseAuthException error) {
     if (widget.onErrorAppleLogin != null) {
-      widget.onErrorAppleLogin!(
-          error.message ?? "Unknown login error with apple");
+      widget.onErrorAppleLogin!(error);
     } else {
       debugPrint("El error fue: $error");
     }
