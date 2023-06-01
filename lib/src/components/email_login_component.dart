@@ -12,7 +12,7 @@ import 'package:s_multiloginp/src/utils/loading_popup.dart';
 import 'package:s_multiloginp/src/components/button_component.dart';
 
 // ignore: must_be_immutable
-class LoginFormComponent extends StatefulWidget {
+class EmailLoginComponent extends StatefulWidget {
   // Custom style parameters
   final InputDecoration? emailInputDecoration;
   final TextStyle? emailInputTextStyle;
@@ -23,9 +23,9 @@ class LoginFormComponent extends StatefulWidget {
   final Widget? emailButtonIcon;
   // Functions
   Function(CurrentUserModel)? onResultEmailLogin;
-  Function(String)? onErrorEmailLogin;
+  Function? onErrorEmailLogin;
 
-  LoginFormComponent({
+  EmailLoginComponent({
     Key? key,
     // Custom style parameters
     required this.emailInputDecoration,
@@ -41,10 +41,10 @@ class LoginFormComponent extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  LoginFormComponentState createState() => LoginFormComponentState();
+  EmailLoginComponentState createState() => EmailLoginComponentState();
 }
 
-class LoginFormComponentState extends State<LoginFormComponent> {
+class EmailLoginComponentState extends State<EmailLoginComponent> {
   // Initialize TextEditingControllers and variables
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -193,8 +193,7 @@ class LoginFormComponentState extends State<LoginFormComponent> {
 
   _onEmailError(FirebaseAuthException error) {
     if (widget.onErrorEmailLogin != null) {
-      widget.onErrorEmailLogin!(
-          error.message ?? "Unknown login error with email & password");
+      widget.onErrorEmailLogin!(error);
     } else {
       debugPrint("El error fue: $error");
     }

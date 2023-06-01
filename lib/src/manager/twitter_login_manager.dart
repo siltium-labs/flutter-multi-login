@@ -1,10 +1,10 @@
 //* Package imports
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:s_multiloginp/src/models/twitter_login_model.dart';
+import 'package:s_multiloginp/src/models/twitter_init_login_model.dart';
 import 'package:twitter_login/twitter_login.dart';
 
 class TwitterLoginManager {
-  twitterLogin(TwitterLoginModel? twLoginData) async {
+  twitterLogin(TwitterInitLoginModel? twLoginData) async {
     if (twLoginData != null) {
       // Create a TwitterLogin instance
       final twitterLogin = TwitterLogin(
@@ -26,7 +26,7 @@ class TwitterLoginManager {
       return twitterOAuthCredential;
     } else {
       return throw Exception(
-          "No es posible iniciar sesión con Twitter si primero no se define \"twitterInitData\" en \"SMultiLogin().multiLoginInit()\"");
+          "No es posible iniciar sesión con Twitter si primero no se definen los parámetros \"twitterApiKey\", \"twitterApiSecretKey\" y \"twitterRedirectURI\" en \"SMultiLogin().multiLoginInit()\"");
     }
   }
 

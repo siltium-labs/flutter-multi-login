@@ -8,8 +8,8 @@ import 'package:s_multiloginp/src/manager/apple_login_manager.dart';
 import 'package:s_multiloginp/src/manager/twitter_login_manager.dart';
 import 'package:s_multiloginp/src/manager/microsoft_login_manager.dart';
 import 'package:s_multiloginp/src/models/current_user_model.dart';
-import 'package:s_multiloginp/src/models/linkedin_login_model.dart';
-import 'package:s_multiloginp/src/models/twitter_login_model.dart';
+import 'package:s_multiloginp/src/models/linkedin_init_login_model.dart';
+import 'package:s_multiloginp/src/models/twitter_init_login_model.dart';
 
 class AuthManager {
   static final AuthManager _instance = AuthManager._constructor();
@@ -24,19 +24,19 @@ class AuthManager {
   CurrentUserModel? userCredential;
   // Variables Social Media Inits:
   String? googleIOSClientId;
-  TwitterLoginModel? twitterLoginData;
-  LinkedinLoginModel? linkedinLoginData;
+  TwitterInitLoginModel? twitterLoginData;
+  LinkedinInitLoginModel? linkedinLoginData;
 
   // Social Media Inits:
   googleLoginInit(String? iOSClientId) {
     googleIOSClientId = iOSClientId;
   }
 
-  twitterLoginInit({TwitterLoginModel? newTwLoginData}) {
+  twitterLoginInit({TwitterInitLoginModel? newTwLoginData}) {
     twitterLoginData = newTwLoginData;
   }
 
-  linkedinLoginInit({LinkedinLoginModel? newLkLoginData}) {
+  linkedinLoginInit({LinkedinInitLoginModel? newLkLoginData}) {
     linkedinLoginData = newLkLoginData;
   }
 

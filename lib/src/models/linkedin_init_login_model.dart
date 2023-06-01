@@ -1,9 +1,9 @@
-class LinkedinLoginModel {
+class LinkedinInitLoginModel {
   String clientId;
   String clientSecret;
   String redirectUrl;
 
-  LinkedinLoginModel({
+  LinkedinInitLoginModel({
     required this.clientId,
     required this.clientSecret,
     required this.redirectUrl,
