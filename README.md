@@ -244,7 +244,7 @@ defaultConfig {
         ...
         // Facebook Android config
         resValue "string", "fbAppID", "\"TU_FB_APP_ID\""
-        resValue "string", "facebook_client_token", "\"TU_FB_CLIENT_TOKEN\""
+        resValue "string", "fbClientToken", "\"TU_FB_CLIENT_TOKEN\""
     }
 
 dependencies {
