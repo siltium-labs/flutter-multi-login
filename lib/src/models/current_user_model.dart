@@ -5,6 +5,8 @@ class CurrentUserModel {
   String? photoURL;
   String? token;
   String? refreshToken;
+  String? accessToken;
+  String? providerId;
 
   CurrentUserModel({
     this.displayName,
@@ -13,5 +15,7 @@ class CurrentUserModel {
     this.photoURL,
     this.token,
     this.refreshToken,
+    this.accessToken,
+    this.providerId,
   });
 }

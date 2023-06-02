@@ -138,6 +138,8 @@ class AuthManager {
         photoURL: user!.user!.photoURL,
         token: await user!.user!.getIdToken(),
         refreshToken: user!.user!.refreshToken,
+        accessToken: user!.credential?.accessToken,
+        providerId: user!.credential?.providerId,
       );
     } else if (currentUser != null) {
       return userCredential = CurrentUserModel(
