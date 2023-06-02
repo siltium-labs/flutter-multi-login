@@ -59,7 +59,6 @@ class EmailLoginComponentState extends State<EmailLoginComponent> {
         _passwordInput(),
         const SizedBox(height: 40),
         _emailLoginButton(),
-        const SizedBox(height: 70),
       ],
     );
   }

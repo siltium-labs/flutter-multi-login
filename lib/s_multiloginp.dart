@@ -430,6 +430,7 @@ class SMultiLoginComponentState extends State<SMultiLoginComponent> {
           visible: widget.footerText != null,
           child: Column(
             children: [
+              const SizedBox(height: 50),
               Text(
                 widget.footerText ?? "O podés ingresar con:",
                 style: widget.footerTextStyle,
@@ -439,6 +440,7 @@ class SMultiLoginComponentState extends State<SMultiLoginComponent> {
             ],
           ),
         ),
+        const SizedBox(height: 20),
         // Social Media Login Buttons
         Wrap(
           alignment: WrapAlignment.center,
