@@ -9,6 +9,7 @@ import 'package:s_multiloginp/src/constants/k_colors.dart';
 class LoadingPopup {
   final BuildContext context;
   final Color backgroundColor;
+  final Color loadingColor;
   final Future onLoading;
   Function? onResult;
   Function? onError;
@@ -18,7 +19,8 @@ class LoadingPopup {
     required this.onLoading,
     this.onResult,
     this.onError,
-    this.backgroundColor = const Color(0x80707070),
+    this.backgroundColor = kblue,
+    this.loadingColor = kwhite,
   });
 
   final double radius = 20;
@@ -53,14 +55,21 @@ class LoadingPopup {
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [kblue.withOpacity(0.5), kblue.withOpacity(0.5)],
+          colors: [
+            backgroundColor.withOpacity(0.5),
+            // backgroundColor.withOpacity(0.5),
+          ],
         ),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          loadingComponent(true, color: Colors.white, size: 50),
+          loadingComponent(
+            true,
+            color: loadingColor,
+            size: 50,
+          ),
         ],
       ),
     );

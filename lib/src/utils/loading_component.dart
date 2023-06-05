@@ -90,8 +90,12 @@ class SpinKitChasingDotsState extends State<Loading>
   }
 }
 
-Widget loadingComponent(bool isVisible,
-    {Color color = kblue, double size = 50, EdgeInsetsGeometry? padding}) {
+Widget loadingComponent(
+  bool isVisible, {
+  Color color = kGoogle,
+  double size = 50,
+  EdgeInsetsGeometry? padding,
+}) {
   return Visibility(
     visible: isVisible,
     child: Container(
