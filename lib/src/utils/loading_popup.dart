@@ -57,7 +57,7 @@ class LoadingPopup {
           end: Alignment.bottomCenter,
           colors: [
             backgroundColor.withOpacity(0.5),
-            // backgroundColor.withOpacity(0.5),
+            backgroundColor.withOpacity(0.5),
           ],
         ),
       ),
