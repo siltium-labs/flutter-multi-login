@@ -19,7 +19,7 @@ class AppleBtnComponent extends StatefulWidget {
   Widget? appleButtonIcon;
   Function(CurrentUserModel)? onResultAppleLogin;
   Function? onErrorAppleLogin;
-  late ComponentMode componentMode;
+  late ComponentModeEnum componentMode;
 
   AppleBtnComponent.simple({
     Key? key,
@@ -28,7 +28,7 @@ class AppleBtnComponent extends StatefulWidget {
     required this.onResultAppleLogin,
     required this.onErrorAppleLogin,
   }) : super(key: key) {
-    componentMode = ComponentMode.simpleMode;
+    componentMode = ComponentModeEnum.simpleMode;
   }
 
   AppleBtnComponent.complex({
@@ -39,7 +39,7 @@ class AppleBtnComponent extends StatefulWidget {
     required this.onResultAppleLogin,
     required this.onErrorAppleLogin,
   }) : super(key: key) {
-    componentMode = ComponentMode.complexMode;
+    componentMode = ComponentModeEnum.complexMode;
   }
 
   @override
@@ -49,7 +49,7 @@ class AppleBtnComponent extends StatefulWidget {
 class AppleBtnComponentState extends State<AppleBtnComponent> {
   @override
   Widget build(BuildContext context) {
-    return widget.componentMode == ComponentMode.simpleMode
+    return widget.componentMode == ComponentModeEnum.simpleMode
         ? _simpleAppleLoginButton()
         : _complexAppleLoginButton();
   }

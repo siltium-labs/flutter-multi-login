@@ -19,7 +19,7 @@ class FacebookBtnComponent extends StatefulWidget {
   Widget? facebookButtonIcon;
   Function(CurrentUserModel)? onResultFacebookLogin;
   Function? onErrorFacebookLogin;
-  late ComponentMode componentMode;
+  late ComponentModeEnum componentMode;
 
   FacebookBtnComponent.simple({
     Key? key,
@@ -28,7 +28,7 @@ class FacebookBtnComponent extends StatefulWidget {
     required this.onResultFacebookLogin,
     required this.onErrorFacebookLogin,
   }) : super(key: key) {
-    componentMode = ComponentMode.simpleMode;
+    componentMode = ComponentModeEnum.simpleMode;
   }
 
   FacebookBtnComponent.complex({
@@ -39,7 +39,7 @@ class FacebookBtnComponent extends StatefulWidget {
     required this.onResultFacebookLogin,
     required this.onErrorFacebookLogin,
   }) : super(key: key) {
-    componentMode = ComponentMode.complexMode;
+    componentMode = ComponentModeEnum.complexMode;
   }
 
   @override
@@ -49,7 +49,7 @@ class FacebookBtnComponent extends StatefulWidget {
 class FacebookBtnComponentState extends State<FacebookBtnComponent> {
   @override
   Widget build(BuildContext context) {
-    return widget.componentMode == ComponentMode.simpleMode
+    return widget.componentMode == ComponentModeEnum.simpleMode
         ? _simpleFacebookLoginButton()
         : _complexFacebookLoginButton();
   }

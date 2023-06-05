@@ -19,7 +19,7 @@ class TwitterBtnComponent extends StatefulWidget {
   Widget? twitterButtonIcon;
   Function(CurrentUserModel)? onResultTwitterLogin;
   Function? onErrorTwitterLogin;
-  late ComponentMode componentMode;
+  late ComponentModeEnum componentMode;
 
   TwitterBtnComponent.simple({
     Key? key,
@@ -28,7 +28,7 @@ class TwitterBtnComponent extends StatefulWidget {
     required this.onResultTwitterLogin,
     required this.onErrorTwitterLogin,
   }) : super(key: key) {
-    componentMode = ComponentMode.simpleMode;
+    componentMode = ComponentModeEnum.simpleMode;
   }
 
   TwitterBtnComponent.complex({
@@ -39,7 +39,7 @@ class TwitterBtnComponent extends StatefulWidget {
     required this.onResultTwitterLogin,
     required this.onErrorTwitterLogin,
   }) : super(key: key) {
-    componentMode = ComponentMode.complexMode;
+    componentMode = ComponentModeEnum.complexMode;
   }
 
   @override
@@ -49,7 +49,7 @@ class TwitterBtnComponent extends StatefulWidget {
 class TwitterBtnComponentState extends State<TwitterBtnComponent> {
   @override
   Widget build(BuildContext context) {
-    return widget.componentMode == ComponentMode.simpleMode
+    return widget.componentMode == ComponentModeEnum.simpleMode
         ? _simpleTwitterLoginButton()
         : _complexTwitterLoginButton();
   }

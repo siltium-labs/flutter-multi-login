@@ -19,7 +19,7 @@ class LinkedinBtnComponent extends StatefulWidget {
   Widget? linkedinButtonIcon;
   Function(CurrentUserModel)? onResultLinkedinLogin;
   Function? onErrorLinkedinLogin;
-  late ComponentMode componentMode;
+  late ComponentModeEnum componentMode;
 
   LinkedinBtnComponent.simple({
     Key? key,
@@ -28,7 +28,7 @@ class LinkedinBtnComponent extends StatefulWidget {
     required this.onResultLinkedinLogin,
     required this.onErrorLinkedinLogin,
   }) : super(key: key) {
-    componentMode = ComponentMode.simpleMode;
+    componentMode = ComponentModeEnum.simpleMode;
   }
 
   LinkedinBtnComponent.complex({
@@ -39,7 +39,7 @@ class LinkedinBtnComponent extends StatefulWidget {
     required this.onResultLinkedinLogin,
     required this.onErrorLinkedinLogin,
   }) : super(key: key) {
-    componentMode = ComponentMode.complexMode;
+    componentMode = ComponentModeEnum.complexMode;
   }
 
   @override
@@ -49,7 +49,7 @@ class LinkedinBtnComponent extends StatefulWidget {
 class LinkedinBtnComponentState extends State<LinkedinBtnComponent> {
   @override
   Widget build(BuildContext context) {
-    return widget.componentMode == ComponentMode.simpleMode
+    return widget.componentMode == ComponentModeEnum.simpleMode
         ? _simpleLinkedinLoginButton()
         : _complexLinkedinLoginButton();
   }

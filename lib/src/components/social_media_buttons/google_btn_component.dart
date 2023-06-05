@@ -19,7 +19,7 @@ class GoogleBtnComponent extends StatefulWidget {
   Widget? googleButtonIcon;
   Function(CurrentUserModel)? onResultGoogleLogin;
   Function? onErrorGoogleLogin;
-  late ComponentMode componentMode;
+  late ComponentModeEnum componentMode;
 
   GoogleBtnComponent.simple({
     Key? key,
@@ -28,7 +28,7 @@ class GoogleBtnComponent extends StatefulWidget {
     required this.onResultGoogleLogin,
     required this.onErrorGoogleLogin,
   }) : super(key: key) {
-    componentMode = ComponentMode.simpleMode;
+    componentMode = ComponentModeEnum.simpleMode;
   }
 
   GoogleBtnComponent.complex({
@@ -39,7 +39,7 @@ class GoogleBtnComponent extends StatefulWidget {
     required this.onResultGoogleLogin,
     required this.onErrorGoogleLogin,
   }) : super(key: key) {
-    componentMode = ComponentMode.complexMode;
+    componentMode = ComponentModeEnum.complexMode;
   }
 
   @override
@@ -49,7 +49,7 @@ class GoogleBtnComponent extends StatefulWidget {
 class GoogleBtnComponentState extends State<GoogleBtnComponent> {
   @override
   Widget build(BuildContext context) {
-    return widget.componentMode == ComponentMode.simpleMode
+    return widget.componentMode == ComponentModeEnum.simpleMode
         ? _simpleGoogleLoginButton()
         : _complexGoogleLoginButton();
   }

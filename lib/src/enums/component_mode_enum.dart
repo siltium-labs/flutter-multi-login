@@ -1,6 +1,4 @@
-enum ComponentMode {
+enum ComponentModeEnum {
   simpleMode,
-  simpleCardMode,
   complexMode,
-  complexCardMode,
 }

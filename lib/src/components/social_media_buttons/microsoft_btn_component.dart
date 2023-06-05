@@ -19,7 +19,7 @@ class MicrosoftBtnComponent extends StatefulWidget {
   Widget? microsoftButtonIcon;
   Function(CurrentUserModel)? onResultMicrosoftLogin;
   Function? onErrorMicrosoftLogin;
-  late ComponentMode componentMode;
+  late ComponentModeEnum componentMode;
 
   MicrosoftBtnComponent.simple({
     Key? key,
@@ -28,7 +28,7 @@ class MicrosoftBtnComponent extends StatefulWidget {
     required this.onResultMicrosoftLogin,
     required this.onErrorMicrosoftLogin,
   }) : super(key: key) {
-    componentMode = ComponentMode.simpleMode;
+    componentMode = ComponentModeEnum.simpleMode;
   }
 
   MicrosoftBtnComponent.complex({
@@ -39,7 +39,7 @@ class MicrosoftBtnComponent extends StatefulWidget {
     required this.onResultMicrosoftLogin,
     required this.onErrorMicrosoftLogin,
   }) : super(key: key) {
-    componentMode = ComponentMode.complexMode;
+    componentMode = ComponentModeEnum.complexMode;
   }
 
   @override
@@ -49,7 +49,7 @@ class MicrosoftBtnComponent extends StatefulWidget {
 class MicrosoftBtnComponentState extends State<MicrosoftBtnComponent> {
   @override
   Widget build(BuildContext context) {
-    return widget.componentMode == ComponentMode.simpleMode
+    return widget.componentMode == ComponentModeEnum.simpleMode
         ? _simpleMicrosoftLoginButton()
         : _complexMicrosoftLoginButton();
   }
