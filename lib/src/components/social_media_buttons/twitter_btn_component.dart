@@ -14,12 +14,17 @@ import 'package:s_multiloginp/src/components/button_component.dart';
 
 // ignore: must_be_immutable
 class TwitterBtnComponent extends StatefulWidget {
+  late ComponentModeEnum componentMode;
+  // Custom style parameters
   ButtonStyle? twitterButtonStyle;
   String? twitterButtonText;
   Widget? twitterButtonIcon;
+  // Functions
   Function(CurrentUserModel)? onResultTwitterLogin;
   Function? onErrorTwitterLogin;
-  late ComponentModeEnum componentMode;
+  // Loading custom color
+  final Color? backgroundColor;
+  final Color? loadingColor;
 
   TwitterBtnComponent.simple({
     Key? key,
@@ -27,6 +32,8 @@ class TwitterBtnComponent extends StatefulWidget {
     required this.twitterButtonIcon,
     required this.onResultTwitterLogin,
     required this.onErrorTwitterLogin,
+    this.backgroundColor,
+    this.loadingColor,
   }) : super(key: key) {
     componentMode = ComponentModeEnum.simpleMode;
   }
@@ -38,6 +45,8 @@ class TwitterBtnComponent extends StatefulWidget {
     required this.twitterButtonIcon,
     required this.onResultTwitterLogin,
     required this.onErrorTwitterLogin,
+    this.backgroundColor,
+    this.loadingColor,
   }) : super(key: key) {
     componentMode = ComponentModeEnum.complexMode;
   }
@@ -112,6 +121,8 @@ class TwitterBtnComponentState extends State<TwitterBtnComponent> {
       onLoading: _onTwitterLoading(),
       onResult: (data) => _onTwitterResult(data),
       onError: (error) => _onTwitterError(error),
+      backgroundColor: widget.backgroundColor,
+      loadingColor: widget.loadingColor,
     ).show();
   }
 

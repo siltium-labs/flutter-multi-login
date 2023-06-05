@@ -26,6 +26,9 @@ import 'package:s_multiloginp/src/utils/extensions.dart';
 // Plugin class (with Method Channel)
 import 's_multiloginp_platform_interface.dart';
 
+Color? _backgroundLoadingColor;
+Color? _circleLoadingColor;
+
 class SMultiloginp {
   Future<String?> getPlatformVersion() {
     return SMultiloginpPlatform.instance.getPlatformVersion();
@@ -91,6 +94,11 @@ class SMultiLogin {
 
   CurrentUserModel? userData() {
     return AuthManager().getUserData();
+  }
+
+  customLoadingColor(Color backgroundColor, Color loadingColor) {
+    _backgroundLoadingColor = backgroundColor;
+    _circleLoadingColor = loadingColor;
   }
 }
 
@@ -270,6 +278,8 @@ class SMultiLoginComponentState extends State<SMultiLoginComponent> {
       emailButtonIcon: widget.emailButtonIcon,
       onResultEmailLogin: widget.onResultEmailLogin,
       onErrorEmailLogin: widget.onErrorEmailLogin,
+      backgroundColor: _backgroundLoadingColor,
+      loadingColor: _circleLoadingColor,
     );
   }
 
@@ -295,6 +305,8 @@ class SMultiLoginComponentState extends State<SMultiLoginComponent> {
           facebookButtonIcon: widget.facebookButtonIcon,
           onResultFacebookLogin: widget.onResultFacebookLogin,
           onErrorFacebookLogin: widget.onErrorFacebookLogin,
+          backgroundColor: _backgroundLoadingColor,
+          loadingColor: _circleLoadingColor,
         ),
       );
     }
@@ -305,6 +317,8 @@ class SMultiLoginComponentState extends State<SMultiLoginComponent> {
           googleButtonIcon: widget.googleButtonIcon,
           onResultGoogleLogin: widget.onResultGoogleLogin,
           onErrorGoogleLogin: widget.onErrorGoogleLogin,
+          backgroundColor: _backgroundLoadingColor,
+          loadingColor: _circleLoadingColor,
         ),
       );
     }
@@ -315,6 +329,8 @@ class SMultiLoginComponentState extends State<SMultiLoginComponent> {
           appleButtonIcon: widget.appleButtonIcon,
           onResultAppleLogin: widget.onResultAppleLogin,
           onErrorAppleLogin: widget.onErrorAppleLogin,
+          backgroundColor: _backgroundLoadingColor,
+          loadingColor: _circleLoadingColor,
         ),
       );
     }
@@ -325,6 +341,8 @@ class SMultiLoginComponentState extends State<SMultiLoginComponent> {
           twitterButtonIcon: widget.twitterButtonIcon,
           onResultTwitterLogin: widget.onResultTwitterLogin,
           onErrorTwitterLogin: widget.onErrorTwitterLogin,
+          backgroundColor: _backgroundLoadingColor,
+          loadingColor: _circleLoadingColor,
         ),
       );
     }
@@ -335,6 +353,8 @@ class SMultiLoginComponentState extends State<SMultiLoginComponent> {
           microsoftButtonIcon: widget.microsoftButtonIcon,
           onResultMicrosoftLogin: widget.onResultMicrosoftLogin,
           onErrorMicrosoftLogin: widget.onErrorMicrosoftLogin,
+          backgroundColor: _backgroundLoadingColor,
+          loadingColor: _circleLoadingColor,
         ),
       );
     }
@@ -345,6 +365,8 @@ class SMultiLoginComponentState extends State<SMultiLoginComponent> {
           linkedinButtonIcon: widget.linkedinButtonIcon,
           onResultLinkedinLogin: widget.onResultLinkedinLogin,
           onErrorLinkedinLogin: widget.onErrorLinkedinLogin,
+          backgroundColor: _backgroundLoadingColor,
+          loadingColor: _circleLoadingColor,
         ),
       );
     }
@@ -361,6 +383,8 @@ class SMultiLoginComponentState extends State<SMultiLoginComponent> {
           facebookButtonIcon: widget.facebookButtonIcon,
           onResultFacebookLogin: widget.onResultFacebookLogin,
           onErrorFacebookLogin: widget.onErrorFacebookLogin,
+          backgroundColor: _backgroundLoadingColor,
+          loadingColor: _circleLoadingColor,
         ),
       );
     }
@@ -372,6 +396,8 @@ class SMultiLoginComponentState extends State<SMultiLoginComponent> {
           googleButtonIcon: widget.googleButtonIcon,
           onResultGoogleLogin: widget.onResultGoogleLogin,
           onErrorGoogleLogin: widget.onErrorGoogleLogin,
+          backgroundColor: _backgroundLoadingColor,
+          loadingColor: _circleLoadingColor,
         ),
       );
     }
@@ -383,6 +409,8 @@ class SMultiLoginComponentState extends State<SMultiLoginComponent> {
           appleButtonIcon: widget.appleButtonIcon,
           onResultAppleLogin: widget.onResultAppleLogin,
           onErrorAppleLogin: widget.onErrorAppleLogin,
+          backgroundColor: _backgroundLoadingColor,
+          loadingColor: _circleLoadingColor,
         ),
       );
     }
@@ -394,6 +422,8 @@ class SMultiLoginComponentState extends State<SMultiLoginComponent> {
           twitterButtonIcon: widget.twitterButtonIcon,
           onResultTwitterLogin: widget.onResultTwitterLogin,
           onErrorTwitterLogin: widget.onErrorTwitterLogin,
+          backgroundColor: _backgroundLoadingColor,
+          loadingColor: _circleLoadingColor,
         ),
       );
     }
@@ -405,6 +435,8 @@ class SMultiLoginComponentState extends State<SMultiLoginComponent> {
           microsoftButtonIcon: widget.microsoftButtonIcon,
           onResultMicrosoftLogin: widget.onResultMicrosoftLogin,
           onErrorMicrosoftLogin: widget.onErrorMicrosoftLogin,
+          backgroundColor: _backgroundLoadingColor,
+          loadingColor: _circleLoadingColor,
         ),
       );
     }
@@ -416,6 +448,8 @@ class SMultiLoginComponentState extends State<SMultiLoginComponent> {
           linkedinButtonIcon: widget.linkedinButtonIcon,
           onResultLinkedinLogin: widget.onResultLinkedinLogin,
           onErrorLinkedinLogin: widget.onErrorLinkedinLogin,
+          backgroundColor: _backgroundLoadingColor,
+          loadingColor: _circleLoadingColor,
         ),
       );
     }

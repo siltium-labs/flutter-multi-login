@@ -14,12 +14,17 @@ import 'package:s_multiloginp/src/components/button_component.dart';
 
 // ignore: must_be_immutable
 class FacebookBtnComponent extends StatefulWidget {
+  late ComponentModeEnum componentMode;
+  // Custom style parameters
   ButtonStyle? facebookButtonStyle;
   String? facebookButtonText;
   Widget? facebookButtonIcon;
+  // Functions
   Function(CurrentUserModel)? onResultFacebookLogin;
   Function? onErrorFacebookLogin;
-  late ComponentModeEnum componentMode;
+  // Loading custom color
+  final Color? backgroundColor;
+  final Color? loadingColor;
 
   FacebookBtnComponent.simple({
     Key? key,
@@ -27,6 +32,8 @@ class FacebookBtnComponent extends StatefulWidget {
     required this.facebookButtonIcon,
     required this.onResultFacebookLogin,
     required this.onErrorFacebookLogin,
+    this.backgroundColor,
+    this.loadingColor,
   }) : super(key: key) {
     componentMode = ComponentModeEnum.simpleMode;
   }
@@ -38,6 +45,8 @@ class FacebookBtnComponent extends StatefulWidget {
     required this.facebookButtonIcon,
     required this.onResultFacebookLogin,
     required this.onErrorFacebookLogin,
+    this.backgroundColor,
+    this.loadingColor,
   }) : super(key: key) {
     componentMode = ComponentModeEnum.complexMode;
   }
@@ -110,6 +119,8 @@ class FacebookBtnComponentState extends State<FacebookBtnComponent> {
       onLoading: _onFacebookLoading(),
       onResult: (data) => _onFacebookResult(data),
       onError: (error) => _onFacebookError(error),
+      backgroundColor: widget.backgroundColor,
+      loadingColor: widget.loadingColor,
     ).show();
   }
 

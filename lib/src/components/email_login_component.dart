@@ -24,6 +24,9 @@ class EmailLoginComponent extends StatefulWidget {
   // Functions
   Function(CurrentUserModel)? onResultEmailLogin;
   Function? onErrorEmailLogin;
+  // Loading custom color
+  final Color? backgroundColor;
+  final Color? loadingColor;
 
   EmailLoginComponent({
     Key? key,
@@ -38,6 +41,9 @@ class EmailLoginComponent extends StatefulWidget {
     // Functions
     required this.onResultEmailLogin,
     required this.onErrorEmailLogin,
+    // Loading custom color
+    this.backgroundColor,
+    this.loadingColor,
   }) : super(key: key);
 
   @override
@@ -165,6 +171,8 @@ class EmailLoginComponentState extends State<EmailLoginComponent> {
       onLoading: _onEmailLoading(),
       onResult: (data) => _onEmailResult(data),
       onError: (error) => _onEmailError(error),
+      backgroundColor: widget.backgroundColor,
+      loadingColor: widget.loadingColor,
     ).show();
   }
 

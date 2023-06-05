@@ -14,12 +14,17 @@ import 'package:s_multiloginp/src/components/button_component.dart';
 
 // ignore: must_be_immutable
 class LinkedinBtnComponent extends StatefulWidget {
+  late ComponentModeEnum componentMode;
+  // Custom style parameters
   ButtonStyle? linkedinButtonStyle;
   String? linkedinButtonText;
   Widget? linkedinButtonIcon;
+  // Functions
   Function(CurrentUserModel)? onResultLinkedinLogin;
   Function? onErrorLinkedinLogin;
-  late ComponentModeEnum componentMode;
+  // Loading custom color
+  final Color? backgroundColor;
+  final Color? loadingColor;
 
   LinkedinBtnComponent.simple({
     Key? key,
@@ -27,6 +32,8 @@ class LinkedinBtnComponent extends StatefulWidget {
     required this.linkedinButtonIcon,
     required this.onResultLinkedinLogin,
     required this.onErrorLinkedinLogin,
+    this.backgroundColor,
+    this.loadingColor,
   }) : super(key: key) {
     componentMode = ComponentModeEnum.simpleMode;
   }
@@ -38,6 +45,8 @@ class LinkedinBtnComponent extends StatefulWidget {
     required this.linkedinButtonIcon,
     required this.onResultLinkedinLogin,
     required this.onErrorLinkedinLogin,
+    this.backgroundColor,
+    this.loadingColor,
   }) : super(key: key) {
     componentMode = ComponentModeEnum.complexMode;
   }

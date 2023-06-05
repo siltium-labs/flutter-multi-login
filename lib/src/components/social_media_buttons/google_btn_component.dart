@@ -14,12 +14,17 @@ import 'package:s_multiloginp/src/components/button_component.dart';
 
 // ignore: must_be_immutable
 class GoogleBtnComponent extends StatefulWidget {
+  late ComponentModeEnum componentMode;
+  // Custom style parameters
   ButtonStyle? googleButtonStyle;
   String? googleButtonText;
   Widget? googleButtonIcon;
+  // Functions
   Function(CurrentUserModel)? onResultGoogleLogin;
   Function? onErrorGoogleLogin;
-  late ComponentModeEnum componentMode;
+  // Loading custom color
+  final Color? backgroundColor;
+  final Color? loadingColor;
 
   GoogleBtnComponent.simple({
     Key? key,
@@ -27,6 +32,8 @@ class GoogleBtnComponent extends StatefulWidget {
     required this.googleButtonIcon,
     required this.onResultGoogleLogin,
     required this.onErrorGoogleLogin,
+    this.backgroundColor,
+    this.loadingColor,
   }) : super(key: key) {
     componentMode = ComponentModeEnum.simpleMode;
   }
@@ -38,6 +45,8 @@ class GoogleBtnComponent extends StatefulWidget {
     required this.googleButtonIcon,
     required this.onResultGoogleLogin,
     required this.onErrorGoogleLogin,
+    this.backgroundColor,
+    this.loadingColor,
   }) : super(key: key) {
     componentMode = ComponentModeEnum.complexMode;
   }
@@ -112,6 +121,8 @@ class GoogleBtnComponentState extends State<GoogleBtnComponent> {
       onLoading: _onGoogleLoading(),
       onResult: (data) => _onGoogleResult(data),
       onError: (error) => _onGoogleError(error),
+      backgroundColor: widget.backgroundColor,
+      loadingColor: widget.loadingColor,
     ).show();
   }
 

@@ -14,12 +14,17 @@ import 'package:s_multiloginp/src/components/button_component.dart';
 
 // ignore: must_be_immutable
 class AppleBtnComponent extends StatefulWidget {
+  late ComponentModeEnum componentMode;
+  // Custom style parameters
   ButtonStyle? appleButtonStyle;
   String? appleButtonText;
   Widget? appleButtonIcon;
+  // Functions
   Function(CurrentUserModel)? onResultAppleLogin;
   Function? onErrorAppleLogin;
-  late ComponentModeEnum componentMode;
+  // Loading custom color
+  final Color? backgroundColor;
+  final Color? loadingColor;
 
   AppleBtnComponent.simple({
     Key? key,
@@ -27,6 +32,8 @@ class AppleBtnComponent extends StatefulWidget {
     required this.appleButtonIcon,
     required this.onResultAppleLogin,
     required this.onErrorAppleLogin,
+    this.backgroundColor,
+    this.loadingColor,
   }) : super(key: key) {
     componentMode = ComponentModeEnum.simpleMode;
   }
@@ -38,6 +45,8 @@ class AppleBtnComponent extends StatefulWidget {
     required this.appleButtonIcon,
     required this.onResultAppleLogin,
     required this.onErrorAppleLogin,
+    this.backgroundColor,
+    this.loadingColor,
   }) : super(key: key) {
     componentMode = ComponentModeEnum.complexMode;
   }
@@ -111,6 +120,8 @@ class AppleBtnComponentState extends State<AppleBtnComponent> {
       onLoading: _onAppleLoading(),
       onResult: (data) => _onAppleResult(/*data*/),
       onError: (error) => _onAppleError(error),
+      backgroundColor: widget.backgroundColor,
+      loadingColor: widget.loadingColor,
     ).show();
   }
 

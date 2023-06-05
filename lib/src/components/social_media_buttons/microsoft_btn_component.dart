@@ -14,12 +14,17 @@ import 'package:s_multiloginp/src/components/button_component.dart';
 
 // ignore: must_be_immutable
 class MicrosoftBtnComponent extends StatefulWidget {
+  late ComponentModeEnum componentMode;
+  // Custom style parameters
   ButtonStyle? microsoftButtonStyle;
   String? microsoftButtonText;
   Widget? microsoftButtonIcon;
+  // Functions
   Function(CurrentUserModel)? onResultMicrosoftLogin;
   Function? onErrorMicrosoftLogin;
-  late ComponentModeEnum componentMode;
+  // Loading custom color
+  final Color? backgroundColor;
+  final Color? loadingColor;
 
   MicrosoftBtnComponent.simple({
     Key? key,
@@ -27,6 +32,8 @@ class MicrosoftBtnComponent extends StatefulWidget {
     required this.microsoftButtonIcon,
     required this.onResultMicrosoftLogin,
     required this.onErrorMicrosoftLogin,
+    this.backgroundColor,
+    this.loadingColor,
   }) : super(key: key) {
     componentMode = ComponentModeEnum.simpleMode;
   }
@@ -38,6 +45,8 @@ class MicrosoftBtnComponent extends StatefulWidget {
     required this.microsoftButtonIcon,
     required this.onResultMicrosoftLogin,
     required this.onErrorMicrosoftLogin,
+    this.backgroundColor,
+    this.loadingColor,
   }) : super(key: key) {
     componentMode = ComponentModeEnum.complexMode;
   }
@@ -112,6 +121,8 @@ class MicrosoftBtnComponentState extends State<MicrosoftBtnComponent> {
       onLoading: _onMicrosoftLoading(),
       onResult: (data) => _onMicrosoftResult(data),
       onError: (error) => _onMicrosoftError(error),
+      backgroundColor: widget.backgroundColor,
+      loadingColor: widget.loadingColor,
     ).show();
   }
 

@@ -92,7 +92,7 @@ class SpinKitChasingDotsState extends State<Loading>
 
 Widget loadingComponent(
   bool isVisible, {
-  Color color = kGoogle,
+  Color color = kwhite,
   double size = 50,
   EdgeInsetsGeometry? padding,
 }) {
