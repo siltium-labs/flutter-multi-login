@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 //* Project imports
 import 'package:s_multiloginp/src/constants/k_colors.dart';
+import 'package:s_multiloginp/src/controllers/email_login_controller.dart';
 import 'package:s_multiloginp/src/manager/auth_manager.dart';
 import 'package:s_multiloginp/src/models/current_user_model.dart';
 import 'package:s_multiloginp/src/utils/loading_popup.dart';
@@ -146,7 +147,15 @@ class EmailLoginComponentState extends State<EmailLoginComponent> {
 
   _emailLoginButton() {
     return ButtonComponent(
-      onPressed: () => _onEmailLogin(),
+      onPressed: () => EmailLoginController().onEmailLogin(
+        context,
+        _emailController.text,
+        _passwordController.text,
+        widget.onResultEmailLogin,
+        widget.onErrorEmailLogin,
+        widget.backgroundColor,
+        widget.loadingColor,
+      ),
       text: widget.emailButtonText ?? "Iniciar Sesión",
       icon: widget.emailButtonIcon,
       buttonStyle: widget.emailButtonStyle ??
