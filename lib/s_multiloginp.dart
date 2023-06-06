@@ -96,8 +96,9 @@ class SMultiLogin {
     return AuthManager().getUserData();
   }
 
-  emailLogin(String email, String password) async {
-    await AuthManager().signInEmailAndPassword(email: email, password: password);
+  Future<CurrentUserModel?> emailLogin(String email, String password) async {
+    await AuthManager()
+        .signInEmailAndPassword(email: email, password: password);
     return AuthManager().getUserCredential();
   }
 
