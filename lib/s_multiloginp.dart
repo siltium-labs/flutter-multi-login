@@ -96,6 +96,12 @@ class SMultiLogin {
     return AuthManager().getUserData();
   }
 
+  emailLogin(String email, String password) async {
+    await AuthManager().signInEmailAndPassword(email: email, password: password);
+    return AuthManager().getUserCredential();
+  }
+
+  // Init design
   customLoadingColor(Color backgroundColor, Color loadingColor) {
     _backgroundLoadingColor = backgroundColor;
     _circleLoadingColor = loadingColor;
