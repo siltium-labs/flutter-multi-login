@@ -24,6 +24,9 @@ import 'package:s_multiloginp/src/models/linkedin_init_login_model.dart';
 import 'package:s_multiloginp/src/models/twitter_init_login_model.dart';
 import 'package:s_multiloginp/src/utils/extensions.dart';
 
+//* Plugin exports
+export 'package:s_multiloginp/src/models/current_user_model.dart';
+
 // Plugin class (with Method Channel)
 import 's_multiloginp_platform_interface.dart';
 
