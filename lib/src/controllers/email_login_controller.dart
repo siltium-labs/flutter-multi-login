@@ -5,15 +5,15 @@ import 'package:s_multiloginp/src/models/current_user_model.dart';
 import 'package:s_multiloginp/src/utils/loading_popup.dart';
 
 class EmailLoginController {
-  onEmailLogin(
-    BuildContext context,
-    String email,
-    String password,
+  onEmailLogin({
+    required BuildContext context,
+    required String email,
+    required String password,
     Function(CurrentUserModel)? onResultEmailLogin,
     Function? onErrorEmailLogin,
     final Color? backgroundColor,
     final Color? loadingColor,
-  ) async {
+  }) async {
     await LoadingPopup(
       context: context,
       onLoading: _onEmailLoading(email, password),

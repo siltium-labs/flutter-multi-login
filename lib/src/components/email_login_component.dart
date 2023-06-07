@@ -148,13 +148,13 @@ class EmailLoginComponentState extends State<EmailLoginComponent> {
   _emailLoginButton() {
     return ButtonComponent(
       onPressed: () => EmailLoginController().onEmailLogin(
-        context,
-        _emailController.text,
-        _passwordController.text,
-        widget.onResultEmailLogin,
-        widget.onErrorEmailLogin,
-        widget.backgroundColor,
-        widget.loadingColor,
+        context: context,
+        email: _emailController.text,
+        password: _passwordController.text,
+        onResultEmailLogin: widget.onResultEmailLogin,
+        onErrorEmailLogin: widget.onErrorEmailLogin,
+        backgroundColor: widget.backgroundColor,
+        loadingColor: widget.loadingColor,
       ),
       text: widget.emailButtonText ?? "Iniciar Sesión",
       icon: widget.emailButtonIcon,

@@ -97,21 +97,21 @@ class SMultiLogin {
     return AuthManager().getUserData();
   }
 
-  emailLogin(
-    BuildContext context,
-    String email,
-    String password,
+  emailLogin({
+    required BuildContext context,
+    required String email,
+    required String password,
     Function(CurrentUserModel)? onResultEmailLogin,
     Function? onErrorEmailLogin,
-  ) async {
+  }) async {
     await EmailLoginController().onEmailLogin(
-      context,
-      email,
-      password,
-      onResultEmailLogin,
-      onErrorEmailLogin,
-      _backgroundLoadingColor,
-      _circleLoadingColor,
+      context: context,
+      email: email,
+      password: password,
+      onResultEmailLogin: onResultEmailLogin,
+      onErrorEmailLogin: onErrorEmailLogin,
+      backgroundColor: _backgroundLoadingColor,
+      loadingColor: _circleLoadingColor,
     );
   }
 
