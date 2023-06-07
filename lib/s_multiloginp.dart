@@ -15,7 +15,6 @@ import 'package:s_multiloginp/src/components/social_media_buttons/apple_btn_comp
 import 'package:s_multiloginp/src/components/social_media_buttons/twitter_btn_component.dart';
 import 'package:s_multiloginp/src/components/social_media_buttons/microsoft_btn_component.dart';
 import 'package:s_multiloginp/src/components/social_media_buttons/linkedin_btn_component.dart';
-import 'package:s_multiloginp/src/controllers/email_login_controller.dart';
 import 'package:s_multiloginp/src/enums/component_mode_enum.dart';
 import 'package:s_multiloginp/src/enums/component_type_enum.dart';
 import 'package:s_multiloginp/src/manager/auth_manager.dart';
@@ -26,6 +25,7 @@ import 'package:s_multiloginp/src/utils/extensions.dart';
 
 //* Plugin exports
 export 'package:s_multiloginp/src/models/current_user_model.dart';
+export 'package:s_multiloginp/src/controllers/login_controller.dart';
 
 // Plugin class (with Method Channel)
 import 's_multiloginp_platform_interface.dart';
@@ -98,24 +98,6 @@ class SMultiLogin {
 
   CurrentUserModel? userData() {
     return AuthManager().getUserData();
-  }
-
-  emailLogin({
-    required BuildContext context,
-    required String email,
-    required String password,
-    Function(CurrentUserModel)? onResultEmailLogin,
-    Function? onErrorEmailLogin,
-  }) async {
-    await EmailLoginController().onEmailLogin(
-      context: context,
-      email: email,
-      password: password,
-      onResultEmailLogin: onResultEmailLogin,
-      onErrorEmailLogin: onErrorEmailLogin,
-      backgroundColor: _backgroundLoadingColor,
-      loadingColor: _circleLoadingColor,
-    );
   }
 
   // Init design

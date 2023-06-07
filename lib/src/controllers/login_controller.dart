@@ -9,11 +9,11 @@ import 'package:s_multiloginp/src/manager/auth_manager.dart';
 import 'package:s_multiloginp/src/models/current_user_model.dart';
 import 'package:s_multiloginp/src/utils/loading_popup.dart';
 
-class EmailLoginController {
+class LoginController {
   onEmailLogin({
     required BuildContext context,
-    required String email,
-    required String password,
+    required TextEditingController email,
+    required TextEditingController password,
     Function(CurrentUserModel)? onResultEmailLogin,
     Function? onErrorEmailLogin,
     final Color? backgroundColor,
@@ -21,16 +21,20 @@ class EmailLoginController {
   }) async {
     await LoadingPopup(
       context: context,
-      onLoading: _onEmailLoading(email, password),
+      backgroundColor: backgroundColor,
+      loadingColor: loadingColor,
+      onLoading: _onEmailLoading(email.text, password.text),
       onResult: (CurrentUserModel data) async {
         if (data.token != null) {
           if (onResultEmailLogin != null) {
+            email.clear();
+            password.clear();
             onResultEmailLogin(data);
           } else {
-            debugPrint("Null result EmailLogin");
+            debugPrint("onResultEmailLogin was not given or is empty.");
           }
         } else {
-          debugPrint("Error on EmailLogin");
+          debugPrint("Error on EmailLogin: Data token is null.");
         }
       },
       onError: (FirebaseAuthException error) async {
@@ -40,11 +44,10 @@ class EmailLoginController {
           debugPrint("El error fue: $error");
         }
       },
-      backgroundColor: backgroundColor,
-      loadingColor: loadingColor,
     ).show();
   }
 
+  // Loadings AuthManager (private for now)
   _onEmailLoading(String email, String password) async {
     await AuthManager().signInEmailAndPassword(
       email: email,
