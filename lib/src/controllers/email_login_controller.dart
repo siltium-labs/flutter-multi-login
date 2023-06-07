@@ -1,5 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
+//* Flutter imports
 import 'package:flutter/material.dart';
+
+//* Packages imports
+import 'package:firebase_auth/firebase_auth.dart';
+
+//* Project imports
 import 'package:s_multiloginp/src/manager/auth_manager.dart';
 import 'package:s_multiloginp/src/models/current_user_model.dart';
 import 'package:s_multiloginp/src/utils/loading_popup.dart';
