@@ -10,6 +10,5 @@ Inicio de sesión con Email & Contraseña, Google y Facebook disponibles para An
 ## 0.2.0
 Inicio de sesión con Email & Contraseña, Google y Facebook disponibles para Android & iOS. Inicio de sesión con iOS y Apple en testing.
 
-## 0.1.0 - Version inicial
-
+## 1.0.0 - Version inicial
 Initial release: Inicio de sesión con Email & Contraseña, Google y Facebook disponibles para Android.
