@@ -44,21 +44,36 @@ android {
 }
 ```
 
-3) Modificar el minSdkVersion a 21 `project_name\android\app\build.gradle`:
+3) Modificar el minSdkVersion a 21 en `project_name\android\app\build.gradle`:
 ```gradle
 android {
     defaultConfig {
         minSdkVersion 21
+        ...
+    }
+}
+```
+
+4) Inicializar las siguientes variables en `project_name\android\app\build.gradle`:
+```gradle
+android {
+    defaultConfig {
+      ...
+        // Facebook config
+        resValue "string", "fbAppID", ""
+        resValue "string", "fbClientToken", ""
+        // Twitter config
+        resValue "string", "twRedirectURL", ""
     }
 }
 ```
 
 PARA IOS:
 
-4) Ejecutar el comando `flutter clean` y borrar el archivo `project_name\ios\Podfile`.<br>
+5) Ejecutar el comando `flutter clean` y borrar el archivo `project_name\ios\Podfile`.<br>
 Nota: Este paso es necesario debido a una mala generación de un fragmento de código en dicho archivo.
 
-5) Correr el comando `flutter pub get` para generar el archivo nuevamente, y a continuación verificar que el siguiente fragmento ya no se encuentre generado en él:
+6) Correr el comando `flutter pub get` para generar el archivo nuevamente, y a continuación verificar que el siguiente fragmento ya no se encuentre generado en él:
 
 ![Agregar email login](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/ios_init_config.png)
 
@@ -67,12 +82,12 @@ y también en el mismo archivo modificar la versión de la plataforma iOS a 12:
 # Uncomment the next line to define a global platform for your project
 platform :ios, '12.0'
 ```
-6) Luego correr el comando `pod install` y, finalmente, podrás correr el comando `flutter run`.
+7) Luego correr el comando `pod install` y, finalmente, podrás correr el comando `flutter run`.
 
 
 EN FIREBASE:
 
-7) En Firebase, Ir a la [Consola Firebase](https://firebase.google.com) y crear un nuevo proyecto:
+8) En Firebase, Ir a la [Consola Firebase](https://firebase.google.com) y crear un nuevo proyecto:
 
 ![Crear nuevo proyecto firebase](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/install_01.png)
 
@@ -88,7 +103,7 @@ Al habilitar Google Analytics es necesario configurarlo y aceptar las condicione
 
 ![Finalizar y crear el proyecto](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/install_04.png)
 
-8) Luego, añadir Firebase a tu aplicación: NuevoProyectoFirebase -> Agregar app -> Flutter<br>
+9) Luego, añadir Firebase a tu aplicación: NuevoProyectoFirebase -> Agregar app -> Flutter<br>
 
 ![Crear App de Flutter en Firebase](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/install_05.png)
 
@@ -238,7 +253,7 @@ EN FLUTTER, resumen:
 
 PARA ANDROID:
 
-1) En el archivo `project_name\android\app\build.gradle` importar el SDK de Facebook y agregar un par de strings, con el `fbAppID` y el `fbClientToken` (Secret App) respectivamente y con esos nombres de variable:
+1) En el archivo `project_name\android\app\build.gradle` importar el SDK de Facebook y, donde anteriormente se había inicializado las variables para Facebook `fbAppID` y `fbClientToken`, agregar los valores correspondientes a dichas variables (App ID y Secret App respectivamente):
 ```gradle
 defaultConfig {
         ...
@@ -327,7 +342,7 @@ await SMultiLogin().multiLoginInit(
 
 PARA ANDROID:
 
-1) En el archivo `project_name\android\app\build.gradle` agregar el mismo esquema de redireccionamiento como un string con el nombre de variable `twRedirectURL`:
+1) En el archivo `project_name\android\app\build.gradle`, donde anteriormente se había inicializado la variable para Twitter `twRedirectURL`, agregar a dicha variable el valor corresponiente, es decir, el mismo esquema de redireccionamiento de Twitter:
 ```gradle
 defaultConfig {
         ...
