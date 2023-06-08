@@ -136,7 +136,7 @@ class AuthManager {
         email: user!.user!.email,
         phoneNumber: user!.user!.phoneNumber,
         photoURL: user!.user!.photoURL,
-        token: await user!.user!.getIdToken(),
+        token: await user!.user!.getIdToken(), //jwt
         refreshToken: user!.user!.refreshToken,
         accessToken: user!.credential?.accessToken,
         providerId: user!.credential?.providerId,
