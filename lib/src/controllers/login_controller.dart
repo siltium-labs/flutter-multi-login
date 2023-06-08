@@ -256,7 +256,8 @@ class LoginController {
                 if (onResultLinkedinLogin != null) {
                   onResultLinkedinLogin(currentLkUser);
                 } else {
-                  debugPrint("onResultLinkedinLogin was not given or is empty.");
+                  debugPrint(
+                      "onResultLinkedinLogin was not given or is empty.");
                 }
               } else {
                 debugPrint("Error onLinkedinLogin: Data token is null.");
