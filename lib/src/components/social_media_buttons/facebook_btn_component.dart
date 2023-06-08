@@ -1,16 +1,12 @@
 //* Flutter imports
 import 'package:flutter/material.dart';
 
-//* Packages imports
-import 'package:firebase_auth/firebase_auth.dart';
-
 //* Project imports
 import 'package:s_multiloginp/src/constants/k_colors.dart';
-import 'package:s_multiloginp/src/enums/component_mode_enum.dart';
-import 'package:s_multiloginp/src/manager/auth_manager.dart';
 import 'package:s_multiloginp/src/models/current_user_model.dart';
-import 'package:s_multiloginp/src/utils/loading_popup.dart';
+import 'package:s_multiloginp/src/enums/component_mode_enum.dart';
 import 'package:s_multiloginp/src/components/button_component.dart';
+import 'package:s_multiloginp/src/controllers/login_controller.dart';
 
 // ignore: must_be_immutable
 class FacebookBtnComponent extends StatefulWidget {
@@ -65,7 +61,13 @@ class FacebookBtnComponentState extends State<FacebookBtnComponent> {
 
   _simpleFacebookLoginButton() {
     return ButtonComponent(
-      onPressed: () => _onFacebookLogin(),
+      onPressed: () => LoginController().onFacebookLogin(
+        context: context,
+        onResultFacebookLogin: widget.onResultFacebookLogin,
+        onErrorFacebookLogin: widget.onErrorFacebookLogin,
+        backgroundColor: widget.backgroundColor,
+        loadingColor: widget.loadingColor,
+      ),
       icon: widget.facebookButtonIcon ??
           const Icon(
             Icons.facebook,
@@ -89,7 +91,13 @@ class FacebookBtnComponentState extends State<FacebookBtnComponent> {
 
   _complexFacebookLoginButton() {
     return ButtonComponent(
-      onPressed: () => _onFacebookLogin(),
+      onPressed: () => LoginController().onFacebookLogin(
+        context: context,
+        onResultFacebookLogin: widget.onResultFacebookLogin,
+        onErrorFacebookLogin: widget.onErrorFacebookLogin,
+        backgroundColor: widget.backgroundColor,
+        loadingColor: widget.loadingColor,
+      ),
       text: widget.facebookButtonText ?? "Sign In with Facebook",
       icon: widget.facebookButtonIcon ??
           const Icon(
@@ -110,42 +118,5 @@ class FacebookBtnComponentState extends State<FacebookBtnComponent> {
             ),
           ),
     );
-  }
-
-  // CONTROLLER----------------------------------------------------
-  _onFacebookLogin() async {
-    await LoadingPopup(
-      context: context,
-      onLoading: _onFacebookLoading(),
-      onResult: (data) => _onFacebookResult(data),
-      onError: (error) => _onFacebookError(error),
-      backgroundColor: widget.backgroundColor,
-      loadingColor: widget.loadingColor,
-    ).show();
-  }
-
-  _onFacebookLoading() async {
-    await AuthManager().signInWithFacebook();
-    return AuthManager().getUserCredential();
-  }
-
-  _onFacebookResult(CurrentUserModel data) async {
-    if (data.token != null) {
-      if (widget.onResultFacebookLogin != null) {
-        widget.onResultFacebookLogin!(data);
-      } else {
-        debugPrint("Null result FacebookLogin");
-      }
-    } else {
-      debugPrint("Error on FacebookLogin");
-    }
-  }
-
-  _onFacebookError(FirebaseAuthException error) {
-    if (widget.onErrorFacebookLogin != null) {
-      widget.onErrorFacebookLogin!(error);
-    } else {
-      debugPrint("El error fue: $error");
-    }
   }
 }

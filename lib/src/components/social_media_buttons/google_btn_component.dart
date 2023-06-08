@@ -1,16 +1,12 @@
 //* Flutter imports
 import 'package:flutter/material.dart';
 
-//* Packages imports
-import 'package:firebase_auth/firebase_auth.dart';
-
 //* Project imports
 import 'package:s_multiloginp/src/constants/k_colors.dart';
-import 'package:s_multiloginp/src/enums/component_mode_enum.dart';
-import 'package:s_multiloginp/src/manager/auth_manager.dart';
 import 'package:s_multiloginp/src/models/current_user_model.dart';
-import 'package:s_multiloginp/src/utils/loading_popup.dart';
+import 'package:s_multiloginp/src/enums/component_mode_enum.dart';
 import 'package:s_multiloginp/src/components/button_component.dart';
+import 'package:s_multiloginp/src/controllers/login_controller.dart';
 
 // ignore: must_be_immutable
 class GoogleBtnComponent extends StatefulWidget {
@@ -65,7 +61,13 @@ class GoogleBtnComponentState extends State<GoogleBtnComponent> {
 
   _simpleGoogleLoginButton() {
     return ButtonComponent(
-      onPressed: () => _onGoogleLogin(),
+      onPressed: () => LoginController().onGoogleLogin(
+        context: context,
+        onResultGoogleLogin: widget.onResultGoogleLogin,
+        onErrorGoogleLogin: widget.onErrorGoogleLogin,
+        backgroundColor: widget.backgroundColor,
+        loadingColor: widget.loadingColor,
+      ),
       icon: widget.googleButtonIcon ??
           Image.asset(
             "assets/icon_google_default.png",
@@ -90,7 +92,13 @@ class GoogleBtnComponentState extends State<GoogleBtnComponent> {
 
   _complexGoogleLoginButton() {
     return ButtonComponent(
-      onPressed: () => _onGoogleLogin(),
+      onPressed: () => LoginController().onGoogleLogin(
+        context: context,
+        onResultGoogleLogin: widget.onResultGoogleLogin,
+        onErrorGoogleLogin: widget.onErrorGoogleLogin,
+        backgroundColor: widget.backgroundColor,
+        loadingColor: widget.loadingColor,
+      ),
       text: widget.googleButtonText ?? "Sign In with Google",
       icon: widget.googleButtonIcon ??
           Image.asset(
@@ -112,42 +120,5 @@ class GoogleBtnComponentState extends State<GoogleBtnComponent> {
             ),
           ),
     );
-  }
-
-  // CONTROLLER----------------------------------------------------
-  _onGoogleLogin() async {
-    await LoadingPopup(
-      context: context,
-      onLoading: _onGoogleLoading(),
-      onResult: (data) => _onGoogleResult(data),
-      onError: (error) => _onGoogleError(error),
-      backgroundColor: widget.backgroundColor,
-      loadingColor: widget.loadingColor,
-    ).show();
-  }
-
-  _onGoogleLoading() async {
-    await AuthManager().signInWithGoogle();
-    return AuthManager().getUserCredential();
-  }
-
-  _onGoogleResult(CurrentUserModel data) async {
-    if (data.token != null) {
-      if (widget.onResultGoogleLogin != null) {
-        widget.onResultGoogleLogin!(data);
-      } else {
-        debugPrint("Null result GoogleLogin");
-      }
-    } else {
-      debugPrint("Error on GoogleLogin");
-    }
-  }
-
-  _onGoogleError(FirebaseAuthException error) {
-    if (widget.onErrorGoogleLogin != null) {
-      widget.onErrorGoogleLogin!(error);
-    } else {
-      debugPrint("El error fue: $error");
-    }
   }
 }

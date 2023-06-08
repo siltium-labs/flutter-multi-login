@@ -1,16 +1,11 @@
 //* Flutter imports
 import 'package:flutter/material.dart';
 
-//* Packages imports
-// import 'package:firebase_auth/firebase_auth.dart';
-
 //* Project imports
 import 'package:s_multiloginp/src/constants/k_colors.dart';
-import 'package:s_multiloginp/src/controllers/login_controller.dart';
-// import 'package:s_multiloginp/src/manager/auth_manager.dart';
 import 'package:s_multiloginp/src/models/current_user_model.dart';
-// import 'package:s_multiloginp/src/utils/loading_popup.dart';
 import 'package:s_multiloginp/src/components/button_component.dart';
+import 'package:s_multiloginp/src/controllers/login_controller.dart';
 
 // ignore: must_be_immutable
 class EmailLoginComponent extends StatefulWidget {
@@ -172,46 +167,4 @@ class EmailLoginComponentState extends State<EmailLoginComponent> {
           ),
     );
   }
-
-  //CONTROLLER----------------------------------------------------
-  // _onEmailLogin() async {
-  //   await LoadingPopup(
-  //     context: context,
-  //     onLoading: _onEmailLoading(),
-  //     onResult: (data) => _onEmailResult(data),
-  //     onError: (error) => _onEmailError(error),
-  //     backgroundColor: widget.backgroundColor,
-  //     loadingColor: widget.loadingColor,
-  //   ).show();
-  // }
-
-  // _onEmailLoading() async {
-  //   await AuthManager().signInEmailAndPassword(
-  //     email: _emailController.text,
-  //     password: _passwordController.text,
-  //   );
-  //   return AuthManager().getUserCredential();
-  // }
-
-  // _onEmailResult(CurrentUserModel data) async {
-  //   if (data.token != null) {
-  //     if (widget.onResultEmailLogin != null) {
-  //       _emailController.clear();
-  //       _passwordController.clear();
-  //       widget.onResultEmailLogin!(data);
-  //     } else {
-  //       debugPrint("Null result EmailLogin");
-  //     }
-  //   } else {
-  //     debugPrint("Error on EmailLogin");
-  //   }
-  // }
-
-  // _onEmailError(FirebaseAuthException error) {
-  //   if (widget.onErrorEmailLogin != null) {
-  //     widget.onErrorEmailLogin!(error);
-  //   } else {
-  //     debugPrint("El error fue: $error");
-  //   }
-  // }
 }
