@@ -465,21 +465,41 @@ Nota: No hacen falta configuraciones adicionales en tu proyecto Flutter para hab
 <br>
 
 ## **Uso de la Librería**
-1) Llamar a `SMultiLoginComponent()` en tu proyecto.<br>
-Nota: Se puede elegir uno de entre 4 "modos" de diseño por defecto, que son:
+1) Llamar a `SMultiLoginComponent()` en tu proyecto para usar el componente por defecto de la librería.<br>
+Puedes llamar al componente para inicio de sesión con correo y contraseña, al componente para inicio de sesión con redes sociales o también puedes llamar a ambos componentes.
 ```dart
-// Dos modos, uno minimalista y otro con más detalle respectivamente, encerrados en una Card con un estilo el cual es personalizable:
-SMultiLoginComponent.simpleCardMode();
-SMultiLoginComponent.complexCardMode();
-
-// Dos modos, uno minimalista y otro con más detalle respectivamente, sin la Card mencionada anteriormente:
-SMultiLoginComponent.simpleMode();
-SMultiLoginComponent.complexMode();
+// Componente de Inicio de sesión con correo y contraseña
+SMultiLoginComponent.emailLogin();
 ```
-Cada uno de estos "modos", a su vez, también es personalizable.
+![Componente de login correo](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/usage_01.png)
 
-2) Especificar los parametros deseados:
+```dart
+// Componente de Inicio de sesión con redes sociales
+// Posee dos diseños, este es un diseño minimalista:
+SMultiLoginComponent.socialMediaLogin();
+```
+
+![Componente login social media 1](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/usage_02.png)
+
+```dart
+// Y este es un diseño más detallado:
+SMultiLoginComponent.socialMediaLoginComplex();
+```
+
+![Componente login social media 2](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/usage_03.png)
+
+Ambos componentes juntos:
+
+![Componente completo](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/usage_04.png)
+
+Nota: Cada uno de estos "modos", a su vez, también es personalizable.
+
+2) Especificar los parametros deseados en cada componente:
+
+En el componente `emailLogin`:
   - `onResultEmailLogin` - para incluir en inicio de sesión con correo y contraseña
+
+En el componente `socialMediaLogin` o `socialMediaLoginComplex`:
   - `onResultGoogleLogin` - para incluir en inicio de sesión con una cuenta de Google
   - `onResultFacebookLogin` - para incluir en inicio de sesión con una cuenta de Facebook
   - `onResultAppleLogin` - para incluir en inicio de sesión con una cuenta de Apple (pendiente)
@@ -490,7 +510,90 @@ Cada uno de estos "modos", a su vez, también es personalizable.
 Nota: para contar con un metodo de inicio de sesión, incluir el metodo onResult deseado. En caso contrario, no incluirlo.<br>
 El resto de parametros son opcionales para personalizar el diseño del componente, de ser necesario.
 
-3) Otros Metodos disponibles:
+3) También es posible llamar solamente a los métodos de inicio de sesión que se necesite, para utilizarlos en un widget personalizado:
+```dart
+// Métodos de inicio de sesión para llamar desde un widget personalizado:
+// EMAIL
+await LoginController().onEmailLogin(
+  context: context,
+  email: _emailController, // un TextEditingController
+  password: _passwordController, // un TextEditingController
+  onResultEmailLogin: (data) {
+    // código onResultEmail
+  },
+  onErrorEmailLogin: (error) {
+    // código onErrorEmail
+  },
+);
+
+// FACEBOOK
+await LoginController().onFacebookLogin(
+  context: context,
+  onResultFacebookLogin: (data) {
+    // código onResultFacebook
+  },
+  onErrorFacebookLogin: (error) {
+    // código onErrorFacebook
+  },
+);
+
+// GOOGLE
+await LoginController().onGoogleLogin(
+  context: context,
+  onResultGoogleLogin: (data) {
+    // código onResultGoogle
+  },
+  onErrorGoogleLogin: (error) {
+    // código onErrorGoogle
+  },
+);
+
+// APPLE
+await LoginController().onAppleLogin(
+  context: context,
+  onResultAppleLogin: (data) {
+    // código onResultApple
+  },
+  onErrorAppleLogin: (error) {
+    // código onErrorApple
+  },
+);
+
+// TWITTER
+await LoginController().onTwitterLogin(
+  context: context,
+  onResultTwitterLogin: {
+    // código onResultTwitter
+  },
+  onErrorTwitterLogin: {
+    // código onErrorTwitter
+  },
+);
+
+// MICROSOFT
+await LoginController().onMicrosoftLogin(
+  context: context,
+  onResultMicrosoftLogin: (data) {
+    // código onResultMicrosoft
+  },
+  onErrorMicrosoftLogin: (error) {
+    // código onErrorMicrosoft
+  },
+);
+
+// LINKEDIN
+await LoginController().onLinkedinLogin(
+  context: context,
+  onResultLinkedinLogin: (data) {
+    // código onResultLinkedin
+  },
+  onErrorLinkedinLogin: (error) {
+    // código onErrorLinkedin
+  },
+);
+```
+
+4) Otros Metodos disponibles:
 ```dart
 // Para cerrar sesión en la instancia Firebase.
 // LLamarlo al cerrar sesión en la app
@@ -512,74 +615,142 @@ SMultiLogin().userData().token; // Trae el token de acceso del usuario logueado
 
 EJEMPLOS:
 ```dart
-// Ejemplo de SMultiLoginComponent.simpleCardMode(), diseño por defecto e inicio de sesión a través de correo, google, facebook, twitter, linkedin y microsoft:
-SMultiLoginComponent.simpleCardMode(
-  footerText: "O podés ingresar con:",
-  onResultEmailLogin: (data) {
-    // código onResult Email
-  },
-  onErrorEmailLogin: (error) {
-    // código onError Email
-  },
-  onResultGoogleLogin: (data) {
-    // código onResult Google
-  },
-  onErrorGoogleLogin: (error) {
-    // código onError Google
-  },
-  onResultFacebookLogin: (data) {
-    // código onResult Facebook
-  },
-  onErrorFacebookLogin: (error) {
-    // código onError Facebook
-  },
-  onResultTwitterLogin: (data) {
-    // código onResult Twitter
-  },
-  onErrorTwitterLogin: (error) {
-    // código onError Twitter
-  },
-  onResultLinkedinLogin: (data) {
-    // código onResult LinkedIn
-  },
-  onErrorLinkedinLogin: (error) {
-    // código onError LinkedIn
-  },
-  onResultMicrosoftLogin: (data) {
-    // código onResult Microsoft
-  },
-  onErrorMicrosoftLogin: (error) {
-    // código onError Microsoft
-  },
-);
+// Ejemplo de Componente emailLogin y socialMediaLogin, diseño por defecto e inicio de sesión a través de correo, facebook, google, twitter, linkedin y microsoft:
+ejemplo_1() {
+  return Padding(
+    padding: const EdgeInsets.all(30),
+    child: Column(
+      children: [
+        const Text(
+          'S-MultiLogin',
+          style: TextStyle(
+            color: kblue,
+            fontSize: 40,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: 30),
+        SMultiLoginComponent.emailLogin(
+          onResultEmailLogin: (data) {
+            // código onResultEmail
+          },
+          onErrorEmailLogin: (error) {
+            // código onErrorEmail
+          },
+        ),
+        const SizedBox(height: 20),
+        const Text("También podés ingresar con:"),
+        const SizedBox(height: 15),
+        SMultiLoginComponent.socialMediaLogin(
+          onResultFacebookLogin: (data) {
+            // código onResultFacebook
+          },
+          onErrorFacebookLogin: (error) {
+            // código onErrorFacebook
+          },
+          onResultGoogleLogin: (data) {
+            // código onResultGoogle
+          },
+          onErrorGoogleLogin: (error) {
+            // código onErrorGoogle
+          },
+          onResultTwitterLogin: (data) {
+            // código onResultTwitter
+          },
+          onErrorTwitterLogin: (error) {
+            // código onErrorTwitter
+          },
+          onResultMicrosoftLogin: (data) {
+            // código onResultMicrosoft
+          },
+          onErrorMicrosoftLogin: (error) {
+            // código onErrorMicrosoft
+          },
+          onResultLinkedinLogin: (data) {
+            // código onResultLinkedin
+          },
+          onErrorLinkedinLogin: (error) {
+            // código onErrorLinkedin
+          },
+        )
+      ],
+    ),
+  );
+}
 ```
-Imagen ilustrativa:<br>
-![Imagen del componente con estilo default y login con email, google y facebook](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/usage_01.png)
+
+![Ejemplo_1](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/usage_05.png)
 
 ```dart
-// Ejemplo de SMultiLoginComponent.complexCardMode(), diseño personalizado e inicio de sesión a través de correo, google y facebook:
-SMultiLoginComponent.complexCardMode(
-  // Parametros para personalizar la Card que encierra al login (en los diseños CardMode)
-  cardDecoration: BoxDecoration(
-    color: const Color.fromARGB(255, 158, 192, 231),
-    borderRadius: BorderRadius.circular(20),
-    boxShadow: const [
-      BoxShadow(
-        color: Color(0x40666666),
-        spreadRadius: -3,
-        blurRadius: 20,
-        offset: Offset(0, 10),
-      ),
-    ],
-  ),
-  cardInnerPadding: const EdgeInsets.all(15),
-  // Parametros para personalizar los estilos de los inputs de correo y contraseña
+// Ejemplo de Componente emailLogin y socialMediaLoginComplex (componente más detallado), diseño por defecto e inicio de sesión a través de correo, facebook, google y twitter:
+ejemplo_2() {
+  return Padding(
+    padding: const EdgeInsets.all(30),
+    child: Column(
+      children: [
+        const Text(
+          'S-MultiLogin',
+          style: TextStyle(
+            color: kblue,
+            fontSize: 40,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: 30),
+        SMultiLoginComponent.emailLogin(
+          onResultEmailLogin: (data) {
+            // código onResultEmail
+          },
+          onErrorEmailLogin: (error) {
+            // código onErrorEmail
+          },
+        ),
+        const SizedBox(height: 20),
+        const Text("También podés ingresar con:"),
+        const SizedBox(height: 15),
+        SMultiLoginComponent.socialMediaLoginComplex(
+          onResultFacebookLogin: (data) {
+            // código onResultFacebook
+          },
+          onErrorFacebookLogin: (error) {
+            // código onErrorFacebook
+          },
+          onResultGoogleLogin: (data) {
+            // código onResultGoogle
+          },
+          onErrorGoogleLogin: (error) {
+            // código onErrorGoogle
+          },
+          onResultTwitterLogin: (data) {
+            // código onResultTwitter
+          },
+          onErrorTwitterLogin: (error) {
+            // código onErrorTwitter
+          },
+        )
+      ],
+    ),
+  );
+}
+```
+
+![Ejemplo_2](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/usage_06.png)
+
+```dart
+// Ejemplo del componente emailLogin con estilo personalizado:
+SMultiLoginComponent.emailLogin(
+  onResultEmailLogin: (data) {
+    // código onResultEmail
+  },
+  onErrorEmailLogin: (error) {
+    // código onErrorEmail
+  },
   emailInputDecoration: InputDecoration(
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(15),
       borderSide: BorderSide.none,
     ),
-    fillColor: const Color(0xFFFFFFFF),
+    fillColor: Color(0xFFFFDA00),
     filled: true,
     hintStyle: const TextStyle(
       color: Color(0xFF000000),
@@ -591,7 +762,7 @@ SMultiLoginComponent.complexCardMode(
   ),
   emailInputTextStyle: const TextStyle(
     fontSize: 15,
-    color: Color(0xFF0230C5),
+    color: Color(0xFF000000),
     fontStyle: FontStyle.italic,
   ),
   passwordInputDecoration: InputDecoration(
@@ -599,7 +770,7 @@ SMultiLoginComponent.complexCardMode(
       borderRadius: BorderRadius.circular(15),
       borderSide: BorderSide.none,
     ),
-    fillColor: const Color(0xFFFFFFFF),
+    fillColor: Color(0xFFFFDA00),
     filled: true,
     hintStyle: const TextStyle(
       color: Color(0xFF000000),
@@ -611,14 +782,11 @@ SMultiLoginComponent.complexCardMode(
   ),
   passwordInputTextStyle: const TextStyle(
     fontSize: 15,
-    color: Color(0xFF0230C5),
+    color: Color(0xFF000000),
     fontStyle: FontStyle.italic,
   ),
-  // Parametros para personalizar los estilos de los botones de:
-  // Correo
   emailButtonStyle: ButtonStyle(
-    backgroundColor: const MaterialStatePropertyAll<Color>(
-        Color(0xFF0230C5)),
+    backgroundColor: const MaterialStatePropertyAll<Color>(Color(0xFF000000)),
     maximumSize: const MaterialStatePropertyAll<Size>(
       Size(double.infinity, 100),
     ),
@@ -637,32 +805,17 @@ SMultiLoginComponent.complexCardMode(
     size: 30,
   ),
   emailButtonText: "Iniciar sesión con correo",
-  // Google
-  googleButtonStyle: ButtonStyle(
-    backgroundColor: const MaterialStatePropertyAll<Color>(
-        Color(0xFF0230C5)),
-    maximumSize: const MaterialStatePropertyAll<Size>(
-      Size(double.infinity, 100),
-    ),
-    minimumSize: const MaterialStatePropertyAll<Size>(
-      Size(100, 40),
-    ),
-    shape: MaterialStatePropertyAll<OutlinedBorder>(
-      RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(50),
-      ),
-    ),
-  ),
-  googleButtonIcon: Image.asset(
-    "assets/icon_google_default.png",
-    height: 30,
-    color: const Color(0xFFFFDA00),
-  ),
-  googleButtonText: "Iniciar sesión con Google",
+);
+```
+
+![Ejemplo_3](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/usage_07.png)
+
+```dart
+// Ejemplo del componente socialMediaLoginComplex con estilo personalizado:
+SMultiLoginComponent.socialMediaLoginComplex(
   // Facebook
   facebookButtonStyle: ButtonStyle(
-    backgroundColor: const MaterialStatePropertyAll<Color>(
-        Color(0xFF0230C5)),
+    backgroundColor: const MaterialStatePropertyAll<Color>(Color(0xFF000000)),
     maximumSize: const MaterialStatePropertyAll<Size>(
       Size(double.infinity, 100),
     ),
@@ -681,28 +834,58 @@ SMultiLoginComponent.complexCardMode(
     size: 30,
   ),
   facebookButtonText: "Iniciar sesión con Facebook",
-  footerText: "O podés ingresar con:",
-  // Metodos onResult y onError:
-  onResultEmailLogin: (data) {
-    // código onResult Email
-  },
-  onErrorEmailLogin: (error) {
-    // código onError Email
-  },
-  onResultGoogleLogin: (data) {
-    // código onResult Google
-  },
-  onErrorGoogleLogin: (error) {
-    // código onError Google
-  },
+  // Google
+  googleButtonStyle: ButtonStyle(
+    backgroundColor: const MaterialStatePropertyAll<Color>(Color(0xFF000000)),
+    maximumSize: const MaterialStatePropertyAll<Size>(
+      Size(double.infinity, 100),
+    ),
+    minimumSize: const MaterialStatePropertyAll<Size>(
+      Size(100, 40),
+    ),
+    shape: MaterialStatePropertyAll<OutlinedBorder>(
+      RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(50),
+      ),
+    ),
+  ),
+  googleButtonIcon: Image.asset(
+    "assets/icon_google_default.png",
+    height: 30,
+    color: Color(0xFFFFDA00),
+  ),
+  googleButtonText: "Iniciar sesión con Google",
   onResultFacebookLogin: (data) {
-    // código onResult Facebook
+    // código onResultFacebook
   },
   onErrorFacebookLogin: (error) {
-    // código onError Facebook
+    // código onErrorFacebook
   },
-),
+  onResultGoogleLogin: (data) {
+    // código onResultGoogle
+  },
+  onErrorGoogleLogin: (error) {
+    // código onErrorGoogle
+  },
+);
 ```
 
-Imagen ilustrativa:<br>
-![Imagen del componente con estilo personalizado y login con email, google y facebook](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/usage_02.png)
+![Ejemplo_4](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/usage_08.png)
+
+```dart
+// Ejemplo de cómo usar el método de login con Google en un widget personalizado:
+ElevatedButton(
+  onPressed: () async {
+    await LoginController().onGoogleLogin(
+      context: context,
+      onResultGoogleLogin: (data) => googleLogin(data),
+      onErrorGoogleLogin: (error) => googleError(error),
+    );
+  },
+  child: const FittedBox(
+    child: Text(
+      "Google Login",
+    ),
+  ),
+);
+```
