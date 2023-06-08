@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 const Color ktransparent = Colors.transparent;
 const Color kwhite = Color(0xFFFFFFFF);
 const Color kblack = Color(0xFF000000);
+
 const Color kgrey = Colors.grey;
 const Color kdarkgrey = Color(0xFF616161);
 const Color kbackground = Color(0xFFF2F3F6);
@@ -18,5 +19,3 @@ const Color kApple = Color(0xFF000000);
 const Color kTwitter = Color(0xFF00ACED);
 const Color kLinkedin = Color(0xFF007BB6);
 const Color kMicrosoft = Color(0xFF7cbb00);
-const Color kInstagram = Color(0xFFD43089);
-// const Color kPinterest = Color(0xFFCB2027);

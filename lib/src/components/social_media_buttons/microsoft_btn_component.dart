@@ -1,16 +1,12 @@
 //* Flutter imports
 import 'package:flutter/material.dart';
 
-//* Packages imports
-import 'package:firebase_auth/firebase_auth.dart';
-
 //* Project imports
 import 'package:s_multiloginp/src/constants/k_colors.dart';
 import 'package:s_multiloginp/src/enums/component_mode_enum.dart';
-import 'package:s_multiloginp/src/manager/auth_manager.dart';
 import 'package:s_multiloginp/src/models/current_user_model.dart';
-import 'package:s_multiloginp/src/utils/loading_popup.dart';
 import 'package:s_multiloginp/src/components/button_component.dart';
+import 'package:s_multiloginp/src/controllers/login_controller.dart';
 
 // ignore: must_be_immutable
 class MicrosoftBtnComponent extends StatefulWidget {
@@ -65,7 +61,13 @@ class MicrosoftBtnComponentState extends State<MicrosoftBtnComponent> {
 
   _simpleMicrosoftLoginButton() {
     return ButtonComponent(
-      onPressed: () => _onMicrosoftLogin(),
+      onPressed: () => LoginController().onMicrosoftLogin(
+        context: context,
+        onResultMicrosoftLogin: widget.onResultMicrosoftLogin,
+        onErrorMicrosoftLogin: widget.onErrorMicrosoftLogin,
+        backgroundColor: widget.backgroundColor,
+        loadingColor: widget.loadingColor,
+      ),
       icon: widget.microsoftButtonIcon ??
           Image.asset(
             "assets/icon_microsoft_default.png",
@@ -90,7 +92,13 @@ class MicrosoftBtnComponentState extends State<MicrosoftBtnComponent> {
 
   _complexMicrosoftLoginButton() {
     return ButtonComponent(
-      onPressed: () => _onMicrosoftLogin(),
+      onPressed: () => LoginController().onMicrosoftLogin(
+        context: context,
+        onResultMicrosoftLogin: widget.onResultMicrosoftLogin,
+        onErrorMicrosoftLogin: widget.onErrorMicrosoftLogin,
+        backgroundColor: widget.backgroundColor,
+        loadingColor: widget.loadingColor,
+      ),
       text: widget.microsoftButtonText ?? "Sign In with Microsoft",
       icon: widget.microsoftButtonIcon ??
           Image.asset(
@@ -112,42 +120,5 @@ class MicrosoftBtnComponentState extends State<MicrosoftBtnComponent> {
             ),
           ),
     );
-  }
-
-  // CONTROLLER----------------------------------------------------
-  _onMicrosoftLogin() async {
-    await LoadingPopup(
-      context: context,
-      onLoading: _onMicrosoftLoading(),
-      onResult: (data) => _onMicrosoftResult(data),
-      onError: (error) => _onMicrosoftError(error),
-      backgroundColor: widget.backgroundColor,
-      loadingColor: widget.loadingColor,
-    ).show();
-  }
-
-  _onMicrosoftLoading() async {
-    await AuthManager().signInWithMicrosoft();
-    return AuthManager().getUserCredential();
-  }
-
-  _onMicrosoftResult(CurrentUserModel data) async {
-    if (data.token != null) {
-      if (widget.onResultMicrosoftLogin != null) {
-        widget.onResultMicrosoftLogin!(data);
-      } else {
-        debugPrint("Null result MicrosoftLogin");
-      }
-    } else {
-      debugPrint("Error on MicrosoftLogin");
-    }
-  }
-
-  _onMicrosoftError(FirebaseAuthException error) {
-    if (widget.onErrorMicrosoftLogin != null) {
-      widget.onErrorMicrosoftLogin!(error);
-    } else {
-      debugPrint("El error fue: $error");
-    }
   }
 }
