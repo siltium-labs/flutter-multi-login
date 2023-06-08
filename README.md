@@ -465,7 +465,7 @@ Nota: No hacen falta configuraciones adicionales en tu proyecto Flutter para hab
 <br>
 
 ## **Uso de la Librería**
-1) Llamar a `SMultiLoginComponent()` en tu proyecto para usar el componente por defecto de la librería.<br>
+1) Llamar a `SMultiLoginComponent` en tu proyecto para usar el componente por defecto de la librería.<br>
 Puedes llamar al componente para inicio de sesión con correo y contraseña, al componente para inicio de sesión con redes sociales o también puedes llamar a ambos componentes.
 ```dart
 // Componente de Inicio de sesión con correo y contraseña
