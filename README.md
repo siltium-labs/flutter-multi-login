@@ -29,7 +29,7 @@ EN FLUTTER:
 dependencies:
   s_multiloginp:
     git:
-      url: https://github.com/YamiTeyssier/s-multilogin-plug.git
+      url: https://github.com/siltium-labs/flutter-multi-login.git
       ref: development
 ```
 Nota: Si se realizan cambios en la rama de dicho repositorio, es necesario quitar la librería (comentarla), correr el comando `flutter pub get`, volver a agregar la librería (descomentarla) y finalmente volver a correr el comando `flutter pub get`.
@@ -54,19 +54,20 @@ android {
 }
 ```
 
-4) Inicializar las siguientes variables en `project_name\android\app\build.gradle`:
+4) Inicializar las siguientes variables en `project_name\android\app\build.gradle` de la siguiente manera:
 ```gradle
 android {
     defaultConfig {
       ...
         // Facebook config
-        resValue "string", "fbAppID", ""
-        resValue "string", "fbClientToken", ""
+        resValue "string", "fbAppID", "\"TU_FB_APP_ID\""
+        resValue "string", "fbClientToken", "\"TU_FB_CLIENT_TOKEN\""
         // Twitter config
-        resValue "string", "twRedirectURL", ""
+        resValue "string", "twRedirectURL", "\"TU_CUSTOM_SCHEME\""
     }
 }
 ```
+Nota: Estos son valores de inicialización por defecto que se cambiarán más adelante, según la splataformas que agreguemos para iniciar sesión.
 
 PARA IOS:
 
@@ -258,8 +259,8 @@ PARA ANDROID:
 defaultConfig {
         ...
         // Facebook Android config
-        resValue "string", "fbAppID", "\"TU_FB_APP_ID\""
-        resValue "string", "fbClientToken", "\"TU_FB_CLIENT_TOKEN\""
+        resValue "string", "fbAppID", "\"TU_FB_APP_ID\"" // cambiar TU_FB_APP_ID por tu Identificador de la app.
+        resValue "string", "fbClientToken", "\"TU_FB_CLIENT_TOKEN\"" // cambiar TU_FB_CLIENT_TOKEN por tu Clave secreta de la app.
     }
 
 dependencies {
@@ -347,7 +348,7 @@ PARA ANDROID:
 defaultConfig {
         ...
         // Twitter Android config
-         resValue "string", "twRedirectURL", "\"customscheme\""
+         resValue "string", "twRedirectURL", "\"TU_CUSTOM_SCHEME\"" // cambiar TU_CUSTOM_SCHEME por tu customscheme de Twitter.
     }
 ```
 Nota: Es necesario escapar las comillas para que el archivo `build.gradle` lo tome como un string y NO colocar "://" al final del nombre del esquema.<br>
