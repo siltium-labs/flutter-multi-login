@@ -1,7 +1,7 @@
 name: s_multiloginp
-description: Siltium social media sign in with Firebase.
+description: Siltium plugin to log in app with email & social network.
 version: 1.0.0
-homepage:
+homepage: https://github.com/siltium-labs/flutter-multi-login/tree/development
 
 environment:
   sdk: '>=2.18.6 <3.0.0'
