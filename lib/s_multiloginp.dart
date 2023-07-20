@@ -48,7 +48,7 @@ class SMultiLogin {
   SMultiLogin._constructor();
 
   multiLoginInit({
-    required FirebaseOptions options,
+    FirebaseOptions? options,
     String? googleIOSClientId,
     String? twitterApiKey,
     String? twitterApiSecretKey,
@@ -59,9 +59,13 @@ class SMultiLogin {
   }) async {
     // Init de Firebase -Correo y redes sociales- (Android & iOS)
     WidgetsFlutterBinding.ensureInitialized();
-    await Firebase.initializeApp(
-      options: options,
-    );
+    if (options != null) {
+      await Firebase.initializeApp(
+        options: options,
+      );
+    } else {
+      await Firebase.initializeApp();
+    }
     // Init Google (iOS)
     if (googleIOSClientId.isNotNullOrEmpty()) {
       AuthManager().googleLoginInit(googleIOSClientId);
