@@ -132,6 +132,7 @@ class AuthManager {
       {CurrentUserModel? currentUser}) async {
     if (user != null && user!.user != null) {
       return userCredential = CurrentUserModel(
+        userId: user!.user!.uid,
         displayName: user!.user!.displayName,
         email: user!.user!.email,
         phoneNumber: user!.user!.phoneNumber,
