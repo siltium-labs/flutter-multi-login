@@ -42,5 +42,10 @@ android {
 
     defaultConfig {
         minSdkVersion 16
+        // Facebook config
+        resValue "string", "fbAppID", "\"TU_FB_APP_ID\""
+        resValue "string", "fbClientToken", "\"TU_FB_CLIENT_TOKEN\""
+        // Twitter config
+        resValue "string", "twRedirectURL", "\"TU_CUSTOM_SCHEME\""
     }
 }
