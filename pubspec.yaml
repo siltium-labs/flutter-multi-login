@@ -1,0 +1,42 @@
+name: s_multiloginp
+description: Siltium plugin to log in app with email & social network.
+version: 1.0.0
+homepage: https://github.com/siltium-labs/flutter-multi-login/tree/development
+
+environment:
+  sdk: '>=2.18.6 <4.0.0'
+  flutter: ">=2.5.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  plugin_platform_interface: ^2.0.2
+  cupertino_icons: ^1.0.2
+  cached_network_image: ^3.2.2
+  # Librerías para inicio de sesión con redes sociales
+  firebase_core: ^2.10.0
+  firebase_auth: ^4.4.2
+  google_sign_in: ^6.1.0
+  flutter_facebook_auth: ^5.0.9
+  sign_in_with_apple: ^4.3.0
+  crypto: ^3.0.1
+  twitter_login: ^4.4.0
+  linkedin_login: ^2.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.example.s_multiloginp
+        pluginClass: SMultiloginpPlugin
+      ios:
+        pluginClass: SMultiloginpPlugin
+
+  assets:
+    - assets/

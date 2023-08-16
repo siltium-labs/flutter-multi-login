@@ -1,0 +1,4 @@
+enum ComponentTypeEnum {
+  emailLogin,
+  socialMediaLogin,
+}

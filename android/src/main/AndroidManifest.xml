@@ -1,0 +1,27 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  package="com.example.s_multiloginp"
+  xmlns:tools="http://schemas.android.com/tools">
+
+  <uses-permission android:name="android.permission.INTERNET" tools:node="merge" />
+
+  <!-- Facebook config-->
+  <application android:name="android.app.Application" tools:node="merge">
+    <meta-data android:name="com.facebook.sdk.ApplicationId"
+      android:value="@string/fbAppID" />
+    <meta-data android:name="com.facebook.sdk.ClientToken"
+      android:value="@string/fbClientToken" />
+
+    <!-- Twitter config -->
+    <activity
+      android:name="${applicationId}.MainActivity"
+      android:exported="true">
+      <intent-filter tools:node="merge">
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="@string/twRedirectURL" />
+      </intent-filter>
+    </activity>
+  </application>
+
+</manifest>
