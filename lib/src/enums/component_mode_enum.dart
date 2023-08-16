@@ -1,4 +1,0 @@
-enum ComponentModeEnum {
-  simpleMode,
-  complexMode,
-}
