@@ -8,6 +8,12 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:crypto/crypto.dart';
 
 class AppleLoginManager {
+  String? _appleUserId;
+
+  String? getAppleUserId() {
+    return _appleUserId;
+  }
+
   /// Generates a cryptographically secure random nonce, to be included in a
   /// credential request.
   String generateNonce([int length = 32]) {
@@ -41,6 +47,9 @@ class AppleLoginManager {
       ],
       nonce: nonce,
     );
+
+    // Obtener AppleUserId, para conexión con API Gas del norte Pedidos
+    _appleUserId = appleCredential.userIdentifier;
 
     // Create an `OAuthCredential` from the credential returned by Apple.
     final appleOAuthCredential = OAuthProvider("apple.com").credential(

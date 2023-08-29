@@ -127,18 +127,16 @@ class LoginController {
       backgroundColor: backgroundColor,
       loadingColor: loadingColor,
       onLoading: _onAppleLoading(),
-      //TODO: APPLE. DESCOMENTAR ONAPPLERESULT Y DATA PARA PROBAR!!!
-      onResult: (/*CurrentUserModel data*/) {
-        debugPrint("Apple login");
-        // if (data.token != null) {
-        //   if (onResultAppleLogin != null) {
-        //     onResultAppleLogin(data);
-        //   } else {
-        //     debugPrint("onResultAppleLogin was not given or is empty.");
-        //   }
-        // } else {
-        //   debugPrint("Error onAppleLogin: Data token is null.");
-        // }
+      onResult: (CurrentUserModel data) {
+        if (data.token != null) {
+          if (onResultAppleLogin != null) {
+            onResultAppleLogin(data);
+          } else {
+            debugPrint("onResultAppleLogin was not given or is empty.");
+          }
+        } else {
+          debugPrint("Error onAppleLogin: Data token is null.");
+        }
       },
       onError: (FirebaseAuthException error) {
         if (onErrorAppleLogin != null) {

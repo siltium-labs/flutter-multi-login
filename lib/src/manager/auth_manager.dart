@@ -133,6 +133,7 @@ class AuthManager {
     if (user != null && user!.user != null) {
       return userCredential = CurrentUserModel(
         fbUserId: FacebookLoginManager().getFbUserId(),
+        appleUserId: AppleLoginManager().getAppleUserId(),
         displayName: user!.user!.displayName,
         email: user!.user!.email,
         phoneNumber: user!.user!.phoneNumber,

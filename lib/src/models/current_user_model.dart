@@ -1,5 +1,6 @@
 class CurrentUserModel {
   String? fbUserId;
+  String? appleUserId;
   String? displayName;
   String? email;
   String? phoneNumber;
@@ -11,6 +12,7 @@ class CurrentUserModel {
 
   CurrentUserModel({
     this.fbUserId,
+    this.appleUserId,
     this.displayName,
     this.email,
     this.phoneNumber,
