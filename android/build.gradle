@@ -1,19 +1,6 @@
 group 'com.example.s_multiloginp'
 version '1.0-SNAPSHOT'
 
-buildscript {
-    ext.kotlin_version = '1.6.10'
-    repositories {
-        google()
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath 'com.android.tools.build:gradle:7.1.2'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
-}
-
 allprojects {
     repositories {
         google()
@@ -41,7 +28,7 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 21
         // Facebook config
         resValue "string", "fbAppID", "\"TU_FB_APP_ID\""
         resValue "string", "fbClientToken", "\"TU_FB_CLIENT_TOKEN\""
