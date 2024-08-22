@@ -242,12 +242,9 @@ class LoginController {
             },
             onGetUserProfile: (final UserSucceededAction linkedInUser) {
               CurrentUserModel currentLkUser = CurrentUserModel(
-                displayName:
-                    "${linkedInUser.user.firstName?.localized?.label} ${linkedInUser.user.lastName?.localized?.label}",
-                email: linkedInUser
-                    .user.email?.elements?[0].handleDeep?.emailAddress,
-                photoURL: linkedInUser.user.profilePicture?.displayImageContent
-                    ?.elements?[0].identifiers?[0].identifier,
+                displayName: "${linkedInUser.user.name}",
+                email: linkedInUser.user.email,
+                photoURL: linkedInUser.user.picture,
                 token: linkedInUser.user.token.accessToken,
               );
               AuthManager().getUserCredential(currentUser: currentLkUser);
