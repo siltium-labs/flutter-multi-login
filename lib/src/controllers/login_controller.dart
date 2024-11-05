@@ -49,19 +49,31 @@ class LoginController {
     ).show();
   }
 
-  onFacebookLogin({
+  Future<String> onFacebookLogin({
     required BuildContext context,
     Function(CurrentUserModel)? onResultFacebookLogin,
     Function? onErrorFacebookLogin,
     final Color? backgroundColor,
     final Color? loadingColor,
   }) async {
+    String result = "";
     await LoadingPopup(
       context: context,
       backgroundColor: backgroundColor,
       loadingColor: loadingColor,
       onLoading: _onFacebookLoading(),
       onResult: (CurrentUserModel data) {
+        result = '''
+        FACEBOOK DATA
+        access token:${data.accessToken}
+        displayName: ${data.displayName}
+        email: ${data.email}
+        phoneNumber: ${data.phoneNumber}
+        photoURL: ${data.photoURL}
+        providerId: ${data.providerId}
+        refreshToken: ${data.refreshToken}
+        token: ${data.token}
+        ''';
         if (data.token != null) {
           if (onResultFacebookLogin != null) {
             onResultFacebookLogin(data);
@@ -72,14 +84,34 @@ class LoginController {
           debugPrint("Error onFacebookLogin: Data token is null.");
         }
       },
-      onError: (FirebaseAuthException error) {
-        if (onErrorFacebookLogin != null) {
-          onErrorFacebookLogin(error);
+      onError: (dynamic error) {
+        if (error is FirebaseAuthException) {
+          result = '''
+          ERROR
+          credential: ${error.credential}
+          email: ${error.email}
+          phoneNumber: ${error.phoneNumber}
+          tenantId: ${error.tenantId}
+          code: ${error.code}
+          message: ${error.message}
+          plugin: ${error.plugin}
+          ---------------
+          stackTrace: ${error.stackTrace}
+          ''';
+          if (onErrorFacebookLogin != null) {
+            onErrorFacebookLogin(error);
+          } else {
+            debugPrint("The error was: $error");
+          }
         } else {
-          debugPrint("The error was: $error");
+          result = '''
+            DEFAULT ERROR
+            ${error.toString()}
+          ''';
         }
       },
     ).show();
+    return result;
   }
 
   onGoogleLogin({
