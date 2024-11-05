@@ -23,32 +23,42 @@ class FacebookLoginManager {
   }
 
   facebookLogin() async {
+    //* FOR iOS
     if (Platform.isIOS) {
       final rawNonce = generateNonce();
       final nonce = sha256ofString(rawNonce);
       // Trigger the sign-in flow
       final LoginResult loginResult = await FacebookAuth.instance.login(
-        // loginBehavior: LoginBehavior.webOnly,
+        loginBehavior: LoginBehavior.webOnly,
         loginTracking: LoginTracking.limited,
         nonce: nonce,
       );
 
-      // Create a credential from the access toke
-      final OAuthCredential facebookOAuthCredential =
-          FacebookAuthProvider.credential(
-        loginResult.accessToken!.tokenString,
-      );
+      // Create a credential from the access token (depends of accessToken type)
+      final OAuthCredential facebookOAuthCredential;
+
+      switch (loginResult.accessToken!.type) {
+        case AccessTokenType.classic:
+          final classicToken = loginResult.accessToken as ClassicToken;
+          facebookOAuthCredential = FacebookAuthProvider.credential(
+            classicToken.authenticationToken!,
+          );
+          break;
+        case AccessTokenType.limited:
+          final limitedToken = loginResult.accessToken as LimitedToken;
+          facebookOAuthCredential = OAuthCredential(
+            providerId: 'facebook.com',
+            signInMethod: 'oauth',
+            idToken: limitedToken.tokenString,
+            rawNonce: rawNonce,
+          );
+          break;
+      }
 
       // Once signed in, return the UserCredential (inicio de sesion, en AuthManager)
-      // return facebookOAuthCredential;
-      final LimitedToken token =
-          facebookOAuthCredential.accessToken as LimitedToken;
-      return OAuthCredential(
-        providerId: 'facebook.com',
-        signInMethod: 'oauth',
-        idToken: token.tokenString,
-        rawNonce: rawNonce,
-      );
+      return facebookOAuthCredential;
+
+      //* FOR Android
     } else {
       // Trigger the sign-in flow
       final LoginResult loginResult = await FacebookAuth.instance.login(
