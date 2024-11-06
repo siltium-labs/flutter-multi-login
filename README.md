@@ -19,7 +19,7 @@ Plugin para incluir en proyectos mobile de Siltium que permite utilizar el compo
 <br>
 **1.0.0** - Inicio de sesión con Email & Contraseña, Google, Facebook, Twitter, LinkedIn y Microsoft disponibles para Android & iOS. Inicio de sesión con Apple en testing.
 <br>
-**1.1.0** - Inicio de sesión con Email & Contraseña, Google, Facebook, Twitter, LinkedIn y Microsoft disponibles para Android & iOS. Inicio de sesión con Apple para iOS.
+**1.1.0 y 1.1.1** - Inicio de sesión con Email & Contraseña, Google, Facebook, Twitter, LinkedIn y Microsoft disponibles para Android & iOS. Inicio de sesión con Apple para iOS.
 <br>
 <br>
 
@@ -35,7 +35,7 @@ dependencies:
       # ref a branch
       ref: development
       # or ref a version tag
-      # ref: 1.1.0
+      # ref: 1.1.1
 ```
 Nota: Si se realizan cambios en la rama de dicho repositorio, es necesario quitar la librería (comentarla), correr el comando `flutter pub get`, volver a agregar la librería (descomentarla) y finalmente volver a correr el comando `flutter pub get`.
 
