@@ -13,3 +13,7 @@ Inicio de sesión con Email & Contraseña, Google y Facebook disponibles para An
 ## 1.0.0
 Inicio de sesión con Email & Contraseña, Google, Facebook, Twitter, LinkedIn y Microsoft disponibles para Android & iOS. Inicio de sesión con Apple en testing.
 Versión de Flutter compatible: hasta la 3.13.5
+
+## 1.1.0
+Inicio de sesión con Email & Contraseña, Google, Facebook, Twitter, LinkedIn y Microsoft disponibles para Android & iOS. Inicio de sesión con Apple para iOS.
+Versión de Flutter compatible: hasta la 3.19.6
