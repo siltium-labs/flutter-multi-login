@@ -1,6 +1,6 @@
 
 ------------------------------------------
-# **S-MultiLogin: Siltium Component for Social Media Login**<br> ![](https://img.shields.io/badge/Dart-Flutter-blue) ![](https://img.shields.io/badge/iOS-Android-green) <br> ![](https://img.shields.io/badge/Email&Pass-yellow) ![](https://img.shields.io/badge/Google-DD4B39) ![](https://img.shields.io/badge/Facebook-3B5998) ![](https://img.shields.io/badge/Twitter-00ACED) ![](https://img.shields.io/badge/LinkedIn-007BB6) ![](https://img.shields.io/badge/Microsoft-7cbb00) ![](https://img.shields.io/badge/en%20test-Apple-black)
+# **S-MultiLogin: Siltium Component for Social Media Login**<br> ![](https://img.shields.io/badge/Flutter-3.19.6-blue) ![](https://img.shields.io/badge/iOS-Android-green) <br> ![](https://img.shields.io/badge/Email&Pass-yellow) ![](https://img.shields.io/badge/Google-DD4B39) ![](https://img.shields.io/badge/Facebook-3B5998) ![](https://img.shields.io/badge/Twitter-00ACED) ![](https://img.shields.io/badge/LinkedIn-007BB6) ![](https://img.shields.io/badge/Microsoft-7cbb00) ![](https://img.shields.io/badge/iOS-Apple-black)
 
 
 ## **Descripción**
@@ -19,6 +19,8 @@ Plugin para incluir en proyectos mobile de Siltium que permite utilizar el compo
 <br>
 **1.0.0** - Inicio de sesión con Email & Contraseña, Google, Facebook, Twitter, LinkedIn y Microsoft disponibles para Android & iOS. Inicio de sesión con Apple en testing.
 <br>
+**1.1.0** - Inicio de sesión con Email & Contraseña, Google, Facebook, Twitter, LinkedIn y Microsoft disponibles para Android & iOS. Inicio de sesión con Apple para iOS.
+<br>
 <br>
 
 ## **Instalación de la Librería (Android y iOS)**
@@ -30,16 +32,19 @@ dependencies:
   s_multiloginp:
     git:
       url: https://github.com/siltium-labs/flutter-multi-login.git
+      # ref a branch
       ref: development
+      # or ref a version tag
+      # ref: 1.1.0
 ```
 Nota: Si se realizan cambios en la rama de dicho repositorio, es necesario quitar la librería (comentarla), correr el comando `flutter pub get`, volver a agregar la librería (descomentarla) y finalmente volver a correr el comando `flutter pub get`.
 
 PARA ANDROID:
 
-2) Modificar el compileSdkVersion a 33 en `project_name\android\app\build.gradle`:
+2) Modificar el compileSdkVersion a 34 en `project_name\android\app\build.gradle`:
 ```gradle
 android {
-    compileSdkVersion 33
+    compileSdkVersion 34
     ...
 }
 ```
@@ -76,7 +81,7 @@ Nota: Este paso es necesario debido a una mala generación de un fragmento de c�
 
 6) Correr el comando `flutter pub get` para generar el archivo nuevamente, y a continuación verificar que el siguiente fragmento ya no se encuentre generado en él:
 
-![Agregar email login](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/ios_init_config.png)
+![Agregar email login](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/ios_init_config.png)
 
 y también en el mismo archivo modificar la versión de la plataforma iOS a 12:
 ```ruby
@@ -90,30 +95,30 @@ EN FIREBASE:
 
 8) En Firebase, Ir a la [Consola Firebase](https://firebase.google.com) y crear un nuevo proyecto:
 
-![Crear nuevo proyecto firebase](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/install_01.png)
+![Crear nuevo proyecto firebase](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/install_01.png)
 
 Colocarle nombre al nuevo proyecto y continuar:
 
-![Nombrar el nuevo proyecto firebase](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/install_02.png)
+![Nombrar el nuevo proyecto firebase](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/install_02.png)
 
 También puedes habilitar o deshabilitar Google Analytics. Si lo deshabilitas, seguidamente puedes crear el proyecto. Si no, continúa a la configuración del mismo:
 
-![Habilitar/Deshabilitar google analytics](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/install_03.png)
+![Habilitar/Deshabilitar google analytics](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/install_03.png)
 
 Al habilitar Google Analytics es necesario configurarlo y aceptar las condiciones de uso. Y finalmente, puedes crear el proyecto:
 
-![Finalizar y crear el proyecto](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/install_04.png)
+![Finalizar y crear el proyecto](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/install_04.png)
 
 9) Luego, añadir Firebase a tu aplicación: NuevoProyectoFirebase -> Agregar app -> Flutter<br>
 
-![Crear App de Flutter en Firebase](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/install_05.png)
+![Crear App de Flutter en Firebase](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/install_05.png)
 
 A continuación, seguir los pasos 1 y 2 de la documentación oficial que se muestran en pantalla.<br>
 Nota: Si es la primera vez que usas Firebase con Flutter, realiza los pasos 1 y 2 completos. Si ya lo usaste anteriormente, puedes realizar solo el paso 2 desde el comando `flutterfire configure`.<br>
 
-![Paso 1](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/install_06.png)
+![Paso 1](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/install_06.png)
 
-![Paso 2](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/install_07.png)
+![Paso 2](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/install_07.png)
 
 También puedes seguir la guía de la [Documentación oficial para Agregar Firebase en una app de Flutter](https://firebase.google.com/docs/flutter/setup?hl=es-419&platform=android)<br>
 (Una vez terminada esta guía, también es necesario ir a NuevoProyectoFirebase -> Agregar app -> Flutter)
@@ -148,22 +153,22 @@ Ahora ya puedes agregar el login de diferentes plataformas/proveedores.
 ## **Agregar y Usar los Inicio de sesión (Android y iOS)**
 Nota: Para habilitar los diferentes proveedores, dirigirse a Authentication -> Sign-in method -> Agregar proveedor nuevo:
 
-![Agregar nuevo proveedor](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/login_01.png)
+![Agregar nuevo proveedor](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/login_01.png)
 
 ~
 
 ### **LOGIN CON CORREO Y CONTRASEÑA:**
 Con los pasos anteriores, se habilita el uso del login con correo y contraseña, tanto para Android como para iOS. Habilitarlo desde Firebase.<br>
 
-![Agregar email login](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/email_01.png)
+![Agregar email login](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/email_01.png)
 
-![Habilitar email login](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/email_02.png)
+![Habilitar email login](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/email_02.png)
 
 Nota: Crear también un usuario de prueba (Authentication -> Users -> Agregar usuario):
 
-![Crear nuevo usuario](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/email_03.png)
+![Crear nuevo usuario](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/email_03.png)
 
-![Nuevo usuario](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/email_04.png)
+![Nuevo usuario](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/email_04.png)
 
 ~
 
@@ -172,9 +177,9 @@ EN ANDROID:
 
 Con los pasos anteriores, se habilita el uso del login con cuenta de google para Android. Habilitarlo desde Firebase y agregar la huella digital SHA1 de tu computadora, en "Configuración del proyecto" y seleccionando la app.<br>
 
-![Agregar google login](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/google_01.png)
+![Agregar google login](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/google_01.png)
 
-![Habilitar google login](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/google_02.png)
+![Habilitar google login](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/google_02.png)
 
 Como obtener la huella digital SHA1: [Google docs sobre SHA1](https://developers.google.com/android/guides/client-auth?hl=es-419).<br>
 - Resumen: En el cmd (consola de comandos) posicionarse dentro del directorio bin del jdk instalado, y ejecutar:
@@ -184,11 +189,11 @@ password: android
 ```
 - Copiar el SHA1 en la consola de Firebase.
 
-![ir a configuracion del proyecto](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/google_03.png)
+![ir a configuracion del proyecto](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/google_03.png)
 
-![En tu app, huellas digitales](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/google_04.png)
+![En tu app, huellas digitales](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/google_04.png)
 
-![Agregar tu huella digital](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/google_05.png)
+![Agregar tu huella digital](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/google_05.png)
 
 EN IOS:
 
@@ -197,7 +202,7 @@ Por lo tanto, es necesario realizar los siguientes pasos para iOS:
 
 1) Del archivo `GoogleService-Info.plist`, ubicado en `project_name\ios\Runner\`, obtener el `CLIENT_ID` y el `REVERSED_CLIENT_ID`.
 
-![Obtener CLIENT_ID y REVERSED_CLIENT_ID](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/google_06.png)
+![Obtener CLIENT_ID y REVERSED_CLIENT_ID](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/google_06.png)
 
 2) Copiar el `CLIENT_ID` y colocarlo como parte del método `SMultiLogin().multiLoginInit()` (anteriormente iniciado en `main.dart`) como se detalla a continuación:
 ```dart
@@ -224,7 +229,7 @@ await SMultiLogin().multiLoginInit(
 ```
 4) Eliminar el archivo `GoogleService-Info.plist`.
 
-![Eliminar GoogleService-Info.plist](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/google_07.png)
+![Eliminar GoogleService-Info.plist](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/google_07.png)
 
 ~
 
@@ -236,17 +241,17 @@ Crear una nueva app y seguir la guía de inicio rápido según la plataforma que
 [Desde la consola de Facebook Devs](https://developers.facebook.com/apps/766439921742770/fb-login/quickstart/)<br>
 [Documentacion extra](https://defold.com/extension-facebook/)<br>
 
-Nota: Hay problemas con los nombres de paquetes en la guia de inicio rápido, hacerlo por aparte probando hasta que pueda agregarse mediante los hash.
+Nota: Si hay problemas con los nombres de paquetes en la guia de inicio rápido, hacerlo por aparte probando hasta que pueda agregarse mediante los hash.
 
 Habilitar el inicio de sesión de Facebook desde Firebase. Copiar el App ID y el App Secret dados en Facebook Devs y luego copiar la URI en la Consola de Facebook Devs, en "Inicio de sesión con Facebook -> Configurar -> URI de redireccionamiento de OAuth válidos".
 
-![Donde estan el AppID y el App Secret](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/facebook_01.png)
+![Donde estan el AppID y el App Secret](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/facebook_01.png)
 
-![Agregar facebook login](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/facebook_02.png)
+![Agregar facebook login](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/facebook_02.png)
 
-![Habilitar facebook login](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/facebook_03.png)
+![Habilitar facebook login](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/facebook_03.png)
 
-![Agregar uri en facebook](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/facebook_04.png)
+![Agregar uri en facebook](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/facebook_04.png)
 
 ~
 
@@ -272,7 +277,7 @@ Nota: Es necesario escapar las comillas para que el archivo `build.gradle` lo to
 
 Para IOS:
 
-1) En el archivo `project_name\ios\Runner\Info.plist` agregar el siguiente código dentro de `<dict>...</dict>`, agregando los campos correspondientes. Es decir, el AppID y el Client Token (SecretApp) de tu app de facebook:
+1) En el archivo `project_name\ios\Runner\Info.plist` agregar el siguiente código dentro de `<dict>...</dict>`, agregando los campos correspondientes. Es decir, el AppID y el Client Token de tu app de facebook:
 ```plist
 <!-- Facebook iOS config -->
 		<key>CFBundleURLTypes</key>
@@ -301,31 +306,42 @@ Para IOS:
 Nota: En `CFBundleURLSchemes` en necesario colocar el texto "fb" antes del `FB_APP_ID` para que funcione correctamente.
 
 ~
-### **LOGIN CON APPLE:** Pendiente de configuración en Apple Dev.
+### **LOGIN CON APPLE:**
+1) Habilitar el inicio de sesión con cuenta de Apple desde la consola de Firebase.
+
+![Agregar apple login](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/apple_01.png)
+
+De ser necesario, agregar los ID necesarios (login con cuenta de apple en Android u otro distinto a iOS)
+
+![Configuración apple firebase](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/apple_02.png)
+
+2) En caso de necesitar configuración adicional desde la consola apple, dirigirse a [Apple Developers](https://developer.apple.com/)
+
+Nota: Requiere de una cuanta de Apple Developer.
 
 ~
 ### **LOGIN CON TWITTER:**
 1) Iniciar sesión con una cuenta de twitter, ingresar a [Twitter Developers](https://developer.twitter.com/) e ir a "Developer Portal", para crear un proyecto (o usar el creado por defecto) y una aplicación de twitter.<br>
 Nota: si no tienes una cuenta developer, necesitarás activarla enviando las razones de uso de la misma. Finalizado esto te enviará a tu dashboard. Si te generó automáticamente una aplicación por defecto, será necesario borrarla y hacer una nueva app para que asi te den las API Keys y Secret, necesarias para la implementacion del login en flutter.
 
-![Developer Portal](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/twitter_01.png)
+![Developer Portal](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/twitter_01.png)
 
-![Crear proyecto y app en twitter Devs](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/twitter_02.png)
+![Crear proyecto y app en twitter Devs](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/twitter_02.png)
 
 2) Estas API key y secret, colocarlas en la configuracion de la consola de firebase para habilitar el inicio de sesión con twitter.
 
-![Habilitar twitter login](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/twitter_03.png)
+![Habilitar twitter login](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/twitter_03.png)
 
-![Agregar keys de twitter](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/twitter_04.png)
+![Agregar keys de twitter](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/twitter_04.png)
 
 3) Configurar la autenticación de usuarios en el Developer Portal, seleccionando la aplicación y desplazandote hasta el fondo, donde deberás hacer clik en "Set up" en la parte "User authentication settings".
 Deberás elegir que permisos necesitas para la aplicación (lectura de tuits y perfil, lectura y escritura de tuits, etc.), el tipo de tu app (en este caso, Native App) y te mostrará la información del Client ID. Aqui tambien deberas colocar una URL tipo esquema (sheme//:) que NO sea la que da firebase, sino una custom que tambien será definida en la aplicación para asi poder redirigir desde el navegador a la misma.
 
-![User auth settings en dashboard](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/twitter_05.png)
+![User auth settings en dashboard](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/twitter_05.png)
 
-![User auth settings](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/twitter_06.png)
+![User auth settings](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/twitter_06.png)
 
-![App scheme](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/twitter_07.png)
+![App scheme](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/twitter_07.png)
 
 ~
 
@@ -377,44 +393,44 @@ Nota: NO colocar "://" al final del nombre del esquema.
 ### **LOGIN CON LINKEDIN:**
 1) Iniciar sesión con una cuenta de LinkedIn en [LinkedIn Developers](https://developer.linkedin.com/) y entrar en la pestaña "My apps".
 
-![Linkedin devs](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/linkedin_01.png)
+![Linkedin devs](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/linkedin_01.png)
 
 2) Crear una app, indicando nombre de la misma, agregando una foto/logo y vinculandola a una página de LinkedIn existente.
 Nota: Vincular una página a la aplicación es Obligatorio.
 
-![Crear app](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/linkedin_02.png)
+![Crear app](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/linkedin_02.png)
 
-![Configurar app 1](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/linkedin_03.png)
+![Configurar app 1](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/linkedin_03.png)
 
-![Configurar app 2](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/linkedin_04.png)
+![Configurar app 2](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/linkedin_04.png)
 
 3) Luego ir a la pestaña "Settings" para verificar la aplicación con la página vinculada anteriormente. Para eso hacemos click en "Verify" el cual nos abrira un popup en el que tenemos que generar una URL para dirigirnos a la página de verificación.
 
-![Verificar app 1](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/linkedin_05.png)
+![Verificar app 1](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/linkedin_05.png)
 
-![Verificar app 2](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/linkedin_06.png)
+![Verificar app 2](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/linkedin_06.png)
 
 4) Una vez generado el URL, lo copiamos y pegamos en una nueva pestaña del navegador y nos redirigirá a una pagina para ahora sí verificar la app con la pagina vinculada en su creación. Una vez hecho esto cerramos esta pestaña, volvemos a nuestra app, ponemos "I'm done" y recargamos la pagina para comprobar que la app ya esta verificada.
 
-![Verificar app 3](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/linkedin_07.png)
+![Verificar app 3](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/linkedin_07.png)
 
-![Verificar app 4](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/linkedin_08.png)
+![Verificar app 4](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/linkedin_08.png)
 
 5) Una vez verificada la app, podemos agregar el inicio de sesión a la misma. En la pestaña "Products" de la app pedir el acceso al inicio de sesion, tanto al "Sign In with LinkedIn" como asi también al "Sign In with LinkedIn v2".
 
-![Agregar login 1](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/linkedin_09.png)
+![Agregar login 1](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/linkedin_09.png)
 
-![Agregar login 2](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/linkedin_10.png)
+![Agregar login 2](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/linkedin_10.png)
 
-![Agregar login 3](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/linkedin_11.png)
+![Agregar login 3](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/linkedin_11.png)
 
 6) Finalmente, obtener los datos que serán utilizados para inicializar la configuración de dicho login en tu proyecto flutter.
 Primero, en la pestaña "Auth" de la app, agregar una URL de redireccionamiento para la misma. Esta debe ser exactamente la siguiente: "https://www.linkedin.com/callback"
 Y por último, de la misma pestaña "Auth", obtener y copiar el Client ID y Client Secret.
 
-![Obtener redirect Url](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/linkedin_12.png)
+![Obtener redirect Url](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/linkedin_12.png)
 
-![Obtener keys](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/linkedin_13.png)
+![Obtener keys](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/linkedin_13.png)
 
 EN FLUTTER:
 
@@ -431,34 +447,34 @@ await SMultiLogin().multiLoginInit(
 ### **LOGIN CON MICROSOFT:**
 1) Iniciar sesión con una cuenta de Microsoft en [Microsoft Azure Portal](https://portal.azure.com/#home) y entrar en la pestaña "Azure Active Directory". Se puede entrar allí desde el dashboard o desde el menú lateral, como se muestra a continuación.
 
-![Microsoft inicio](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/microsoft_01.png)
+![Microsoft inicio](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/microsoft_01.png)
 
 2) Una vez allí, ir a la pestaña "Registro de aplicaciones" y registrar una nueva aplicación. Esta debe tener un nombre y que los tipos de cuentas compatibles sean "Cuentas en cualquier directorio organizativo y cuentas de Microsoft personales". Por último, poner "Registrar".<br>
 Nota: Aquí todavía no agregamos una URI de redireccionamiento.
 
-![Ir a registro de app](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/microsoft_02.png)
+![Ir a registro de app](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/microsoft_02.png)
 
-![Registrar app](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/microsoft_03.png)
+![Registrar app](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/microsoft_03.png)
 
 3) Luego, en la app, obtenemos los datos necesarios para habilitar el inicio de sesión en Firebase. Primero copiamos el "Id. de aplicación" que lo obtenemos de la pestaña "Información general" y luego, en la pestaña "Certificados y Secretos", generamos un nuevo Secreto de cliente para nuestra app y copiamos su valor.<br>
 Nota importante: Copiar el VALOR del secreto, NO el Id.<br>
 Además, es necesario copiarlo en ese momento, ya que una vez que salimos de la página el valor de dicho secreto ya no estará visible.
 
-![Obtener Id de la app](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/microsoft_04.png)
+![Obtener Id de la app](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/microsoft_04.png)
 
-![Obtener secret client](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/microsoft_05.png)
+![Obtener secret client](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/microsoft_05.png)
 
 4) Ahora, en la [Consola de Firebase](https://firebase.google.com), habilitamos el inicio de sesión con Microsoft y agregamos los datos obtenidos, es decir, el Id de aplicación y el Secreto de cliente. También copiamos la URI de redireccionamiento que nos provee Firebase para agregar en nuestra app.
 
-![Obtener secret client](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/microsoft_06.png)
+![Obtener secret client](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/microsoft_06.png)
 
-![Obtener secret client](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/microsoft_07.png)
+![Obtener secret client](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/microsoft_07.png)
 
 5) Finalmente, nos dirigimos a la pestaña "Autenticación" del menú lateral, ponemos "Agregar una plataforma" y es necesario elegir "Web". Aquí agregamos la URI de redireccionamiento brindada por Firebase y hacemos click en "Configurar".
 
-![Obtener secret client](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/microsoft_08.png)
+![Obtener secret client](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/microsoft_08.png)
 
-![Obtener secret client](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/microsoft_09.png)
+![Obtener secret client](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/microsoft_09.png)
 
 Nota: No hacen falta configuraciones adicionales en tu proyecto Flutter para habilitar el inicio de sesión con Microsoft.
 
@@ -472,7 +488,7 @@ Puedes llamar al componente para inicio de sesión con correo y contraseña, al 
 // Componente de Inicio de sesión con correo y contraseña
 SMultiLoginComponent.emailLogin();
 ```
-![Componente de login correo](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/usage_01.png)
+![Componente de login correo](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/usage_01.png)
 
 ```dart
 // Componente de Inicio de sesión con redes sociales
@@ -480,18 +496,18 @@ SMultiLoginComponent.emailLogin();
 SMultiLoginComponent.socialMediaLogin();
 ```
 
-![Componente login social media 1](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/usage_02.png)
+![Componente login social media 1](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/usage_02.png)
 
 ```dart
 // Y este es un diseño más detallado:
 SMultiLoginComponent.socialMediaLoginComplex();
 ```
 
-![Componente login social media 2](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/usage_03.png)
+![Componente login social media 2](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/usage_03.png)
 
 Ambos componentes juntos:
 
-![Componente completo](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/usage_04.png)
+![Componente completo](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/usage_04.png)
 
 Nota: Cada uno de estos "modos", a su vez, también es personalizable.
 
@@ -680,7 +696,7 @@ ejemplo_1() {
 }
 ```
 
-![Ejemplo_1](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/usage_05.png)
+![Ejemplo_1](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/usage_05.png)
 
 ```dart
 // Ejemplo de Componente emailLogin y socialMediaLoginComplex (componente más detallado), diseño por defecto e inicio de sesión a través de correo, facebook, google y twitter:
@@ -735,7 +751,7 @@ ejemplo_2() {
 }
 ```
 
-![Ejemplo_2](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/usage_06.png)
+![Ejemplo_2](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/usage_06.png)
 
 ```dart
 // Ejemplo del componente emailLogin con estilo personalizado:
@@ -809,7 +825,7 @@ SMultiLoginComponent.emailLogin(
 );
 ```
 
-![Ejemplo_3](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/usage_07.png)
+![Ejemplo_3](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/usage_07.png)
 
 ```dart
 // Ejemplo del componente socialMediaLoginComplex con estilo personalizado:
@@ -871,7 +887,7 @@ SMultiLoginComponent.socialMediaLoginComplex(
 );
 ```
 
-![Ejemplo_4](https://github.com/YamiTeyssier/s-multilogin-plug/blob/development/assets/readme_images/usage_08.png)
+![Ejemplo_4](https://github.com/siltium-labs/flutter-multi-login/blob/development/assets/readme_images/usage_08.png)
 
 ```dart
 // Ejemplo de cómo usar el método de login con Google en un widget personalizado:
