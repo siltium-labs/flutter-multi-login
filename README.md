@@ -21,6 +21,8 @@ Plugin para incluir en proyectos mobile de Siltium que permite utilizar el compo
 <br>
 **1.1.0 y 1.1.1** - Inicio de sesión con Email & Contraseña, Google, Facebook, Twitter, LinkedIn y Microsoft disponibles para Android & iOS. Inicio de sesión con Apple para iOS.
 <br>
+**1.2.0** - Se actualizaron librerias y compatibilidad para la version 3.24.5 de flutter.
+<br>
 <br>
 
 ## **Instalación de la Librería (Android y iOS)**
