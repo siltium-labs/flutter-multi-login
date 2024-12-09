@@ -19,7 +19,7 @@ dependencies:
   flutter_facebook_auth: ^7.0.1
   sign_in_with_apple: ^6.1.1
   crypto: ^3.0.3
-  twitter_login: ^4.4.2
+  # twitter_login: ^4.4.2
   linkedin_login: ^3.0.5
 
 dev_dependencies:

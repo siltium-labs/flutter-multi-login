@@ -94,14 +94,14 @@ class AuthManager {
 
   //? TWITTER
   Future<UserCredential?> signInWithTwitter() async {
-    try {
-      OAuthCredential twitterOAuthCredential =
-          await TwitterLoginManager().twitterLogin(twitterLoginData);
-      return user = await _auth.signInWithCredential(twitterOAuthCredential);
-    } on FirebaseAuthException catch (e) {
-      await onFirebaseAuthException(error: e);
-      return null;
-    }
+    // try {
+    //   OAuthCredential twitterOAuthCredential =
+    //       await TwitterLoginManager().twitterLogin(twitterLoginData);
+    //   return user = await _auth.signInWithCredential(twitterOAuthCredential);
+    // } on FirebaseAuthException catch (e) {
+    //   await onFirebaseAuthException(error: e);
+    //   return null;
+    // }
   }
 
   //* MICROSOFT
