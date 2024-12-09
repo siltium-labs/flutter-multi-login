@@ -12,6 +12,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
+
+    namespace:"com.example.s_multiloginp"
     compileSdkVersion 34
 
     compileOptions {
