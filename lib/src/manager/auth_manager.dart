@@ -1,4 +1,6 @@
 //* Package imports
+// ignore_for_file: use_rethrow_when_possible
+
 import 'package:firebase_auth/firebase_auth.dart';
 
 //* Project imports
@@ -53,6 +55,8 @@ class AuthManager {
     } on FirebaseAuthException catch (e) {
       await onFirebaseAuthException(error: e, inputEmail: email);
       return null;
+    } on Exception catch (e) {
+      throw e;
     }
   }
 
@@ -65,6 +69,8 @@ class AuthManager {
     } on FirebaseAuthException catch (e) {
       await onFirebaseAuthException(error: e);
       return null;
+    } on Exception catch (e) {
+      throw e;
     }
   }
 
@@ -77,6 +83,8 @@ class AuthManager {
     } on FirebaseAuthException catch (e) {
       await onFirebaseAuthException(error: e);
       return null;
+    } on Exception catch (e) {
+      throw e;
     }
   }
 
@@ -89,6 +97,8 @@ class AuthManager {
     } on FirebaseAuthException catch (e) {
       await onFirebaseAuthException(error: e);
       return null;
+    } on Exception catch (e) {
+      throw e;
     }
   }
 
@@ -101,6 +111,8 @@ class AuthManager {
     } on FirebaseAuthException catch (e) {
       await onFirebaseAuthException(error: e);
       return null;
+    } on Exception catch (e) {
+      throw e;
     }
   }
 
@@ -113,6 +125,8 @@ class AuthManager {
     } on FirebaseAuthException catch (e) {
       await onFirebaseAuthException(error: e);
       return null;
+    } on Exception catch (e) {
+      throw e;
     }
   }
 

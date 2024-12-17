@@ -17,7 +17,7 @@ class LoginController {
     required TextEditingController email,
     required TextEditingController password,
     Function(CurrentUserModel)? onResultEmailLogin,
-    Function? onErrorEmailLogin,
+    Function(dynamic)? onErrorEmailLogin,
     final Color? backgroundColor,
     final Color? loadingColor,
   }) async {
@@ -39,12 +39,9 @@ class LoginController {
           debugPrint("Error onEmailLogin: Data token is null.");
         }
       },
-      onError: (FirebaseAuthException error) async {
-        if (onErrorEmailLogin != null) {
-          onErrorEmailLogin(error);
-        } else {
-          debugPrint("The error was: $error");
-        }
+      onError: (dynamic error) async {
+        onErrorEmailLogin?.call(error);
+        throw error;
       },
     ).show();
   }
@@ -52,7 +49,7 @@ class LoginController {
   Future<String> onFacebookLogin({
     required BuildContext context,
     Function(CurrentUserModel)? onResultFacebookLogin,
-    Function? onErrorFacebookLogin,
+    Function(dynamic)? onErrorFacebookLogin,
     final Color? backgroundColor,
     final Color? loadingColor,
   }) async {
@@ -85,30 +82,8 @@ class LoginController {
         }
       },
       onError: (dynamic error) {
-        if (error is FirebaseAuthException) {
-          result = '''
-          ERROR
-          credential: ${error.credential}
-          email: ${error.email}
-          phoneNumber: ${error.phoneNumber}
-          tenantId: ${error.tenantId}
-          code: ${error.code}
-          message: ${error.message}
-          plugin: ${error.plugin}
-          ---------------
-          stackTrace: ${error.stackTrace}
-          ''';
-          if (onErrorFacebookLogin != null) {
-            onErrorFacebookLogin(error);
-          } else {
-            debugPrint("The error was: $error");
-          }
-        } else {
-          result = '''
-            DEFAULT ERROR
-            ${error.toString()}
-          ''';
-        }
+        onErrorFacebookLogin?.call(error);
+        throw error;
       },
     ).show();
     return result;
@@ -117,7 +92,7 @@ class LoginController {
   onGoogleLogin({
     required BuildContext context,
     Function(CurrentUserModel)? onResultGoogleLogin,
-    Function? onErrorGoogleLogin,
+    Function(dynamic)? onErrorGoogleLogin,
     final Color? backgroundColor,
     final Color? loadingColor,
   }) async {
@@ -137,12 +112,9 @@ class LoginController {
           debugPrint("Error onGoogleLogin: Data token is null.");
         }
       },
-      onError: (FirebaseAuthException error) {
-        if (onErrorGoogleLogin != null) {
-          onErrorGoogleLogin(error);
-        } else {
-          debugPrint("The error was: $error");
-        }
+      onError: (dynamic error) {
+        onErrorGoogleLogin?.call(error);
+        throw error;
       },
     ).show();
   }
@@ -150,7 +122,7 @@ class LoginController {
   onAppleLogin({
     required BuildContext context,
     Function(CurrentUserModel)? onResultAppleLogin,
-    Function? onErrorAppleLogin,
+    Function(dynamic)? onErrorAppleLogin,
     final Color? backgroundColor,
     final Color? loadingColor,
   }) async {
@@ -171,12 +143,9 @@ class LoginController {
           debugPrint("Error onAppleLogin: Data token is null.");
         }
       },
-      onError: (FirebaseAuthException error) {
-        if (onErrorAppleLogin != null) {
-          onErrorAppleLogin(error);
-        } else {
-          debugPrint("The error was: $error");
-        }
+      onError: (dynamic error) {
+        onErrorAppleLogin?.call(error);
+        throw error;
       },
     ).show();
   }
@@ -184,7 +153,7 @@ class LoginController {
   onTwitterLogin({
     required BuildContext context,
     Function(CurrentUserModel)? onResultTwitterLogin,
-    Function? onErrorTwitterLogin,
+    Function(dynamic)? onErrorTwitterLogin,
     final Color? backgroundColor,
     final Color? loadingColor,
   }) async {
@@ -204,12 +173,9 @@ class LoginController {
           debugPrint("Error onTwitterLogin: Data token is null.");
         }
       },
-      onError: (FirebaseAuthException error) {
-        if (onErrorTwitterLogin != null) {
-          onErrorTwitterLogin(error);
-        } else {
-          debugPrint("The error was: $error");
-        }
+      onError: (dynamic error) {
+        onErrorTwitterLogin?.call(error);
+        throw error;
       },
     ).show();
   }
@@ -217,7 +183,7 @@ class LoginController {
   onMicrosoftLogin({
     required BuildContext context,
     Function(CurrentUserModel)? onResultMicrosoftLogin,
-    Function? onErrorMicrosoftLogin,
+    Function(dynamic)? onErrorMicrosoftLogin,
     final Color? backgroundColor,
     final Color? loadingColor,
   }) async {
@@ -237,12 +203,9 @@ class LoginController {
           debugPrint("Error onMicrosoftLogin: Data token is null.");
         }
       },
-      onError: (FirebaseAuthException error) {
-        if (onErrorMicrosoftLogin != null) {
-          onErrorMicrosoftLogin(error);
-        } else {
-          debugPrint("The error was: $error");
-        }
+      onError: (dynamic error) {
+        onErrorMicrosoftLogin?.call(error);
+        throw error;
       },
     ).show();
   }
@@ -250,7 +213,7 @@ class LoginController {
   onLinkedinLogin({
     required BuildContext context,
     Function(CurrentUserModel)? onResultLinkedinLogin,
-    Function? onErrorLinkedinLogin,
+    Function(dynamic)? onErrorLinkedinLogin,
     final Color? backgroundColor,
     final Color? loadingColor,
   }) async {
