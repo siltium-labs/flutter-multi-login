@@ -17,7 +17,7 @@ class LinkedinBtnComponent extends StatefulWidget {
   Widget? linkedinButtonIcon;
   // Functions
   Function(CurrentUserModel)? onResultLinkedinLogin;
-  Function? onErrorLinkedinLogin;
+  Function(dynamic)? onErrorLinkedinLogin;
   // Loading custom color
   final Color? backgroundColor;
   final Color? loadingColor;

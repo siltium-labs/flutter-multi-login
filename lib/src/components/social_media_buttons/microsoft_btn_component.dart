@@ -17,7 +17,7 @@ class MicrosoftBtnComponent extends StatefulWidget {
   Widget? microsoftButtonIcon;
   // Functions
   Function(CurrentUserModel)? onResultMicrosoftLogin;
-  Function? onErrorMicrosoftLogin;
+  Function(dynamic)? onErrorMicrosoftLogin;
   // Loading custom color
   final Color? backgroundColor;
   final Color? loadingColor;

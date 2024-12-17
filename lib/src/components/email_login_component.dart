@@ -19,7 +19,7 @@ class EmailLoginComponent extends StatefulWidget {
   final Widget? emailButtonIcon;
   // Functions
   Function(CurrentUserModel)? onResultEmailLogin;
-  Function? onErrorEmailLogin;
+  Function(dynamic)? onErrorEmailLogin;
   // Loading custom color
   final Color? backgroundColor;
   final Color? loadingColor;

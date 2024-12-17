@@ -120,43 +120,43 @@ class SMultiLoginComponent extends StatefulWidget {
   String? emailButtonText;
   Widget? emailButtonIcon;
   Function(CurrentUserModel)? onResultEmailLogin;
-  Function? onErrorEmailLogin;
+  Function(dynamic)? onErrorEmailLogin;
   //? FACEBOOK
   ButtonStyle? facebookButtonStyle;
   String? facebookButtonText;
   Widget? facebookButtonIcon;
   Function(CurrentUserModel)? onResultFacebookLogin;
-  Function? onErrorFacebookLogin;
+  Function(dynamic)? onErrorFacebookLogin;
   //! GOOGLE
   ButtonStyle? googleButtonStyle;
   String? googleButtonText;
   Widget? googleButtonIcon;
   Function(CurrentUserModel)? onResultGoogleLogin;
-  Function? onErrorGoogleLogin;
+  Function(dynamic)? onErrorGoogleLogin;
   // TODO: APPLE
   ButtonStyle? appleButtonStyle;
   String? appleButtonText;
   Widget? appleButtonIcon;
   Function(CurrentUserModel)? onResultAppleLogin;
-  Function? onErrorAppleLogin;
+  Function(dynamic)? onErrorAppleLogin;
   //? TWITTER
   ButtonStyle? twitterButtonStyle;
   String? twitterButtonText;
   Widget? twitterButtonIcon;
   Function(CurrentUserModel)? onResultTwitterLogin;
-  Function? onErrorTwitterLogin;
+  Function(dynamic)? onErrorTwitterLogin;
   //* MICROSOFT
   ButtonStyle? microsoftButtonStyle;
   String? microsoftButtonText;
   Widget? microsoftButtonIcon;
   Function(CurrentUserModel)? onResultMicrosoftLogin;
-  Function? onErrorMicrosoftLogin;
+  Function(dynamic)? onErrorMicrosoftLogin;
   //? LINKEDIN
   ButtonStyle? linkedinButtonStyle;
   String? linkedinButtonText;
   Widget? linkedinButtonIcon;
   Function(CurrentUserModel)? onResultLinkedinLogin;
-  Function? onErrorLinkedinLogin;
+  Function(dynamic)? onErrorLinkedinLogin;
 
   SMultiLoginComponent.emailLogin({
     Key? key,

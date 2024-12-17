@@ -17,7 +17,7 @@ class FacebookBtnComponent extends StatefulWidget {
   Widget? facebookButtonIcon;
   // Functions
   Function(CurrentUserModel)? onResultFacebookLogin;
-  Function? onErrorFacebookLogin;
+  Function(dynamic)? onErrorFacebookLogin;
   // Loading custom color
   final Color? backgroundColor;
   final Color? loadingColor;

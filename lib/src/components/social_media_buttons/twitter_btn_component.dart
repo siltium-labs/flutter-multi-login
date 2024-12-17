@@ -17,7 +17,7 @@ class TwitterBtnComponent extends StatefulWidget {
   Widget? twitterButtonIcon;
   // Functions
   Function(CurrentUserModel)? onResultTwitterLogin;
-  Function? onErrorTwitterLogin;
+  Function(dynamic)? onErrorTwitterLogin;
   // Loading custom color
   final Color? backgroundColor;
   final Color? loadingColor;

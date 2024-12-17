@@ -17,7 +17,7 @@ class GoogleBtnComponent extends StatefulWidget {
   Widget? googleButtonIcon;
   // Functions
   Function(CurrentUserModel)? onResultGoogleLogin;
-  Function? onErrorGoogleLogin;
+  Function(dynamic)? onErrorGoogleLogin;
   // Loading custom color
   final Color? backgroundColor;
   final Color? loadingColor;

@@ -17,7 +17,7 @@ class AppleBtnComponent extends StatefulWidget {
   Widget? appleButtonIcon;
   // Functions
   Function(CurrentUserModel)? onResultAppleLogin;
-  Function? onErrorAppleLogin;
+  Function(dynamic)? onErrorAppleLogin;
   // Loading custom color
   final Color? backgroundColor;
   final Color? loadingColor;
