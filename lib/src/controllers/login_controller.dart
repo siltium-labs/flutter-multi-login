@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 //* Packages imports
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:linkedin_login/linkedin_login.dart';
+// import 'package:linkedin_login/linkedin_login.dart';
 
 //* Project imports
 import 'package:s_multiloginp/src/manager/auth_manager.dart';
@@ -217,51 +217,51 @@ class LoginController {
     final Color? backgroundColor,
     final Color? loadingColor,
   }) async {
-    LinkedinInitLoginModel? lkLoginData = AuthManager().linkedinLoginData;
-    if (lkLoginData != null) {
-      Navigator.push(
-        context,
-        MaterialPageRoute<void>(
-          builder: (final BuildContext context) => LinkedInUserWidget(
-            destroySession: true,
-            redirectUrl: lkLoginData.redirectUrl,
-            clientId: lkLoginData.clientId,
-            clientSecret: lkLoginData.clientSecret,
-            onError: (final UserFailedAction error) {
-              if (onErrorLinkedinLogin != null) {
-                onErrorLinkedinLogin(error);
-              } else {
-                debugPrint("El error fue: ${error.toString()}");
-              }
-            },
-            onGetUserProfile: (final UserSucceededAction linkedInUser) {
-              CurrentUserModel currentLkUser = CurrentUserModel(
-                displayName: "${linkedInUser.user.name}",
-                email: linkedInUser.user.email,
-                photoURL: linkedInUser.user.picture,
-                token: linkedInUser.user.token.accessToken,
-              );
-              AuthManager().getUserCredential(currentUser: currentLkUser);
-              Navigator.pop(context);
-              if (currentLkUser.token != null) {
-                if (onResultLinkedinLogin != null) {
-                  onResultLinkedinLogin(currentLkUser);
-                } else {
-                  debugPrint(
-                      "onResultLinkedinLogin was not given or is empty.");
-                }
-              } else {
-                debugPrint("Error onLinkedinLogin: Data token is null.");
-              }
-            },
-          ),
-          fullscreenDialog: true,
-        ),
-      );
-    } else {
-      return throw Exception(
-          "No es posible iniciar sesión con LinkedIn si primero no se definen los parámetros \"linkedinClientId\", \"linkedinClientSecret\" y \"linkedinRedirectUrl\" en \"SMultiLogin().multiLoginInit()\"");
-    }
+    // LinkedinInitLoginModel? lkLoginData = AuthManager().linkedinLoginData;
+    // if (lkLoginData != null) {
+    //   Navigator.push(
+    //     context,
+    //     MaterialPageRoute<void>(
+    //       builder: (final BuildContext context) => LinkedInUserWidget(
+    //         destroySession: true,
+    //         redirectUrl: lkLoginData.redirectUrl,
+    //         clientId: lkLoginData.clientId,
+    //         clientSecret: lkLoginData.clientSecret,
+    //         onError: (final UserFailedAction error) {
+    //           if (onErrorLinkedinLogin != null) {
+    //             onErrorLinkedinLogin(error);
+    //           } else {
+    //             debugPrint("El error fue: ${error.toString()}");
+    //           }
+    //         },
+    //         onGetUserProfile: (final UserSucceededAction linkedInUser) {
+    //           CurrentUserModel currentLkUser = CurrentUserModel(
+    //             displayName: "${linkedInUser.user.name}",
+    //             email: linkedInUser.user.email,
+    //             photoURL: linkedInUser.user.picture,
+    //             token: linkedInUser.user.token.accessToken,
+    //           );
+    //           AuthManager().getUserCredential(currentUser: currentLkUser);
+    //           Navigator.pop(context);
+    //           if (currentLkUser.token != null) {
+    //             if (onResultLinkedinLogin != null) {
+    //               onResultLinkedinLogin(currentLkUser);
+    //             } else {
+    //               debugPrint(
+    //                   "onResultLinkedinLogin was not given or is empty.");
+    //             }
+    //           } else {
+    //             debugPrint("Error onLinkedinLogin: Data token is null.");
+    //           }
+    //         },
+    //       ),
+    //       fullscreenDialog: true,
+    //     ),
+    //   );
+    // } else {
+    //   return throw Exception(
+    //       "No es posible iniciar sesión con LinkedIn si primero no se definen los parámetros \"linkedinClientId\", \"linkedinClientSecret\" y \"linkedinRedirectUrl\" en \"SMultiLogin().multiLoginInit()\"");
+    // }
   }
 
   // Loadings AuthManager (private for now)
