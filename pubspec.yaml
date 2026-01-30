@@ -15,7 +15,7 @@ dependencies:
   # Librerías para inicio de sesión con redes sociales
   firebase_core: ^4.4.0
   firebase_auth: ^6.1.4
-  google_sign_in: ^6.2.1
+  google_sign_in: ^7.2.0
   flutter_facebook_auth: ^7.1.5
   sign_in_with_apple: ^7.0.1
   crypto: ^3.0.3

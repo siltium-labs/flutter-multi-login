@@ -7,27 +7,28 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class GoogleLoginManager {
   googleLogin(String? iOSClientId) async {
+    GoogleSignIn googleSignIn = GoogleSignIn.instance;
+
     final GoogleSignInAccount? googleUser;
 
     // Trigger the authentication flow
     if (Platform.isIOS && (iOSClientId == null || iOSClientId.isEmpty)) {
       return throw Exception(
           "No es posible iniciar sesión con Google en iOS si primero no se define \"googleIOSClientId\" en \"SMultiLogin().multiLoginInit()\"");
-    } else if (Platform.isIOS &&
-        iOSClientId != null &&
-        iOSClientId.isNotEmpty) {
-      googleUser = await GoogleSignIn(clientId: iOSClientId).signIn();
-    } else {
-      googleUser = await GoogleSignIn().signIn();
     }
+
+    await googleSignIn.initialize(
+      clientId: Platform.isIOS ? iOSClientId : null,
+    );
+
+    googleUser = await googleSignIn.authenticate();
 
     // Obtain the auth details from the request
     final GoogleSignInAuthentication? googleAuth =
-        await googleUser?.authentication;
+        await googleUser.authentication;
 
     // Create a new credential
     AuthCredential googleOAuthCredential = GoogleAuthProvider.credential(
-      accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
     );
 
@@ -36,6 +37,6 @@ class GoogleLoginManager {
   }
 
   googleLogout() async {
-    await GoogleSignIn().signOut();
+    await GoogleSignIn.instance.signOut();
   }
 }
