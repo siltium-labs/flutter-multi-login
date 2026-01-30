@@ -13,11 +13,11 @@ dependencies:
   plugin_platform_interface: ^2.1.8
   cupertino_icons: ^1.0.8
   # Librerías para inicio de sesión con redes sociales
-  firebase_core: ^3.8.1
-  firebase_auth: ^5.3.4
+  firebase_core: ^4.4.0
+  firebase_auth: ^6.1.4
   google_sign_in: ^6.2.1
-  flutter_facebook_auth: ^7.0.1
-  sign_in_with_apple: ^6.1.1
+  flutter_facebook_auth: ^7.1.5
+  sign_in_with_apple: ^7.0.1
   crypto: ^3.0.3
   # twitter_login: ^4.4.2
   linkedin_login: ^3.0.5
