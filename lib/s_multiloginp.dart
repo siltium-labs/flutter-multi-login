@@ -267,8 +267,6 @@ class SMultiLoginComponentState extends State<SMultiLoginComponent> {
         return _emailComponent();
       case ComponentTypeEnum.socialMediaLogin:
         return _socialMediaComponent();
-      default:
-        return _emailComponent();
     }
   }
 

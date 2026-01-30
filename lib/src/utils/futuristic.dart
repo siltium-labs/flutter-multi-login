@@ -89,8 +89,6 @@ class FuturisticState<T> extends State<Futuristic<T>> {
           case ConnectionState.done:
             //return _handleBusy(_context);
             return _handleSnapshot(ctx, snapshot);
-          default:
-            return _defaultWidget();
         }
       },
     );

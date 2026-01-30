@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:s_multiloginp/src/manager/google_login_manager.dart';
 import 'package:s_multiloginp/src/manager/facebook_login_manager.dart';
 import 'package:s_multiloginp/src/manager/apple_login_manager.dart';
-import 'package:s_multiloginp/src/manager/twitter_login_manager.dart';
+// import 'package:s_multiloginp/src/manager/twitter_login_manager.dart';
 import 'package:s_multiloginp/src/manager/microsoft_login_manager.dart';
 import 'package:s_multiloginp/src/models/current_user_model.dart';
 import 'package:s_multiloginp/src/models/linkedin_init_login_model.dart';
