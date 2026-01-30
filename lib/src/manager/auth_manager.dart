@@ -1,5 +1,6 @@
 //* Package imports
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/widgets.dart';
 
 //* Project imports
 import 'package:s_multiloginp/src/manager/google_login_manager.dart';
@@ -94,6 +95,8 @@ class AuthManager {
 
   //? TWITTER
   Future<UserCredential?> signInWithTwitter() async {
+    debugPrint("Login with Twitter is not available at the moment.");
+    return null;
     // try {
     //   OAuthCredential twitterOAuthCredential =
     //       await TwitterLoginManager().twitterLogin(twitterLoginData);
